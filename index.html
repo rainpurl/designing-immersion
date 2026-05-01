@@ -270,9 +270,12 @@ header {
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 9px 16px;
   font-size: 11px;
+  font-family: inherit;
+  line-height: 1;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   font-weight: 500;
@@ -280,7 +283,11 @@ header {
   border: 1px solid transparent;
   background: transparent;
   color: var(--ink);
+  cursor: pointer;
+  box-sizing: border-box;
+  height: 34px;
   transition: all 0.2s ease;
+  text-decoration: none;
 }
 .btn-primary { background: var(--burnt); color: #FFFFFF; border-color: var(--burnt); }
 .btn-primary:hover { background: var(--burnt-deep); border-color: var(--burnt-deep); }
@@ -303,10 +310,11 @@ header {
   max-width: 1100px;
   margin: 0 auto 28px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   gap: 6px;
   flex-wrap: wrap;
-  padding: 8px;
+  padding: 8px 14px;
   border: 1px solid var(--rule);
   border-radius: 2px;
   background: var(--paper);
@@ -358,40 +366,16 @@ header {
   gap: 28px;
   perspective: 3000px;
 }
-.flip-arrow {
-  flex-shrink: 0;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  border: 1px solid var(--rule-strong);
-  background: var(--paper);
-  display: grid;
-  place-items: center;
-  transition: all 0.25s ease;
-  color: var(--ink);
-}
-.flip-arrow:hover:not(:disabled) {
-  background: var(--burnt);
-  color: var(--cream);
-  border-color: var(--burnt);
-  transform: scale(1.06);
-}
-.flip-arrow:disabled {
-  opacity: 0.25;
-  cursor: not-allowed;
-}
-.flip-arrow svg { width: 18px; height: 18px; }
-
 #book {
   position: relative;
-  width: min(1100px, calc(100vw - 200px));
+  width: min(1280px, calc(100vw - 60px));
   aspect-ratio: 2 / 1;
   transform-style: preserve-3d;
   transition: width 0.55s cubic-bezier(0.6, 0, 0.4, 1), aspect-ratio 0.55s cubic-bezier(0.6, 0, 0.4, 1);
 }
 /* Cover-only mode: a single square (the book is closed) */
 #book.cover-only {
-  width: min(550px, calc((100vw - 200px) / 2));
+  width: min(640px, calc((100vw - 60px) / 2));
   aspect-ratio: 1 / 1;
 }
 #book.cover-only .page-left { display: none; }
@@ -599,8 +583,7 @@ header {
   left: 0;
   background: linear-gradient(225deg, transparent 50%, var(--paper-deep) 50%);
 }
-.page-right:hover .page-corner.right,
-.flip-arrow.next:hover ~ #book .page-corner.right {
+.page-right:hover .page-corner.right {
   width: 64px; height: 64px; opacity: 1;
   box-shadow: -2px -2px 10px var(--shadow-md);
 }
@@ -668,7 +651,6 @@ header {
    ============================================================ */
 #archive {
   background: var(--paper);
-  border-top: 1px solid var(--rule);
   padding: 88px 28px 96px;
 }
 .archive-inner {
@@ -987,37 +969,22 @@ header {
 /* ============================================================
    ARROW HOVER HINT (shown once per page load on first arrow hover)
    ============================================================ */
-.arrow-hint {
-  position: fixed;
-  background: var(--ink);
-  color: var(--paper);
-  padding: 11px 18px;
-  border-radius: 10px;
+/* Cover hint — a small line of text below the book, visible only when the
+   book is in cover-only mode, telling users how to navigate. */
+.cover-hint {
+  text-align: center;
   font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-weight: 500;
-  white-space: nowrap;
-  pointer-events: none;
+  color: var(--dust);
+  margin: 22px auto 0;
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.32s ease, transform 0.32s ease;
-  z-index: 500;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+  transition: opacity 0.4s ease;
+  pointer-events: none;
 }
-.arrow-hint.visible {
+.cover-hint.visible {
   opacity: 1;
-  transform: translateY(0);
-}
-.arrow-hint::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  width: 10px;
-  height: 10px;
-  background: var(--ink);
 }
 
 /* ============================================================
@@ -1115,23 +1082,6 @@ body.book-fullscreen #book {
 body.book-fullscreen #book.cover-only {
   width: min(calc((100vw - 16px) / 2), calc(100vh - 80px));
 }
-/* Flip arrows overlay on either side of the book */
-body.book-fullscreen .flip-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 50;
-  background: rgba(0, 0, 0, 0.45);
-  color: #ffffff;
-  border: none;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-body.book-fullscreen .flip-arrow:hover {
-  background: rgba(0, 0, 0, 0.65);
-}
-body.book-fullscreen .flip-arrow.prev { left: 16px; right: auto; }
-body.book-fullscreen .flip-arrow.next { right: 16px; left: auto; }
 
 /* Mobile portrait fullscreen: rotate the book 90° to fill the long axis */
 @media (max-width: 768px) and (orientation: portrait) {
@@ -1460,15 +1410,13 @@ body.book-fullscreen #chat-panel {
   .contribute-inner { grid-template-columns: 1fr; gap: 36px; }
   .changelog-row { grid-template-columns: 100px 1fr; }
   .changelog-row .cl-version, .changelog-row .cl-author { grid-column: 2; }
-  #book { width: calc(100vw - 130px); }
-  #book.cover-only { width: calc((100vw - 130px) / 2); }
-  .flip-arrow { width: 42px; height: 42px; }
+  #book { width: calc(100vw - 60px); }
+  #book.cover-only { width: calc((100vw - 60px) / 2); }
 }
 
-/* Mobile (phone-sized): hide flip arrows entirely so the book gets max real estate.
+/* Mobile (phone-sized): book gets max real estate.
    Tap and swipe on the book itself drive navigation. */
 @media (max-width: 768px) {
-  .flip-arrow { display: none; }
   #book-stage { gap: 0; }
   #book { width: calc(100vw - 24px); }
   #book.cover-only { width: calc((100vw - 24px) / 2); }
@@ -1476,9 +1424,6 @@ body.book-fullscreen #chat-panel {
   /* Larger tap target for the fullscreen button on touch */
   .fullscreen-btn { width: 42px; height: 42px; top: 10px; right: 10px; }
   .fullscreen-btn svg { width: 18px; height: 18px; }
-
-  /* Hint card adjusts for narrower viewport */
-  .arrow-hint { display: none; } /* arrows aren't shown on mobile, so skip the hint */
 }
 
 @media (max-width: 640px) {
@@ -1550,10 +1495,6 @@ body.book-fullscreen #chat-panel {
   <nav class="section-nav above-book" id="section-nav"></nav>
 
   <div id="book-stage">
-    <button class="flip-arrow prev" id="prev-arrow" aria-label="Previous spread">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 18l-6-6 6-6"/></svg>
-    </button>
-
     <div id="book">
       <div class="page page-left" id="page-left">
         <div class="placeholder"></div>
@@ -1577,11 +1518,9 @@ body.book-fullscreen #chat-panel {
         </svg>
       </button>
     </div>
-
-    <button class="flip-arrow next" id="next-arrow" aria-label="Next spread">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18l6-6-6-6"/></svg>
-    </button>
   </div>
+
+  <div id="cover-hint" class="cover-hint" aria-hidden="false">Click the page or use your arrow keys to turn the page.</div>
 
   <div id="page-controls">
     <span class="pc-label">Page</span>
@@ -1680,7 +1619,7 @@ body.book-fullscreen #chat-panel {
 </div>
 
 <!-- Hover hint shown on first interaction with a flip arrow -->
-<div id="arrow-hint" class="arrow-hint" role="tooltip" aria-hidden="true">Click or use arrow keys to turn the page</div>
+
 
 <!-- ============================================================
      SCROLL TO TOP (floating button, appears after scrolling past book)
@@ -2127,8 +2066,9 @@ async function setPageSlot(slotEl, pageNum) {
    FLIP MECHANICS
    ============================================================================ */
 function updateArrows() {
-  $('#prev-arrow').disabled = state.currentSpread <= 0;
-  $('#next-arrow').disabled = state.currentSpread >= state.totalSpreads - 1;
+  // Show cover hint only when the book is in cover-only mode
+  const coverHint = $('#cover-hint');
+  if (coverHint) coverHint.classList.toggle('visible', state.currentSpread === 0);
   // Page number reflected in the editable input below the book
   const [lp, rp] = spreadPages(state.currentSpread);
   // For the cover view, lp is null and rp is page 1
@@ -2202,6 +2142,37 @@ async function coverFadeTransition(targetSpread) {
   // Fade in
   book.style.opacity = '1';
   await sleep(320);
+  book.style.transition = '';
+  state.flipping = false;
+}
+
+// Quick 100ms cross-fade — used for fast flipping, page-number jumps,
+// and section-button jumps. Avoids the 3D animation in cases where a
+// dramatic page-turn would feel sluggish.
+async function quickFade(targetSpread) {
+  if (state.flipping) return;
+  if (targetSpread === state.currentSpread) return;
+  // Cover transitions need their own animation (book width changes)
+  if (state.currentSpread === 0 || targetSpread === 0) {
+    await coverFadeTransition(targetSpread);
+    return;
+  }
+  state.flipping = true;
+  const book = $('#book');
+
+  // Pre-fetch destination pages so the swap is instant
+  const [tl, tr] = spreadPages(targetSpread);
+  await Promise.all([getPage(tl), getPage(tr)]);
+
+  book.style.transition = 'opacity 0.1s ease';
+  book.style.opacity = '0';
+  await sleep(100);
+
+  state.currentSpread = targetSpread;
+  await renderCurrentSpread();
+
+  book.style.opacity = '1';
+  await sleep(100);
   book.style.transition = '';
   state.flipping = false;
 }
@@ -2310,22 +2281,53 @@ async function jumpToSpread(target) {
   if (target === state.currentSpread) return;
   if (state.flipping) return;
 
-  // If the cover view is involved (either side), do a single fade transition
-  // (multi-flip animations don't translate well across the cover).
-  if (state.currentSpread === 0 || target === 0) {
-    await coverFadeTransition(target);
+  // Section-button & page-number jumps always use the quick fade transition.
+  // Reserve the dramatic 3D flip animation for natural one-page-at-a-time reading.
+  await quickFade(target);
+}
+
+// Smart flip wrappers — track timing of consecutive flips and route to
+// instant-snap if the user is flipping fast (>1 click/second).
+let lastFlipAt = 0;
+const FAST_FLIP_THRESHOLD_MS = 1000;
+
+// Instant page swap — no fade, no animation, just snap.
+async function instantSwap(targetSpread) {
+  if (state.flipping) return;
+  if (targetSpread === state.currentSpread) return;
+  // Cover transitions still need their own animation (book width changes)
+  if (state.currentSpread === 0 || targetSpread === 0) {
+    await coverFadeTransition(targetSpread);
     return;
   }
-
-  const direction = target > state.currentSpread ? 'forward' : 'backward';
-
-  // Single flip animation regardless of distance: snap state to one-before-target,
-  // then animate one regular flip to land on the target spread.
-  state.currentSpread = direction === 'forward' ? target - 1 : target + 1;
+  state.currentSpread = targetSpread;
   await renderCurrentSpread();
-  await sleep(15);
-  if (direction === 'forward') await flipForward(FLIP_MS);
-  else await flipBackward(FLIP_MS);
+}
+
+async function smartFlipForward() {
+  if (state.flipping) return;
+  const now = Date.now();
+  const fast = (now - lastFlipAt) < FAST_FLIP_THRESHOLD_MS;
+  lastFlipAt = now;
+  if (fast && state.currentSpread !== 0) {
+    // Fast flipping: snap instantly (no animation) to avoid the glitch
+    // that comes from rapidly stacking cross-fades.
+    await instantSwap(state.currentSpread + 1);
+  } else {
+    await flipForward();
+  }
+}
+
+async function smartFlipBackward() {
+  if (state.flipping) return;
+  const now = Date.now();
+  const fast = (now - lastFlipAt) < FAST_FLIP_THRESHOLD_MS;
+  lastFlipAt = now;
+  if (fast && state.currentSpread !== 1) {
+    await instantSwap(state.currentSpread - 1);
+  } else {
+    await flipBackward();
+  }
 }
 
 /* ============================================================================
@@ -2460,6 +2462,7 @@ function buildSectionNav() {
     btn.dataset.id = sec.id;
     btn.textContent = sec.name;
     btn.addEventListener('click', () => {
+      setRoute(pathForSection(sec));
       jumpToSpread(sec.startSpread);
     });
     nav.appendChild(btn);
@@ -2759,6 +2762,51 @@ function closeContribute() {
   document.body.style.overflow = '';
 }
 
+/* ============================================================================
+   URL ROUTING
+   Each section is reachable at /sectionname (lowercase). Contribute lives at
+   /contribute. We use the History API so navigation feels like a normal SPA
+   without a full page reload. Cloudflare Pages serves index.html for these
+   paths via the _redirects file.
+   ============================================================================ */
+function pathForSection(section) {
+  return '/' + section.name.toLowerCase();
+}
+function findRoute(path) {
+  const clean = (path || '/').replace(/\/$/, '') || '/';
+  if (clean === '/contribute') return { type: 'contribute' };
+  if (clean === '/' || clean === '') return { type: 'home' };
+  const sec = CONFIG.sections.find(s => pathForSection(s) === clean);
+  if (sec) return { type: 'section', section: sec };
+  return null;
+}
+// Update URL without triggering navigation. Pass {replace:true} to avoid
+// adding a history entry (used for the very first route on page load).
+function setRoute(path, opts = {}) {
+  if (window.location.pathname === path) return;
+  if (opts.replace) window.history.replaceState({}, '', path);
+  else window.history.pushState({}, '', path);
+}
+async function applyRouteFromURL(opts = {}) {
+  const route = findRoute(window.location.pathname);
+  if (!route) return; // unknown path — leave book on cover, don't 404 in JS
+  if (route.type === 'contribute') {
+    openContribute();
+    return;
+  }
+  if (route.type === 'home') {
+    if ($('#contribute-overlay').classList.contains('open')) closeContribute();
+    if (state.currentSpread !== 0 && !opts.skipJump) await jumpToSpread(0);
+    return;
+  }
+  if (route.type === 'section') {
+    if ($('#contribute-overlay').classList.contains('open')) closeContribute();
+    if (state.currentSpread !== route.section.startSpread) {
+      await jumpToSpread(route.section.startSpread);
+    }
+  }
+}
+
 async function init() {
   buildSectionNav();
   renderChangelog();
@@ -2771,17 +2819,13 @@ async function init() {
     applyTheme(currentTheme);
   });
 
-  // Wire arrows
-  $('#prev-arrow').addEventListener('click', () => flipBackward());
-  $('#next-arrow').addEventListener('click', () => flipForward());
-
-  // Click anywhere on the right page = forward, anywhere on the left page = backward.
+  // Wire page-area clicks: clicking the right page = forward, left page = backward.
   // (Cover view: page-right is the cover and tapping it advances.)
   $('#page-right').addEventListener('click', () => {
-    if (!state.flipping) flipForward();
+    if (!state.flipping) smartFlipForward();
   });
   $('#page-left').addEventListener('click', () => {
-    if (!state.flipping) flipBackward();
+    if (!state.flipping) smartFlipBackward();
   });
 
   // Touch swipe gestures (mobile): swipe left = next, swipe right = previous.
@@ -2805,31 +2849,9 @@ async function init() {
     if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) && dt < 600) {
       e.preventDefault(); // suppress the synthetic click that would also fire
       swipeFired = true;
-      if (dx < 0) flipForward();
-      else flipBackward();
+      if (dx < 0) smartFlipForward();
+      else smartFlipBackward();
     }
-  });
-
-  // First-time hover hint on either flip arrow.
-  // Resets on reload (in-memory only, intentionally not persisted).
-  let arrowHintShown = false;
-  const arrowHint = $('#arrow-hint');
-  const showArrowHint = (anchorEl) => {
-    if (arrowHintShown || !arrowHint) return;
-    arrowHintShown = true;
-    arrowHint.style.visibility = 'hidden';
-    arrowHint.classList.add('visible'); // measure with class so styles apply
-    requestAnimationFrame(() => {
-      const arect = anchorEl.getBoundingClientRect();
-      const hrect = arrowHint.getBoundingClientRect();
-      arrowHint.style.left = (arect.left + arect.width / 2 - hrect.width / 2) + 'px';
-      arrowHint.style.top  = (arect.top - hrect.height - 14) + 'px';
-      arrowHint.style.visibility = '';
-    });
-    setTimeout(() => arrowHint.classList.remove('visible'), 4200);
-  };
-  [$('#prev-arrow'), $('#next-arrow')].forEach((arrow) => {
-    if (arrow) arrow.addEventListener('mouseenter', (e) => showArrowHint(e.currentTarget));
   });
 
   // Page number input, type a page and jump
@@ -2866,8 +2888,8 @@ async function init() {
       if (e.key === 'Escape') closeContribute();
       return;
     }
-    if (e.key === 'ArrowRight') flipForward();
-    if (e.key === 'ArrowLeft')  flipBackward();
+    if (e.key === 'ArrowRight') smartFlipForward();
+    if (e.key === 'ArrowLeft')  smartFlipBackward();
   });
 
   // PDF modal
@@ -2877,8 +2899,19 @@ async function init() {
   });
 
   // Contribute overlay
-  $('#contribute-btn').addEventListener('click', openContribute);
-  $('#contribute-close').addEventListener('click', closeContribute);
+  $('#contribute-btn').addEventListener('click', () => {
+    setRoute('/contribute');
+    openContribute();
+  });
+  $('#contribute-close').addEventListener('click', () => {
+    // Going back through history takes the user to wherever they were.
+    // If there's no history (deep-link to /contribute), fall back to '/'.
+    if (window.history.length > 1) window.history.back();
+    else { setRoute('/'); closeContribute(); }
+  });
+
+  // Browser back/forward — re-apply route
+  window.addEventListener('popstate', () => applyRouteFromURL());
 
   // Scroll-to-top button (visible when scrolled past the book)
   const scrollTop = $('#scroll-top-btn');
@@ -2962,6 +2995,9 @@ async function init() {
   // Fade out splash
   await sleep(420);
   $('#splash').classList.add('hidden');
+
+  // Apply route from URL (so loading /research lands on the research spread)
+  await applyRouteFromURL();
 }
 
 document.addEventListener('DOMContentLoaded', init);
