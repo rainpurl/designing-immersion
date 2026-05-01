@@ -270,12 +270,9 @@ header {
 .btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
   padding: 9px 16px;
   font-size: 11px;
-  font-family: inherit;
-  line-height: 1;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   font-weight: 500;
@@ -283,11 +280,7 @@ header {
   border: 1px solid transparent;
   background: transparent;
   color: var(--ink);
-  cursor: pointer;
-  box-sizing: border-box;
-  height: 34px;
   transition: all 0.2s ease;
-  text-decoration: none;
 }
 .btn-primary { background: var(--burnt); color: #FFFFFF; border-color: var(--burnt); }
 .btn-primary:hover { background: var(--burnt-deep); border-color: var(--burnt-deep); }
@@ -310,11 +303,10 @@ header {
   max-width: 1100px;
   margin: 0 auto 28px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
   gap: 6px;
   flex-wrap: wrap;
-  padding: 8px 14px;
+  padding: 8px;
   border: 1px solid var(--rule);
   border-radius: 2px;
   background: var(--paper);
@@ -676,6 +668,7 @@ header {
    ============================================================ */
 #archive {
   background: var(--paper);
+  border-top: 1px solid var(--rule);
   padding: 88px 28px 96px;
 }
 .archive-inner {
@@ -2213,37 +2206,6 @@ async function coverFadeTransition(targetSpread) {
   state.flipping = false;
 }
 
-// Quick 100ms cross-fade — used for fast flipping, page-number jumps,
-// and section-button jumps. Avoids the 3D animation in cases where a
-// dramatic page-turn would feel sluggish.
-async function quickFade(targetSpread) {
-  if (state.flipping) return;
-  if (targetSpread === state.currentSpread) return;
-  // Cover transitions need their own animation (book width changes)
-  if (state.currentSpread === 0 || targetSpread === 0) {
-    await coverFadeTransition(targetSpread);
-    return;
-  }
-  state.flipping = true;
-  const book = $('#book');
-
-  // Pre-fetch destination pages so the swap is instant
-  const [tl, tr] = spreadPages(targetSpread);
-  await Promise.all([getPage(tl), getPage(tr)]);
-
-  book.style.transition = 'opacity 0.1s ease';
-  book.style.opacity = '0';
-  await sleep(100);
-
-  state.currentSpread = targetSpread;
-  await renderCurrentSpread();
-
-  book.style.opacity = '1';
-  await sleep(100);
-  book.style.transition = '';
-  state.flipping = false;
-}
-
 async function flipForward(durationMs = FLIP_MS) {
   if (state.flipping) return;
   if (state.currentSpread >= state.totalSpreads - 1) return;
@@ -2348,40 +2310,22 @@ async function jumpToSpread(target) {
   if (target === state.currentSpread) return;
   if (state.flipping) return;
 
-  // Section-button & page-number jumps always use the quick fade transition.
-  // Reserve the dramatic 3D flip animation for natural one-page-at-a-time reading.
-  await quickFade(target);
-}
-
-// Smart flip wrappers — track timing of consecutive flips and route to
-// quickFade if the user is flipping fast (>1 click/second).
-let lastFlipAt = 0;
-const FAST_FLIP_THRESHOLD_MS = 1000;
-
-async function smartFlipForward() {
-  if (state.flipping) return;
-  const now = Date.now();
-  const fast = (now - lastFlipAt) < FAST_FLIP_THRESHOLD_MS;
-  lastFlipAt = now;
-  if (fast && state.currentSpread !== 0) {
-    // Fast flipping: skip the 3D animation, just cross-fade
-    await quickFade(state.currentSpread + 1);
-  } else {
-    await flipForward();
+  // If the cover view is involved (either side), do a single fade transition
+  // (multi-flip animations don't translate well across the cover).
+  if (state.currentSpread === 0 || target === 0) {
+    await coverFadeTransition(target);
+    return;
   }
-}
 
-async function smartFlipBackward() {
-  if (state.flipping) return;
-  const now = Date.now();
-  const fast = (now - lastFlipAt) < FAST_FLIP_THRESHOLD_MS;
-  lastFlipAt = now;
-  if (fast && state.currentSpread !== 1) {
-    // (we exclude spread 1 -> 0 because that's the cover transition which has its own animation)
-    await quickFade(state.currentSpread - 1);
-  } else {
-    await flipBackward();
-  }
+  const direction = target > state.currentSpread ? 'forward' : 'backward';
+
+  // Single flip animation regardless of distance: snap state to one-before-target,
+  // then animate one regular flip to land on the target spread.
+  state.currentSpread = direction === 'forward' ? target - 1 : target + 1;
+  await renderCurrentSpread();
+  await sleep(15);
+  if (direction === 'forward') await flipForward(FLIP_MS);
+  else await flipBackward(FLIP_MS);
 }
 
 /* ============================================================================
@@ -2828,16 +2772,16 @@ async function init() {
   });
 
   // Wire arrows
-  $('#prev-arrow').addEventListener('click', () => smartFlipBackward());
-  $('#next-arrow').addEventListener('click', () => smartFlipForward());
+  $('#prev-arrow').addEventListener('click', () => flipBackward());
+  $('#next-arrow').addEventListener('click', () => flipForward());
 
   // Click anywhere on the right page = forward, anywhere on the left page = backward.
   // (Cover view: page-right is the cover and tapping it advances.)
   $('#page-right').addEventListener('click', () => {
-    if (!state.flipping) smartFlipForward();
+    if (!state.flipping) flipForward();
   });
   $('#page-left').addEventListener('click', () => {
-    if (!state.flipping) smartFlipBackward();
+    if (!state.flipping) flipBackward();
   });
 
   // Touch swipe gestures (mobile): swipe left = next, swipe right = previous.
@@ -2861,8 +2805,8 @@ async function init() {
     if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) && dt < 600) {
       e.preventDefault(); // suppress the synthetic click that would also fire
       swipeFired = true;
-      if (dx < 0) smartFlipForward();
-      else smartFlipBackward();
+      if (dx < 0) flipForward();
+      else flipBackward();
     }
   });
 
@@ -2922,8 +2866,8 @@ async function init() {
       if (e.key === 'Escape') closeContribute();
       return;
     }
-    if (e.key === 'ArrowRight') smartFlipForward();
-    if (e.key === 'ArrowLeft')  smartFlipBackward();
+    if (e.key === 'ArrowRight') flipForward();
+    if (e.key === 'ArrowLeft')  flipBackward();
   });
 
   // PDF modal
