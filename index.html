@@ -1,0 +1,2297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Designing Immersion — Digital Companion</title>
+<meta name="description" content="The Future of Simulation-Based Clinical Education — a digital companion to the printed book." />
+<style>
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  --burnt:        #BF5700;
+  --burnt-deep:   #8E3F00;
+  /* The variable names below are kept for compatibility with the rest of the
+     stylesheet, but their VALUES now follow the strict 3-color rule:
+     burnt orange, pure black, pure white. Any "gray" is just black at
+     reduced opacity (or white at reduced opacity in dark mode). */
+  --paper:        #FFFFFF;                   /* page background          */
+  --paper-deep:   rgba(0, 0, 0, 0.04);       /* faint differentiation    */
+  --cream:        #FFFFFF;                   /* used for inverted text   */
+  --ink:          #000000;                   /* primary text             */
+  --dust:         rgba(0, 0, 0, 0.75);       /* "gray" text → 75% black  */
+  --text-strong:  rgba(0, 0, 0, 0.75);       /* 75% black for body copy  */
+  --rule:         rgba(0, 0, 0, 0.12);
+  --rule-strong:  rgba(0, 0, 0, 0.22);
+  --shadow-sm:    rgba(0, 0, 0, 0.08);
+  --shadow-md:    rgba(0, 0, 0, 0.18);
+  --shadow-lg:    rgba(0, 0, 0, 0.30);
+
+  --sans:  'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --serif: 'Minion Pro', 'Adobe Caslon Pro', 'Garamond', 'Times New Roman', Times, serif;
+}
+
+[data-theme="dark"] {
+  --paper:        #000000;
+  --paper-deep:   rgba(255, 255, 255, 0.05);
+  --cream:        #000000;
+  --ink:          #FFFFFF;
+  --dust:         rgba(255, 255, 255, 0.75);
+  --text-strong:  rgba(255, 255, 255, 0.75);
+  --rule:         rgba(255, 255, 255, 0.12);
+  --rule-strong:  rgba(255, 255, 255, 0.22);
+  --shadow-sm:    rgba(0, 0, 0, 0.40);
+  --shadow-md:    rgba(0, 0, 0, 0.55);
+  --shadow-lg:    rgba(0, 0, 0, 0.75);
+}
+
+/* ============================================================
+   RESET + BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+button { font-family: var(--sans); cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+img, canvas { display: block; max-width: 100%; }
+
+.serif { font-family: var(--serif); font-style: italic; }
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--dust);
+}
+
+/* ============================================================
+   SPLASH SCREEN
+   ============================================================ */
+#splash {
+  position: fixed;
+  inset: 0;
+  background: var(--paper);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  transition: opacity 0.9s ease, visibility 0.9s ease;
+}
+#splash.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.splash-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--burnt);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: splashFadeIn 0.6s 0.1s forwards;
+}
+.splash-title {
+  font-size: clamp(48px, 9vw, 120px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  text-align: center;
+  color: var(--ink);
+  opacity: 0;
+  animation: splashFadeIn 0.8s 0.3s forwards;
+}
+.splash-sub {
+  margin-top: 18px;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  opacity: 0;
+  text-align: center;
+  animation: splashFadeIn 0.8s 0.6s forwards;
+}
+.splash-poetic {
+  margin-top: 60px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 18px;
+  text-align: center;
+  color: var(--ink);
+  opacity: 0;
+  line-height: 1.6;
+  max-width: 480px;
+  animation: splashFadeIn 0.8s 0.9s forwards;
+}
+.splash-progress-wrap {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(420px, 80vw);
+  opacity: 0;
+  animation: splashFadeIn 0.6s 1.2s forwards;
+}
+.splash-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dust);
+  margin-bottom: 10px;
+}
+.splash-progress-track {
+  height: 1px;
+  background: var(--rule);
+  position: relative;
+  overflow: hidden;
+}
+.splash-progress-bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0%;
+  background: var(--burnt);
+  transition: width 0.3s ease;
+}
+@keyframes splashFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+}
+[data-theme="dark"] header { background: rgba(0, 0, 0, 0.92); }
+.header-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+/* Theme toggle — sits at the very top-left */
+.theme-toggle {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--rule-strong);
+  background: transparent;
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  transition: all 0.2s ease;
+  position: relative;
+}
+.theme-toggle:hover { border-color: var(--burnt); color: var(--burnt); }
+.theme-toggle svg { width: 16px; height: 16px; }
+.theme-toggle .icon-moon { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun  { display: none; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+
+/* Wordmark sits centered evenly between the toggle (left) and actions (right).
+   Auto horizontal margins absorb leftover flex space symmetrically. */
+.header-wordmark {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  text-align: center;
+  white-space: nowrap;
+  margin: 0 auto;
+}
+
+.section-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.section-nav button {
+  background: none;
+  border: 0;
+  padding: 6px 0;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.55;
+  position: relative;
+  transition: opacity 0.2s, color 0.2s;
+}
+.section-nav button::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: var(--burnt);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.section-nav button:hover { opacity: 1; }
+.section-nav button.active {
+  opacity: 1;
+  color: var(--burnt);
+}
+.section-nav button.active::after { transform: scaleX(1); }
+.header-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ink);
+  transition: all 0.2s ease;
+}
+.btn-primary { background: var(--burnt); color: #FFFFFF; border-color: var(--burnt); }
+.btn-primary:hover { background: var(--burnt-deep); border-color: var(--burnt-deep); }
+.btn-ghost { border-color: var(--rule-strong); color: var(--ink); background: transparent; }
+.btn-ghost:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+/* ============================================================
+   BOOK SECTION
+   ============================================================ */
+#book-section {
+  padding: 56px 28px 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+/* Section nav above the book */
+.section-nav.above-book {
+  max-width: 1100px;
+  margin: 0 auto 28px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 8px;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  background: var(--paper);
+}
+.section-nav.above-book button {
+  padding: 10px 16px;
+  border-radius: 2px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--ink);
+  opacity: 0.6;
+  transition: all 0.2s ease;
+}
+.section-nav.above-book button:hover {
+  opacity: 1;
+  background: var(--paper-deep);
+}
+.section-nav.above-book button::after { display: none; }
+.section-nav.above-book button.active {
+  opacity: 1;
+  background: var(--burnt);
+  color: #FFFFFF;
+}
+
+/* Book-stage meta (kept for compat in case CSS is re-used) */
+.book-stage-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.spread-counter {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dust);
+}
+.spread-counter strong { color: var(--ink); font-weight: 600; }
+
+#book-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  perspective: 3000px;
+}
+.flip-arrow {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--rule-strong);
+  background: var(--paper);
+  display: grid;
+  place-items: center;
+  transition: all 0.25s ease;
+  color: var(--ink);
+}
+.flip-arrow:hover:not(:disabled) {
+  background: var(--burnt);
+  color: var(--cream);
+  border-color: var(--burnt);
+  transform: scale(1.06);
+}
+.flip-arrow:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+.flip-arrow svg { width: 18px; height: 18px; }
+
+#book {
+  position: relative;
+  width: min(1100px, calc(100vw - 200px));
+  aspect-ratio: 2 / 1;
+  transform-style: preserve-3d;
+  transition: width 0.55s cubic-bezier(0.6, 0, 0.4, 1), aspect-ratio 0.55s cubic-bezier(0.6, 0, 0.4, 1);
+}
+/* Cover-only mode: a single square (the book is closed) */
+#book.cover-only {
+  width: min(550px, calc((100vw - 200px) / 2));
+  aspect-ratio: 1 / 1;
+}
+#book.cover-only .page-left { display: none; }
+#book.cover-only::after { display: none; } /* hide spine */
+#book.cover-only .page-right {
+  left: 0;
+  right: 0;
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 6px 20px var(--shadow-sm), 0 2px 6px var(--shadow-sm);
+}
+#book.cover-only .page-right .page-corner.right {
+  border-radius: 0;
+}
+#book::before {
+  /* desk shadow */
+  content: '';
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: -22px;
+  height: 28px;
+  background: var(--shadow-md);
+  border-radius: 50%;
+  filter: blur(20px);
+  opacity: 0.55;
+}
+#book::after {
+  /* spine seam */
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, var(--shadow-md) 30%, var(--shadow-md) 70%, transparent);
+  z-index: 12;
+  pointer-events: none;
+}
+.page {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: var(--cream);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.page canvas, .page .placeholder { width: 100%; height: 100%; object-fit: contain; }
+.page-left {
+  left: 0;
+  border-radius: 4px 0 0 4px;
+  box-shadow: inset -10px 0 18px -10px var(--shadow-md), 0 6px 20px var(--shadow-sm);
+}
+.page-right {
+  right: 0;
+  border-radius: 0 4px 4px 0;
+  box-shadow: inset 10px 0 18px -10px var(--shadow-md), 0 6px 20px var(--shadow-sm);
+}
+
+/* Flipping page */
+.flip-page {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 20;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+.flip-page-fwd { left: 50%; transform-origin: left center; }
+.flip-page-bwd { left: 0%;  transform-origin: right center; }
+.flip-face {
+  position: absolute;
+  inset: 0;
+  background: var(--cream);
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 28px var(--shadow-lg);
+}
+.flip-face.front { border-radius: 0 4px 4px 0; }
+.flip-face.front.bwd { border-radius: 4px 0 0 4px; }
+.flip-face.back  { transform: rotateY(180deg); border-radius: 4px 0 0 4px; }
+.flip-face.back.bwd { border-radius: 0 4px 4px 0; }
+.flip-face canvas { width: 100%; height: 100%; }
+
+@keyframes flipFwd { from { transform: rotateY(0deg); } to { transform: rotateY(-180deg); } }
+@keyframes flipBwd { from { transform: rotateY(0deg); } to { transform: rotateY(180deg); }  }
+
+.flip-shadow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+.flip-shadow.fwd {
+  background: linear-gradient(90deg, transparent 30%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.22) 100%);
+  animation: shadeAnim var(--flip-ms, 850ms) ease-out forwards;
+}
+.flip-shadow.bwd {
+  background: linear-gradient(90deg, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0) 40%, transparent 70%);
+  animation: shadeAnim var(--flip-ms, 850ms) ease-out forwards;
+}
+@keyframes shadeAnim { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
+
+/* Placeholder page (when no PDF loaded) */
+.placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--cream);
+  padding: 8% 8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--ink);
+}
+.placeholder.cover { background: var(--burnt); color: var(--cream); }
+.placeholder.section-color { color: var(--cream); }
+.ph-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.ph-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.ph-section-num {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+.ph-section-title {
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  margin: 0 0 14px;
+}
+.ph-section-sub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 18px;
+  opacity: 0.85;
+}
+.ph-rule {
+  width: 40px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.4;
+  margin: 28px 0;
+}
+.ph-body {
+  font-size: 12px;
+  line-height: 1.6;
+  opacity: 0.85;
+  max-width: 90%;
+}
+.ph-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.ph-page-num {
+  font-size: 36px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  opacity: 0.5;
+}
+
+/* Page corners (peel hover) */
+.page-corner {
+  position: absolute;
+  bottom: 0;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, transparent 50%, var(--paper-deep) 50%);
+  transition: width 0.4s, height 0.4s, box-shadow 0.4s;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.6;
+}
+.page-corner.right { right: 0; }
+.page-corner.left  {
+  left: 0;
+  background: linear-gradient(225deg, transparent 50%, var(--paper-deep) 50%);
+}
+.page-right:hover .page-corner.right,
+.flip-arrow.next:hover ~ #book .page-corner.right {
+  width: 64px; height: 64px; opacity: 1;
+  box-shadow: -2px -2px 10px var(--shadow-md);
+}
+
+/* Page controls */
+#page-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 36px;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+#page-controls .pc-label,
+#page-controls .pc-divider {
+  color: var(--dust);
+}
+#page-input {
+  width: 56px;
+  padding: 7px 8px;
+  text-align: center;
+  font-family: var(--sans);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+  border-radius: 2px;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  transition: border-color 0.2s, background 0.2s;
+}
+#page-input::-webkit-outer-spin-button,
+#page-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+#page-input:focus {
+  outline: none;
+  border-color: var(--burnt);
+}
+#page-input:hover { border-color: var(--burnt); }
+#page-total { color: var(--ink); font-weight: 500; }
+.spread-counter-right { text-align: right; }
+.scroll-cue {
+  margin-top: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--dust);
+}
+.scroll-cue svg { width: 16px; height: 16px; animation: bounce 2s infinite; }
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(6px); }
+}
+
+/* ============================================================
+   ARCHIVE (BELOW THE FOLD)
+   ============================================================ */
+#archive {
+  background: var(--paper-deep);
+  border-top: 1px solid var(--rule);
+  padding: 88px 28px 96px;
+}
+.archive-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.archive-context {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 36px;
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--burnt);
+}
+.archive-context::before {
+  content: '';
+  width: 18px;
+  height: 1px;
+  background: var(--burnt);
+}
+.archive-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--burnt);
+  margin-bottom: 14px;
+}
+.archive-heading {
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  max-width: 800px;
+  margin: 0 0 24px;
+}
+.archive-intro {
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 720px;
+  color: var(--ink);
+  opacity: 0.88;
+  margin-bottom: 56px;
+}
+
+.pull-quote {
+  position: relative;
+  padding: 32px 0 32px 48px;
+  margin: 56px 0;
+  border-left: 2px solid var(--burnt);
+}
+.pull-quote .q-mark {
+  position: absolute;
+  left: 12px;
+  top: 24px;
+  font-family: var(--serif);
+  font-size: 56px;
+  line-height: 0.6;
+  color: var(--burnt);
+  opacity: 0.4;
+}
+.pull-quote-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(18px, 2.4vw, 24px);
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.pull-quote-attr {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--burnt);
+  font-weight: 500;
+}
+
+.sources-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--burnt);
+  margin: 56px 0 18px;
+}
+.sources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.source-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 22px 22px 20px;
+  border-radius: 3px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: var(--sans);
+  color: var(--ink);
+}
+.source-card:hover {
+  background: var(--paper-deep);
+  border-color: var(--burnt);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--shadow-sm);
+}
+.source-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dust);
+}
+.source-card-meta svg { width: 12px; height: 12px; color: var(--dust); transition: color 0.2s; }
+.source-card:hover .source-card-meta svg { color: var(--burnt); }
+.source-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  transition: color 0.2s;
+}
+.source-card:hover .source-card-title { color: var(--burnt); }
+.source-card-snippet {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink);
+  opacity: 0.78;
+}
+
+.archive-endnote {
+  background: var(--burnt);
+  color: var(--cream);
+  padding: 36px 36px 32px;
+  border-radius: 3px;
+  margin-top: 64px;
+}
+.archive-endnote .eyebrow { color: rgba(250, 246, 236, 0.7); margin-bottom: 12px; }
+.archive-endnote-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(18px, 2.2vw, 22px);
+  line-height: 1.3;
+  margin: 0 0 14px;
+}
+.archive-endnote-body {
+  font-size: 13px;
+  line-height: 1.65;
+  opacity: 0.92;
+}
+
+/* ============================================================
+   CONTRIBUTE — takeover overlay
+   ============================================================ */
+.contribute-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  background: var(--paper);
+  overflow-y: auto;
+  display: none;
+  padding: 96px 28px 64px;
+}
+.contribute-overlay.open { display: block; }
+.contribute-close {
+  position: fixed;
+  top: 22px;
+  right: 28px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--rule-strong);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  z-index: 260;
+  transition: all 0.2s ease;
+}
+.contribute-close:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.contribute-close svg { width: 18px; height: 18px; }
+
+.contribute-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 64px;
+  align-items: start;
+}
+.contribute-intro h2 {
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 14px 0 18px;
+}
+.contribute-intro h2 em { font-family: var(--serif); font-weight: 400; color: var(--burnt); }
+.contribute-intro p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink);
+  opacity: 0.85;
+  margin: 0 0 12px;
+}
+.contribute-intro .eyebrow { color: var(--burnt); }
+
+.contribute-form {
+  background: var(--paper-deep);
+  padding: 32px;
+  border-radius: 3px;
+  border: 1px solid var(--rule);
+}
+.field { margin-bottom: 18px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field label {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dust);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.field input, .field textarea, .field select {
+  width: 100%;
+  font-family: var(--sans);
+  font-size: 14px;
+  padding: 11px 13px;
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+  border-radius: 2px;
+  color: var(--ink);
+  transition: border-color 0.2s, background 0.2s;
+}
+.field input:focus, .field textarea:focus, .field select:focus {
+  outline: none;
+  border-color: var(--burnt);
+  background: var(--paper-deep);
+}
+.field textarea { resize: vertical; min-height: 100px; line-height: 1.5; }
+.field-file {
+  border: 1.5px dashed var(--rule-strong);
+  padding: 22px;
+  text-align: center;
+  border-radius: 2px;
+  background: var(--paper);
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+  cursor: pointer;
+}
+.field-file:hover { border-color: var(--burnt); background: var(--paper-deep); }
+.field-file input[type=file] {
+  position: absolute; inset: 0; opacity: 0; cursor: pointer;
+}
+.field-file-label {
+  font-size: 12px; color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.field-file-label svg { width: 16px; height: 16px; color: var(--burnt); }
+.field-file-meta { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--dust); margin-top: 6px; }
+.form-submit-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 22px;
+}
+.form-submit-row .helper { font-size: 11px; color: var(--dust); line-height: 1.4; }
+.form-msg { display: none; padding: 14px 16px; border-radius: 2px; font-size: 13px; margin-top: 14px; }
+.form-msg.success { display: block; background: rgba(191, 87, 0, 0.08); border: 1px solid var(--burnt); color: var(--burnt); }
+.form-msg.error   { display: block; background: rgba(180, 30, 30, 0.08); border: 1px solid #b41e1e;     color: #b41e1e; }
+
+/* ============================================================
+   CHANGELOG (inside contribute overlay, below form)
+   ============================================================ */
+.contribute-inner > .changelog-inner {
+  grid-column: 1 / -1;
+  margin-top: 64px;
+  padding-top: 56px;
+  border-top: 1px solid var(--rule);
+  max-width: 100%;
+}
+.changelog-inner { max-width: 980px; margin: 0 auto; }
+.changelog-inner > .eyebrow { color: var(--burnt); margin-bottom: 14px; }
+.changelog-inner h2 {
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0 0 14px;
+}
+.changelog-intro {
+  font-size: 14px; line-height: 1.65; max-width: 600px; opacity: 0.85; margin-bottom: 48px;
+}
+.changelog-list { border-top: 1px solid var(--rule); }
+.changelog-row {
+  display: grid;
+  grid-template-columns: 140px 100px 1fr 200px;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+  font-size: 13px;
+}
+.changelog-row .cl-date { font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--dust); padding-top: 2px; }
+.changelog-row .cl-version {
+  font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--burnt); font-weight: 600; padding-top: 2px;
+}
+.changelog-row .cl-change { color: var(--ink); line-height: 1.55; }
+.changelog-row .cl-author { font-size: 11px; color: var(--dust); text-align: right; padding-top: 2px; letter-spacing: 0.05em; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  padding: 36px 28px;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+}
+.footer-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--dust);
+}
+.footer-inner a { color: var(--ink); transition: color 0.2s; }
+.footer-inner a:hover { color: var(--burnt); }
+.footer-links { display: flex; gap: 28px; }
+
+/* ============================================================
+   PDF MODAL
+   ============================================================ */
+#pdf-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 200;
+  display: none;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 32px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+#pdf-modal.open { display: flex; }
+.modal-inner {
+  background: var(--paper);
+  flex: 1;
+  border-radius: 4px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+.modal-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.modal-header-text { line-height: 1.25; }
+.modal-header-eyebrow { font-size: 9px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--burnt); margin-bottom: 4px; }
+.modal-header-title { font-size: 16px; font-weight: 600; }
+.modal-actions { display: flex; gap: 8px; }
+.modal-close {
+  background: transparent;
+  border: 1px solid var(--rule-strong);
+  padding: 6px 14px;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.modal-close:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.modal-body {
+  background: var(--paper-deep);
+  overflow: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.modal-body canvas {
+  width: auto;
+  max-width: 100%;
+  box-shadow: 0 4px 24px var(--shadow-md);
+  background: white;
+}
+.modal-empty {
+  margin: auto;
+  text-align: center;
+  max-width: 420px;
+  padding: 60px 20px;
+}
+.modal-empty h3 { margin: 0 0 14px; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+.modal-empty p { font-size: 13px; line-height: 1.6; color: var(--ink); opacity: 0.75; margin: 0 0 14px; }
+.modal-empty code {
+  display: inline-block; padding: 6px 10px; background: var(--paper); border: 1px solid var(--rule);
+  font-size: 12px; border-radius: 2px; font-family: 'SF Mono', Menlo, Consolas, monospace;
+  color: var(--burnt);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 980px) {
+  .header-wordmark { display: none; }
+  .header-inner { padding: 14px 18px; }
+  .section-nav.above-book button { padding: 8px 12px; font-size: 10px; }
+  .contribute-inner { grid-template-columns: 1fr; gap: 36px; }
+  .changelog-row { grid-template-columns: 100px 1fr; }
+  .changelog-row .cl-version, .changelog-row .cl-author { grid-column: 2; }
+  #book { width: calc(100vw - 130px); }
+  #book.cover-only { width: calc((100vw - 130px) / 2); }
+  .flip-arrow { width: 42px; height: 42px; }
+}
+@media (max-width: 640px) {
+  #book-stage { gap: 8px; }
+  #book { width: calc(100vw - 90px); }
+  .flip-arrow { width: 38px; height: 38px; }
+  .field-row { grid-template-columns: 1fr; }
+  #book-section { padding: 36px 14px 56px; }
+  #archive { padding: 56px 18px 72px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     SPLASH SCREEN
+     ============================================================ -->
+<div id="splash">
+  <div class="splash-eyebrow">UT Austin · Dell Medical School · 2026</div>
+  <div class="splash-title">Designing<br>Immersion</div>
+  <div class="splash-sub">The Future of Simulation-Based Clinical Education</div>
+  <div class="splash-poetic">
+    The book, on the table.<br>The archive, beyond it.
+  </div>
+  <div class="splash-progress-wrap">
+    <div class="splash-progress-meta">
+      <span id="splash-progress-label">Loading the book</span>
+      <span id="splash-progress-pct">0%</span>
+    </div>
+    <div class="splash-progress-track">
+      <div class="splash-progress-bar" id="splash-progress-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header>
+  <div class="header-inner">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark theme" title="Toggle dark theme">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+      </svg>
+    </button>
+    <div class="header-wordmark">Designing Immersion</div>
+    <div class="header-actions">
+      <a class="btn btn-ghost" id="download-btn" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+        Download PDF
+      </a>
+      <button class="btn btn-primary" id="contribute-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        Contribute
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     BOOK SECTION
+     ============================================================ -->
+<section id="book-section">
+  <nav class="section-nav above-book" id="section-nav"></nav>
+
+  <div id="book-stage">
+    <button class="flip-arrow prev" id="prev-arrow" aria-label="Previous spread">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+
+    <div id="book">
+      <div class="page page-left" id="page-left">
+        <div class="placeholder"></div>
+      </div>
+      <div class="page page-right" id="page-right">
+        <div class="placeholder"></div>
+        <div class="page-corner right"></div>
+      </div>
+    </div>
+
+    <button class="flip-arrow next" id="next-arrow" aria-label="Next spread">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <div id="page-controls">
+    <span class="pc-label">Page</span>
+    <input type="number" id="page-input" min="1" value="1" aria-label="Page number" />
+    <span class="pc-divider">of</span>
+    <span id="page-total">—</span>
+  </div>
+
+  <div class="scroll-cue">
+    <span>beyond the book</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARCHIVE (BELOW THE FOLD)
+     ============================================================ -->
+<section id="archive">
+  <div class="archive-inner">
+    <div class="archive-context" id="archive-context">Beyond the book · —</div>
+    <div id="archive-content"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTRIBUTE — takeover overlay (only visible when opened)
+     ============================================================ -->
+<div id="contribute-overlay" class="contribute-overlay" aria-hidden="true" role="dialog" aria-labelledby="contribute-title">
+  <button class="contribute-close" id="contribute-close" aria-label="Close">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <div class="contribute-inner">
+    <div class="contribute-intro">
+      <div class="eyebrow">A living document</div>
+      <h2 id="contribute-title">This book is the <em>front door</em>.<br>Help expand what's behind it.</h2>
+      <p>
+        If you have research, references, files, or thoughts that belong in the appendix — submit them here. We review every contribution and credit accepted additions in the changelog.
+      </p>
+      <p>
+        Files, images, links, or just notes are all welcome.
+      </p>
+    </div>
+
+    <form class="contribute-form" id="contribute-form">
+      <div class="field-row">
+        <div class="field">
+          <label for="cf-name">Your Name</label>
+          <input type="text" id="cf-name" name="name" required placeholder="Jane Doe">
+        </div>
+        <div class="field">
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" name="email" required placeholder="jane@example.org">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="cf-type">What are you submitting?</label>
+        <select id="cf-type" name="submission_type">
+          <option>Research / paper</option>
+          <option>Reference / link</option>
+          <option>File or image</option>
+          <option>Thought or feedback</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="cf-message">Your contribution</label>
+        <textarea id="cf-message" name="message" required placeholder="Describe what you're submitting and how it fits in the book."></textarea>
+      </div>
+
+      <div class="field">
+        <label>Attach a file (optional)</label>
+        <div class="field-file">
+          <input type="file" id="cf-file" name="attachment" accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.gif" />
+          <div class="field-file-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
+            <span id="cf-file-label">Drop a PDF, DOC, or image — or click to choose</span>
+          </div>
+          <div class="field-file-meta">Max 10MB</div>
+        </div>
+      </div>
+
+      <input type="hidden" name="access_key" id="cf-access-key" />
+      <input type="hidden" name="subject" value="Designing Immersion — new contribution" />
+
+      <div class="form-submit-row">
+        <div class="helper">We respond within a week to acknowledge each submission.</div>
+        <button type="submit" class="btn btn-primary" id="cf-submit">
+          Submit
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <div class="form-msg" id="form-msg"></div>
+    </form>
+
+    <!-- Changelog lives below the contribute form, on the same overlay -->
+    <div class="changelog-inner">
+      <div class="eyebrow">Changelog</div>
+      <h2>Every revision, on the record.</h2>
+      <p class="changelog-intro">
+        The book moves with the field. This log records every change to the website — additions, corrections, expansions of the appendix.
+      </p>
+      <div class="changelog-list" id="changelog-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="footer-inner">
+    <div>Created by Master of Arts in Design focused on Health for the Dell Medical Center at the University of Texas</div>
+    <div class="footer-links">
+      <a href="#book-section">Top of book</a>
+      <a href="#archive">Archive</a>
+      <a href="#" id="footer-contribute">Contribute</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     PDF MODAL (for opening source documents in-page)
+     ============================================================ -->
+<div id="pdf-modal" role="dialog" aria-hidden="true">
+  <div class="modal-inner">
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <div class="modal-header-eyebrow" id="modal-eyebrow">Source document</div>
+        <div class="modal-header-title" id="modal-title">—</div>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-close" id="modal-close">Close</button>
+      </div>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+/* ============================================================================
+   ███  CONFIG  ███
+   Site owner: this is the only block you should need to edit regularly.
+   ============================================================================ */
+const CONFIG = {
+
+  /* 1. PATH TO YOUR BOOK PDF
+     ─────────────────────────────────────────────────────────────
+     Drop your exported PDF next to this HTML file and put its
+     filename here. Leaving as `null` shows the placeholder pages
+     so you can preview the layout.                                */
+  pdfPath: './designing-immersion-book.pdf',
+
+  /* 2. SECTIONS
+     ─────────────────────────────────────────────────────────────
+     Six sections shown in the top nav. `startSpread` is 0-indexed
+     (spread 0 = pages 1-2, spread 1 = pages 3-4, etc.).
+     `appendix` powers what shows up below the page.               */
+  sections: [
+    {
+      id: 'scenarios',
+      name: 'Scenarios',
+      startSpread: 2,
+      placeholderColor: '#BF5700',
+      appendix: {
+        eyebrow: 'Lorem ipsum dolor sit',
+        heading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        intro:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+        pullQuote: {
+          quote:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+          attribution: 'Lorem Ipsum, Dolor Sit Amet',
+        },
+        sourcesEyebrow: 'Lorem ipsum sources',
+        sources: [
+          { title: 'Lorem ipsum dolor sit amet',     type: 'Lorem ipsum', snippet: 'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', pdf: 'sources/lorem-1.pdf' },
+          { title: 'Consectetur adipiscing elit',    type: 'Lorem ipsum', snippet: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', pdf: 'sources/lorem-2.pdf' },
+          { title: 'Sed do eiusmod tempor',          type: 'Lorem ipsum', snippet: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', pdf: 'sources/lorem-3.pdf' },
+          { title: 'Ut labore et dolore magna',      type: 'Lorem ipsum', snippet: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', pdf: 'sources/lorem-4.pdf' },
+        ],
+        endNote: {
+          eyebrow: 'Lorem ipsum',
+          title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          body: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        },
+      },
+    },
+
+    {
+      id: 'research',
+      name: 'Research',
+      startSpread: 13,
+      placeholderColor: '#BF5700',
+      appendix: {
+        eyebrow: 'Lorem ipsum dolor sit',
+        heading: 'Consectetur adipiscing elit, sed do eiusmod tempor.',
+        intro:
+          'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.',
+        pullQuote: {
+          quote: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+          attribution: 'Lorem Ipsum, Consectetur',
+        },
+        sourcesEyebrow: 'Lorem ipsum sources',
+        sources: [
+          { title: 'Excepteur sint occaecat cupidatat', type: 'Lorem ipsum', snippet: 'Sunt in culpa qui officia deserunt mollit anim id est laborum, lorem ipsum dolor sit amet.', pdf: 'sources/lorem-5.pdf' },
+          { title: 'Mollit anim id est laborum',         type: 'Lorem ipsum', snippet: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', pdf: 'sources/lorem-6.pdf' },
+          { title: 'Quis nostrud exercitation',          type: 'Lorem ipsum', snippet: 'Ullamco laboris nisi ut aliquip ex ea commodo consequat, duis aute irure dolor in reprehenderit.', pdf: 'sources/lorem-7.pdf' },
+          { title: 'In voluptate velit esse',             type: 'Lorem ipsum', snippet: 'Cillum dolore eu fugiat nulla pariatur, excepteur sint occaecat cupidatat non proident.', pdf: 'sources/lorem-8.pdf' },
+        ],
+      },
+    },
+
+    {
+      id: 'concepts',
+      name: 'Concepts',
+      startSpread: 24,
+      placeholderColor: '#BF5700',
+      appendix: {
+        eyebrow: 'Lorem ipsum dolor sit',
+        heading: 'Duis aute irure dolor in reprehenderit.',
+        intro:
+          'In voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        pullQuote: {
+          quote: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.',
+          attribution: 'Lorem Ipsum, Sed Ut',
+        },
+        sourcesEyebrow: 'Lorem ipsum sources',
+        sources: [
+          { title: 'Sed ut perspiciatis unde omnis',  type: 'Lorem ipsum', snippet: 'Iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.', pdf: 'sources/lorem-9.pdf' },
+          { title: 'Eaque ipsa quae ab illo',          type: 'Lorem ipsum', snippet: 'Inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.', pdf: 'sources/lorem-10.pdf' },
+          { title: 'Nemo enim ipsam voluptatem',       type: 'Lorem ipsum', snippet: 'Quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.', pdf: 'sources/lorem-11.pdf' },
+          { title: 'Eos qui ratione voluptatem',       type: 'Lorem ipsum', snippet: 'Sequi nesciunt, neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.', pdf: 'sources/lorem-12.pdf' },
+        ],
+      },
+    },
+
+    {
+      id: 'tools',
+      name: 'Tools',
+      startSpread: 35,
+      placeholderColor: '#BF5700',
+      appendix: {
+        eyebrow: 'Lorem ipsum dolor sit',
+        heading: 'Neque porro quisquam est qui dolorem ipsum.',
+        intro:
+          'Quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.',
+        pullQuote: {
+          quote: 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti.',
+          attribution: 'Lorem Ipsum, At Vero',
+        },
+        sourcesEyebrow: 'Lorem ipsum sources',
+        sources: [
+          { title: 'At vero eos et accusamus',         type: 'Lorem ipsum', snippet: 'Et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti.', pdf: 'sources/lorem-13.pdf' },
+          { title: 'Quos dolores et quas molestias',    type: 'Lorem ipsum', snippet: 'Excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt.', pdf: 'sources/lorem-14.pdf' },
+          { title: 'Mollitia animi id est laborum',     type: 'Lorem ipsum', snippet: 'Et dolorum fuga, et harum quidem rerum facilis est et expedita distinctio.', pdf: 'sources/lorem-15.pdf' },
+          { title: 'Nam libero tempore cum soluta',     type: 'Lorem ipsum', snippet: 'Nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat.', pdf: 'sources/lorem-16.pdf' },
+        ],
+      },
+    },
+
+    {
+      id: 'principles',
+      name: 'Principles',
+      startSpread: 46,
+      placeholderColor: '#BF5700',
+      appendix: {
+        eyebrow: 'Lorem ipsum dolor sit',
+        heading: 'Temporibus autem quibusdam et aut officiis.',
+        intro:
+          'Debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.',
+        pullQuote: {
+          quote: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized.',
+          attribution: 'Lorem Ipsum, On The Other Hand',
+        },
+        sourcesEyebrow: 'Lorem ipsum sources',
+        sources: [
+          { title: 'On the other hand we denounce',     type: 'Lorem ipsum', snippet: 'With righteous indignation and dislike men who are so beguiled and demoralized by the charms.', pdf: 'sources/lorem-17.pdf' },
+          { title: 'By the charms of pleasure',          type: 'Lorem ipsum', snippet: 'Of the moment, so blinded by desire, that they cannot foresee the pain and trouble.', pdf: 'sources/lorem-18.pdf' },
+          { title: 'Equal blame belongs to those',       type: 'Lorem ipsum', snippet: 'Who fail in their duty through weakness of will, which is the same as saying through shrinking.', pdf: 'sources/lorem-19.pdf' },
+          { title: 'These cases are perfectly simple',   type: 'Lorem ipsum', snippet: 'In a free hour, when our power of choice is untrammelled and when nothing prevents.', pdf: 'sources/lorem-20.pdf' },
+        ],
+      },
+    },
+
+    {
+      id: 'appendix',
+      name: 'Appendix',
+      startSpread: 57,
+      placeholderColor: '#BF5700',
+      appendix: {
+        eyebrow: 'Lorem ipsum dolor sit',
+        heading: 'The wise man therefore always holds in these matters.',
+        intro:
+          'To this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        sourcesEyebrow: 'Lorem ipsum complete archive',
+        sources: [
+          { title: 'The wise man therefore always',     type: 'Lorem ipsum', snippet: 'Holds in these matters to this principle of selection: he rejects pleasures to secure other.', pdf: 'sources/lorem-21.pdf' },
+          { title: 'Greater pleasures or else he',       type: 'Lorem ipsum', snippet: 'Endures pains to avoid worse pains, lorem ipsum dolor sit amet consectetur.', pdf: 'sources/lorem-22.pdf' },
+          { title: 'Lorem ipsum dolor sit amet',          type: 'Lorem ipsum', snippet: 'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.', pdf: 'sources/lorem-23.pdf' },
+          { title: 'Ut enim ad minim veniam',             type: 'Lorem ipsum', snippet: 'Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', pdf: 'sources/lorem-24.pdf' },
+          { title: 'Duis aute irure dolor',               type: 'Lorem ipsum', snippet: 'In reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', pdf: 'sources/lorem-25.pdf' },
+          { title: 'Excepteur sint occaecat',              type: 'Lorem ipsum', snippet: 'Cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', pdf: 'sources/lorem-26.pdf' },
+        ],
+        endNote: {
+          eyebrow: 'Lorem ipsum',
+          title: 'Lorem ipsum dolor sit amet, consectetur adipiscing.',
+          body: 'Elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        },
+      },
+    },
+  ],
+
+  /* 3. TOTAL PAGES (used when no PDF is loaded — auto-detected when PDF is set) */
+  totalPagesIfNoPdf: 125,
+
+  /* 4. CONTRIBUTE FORM
+     ─────────────────────────────────────────────────────────────
+     Get a free access key at https://web3forms.com — it routes
+     submissions (including file attachments) directly to your
+     email, no backend required. Paste the key here.               */
+  web3FormsKey: '26b29568-a06c-4adf-b8e0-f849d04e096d',
+  contactEmailDisplay: 'team@designing-immersion.org', // shown to users; not actually used for routing
+
+  /* 5. CHANGELOG
+     ─────────────────────────────────────────────────────────────
+     Add a new entry every time you update the site. Newest first.  */
+  changelog: [
+    {
+      date: '2026-04-30',
+      version: 'v1.0',
+      author: 'Capstone Team',
+      change:
+        'Initial publication of the digital companion. Book, appendix, and source archive established.',
+    },
+  ],
+};
+
+/* ============================================================================
+   PDF.js setup
+   ============================================================================ */
+if (typeof pdfjsLib !== 'undefined') {
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
+
+/* ============================================================================
+   STATE
+   ============================================================================ */
+const state = {
+  pdf:           null,         // pdf.js document handle (or null)
+  totalPages:    CONFIG.totalPagesIfNoPdf,
+  totalSpreads:  1 + Math.ceil(Math.max(0, CONFIG.totalPagesIfNoPdf - 1) / 2),
+  currentSpread: 0,
+  flipping:      false,
+  pageCache:     {},           // pageNum -> rendered canvas
+};
+
+const FLIP_MS = 850;
+const FAST_FLIP_MS = 380;
+
+/* ============================================================================
+   UTILITIES
+   ============================================================================ */
+const $  = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function spreadToSection(spreadIdx) {
+  let active = CONFIG.sections[0];
+  for (const sec of CONFIG.sections) {
+    if (sec.startSpread <= spreadIdx) active = sec;
+  }
+  return active;
+}
+
+function spreadPages(spreadIdx) {
+  // View 0 = cover only (PDF page 1, single square)
+  // View N for N >= 1 = pages 2N and 2N+1 as a spread
+  if (spreadIdx === 0) return [null, 1];
+  return [2 * spreadIdx, 2 * spreadIdx + 1];
+}
+
+/* ============================================================================
+   PAGE RENDERING
+   ============================================================================ */
+async function renderPdfPage(pageNum) {
+  if (!state.pdf) return null;
+  if (pageNum < 1 || pageNum > state.totalPages) return null;
+  try {
+    const page = await state.pdf.getPage(pageNum);
+    const baseViewport = page.getViewport({ scale: 1 });
+    // Render at 2x device pixel ratio for crispness
+    const scale = Math.min(2.5, 1100 / baseViewport.width);
+    const viewport = page.getViewport({ scale });
+    const canvas = document.createElement('canvas');
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    const ctx = canvas.getContext('2d');
+    await page.render({ canvasContext: ctx, viewport }).promise;
+    return canvas;
+  } catch (err) {
+    console.warn('PDF render error for page', pageNum, err);
+    return null;
+  }
+}
+
+function renderPlaceholder(pageNum) {
+  // Build a DOM element (not canvas) that shows what the page WILL show
+  // when a PDF is added. Different layout for cover vs section vs body pages.
+  const sectionForThisPage = sectionForPageNum(pageNum);
+  const isCover = pageNum === 1;
+  const isSectionStart = sectionForThisPage && sectionForThisPage.startSpread * 2 + 1 === pageNum;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'placeholder';
+
+  if (isCover) {
+    wrap.classList.add('cover');
+    wrap.innerHTML = `
+      <div class="ph-meta"><span>UT Austin · Capstone 2026</span><span></span></div>
+      <div class="ph-content">
+        <div class="ph-section-num">Cover</div>
+        <h1 class="ph-section-title">Designing<br>Immersion</h1>
+        <div class="ph-section-sub">The Future of Simulation-Based Clinical Education</div>
+      </div>
+      <div class="ph-foot"><span>Prepared for the EPMO</span><span class="ph-page-num">01</span></div>
+    `;
+    return wrap;
+  }
+
+  if (isSectionStart && sectionForThisPage) {
+    wrap.classList.add('section-color');
+    wrap.style.background = sectionForThisPage.placeholderColor;
+    wrap.innerHTML = `
+      <div class="ph-meta"><span>Section · ${sectionForThisPage.name}</span><span>${String(pageNum).padStart(2,'0')}</span></div>
+      <div class="ph-content">
+        <div class="ph-section-num">Section opener</div>
+        <h2 class="ph-section-title">${sectionForThisPage.name}</h2>
+        <div class="ph-rule"></div>
+        <p class="ph-body">${(sectionForThisPage.appendix.heading || '').toString()}</p>
+      </div>
+      <div class="ph-foot"><span>Section start</span><span class="ph-page-num">${String(pageNum).padStart(2,'0')}</span></div>
+    `;
+    return wrap;
+  }
+
+  // Generic body page
+  const sectionName = sectionForThisPage ? sectionForThisPage.name : 'Front Matter';
+  const hasConfiguredPdf = !!(CONFIG && CONFIG.pdfPath);
+  const bodyMsg = hasConfiguredPdf
+    ? `This is a preview placeholder. Once the site is deployed alongside <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 11px; background: var(--paper-deep); padding: 1px 5px; border-radius: 2px;">${CONFIG.pdfPath.split('/').pop()}</code>, the actual book page will render here.`
+    : `Drop a PDF into <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 11px; background: var(--paper-deep); padding: 1px 5px; border-radius: 2px;">CONFIG.pdfPath</code> at the top of this file's script tag. Each PDF page becomes one book page; pages are paired into spreads.`;
+  wrap.innerHTML = `
+    <div class="ph-meta"><span>${sectionName}</span><span>${String(pageNum).padStart(2,'0')}</span></div>
+    <div class="ph-content">
+      <div class="ph-section-num">Page ${pageNum}</div>
+      <h2 class="ph-section-title" style="color: var(--burnt); font-size: 32px;">${hasConfiguredPdf ? 'Preview mode.' : 'Your spread<br>renders here.'}</h2>
+      <div class="ph-rule" style="background: var(--burnt);"></div>
+      <p class="ph-body">${bodyMsg}</p>
+    </div>
+    <div class="ph-foot"><span>${hasConfiguredPdf ? 'Preview placeholder' : 'Placeholder mode'}</span><span class="ph-page-num">${String(pageNum).padStart(2,'0')}</span></div>
+  `;
+  return wrap;
+}
+
+function sectionForPageNum(pageNum) {
+  const spreadIdx = Math.floor((pageNum - 1) / 2);
+  return spreadToSection(spreadIdx);
+}
+
+async function getPage(pageNum) {
+  if (state.pageCache[pageNum]) return state.pageCache[pageNum];
+  const canvas = await renderPdfPage(pageNum);
+  const result = canvas || renderPlaceholder(pageNum);
+  state.pageCache[pageNum] = result;
+  return result;
+}
+
+async function setPageSlot(slotEl, pageNum) {
+  // Replace slot contents with page-num's rendered output
+  const content = await getPage(pageNum);
+  slotEl.innerHTML = '';
+  // Clone if it's a canvas (canvases can't be in two places)
+  if (content.tagName === 'CANVAS') {
+    const clone = document.createElement('canvas');
+    clone.width = content.width;
+    clone.height = content.height;
+    clone.getContext('2d').drawImage(content, 0, 0);
+    slotEl.appendChild(clone);
+  } else {
+    // For placeholder DIVs, clone deeply
+    slotEl.appendChild(content.cloneNode(true));
+  }
+}
+
+/* ============================================================================
+   FLIP MECHANICS
+   ============================================================================ */
+function updateArrows() {
+  $('#prev-arrow').disabled = state.currentSpread <= 0;
+  $('#next-arrow').disabled = state.currentSpread >= state.totalSpreads - 1;
+  // Page number reflected in the editable input below the book
+  const [lp, rp] = spreadPages(state.currentSpread);
+  // For the cover view, lp is null and rp is page 1
+  const pageNumber = (lp == null) ? rp : lp;
+  const pageInput = $('#page-input');
+  if (pageInput && document.activeElement !== pageInput) pageInput.value = pageNumber;
+  pageInput.max = state.totalPages;
+  $('#page-total').textContent = state.totalPages;
+}
+
+async function renderCurrentSpread() {
+  const [lp, rp] = spreadPages(state.currentSpread);
+  const isCover = (lp == null);
+
+  // Toggle cover-only mode BEFORE rendering pages, so the layout transitions
+  $('#book').classList.toggle('cover-only', isCover);
+
+  // Always render the right page (cover OR right page of spread)
+  const tasks = [setPageSlot($('#page-right'), rp)];
+  // Render the left page only for spread views
+  if (!isCover) tasks.push(setPageSlot($('#page-left'), lp));
+  await Promise.all(tasks);
+
+  // re-attach right page corner (was wiped)
+  if (!$('#page-right .page-corner')) {
+    const corner = document.createElement('div');
+    corner.className = 'page-corner right';
+    $('#page-right').appendChild(corner);
+  }
+
+  // Update meta UI
+  const sec = spreadToSection(state.currentSpread);
+
+  // Update section nav active
+  $$('#section-nav button').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.id === sec.id);
+  });
+
+  // Update archive
+  renderArchive(sec);
+
+  // Sync arrow + counter UI
+  updateArrows();
+}
+
+/* Smooth cross-fade used when transitioning into or out of the cover view —
+   the book also resizes (1 square ↔ 2 squares) via CSS transition simultaneously. */
+async function coverFadeTransition(targetSpread) {
+  if (state.flipping) return;
+  state.flipping = true;
+  const book = $('#book');
+
+  // Pre-render the destination pages so the fade-in is instant
+  const [tl, tr] = spreadPages(targetSpread);
+  const prefetch = [getPage(tr)];
+  if (tl != null) prefetch.push(getPage(tl));
+  await Promise.all(prefetch);
+
+  // Fade out
+  book.style.transition = 'opacity 0.32s ease, width 0.55s cubic-bezier(0.6,0,0.4,1), aspect-ratio 0.55s cubic-bezier(0.6,0,0.4,1)';
+  book.style.opacity = '0';
+  await sleep(320);
+
+  // Swap state + re-render (which also toggles cover-only class -> width animates)
+  state.currentSpread = targetSpread;
+  await renderCurrentSpread();
+
+  // Allow a frame for the width transition to start before fading back in
+  await sleep(60);
+
+  // Fade in
+  book.style.opacity = '1';
+  await sleep(320);
+  book.style.transition = '';
+  state.flipping = false;
+}
+
+async function flipForward(durationMs = FLIP_MS) {
+  if (state.flipping) return;
+  if (state.currentSpread >= state.totalSpreads - 1) return;
+
+  // Special case: leaving the cover view → fade transition (no 3D flip)
+  if (state.currentSpread === 0) {
+    await coverFadeTransition(1);
+    return;
+  }
+
+  state.flipping = true;
+
+  const [, currentRight] = spreadPages(state.currentSpread);
+  const [nextLeft, nextRight] = spreadPages(state.currentSpread + 1);
+
+  // Pre-fetch upcoming pages
+  await Promise.all([getPage(nextLeft), getPage(nextRight)]);
+
+  // The static right page underneath should reveal the next-spread's right page
+  await setPageSlot($('#page-right'), nextRight);
+
+  // Build flip overlay
+  const flip = document.createElement('div');
+  flip.className = 'flip-page flip-page-fwd';
+  flip.style.setProperty('--flip-ms', durationMs + 'ms');
+  flip.style.animation = `flipFwd ${durationMs}ms cubic-bezier(0.45, 0, 0.25, 1) forwards`;
+
+  const front = document.createElement('div');
+  front.className = 'flip-face front';
+  await setPageSlot(front, currentRight);
+
+  const shadow = document.createElement('div');
+  shadow.className = 'flip-shadow fwd';
+  shadow.style.setProperty('--flip-ms', durationMs + 'ms');
+  front.appendChild(shadow);
+
+  const back = document.createElement('div');
+  back.className = 'flip-face back';
+  await setPageSlot(back, nextLeft);
+
+  flip.appendChild(front);
+  flip.appendChild(back);
+  $('#book').appendChild(flip);
+
+  await sleep(durationMs);
+
+  $('#book').removeChild(flip);
+  state.currentSpread += 1;
+  state.flipping = false;
+  await renderCurrentSpread();
+}
+
+async function flipBackward(durationMs = FLIP_MS) {
+  if (state.flipping) return;
+  if (state.currentSpread <= 0) return;
+
+  // Special case: returning to the cover view → fade transition (no 3D flip)
+  if (state.currentSpread === 1) {
+    await coverFadeTransition(0);
+    return;
+  }
+
+  state.flipping = true;
+
+  const [currentLeft] = spreadPages(state.currentSpread);
+  const [prevLeft, prevRight] = spreadPages(state.currentSpread - 1);
+
+  await Promise.all([getPage(prevLeft), getPage(prevRight)]);
+  await setPageSlot($('#page-left'), prevLeft);
+
+  const flip = document.createElement('div');
+  flip.className = 'flip-page flip-page-bwd';
+  flip.style.setProperty('--flip-ms', durationMs + 'ms');
+  flip.style.animation = `flipBwd ${durationMs}ms cubic-bezier(0.45, 0, 0.25, 1) forwards`;
+
+  const front = document.createElement('div');
+  front.className = 'flip-face front bwd';
+  await setPageSlot(front, currentLeft);
+
+  const shadow = document.createElement('div');
+  shadow.className = 'flip-shadow bwd';
+  shadow.style.setProperty('--flip-ms', durationMs + 'ms');
+  front.appendChild(shadow);
+
+  const back = document.createElement('div');
+  back.className = 'flip-face back bwd';
+  await setPageSlot(back, prevRight);
+
+  flip.appendChild(front);
+  flip.appendChild(back);
+  $('#book').appendChild(flip);
+
+  await sleep(durationMs);
+
+  $('#book').removeChild(flip);
+  state.currentSpread -= 1;
+  state.flipping = false;
+  await renderCurrentSpread();
+}
+
+async function jumpToSpread(target) {
+  if (target === state.currentSpread) return;
+  if (state.flipping) return;
+
+  // If the cover view is involved (either side), do a single fade transition
+  // — multi-flip animations don't translate well across the cover.
+  if (state.currentSpread === 0 || target === 0) {
+    await coverFadeTransition(target);
+    return;
+  }
+
+  const distance = Math.abs(target - state.currentSpread);
+  // 1 spread away → normal flip. Multi-spread → cap at 3 fast flips.
+  const visualFlips = Math.min(distance, 3);
+  const direction = target > state.currentSpread ? 'forward' : 'backward';
+
+  for (let i = 0; i < visualFlips; i++) {
+    const isLast = i === visualFlips - 1;
+    if (isLast) {
+      // Last flip lands directly on target — snap state then animate
+      state.currentSpread = direction === 'forward' ? target - 1 : target + 1;
+      // Re-render with this snapped intermediate state
+      await renderCurrentSpread();
+      await sleep(20);
+      if (direction === 'forward') await flipForward(FAST_FLIP_MS);
+      else await flipBackward(FAST_FLIP_MS);
+    } else {
+      if (direction === 'forward') await flipForward(FAST_FLIP_MS);
+      else await flipBackward(FAST_FLIP_MS);
+    }
+  }
+}
+
+/* ============================================================================
+   ARCHIVE (BELOW THE FOLD) RENDERING
+   ============================================================================ */
+function renderArchive(section) {
+  const a = section.appendix;
+  if (!a) return;
+
+  $('#archive-context').textContent = `Beyond the book · ${section.name}`;
+
+  const pieces = [];
+  if (a.eyebrow) pieces.push(`<div class="archive-eyebrow">${a.eyebrow}</div>`);
+  if (a.heading) pieces.push(`<h2 class="archive-heading">${a.heading}</h2>`);
+  if (a.intro)   pieces.push(`<p class="archive-intro">${a.intro}</p>`);
+
+  if (a.pullQuote) {
+    pieces.push(`
+      <div class="pull-quote">
+        <span class="q-mark">“</span>
+        <div class="pull-quote-text">${a.pullQuote.quote}</div>
+        <div class="pull-quote-attr">— ${a.pullQuote.attribution}</div>
+      </div>
+    `);
+  }
+
+  if (a.sources && a.sources.length) {
+    pieces.push(`<div class="sources-eyebrow">${a.sourcesEyebrow || 'Source documents'}</div>`);
+    pieces.push('<div class="sources-grid">');
+    a.sources.forEach((s, i) => {
+      pieces.push(`
+        <button class="source-card" data-section="${section.id}" data-source-idx="${i}">
+          <div class="source-card-meta">
+            <span>${s.type}</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M14 3h7v7"/><path d="M10 14L21 3"/>
+              <path d="M21 14v5a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h5"/>
+            </svg>
+          </div>
+          <div class="source-card-title">${s.title}</div>
+          <div class="source-card-snippet">${s.snippet || ''}</div>
+        </button>
+      `);
+    });
+    pieces.push('</div>');
+  }
+
+  if (a.endNote) {
+    pieces.push(`
+      <div class="archive-endnote">
+        <div class="eyebrow">${a.endNote.eyebrow}</div>
+        <div class="archive-endnote-title">${a.endNote.title}</div>
+        <div class="archive-endnote-body">${a.endNote.body}</div>
+      </div>
+    `);
+  }
+
+  $('#archive-content').innerHTML = pieces.join('');
+
+  // Wire source cards
+  $$('.source-card').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const sec = CONFIG.sections.find((s) => s.id === btn.dataset.section);
+      const src = sec.appendix.sources[parseInt(btn.dataset.sourceIdx, 10)];
+      openPdfModal(src);
+    });
+  });
+}
+
+/* ============================================================================
+   PDF MODAL — opens any PDF source in-page (no leaving the site)
+   ============================================================================ */
+async function openPdfModal(source) {
+  $('#modal-eyebrow').textContent = source.type || 'Source document';
+  $('#modal-title').textContent = source.title || '—';
+  const body = $('#modal-body');
+  body.innerHTML = '';
+  $('#pdf-modal').classList.add('open');
+  $('#pdf-modal').setAttribute('aria-hidden', 'false');
+
+  // Loading
+  body.innerHTML = '<div class="modal-empty"><h3>Loading…</h3></div>';
+
+  if (!source.pdf) {
+    body.innerHTML = `
+      <div class="modal-empty">
+        <h3>No file linked</h3>
+        <p>This source doesn't have a PDF attached yet.</p>
+      </div>`;
+    return;
+  }
+
+  try {
+    const doc = await pdfjsLib.getDocument(source.pdf).promise;
+    body.innerHTML = '';
+    for (let pn = 1; pn <= doc.numPages; pn++) {
+      const page = await doc.getPage(pn);
+      const baseViewport = page.getViewport({ scale: 1 });
+      const scale = Math.min(2, 900 / baseViewport.width);
+      const viewport = page.getViewport({ scale });
+      const canvas = document.createElement('canvas');
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+      body.appendChild(canvas);
+    }
+  } catch (err) {
+    body.innerHTML = `
+      <div class="modal-empty">
+        <h3>File not found yet</h3>
+        <p>The site is looking for this file at:</p>
+        <code>${source.pdf}</code>
+        <p style="margin-top:18px">Drop the PDF at that path next to this site, and the source will open inline.</p>
+      </div>`;
+  }
+}
+function closePdfModal() {
+  $('#pdf-modal').classList.remove('open');
+  $('#pdf-modal').setAttribute('aria-hidden', 'true');
+  $('#modal-body').innerHTML = '';
+}
+
+/* ============================================================================
+   SECTION NAV
+   ============================================================================ */
+function buildSectionNav() {
+  const nav = $('#section-nav');
+  nav.innerHTML = '';
+  CONFIG.sections.forEach((sec) => {
+    const btn = document.createElement('button');
+    btn.dataset.id = sec.id;
+    btn.textContent = sec.name;
+    btn.addEventListener('click', () => {
+      jumpToSpread(sec.startSpread);
+    });
+    nav.appendChild(btn);
+  });
+}
+
+/* ============================================================================
+   CHANGELOG
+   ============================================================================ */
+function renderChangelog() {
+  const container = $('#changelog-list');
+  container.innerHTML = '';
+  CONFIG.changelog.forEach((entry) => {
+    const row = document.createElement('div');
+    row.className = 'changelog-row';
+    row.innerHTML = `
+      <div class="cl-date">${entry.date}</div>
+      <div class="cl-version">${entry.version || ''}</div>
+      <div class="cl-change">${entry.change}</div>
+      <div class="cl-author">${entry.author}</div>
+    `;
+    container.appendChild(row);
+  });
+}
+
+/* ============================================================================
+   FORM (Web3Forms) — submissions go directly to your inbox
+   ============================================================================ */
+function wireForm() {
+  $('#cf-access-key').value = CONFIG.web3FormsKey || '';
+
+  // File label updates
+  $('#cf-file').addEventListener('change', (e) => {
+    const f = e.target.files && e.target.files[0];
+    $('#cf-file-label').textContent = f ? `Attached: ${f.name}` : 'Drop a PDF, DOC, or image — or click to choose';
+  });
+
+  $('#contribute-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const msg = $('#form-msg');
+    msg.className = 'form-msg';
+    msg.style.display = 'none';
+
+    if (!CONFIG.web3FormsKey) {
+      msg.className = 'form-msg error';
+      msg.textContent =
+        "Form not yet configured. Site owner: get a free access key at web3forms.com and paste it into CONFIG.web3FormsKey.";
+      msg.style.display = 'block';
+      return;
+    }
+
+    const submitBtn = $('#cf-submit');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+      const formData = new FormData(form);
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+      const json = await res.json();
+      if (json.success) {
+        msg.className = 'form-msg success';
+        msg.textContent =
+          'Thank you — your submission is in. We\'ll respond within a week to acknowledge it.';
+        msg.style.display = 'block';
+        form.reset();
+        $('#cf-file-label').textContent = 'Drop a PDF, DOC, or image — or click to choose';
+      } else {
+        throw new Error(json.message || 'Submission failed');
+      }
+    } catch (err) {
+      msg.className = 'form-msg error';
+      msg.textContent = 'Something went wrong. Please email ' + CONFIG.contactEmailDisplay + ' directly.';
+      msg.style.display = 'block';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Submit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>';
+    }
+  });
+}
+
+/* ============================================================================
+   INIT
+   ============================================================================ */
+async function loadPdf() {
+  const splashBar   = $('#splash-progress-bar');
+  const splashPct   = $('#splash-progress-pct');
+  const splashLabel = $('#splash-progress-label');
+
+  const setProgress = (pct, label) => {
+    splashBar.style.width = pct + '%';
+    splashPct.textContent = Math.round(pct) + '%';
+    if (label) splashLabel.textContent = label;
+  };
+
+  // Always wire the download link to the configured path, even if PDF.js
+  // can't load it in this environment (sandboxed previews, etc).
+  const dl = $('#download-btn');
+  if (CONFIG.pdfPath && dl) {
+    dl.href = CONFIG.pdfPath;
+    dl.setAttribute('download', '');
+  }
+
+  if (!CONFIG.pdfPath) {
+    // Placeholder mode — animate the bar quickly so the splash still feels alive
+    setProgress(15, 'Preparing the layout');
+    await sleep(220);
+    setProgress(50, 'No PDF connected — using placeholder pages');
+    await sleep(380);
+    setProgress(100, 'Ready');
+    state.totalSpreads = 1 + Math.ceil(Math.max(0, CONFIG.totalPagesIfNoPdf - 1) / 2);
+    return;
+  }
+
+  try {
+    setProgress(8, 'Fetching the book…');
+
+    // Use explicit `{ url: ... }` form for maximum compatibility across PDF.js
+    // versions and across loading environments (some sandboxed iframes don't
+    // resolve plain relative-string args correctly).
+    // Also resolve the path against the document base so it works whether the
+    // page is loaded from disk, from a hosted site, or from a sandboxed frame.
+    let pdfUrl = CONFIG.pdfPath;
+    try {
+      pdfUrl = new URL(CONFIG.pdfPath, document.baseURI).href;
+    } catch (_) { /* fall through with the raw path */ }
+
+    const loadingTask = pdfjsLib.getDocument({ url: pdfUrl });
+    loadingTask.onProgress = (p) => {
+      if (p.total) {
+        const pct = 8 + Math.min(72, (p.loaded / p.total) * 72);
+        setProgress(pct, 'Fetching the book…');
+      }
+    };
+    const pdf = await loadingTask.promise;
+    state.pdf = pdf;
+    state.totalPages = pdf.numPages;
+    state.totalSpreads = 1 + Math.ceil(Math.max(0, pdf.numPages - 1) / 2);
+
+    setProgress(85, 'Rendering first spread…');
+    // Pre-render first 4 pages
+    await Promise.all([1, 2, 3, 4].map((p) => p <= pdf.numPages ? getPage(p) : null));
+    setProgress(100, 'Ready');
+  } catch (err) {
+    // Most common cause: this site is being viewed in a preview environment
+    // (like Claude's artifact preview) that sandboxes the HTML and won't serve
+    // sibling files. Once the HTML and PDF are deployed together to a real
+    // static host, this path works normally.
+    console.info('Designing Immersion: showing placeholder pages (PDF not reachable here — will work once deployed).');
+    setProgress(100, 'Preview mode — placeholder pages');
+    state.totalSpreads = 1 + Math.ceil(Math.max(0, CONFIG.totalPagesIfNoPdf - 1) / 2);
+    state.previewMode = true;
+  }
+}
+
+/* ============================================================================
+   THEME TOGGLE
+   ============================================================================ */
+function applyTheme(theme) {
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+}
+
+/* ============================================================================
+   CONTRIBUTE OVERLAY OPEN/CLOSE
+   ============================================================================ */
+function openContribute() {
+  $('#contribute-overlay').classList.add('open');
+  $('#contribute-overlay').setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+function closeContribute() {
+  $('#contribute-overlay').classList.remove('open');
+  $('#contribute-overlay').setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+async function init() {
+  buildSectionNav();
+  renderChangelog();
+  wireForm();
+
+  // Theme toggle (no localStorage in artifact preview — just in-memory toggle)
+  let currentTheme = 'light';
+  $('#theme-toggle').addEventListener('click', () => {
+    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    applyTheme(currentTheme);
+  });
+
+  // Wire arrows
+  $('#prev-arrow').addEventListener('click', () => flipBackward());
+  $('#next-arrow').addEventListener('click', () => flipForward());
+
+  // Page number input — type a page and jump
+  const pageInput = $('#page-input');
+  const goToTypedPage = () => {
+    const n = parseInt(pageInput.value, 10);
+    if (!Number.isFinite(n)) return;
+    const clamped = Math.min(Math.max(n, 1), state.totalPages);
+    // Page 1 = cover view (spread 0). Pages 2+ map to spread floor(page/2).
+    const targetSpread = clamped === 1 ? 0 : Math.floor(clamped / 2);
+    pageInput.blur();
+    jumpToSpread(targetSpread);
+  };
+  pageInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); goToTypedPage(); }
+  });
+  pageInput.addEventListener('blur', () => {
+    // If the user changed the value but didn't hit enter, still jump on blur
+    const [lp, rp] = spreadPages(state.currentSpread);
+    const currentDisplayed = (lp == null) ? rp : lp; // cover shows rp(=1); spreads show lp
+    if (parseInt(pageInput.value, 10) !== currentDisplayed) goToTypedPage();
+  });
+
+  // Keyboard arrows for flipping (skip when an input/textarea is focused or any modal is open)
+  window.addEventListener('keydown', (e) => {
+    const target = e.target;
+    const inField = target.matches && (target.matches('input, textarea, select'));
+    if (inField) return;
+    if ($('#pdf-modal').classList.contains('open')) {
+      if (e.key === 'Escape') closePdfModal();
+      return;
+    }
+    if ($('#contribute-overlay').classList.contains('open')) {
+      if (e.key === 'Escape') closeContribute();
+      return;
+    }
+    if (e.key === 'ArrowRight') flipForward();
+    if (e.key === 'ArrowLeft')  flipBackward();
+  });
+
+  // PDF modal
+  $('#modal-close').addEventListener('click', closePdfModal);
+  $('#pdf-modal').addEventListener('click', (e) => {
+    if (e.target.id === 'pdf-modal') closePdfModal();
+  });
+
+  // Contribute overlay
+  $('#contribute-btn').addEventListener('click', openContribute);
+  $('#contribute-close').addEventListener('click', closeContribute);
+  const footerContribute = $('#footer-contribute');
+  if (footerContribute) {
+    footerContribute.addEventListener('click', (e) => { e.preventDefault(); openContribute(); });
+  }
+
+  await loadPdf();
+  await renderCurrentSpread();
+
+  // Fade out splash
+  await sleep(420);
+  $('#splash').classList.add('hidden');
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
