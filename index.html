@@ -200,7 +200,7 @@ header {
   flex-shrink: 0;
   width: 34px;
   height: 34px;
-  border-radius: 50%;
+  border-radius: 2px;
   border: 1px solid var(--rule-strong);
   background: transparent;
   color: var(--ink);
@@ -286,6 +286,8 @@ header {
 .btn-primary:hover { background: var(--burnt-deep); border-color: var(--burnt-deep); }
 .btn-ghost { border-color: var(--rule-strong); color: var(--ink); background: transparent; }
 .btn-ghost:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.btn-dark { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.btn-dark:hover { background: var(--paper); color: var(--ink); border-color: var(--ink); }
 .btn svg { width: 13px; height: 13px; flex-shrink: 0; }
 
 /* ============================================================
@@ -1027,7 +1029,7 @@ header {
   right: 14px;
   width: 36px;
   height: 36px;
-  border-radius: 50%;
+  border-radius: 2px;
   background: rgba(255, 255, 255, 0.18);
   border: 1.5px solid currentColor;
   cursor: pointer;
@@ -1176,39 +1178,19 @@ body.book-fullscreen .flip-arrow.next { right: 16px; left: auto; }
 /* ============================================================
    CHAT WITH THE BOOK
    ============================================================ */
-.chat-btn {
-  position: fixed;
-  bottom: 28px;
-  right: 88px; /* sits to the LEFT of the scroll-top button */
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--ink);
-  border: 1px solid var(--ink);
-  color: var(--paper);
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  z-index: 200;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-.chat-btn:hover { transform: translateY(-2px); }
-.chat-btn svg { width: 22px; height: 22px; }
-.chat-btn.open { background: var(--burnt); border-color: var(--burnt); }
-
 #chat-panel {
   position: fixed;
-  bottom: 28px;
+  top: 76px;
   right: 28px;
   width: min(420px, calc(100vw - 32px));
-  height: min(620px, calc(100vh - 56px));
+  height: min(620px, calc(100vh - 100px));
   background: var(--paper);
   border: 1px solid var(--ink);
   border-radius: 2px;
   z-index: 250;
   display: flex;
   flex-direction: column;
-  transform: translateY(16px) scale(0.98);
+  transform: translateY(-12px) scale(0.98);
   opacity: 0;
   pointer-events: none;
   transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.25s ease;
@@ -1374,19 +1356,18 @@ body.book-fullscreen .flip-arrow.next { right: 16px; left: auto; }
   line-height: 1.4;
 }
 
-/* Hide chat in book-fullscreen mode */
-body.book-fullscreen .chat-btn,
+/* In book-fullscreen the chat panel hides; the chat button is inside the
+   header and disappears via the existing header hide rule. */
 body.book-fullscreen #chat-panel {
   display: none !important;
 }
 
 @media (max-width: 640px) {
-  .chat-btn { right: 80px; bottom: 20px; }
   #chat-panel {
+    top: 70px;
     right: 12px;
-    bottom: 78px;
     width: calc(100vw - 24px);
-    height: calc(100vh - 100px);
+    height: calc(100vh - 90px);
   }
 }
 
@@ -1533,21 +1514,27 @@ body.book-fullscreen #chat-panel {
      ============================================================ -->
 <header>
   <div class="header-inner">
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark theme" title="Toggle dark theme">
-      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-        <circle cx="12" cy="12" r="4"/>
-        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-      </svg>
-      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-      </svg>
-    </button>
-    <div class="header-wordmark">Designing Immersion: Beyond the Book</div>
-    <div class="header-actions">
+    <div class="header-actions left">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark theme" title="Toggle dark theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+      </button>
       <a class="btn btn-ghost" id="download-btn" download>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
         Download PDF
       </a>
+    </div>
+    <div class="header-wordmark">Designing Immersion: Beyond the Book</div>
+    <div class="header-actions right">
+      <button class="btn btn-dark" id="chat-btn" aria-label="Open book chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Book Chat
+      </button>
       <button class="btn btn-primary" id="contribute-btn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
         Contribute
@@ -1703,14 +1690,8 @@ body.book-fullscreen #chat-panel {
 </button>
 
 <!-- ============================================================
-     CHAT WITH THE BOOK (floating button + slide-in panel)
+     CHAT WITH THE BOOK (slide-in panel, button is in the header)
      ============================================================ -->
-<button id="chat-btn" class="chat-btn" aria-label="Chat with the book">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-  </svg>
-</button>
-
 <aside id="chat-panel" aria-hidden="true" aria-label="Chat with the book">
   <div class="chat-head">
     <div>
