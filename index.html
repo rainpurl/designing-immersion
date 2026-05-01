@@ -936,6 +936,7 @@ header {
 }
 .field-file-label svg { width: 16px; height: 16px; color: var(--burnt); }
 .field-file-meta { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--dust); margin-top: 6px; }
+.field-hint { font-size: 11px; color: var(--dust); line-height: 1.5; margin-top: 6px; }
 .form-submit-row {
   display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 22px;
 }
@@ -943,6 +944,7 @@ header {
 .form-msg { display: none; padding: 14px 16px; border-radius: 2px; font-size: 13px; margin-top: 14px; }
 .form-msg.success { display: block; background: rgba(191, 87, 0, 0.08); border: 1px solid var(--burnt); color: var(--burnt); }
 .form-msg.error   { display: block; background: rgba(180, 30, 30, 0.08); border: 1px solid #b41e1e;     color: #b41e1e; }
+.form-msg.error a { color: inherit; text-decoration: underline; font-weight: 600; }
 
 /* ============================================================
    CHANGELOG (inside contribute overlay, below form)
@@ -1295,7 +1297,7 @@ body.book-fullscreen .flip-arrow.next { right: 16px; left: auto; }
      SPLASH SCREEN
      ============================================================ -->
 <div id="splash">
-  <div class="splash-eyebrow">UT Austin · Dell Medical School · 2026</div>
+  <div class="splash-eyebrow">beyond the book</div>
   <div class="splash-title">Designing<br>Immersion</div>
   <div class="splash-sub">The Future of Simulation-Based Clinical Education</div>
   <div class="splash-progress-wrap">
@@ -1422,11 +1424,11 @@ body.book-fullscreen .flip-arrow.next { right: 16px; left: auto; }
       <div class="field-row">
         <div class="field">
           <label for="cf-name">Your Name</label>
-          <input type="text" id="cf-name" name="name" required placeholder="Jane Doe">
+          <input type="text" id="cf-name" name="name" required placeholder="Name">
         </div>
         <div class="field">
           <label for="cf-email">Email</label>
-          <input type="email" id="cf-email" name="email" required placeholder="jane@example.org">
+          <input type="email" id="cf-email" name="email" required placeholder="email@example.com">
         </div>
       </div>
 
@@ -1435,7 +1437,6 @@ body.book-fullscreen .flip-arrow.next { right: 16px; left: auto; }
         <select id="cf-type" name="submission_type">
           <option>Research / paper</option>
           <option>Reference / link</option>
-          <option>File or image</option>
           <option>Thought or feedback</option>
           <option>Other</option>
         </select>
@@ -1447,15 +1448,9 @@ body.book-fullscreen .flip-arrow.next { right: 16px; left: auto; }
       </div>
 
       <div class="field">
-        <label>Attach a file (optional)</label>
-        <div class="field-file">
-          <input type="file" id="cf-file" name="attachment" accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.gif" />
-          <div class="field-file-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
-            <span id="cf-file-label">Drop a PDF, DOC, or image, or click to choose</span>
-          </div>
-          <div class="field-file-meta">Max 10MB</div>
-        </div>
+        <label for="cf-file-link">Link to a file (optional)</label>
+        <input type="url" id="cf-file-link" name="file_link" placeholder="Paste a Google Drive, Dropbox, or journal URL" />
+        <div class="field-hint">For research papers, files, or images, share a link instead of attaching the file directly.</div>
       </div>
 
       <input type="hidden" name="access_key" id="cf-access-key" />
@@ -2249,12 +2244,6 @@ function renderChangelog() {
 function wireForm() {
   $('#cf-access-key').value = CONFIG.web3FormsKey || '';
 
-  // File label updates
-  $('#cf-file').addEventListener('change', (e) => {
-    const f = e.target.files && e.target.files[0];
-    $('#cf-file-label').textContent = f ? `Attached: ${f.name}` : 'Drop a PDF, DOC, or image, or click to choose';
-  });
-
   $('#contribute-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -2287,13 +2276,17 @@ function wireForm() {
           'Thank you, your submission is in. We\'ll respond within a week to acknowledge it.';
         msg.style.display = 'block';
         form.reset();
-        $('#cf-file-label').textContent = 'Drop a PDF, DOC, or image, or click to choose';
       } else {
-        throw new Error(json.message || 'Submission failed');
+        // Surface the real error from Web3Forms
+        console.error('Web3Forms response:', json);
+        const detail = json.message || 'Unknown error';
+        throw new Error(detail);
       }
     } catch (err) {
+      console.error('Contribute form error:', err);
       msg.className = 'form-msg error';
-      msg.textContent = 'Something went wrong. Please email ' + CONFIG.contactEmailDisplay + ' directly.';
+      msg.innerHTML =
+        'Hmm, it looks like the form isn\'t working as expected. Please email site developer <a href="mailto:hi@katr.es">hi@katr.es</a> directly.';
       msg.style.display = 'block';
     } finally {
       submitBtn.disabled = false;
