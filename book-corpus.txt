@@ -1,0 +1,838 @@
+# DESIGNING IMMERSION: THE FUTURE OF SIMULATION-BASED CLINICAL EDUCATION
+
+This is the full content of the book. It is the only authoritative source
+the assistant should use when answering questions about Designing Immersion.
+
+---
+
+**outline/order**
+
+| | **Cover** |
+| --- | --- |
+| *Blank, maybe a graphic?* *What about introductions of us and the design challenge? * | **Title Page** |
+| **Index** | **Index** |
+| **Section 1 Header** | **Section 1 Header** |
+| **Vignette - Intro to ** | **Vignette - Maya** |
+| **Vignette - Dr. Williams** | **Vignette - Dr. sharma** |
+| **“Map” of Space** | **Vignette - EPMO team work behind the scenes** |
+| **Vignette - the doctors - the morning briefing ** | **Closing the loop visual ** |
+| **Note on what you read** | **Additional workbook space ** |
+| **Section 2 Header** | **Section 2 Header** |
+| **Research Methodology** | **Introduce the experts we interviewed** |
+| **Introduce the experts we interviewed cont. ** | **Primary Interviews Roll-Up** |
+| **Secondary Research + Analogous Industry** | **Secondary Research + Analogous Industry** |
+| **Synthesis and list of all insights - highlight font of those the client wanted concepts for ** | **Insight 1A** |
+| **Insight 1B** | **Insight 2** |
+| **Section Break 3** | **Section Break 3** |
+| **Tech Readiness Matrix Overview** | **Tech Readiness Level 1** |
+| **Tech Readiness Level 2** | **Tech Readiness Level 3** |
+| **Tech Readiness Level 4** | **Tech Readiness Level 5** |
+| **Section Break 4** | **Section Break 4** |
+| **Building the System Intro** | **Building the System Matrix** |
+| **Building the System 2030** | **Building the System 2030** |
+| **Building the System 2040** | **Building the System 2040** |
+| **Building the System 2050** | **Building the System 2050** |
+| **Section Break 5** | **Section Break 5** |
+| **Spatial 1** | **Spatial 2** |
+| **Spatial 3** | **Spatial 4** |
+| **Design Principles** | **Other Things to Consider** |
+| **Appendix (Links/QR Codes?)** | **Appendix (Links/QR Codes?)** |
+| **Back Cover** | |
+
+**1 Scenario/Vignette**
+
+**2045 **
+
+**Day in the Life**
+
+UT Austin’s Dell Medical School 
+
+*“Predicting the future is pretty easy. Predicting it well is really, really *
+
+*hard. One thing I’ll guarantee — you’ll be wrong. So a lot of it is just being *
+
+*more right than wrong.” *
+
+— GEN (R) Mike Murray 
+
+Former Commanding General, U.S. Army Futures Command 
+
+**BEFORE YOU BEGIN **
+
+Circle what excites you. Question what 
+
+doesn’t convince you. Name the people and 
+
+organizations who belong in this conversation. 
+
+The future described here will be shaped 
+
+by the people who engage with it, not the people who wrote it. 
+
+6:47 AM — Maya Okafor —
+
+Third Year Medical Student 
+
+Maya Okafor hasn’t set an alarm in years. Her watch knows her sleep 
+
+architecture better than she does. It vibrated at 6:31 this morning because 
+
+today’s session requires fine motor precision, and her recovery metrics say 
+
+she’s ready. 
+
+She’s a third-year medical student, though that phrase means something 
+
+different now. There are no semesters. Maya moves through competency gates. 
+
+Some students reach this point in two and a half years. Some take four. 
+
+Her digital profile tracks everything. Three weeks ago, the system noticed her 
+
+confidence drops when she encounters pediatric cardiac cases. It didn’t flag 
+
+her. It assembled a sequence of simulation exercises, graded from gentle to 
+
+genuinely hard, and opened slots in her calendar. 
+
+She passes the Sim Gym on the fourth floor — two residents running through a 
+
+robotic suturing sequence on their own time. On the landing, she passes the 
+
+room everyone calls the Porch. The Porch is the building’s answer to questions 
+
+medicine took a very long time to ask: where do you put the feelings? How do you 
+
+prioritize physician mental health and wellness. 
+
+The suite doesn’t look like a sim lab. That was deliberate, made by a firm that 
+
+had built environments for museums and immersive theater. The room she enters 
+
+is a pediatric emergency department. Mid-shift. A half-eaten sandwich on the 
+
+nursing station. Spatial audio layered: a parent’s voice from behind the door. 
+
+Maya’s patient is a four-year-old named Luca, a dinosaur backpack on the 
+
+chair, a father who keeps asking if they can just go home. The scenario was 
+
+generated overnight. Faculty approved it yesterday with a review that took 
+
+eleven minutes. 
+
+Maya doesn’t know any of this. She knows a child is struggling to breathe, and 
+
+a father is scared, and the nurse is waiting for her to make a call. It feels real.
+
+* * * **Who in Austin designs narrative environments like this?*
+
+* What would your version of the Porch look like? *
+
+ 
+
+ * ** *
+
+* *
+
+Pic / graph of self improving system
+
+7:15 AM — Dr. Doug Williams —
+
+PGY-3 SURGICAL RESIDENT 
+
+ * Who at Dell Med could lead*
+
+*the sim-to-outcome study? *
+
+*What would it take to *
+
+* protect team training time here? *
+
+Dr. Doug Williams is running seven minutes behind schedule, which the system has already accounted for. Doug doesn’t think about this. It’s like the building breathing. You only notice when it stops. 
+
+Doug is a PGY-3 surgical resident, in the team sim suite with his full OR team: a scrub nurse, an anesthesiology resident, a circulating nurse, and an AI surgical assistant. The AI is not new. What’s new is that Doug has to work with it under conditions where it’s wrong. 
+
+Today’s scenario is an AI failure case. Forty minutes in, the system will misidentify a vascular structure. Doug’s job is to catch it — to trust his own training over a machine that has been right the last two hundred times. Think about overriding your GPS when every instinct says: the machine knows. Now 
+
+replace the wrong turn with a severed artery. 
+
+Getting this team in the room was once the greatest logistical challenge. A decade ago, a surgeon described it: one Friday per quarter. The revenue loss was the blocker. The will to protect training time did not exist yet. 
+
+It exists now. In 2034, a study correlating simulation performance with patient outcomes showed a measurable difference in complication rates. The study was 
+
+done here. After that, the argument stopped being philosophical and started 
+
+being actuarial. 
+
+The debrief room was not an afterthought. The chairs face each other. No table between them. The culture has been built, slowly, to make vulnerability a professional skill rather than a liability. 
+
+Doug doesn’t think about any of this. The AI is online, steady green. In thirty-eight minutes, it won’t be. 
+
+8:02 AM — Dr. Sam Sharma 
+
+PRACTICING CARDIOLOGIST 
+
+Dr. Sam Sharma is fifty-one and has been practicing cardiology for twenty-two 
+
+years. She has not set foot in the center in three months, and yet the center 
+
+has been part of her professional life every single week. 
+
+Last Tuesday, the ambient monitoring system flagged a communication pattern. 
+
+She had interrupted a patient twice in sixty seconds. It offered a reflection 
+
+prompt on her dashboard. She read it while drinking coffee. That was it. That 
+
+was continuing education. Just a mirror held up at exactly the right angle. 
+
+Today she’s here in person. The scenarios run hot. Last quarter, a colleague 
+
+forgot, briefly, that they were in a simulation. The mannequin didn’t look 
+
+real, but the panic did. Muscle memory is generous. It doesn’t care whether the 
+
+emergency was real. 
+
+What Sam appreciates most is that the system pays attention to her. When her 
+
+workload patterns suggested burnout, the system adjusted. The old model of 
+
+resilience was: endure. The new one is: notice. 
+
+Sam’s competency profile has followed her for her entire career. The governance 
+
+framework was modeled on how professional athletes negotiated data rights. That 
+
+sentence is easy to write. It was not easy to build. 
+
+She sets her coffee down on a counter that looks like a real nursing station. 
+
+Sticky notes on the monitor. Someone has left a pen. The pen is not an 
+
+accident. Nothing in this room is. 
+
+ Who builds ambient systems in Austin’s health tech community? 
+
+ 
+
+Space snapshot
+
+8:20 AM — The Work Behind the Scenes 
+
+8 Workstreams : One World Class Campus
+
+The experiences of this morning’s learners is hardly the
+
+product of a single brilliant decision. Maya’s scenario loading seamlessly. 
+
+Doug’s full OR team on a Wednesday. Sam’s ambient feedback traveling forty 
+
+miles. These look like features. They are actually agreements. They almost 
+
+didn’t happen. 
+
+In 2026, UT’s Dell Medical School had eight education workstreams running in 
+
+parallel. That is eight groups of very smart people, each convinced their 
+
+workstream’s resource requirements were most critical. This is not a criticism. 
+
+This is how institutions work. It is also how institutions build eight 
+
+excellent things that don’t talk to each other. 
+
+A research team studied how other industries handled this. Every high 
+
+performing training system had integrated its data, scheduling, assessment, and 
+
+culture into a single operating model. The ones that hadn’t spent years 
+
+retrofitting. 
+
+The workstreams kept their identities. But they deliberately collaborated with
+
+Each other overcome the challenge of navigating eight workstreams to create one campus. 
+
+Ask anyone what made the difference, and they’ll say: we got in the same room 
+
+early enough, we listened, suspended judgement and dreamt big. 
+
+8:30 AM — Doctors Morning Briefing 
+
+On the sixth floor, Dr. James Korndorffer Jr. pulls up the morning’s 
+
+operational dashboard. He could have retired. Some mornings, he almost can’t 
+
+believe it’s real. 
+
+He remembers 2026. He remembers a team of graduate design students — outsiders, 
+
+deliberately chosen. Looking outside of his expertise made all the difference. 
+
+Three immersive suites active. The Sim Gym has had fourteen sessions since 5 
+
+AM. The AI scenario engine generated forty-one new variations overnight. The 
+
+system is feeding yesterday’s outcomes back into the scenario library, closing 
+
+a loop that once existed only on a whiteboard. 
+
+Dr. Alisa Coker arrives with coffee. She is the Chair of Surgical Education 
+
+now. She remembers arriving to find zero robots and a ten-thousand-dollar 
+
+stipend. She swore she wouldn’t build something beautiful that nobody came to. 
+
+She didn’t. Every team sim slot is full. 
+
+Korndorffer pulls up patient safety outcomes correlated with simulation hours, 
+
+tracked across seven years. This chart ended a decades-long argument. It ended 
+
+it with evidence. 
+
+He closes the dashboard. Below him, Maya is listening to a father. Doug is 
+
+scrubbing in beside a machine that will lie to him. Sam is greeting colleagues 
+
+she hasn’t seen since January. 
+
+None of them are thinking about the building. They’re thinking about the work. 
+
+That’s how he knows it’s working. 
+
+ 
+
+Visualization of the dashboard (think spurs)
+
+A NOTE ON WHAT YOU JUST READ 
+
+This narrative is a scenario, not a prediction. Every system described here 
+
+traces to specific findings in our research. Some exist today. Some are five 
+
+years out. Some are fifteen. 
+
+UT’s Simulation, Immersive Learning and Assessment Center is still years in the 
+
+making. The concrete is not yet poured. The decisions that determine whether 
+
+this morning feels possible or fantastical are being made now. 
+
+**This is the moment when the **
+
+**future is most designable. **
+
+Designing Immersion · The Immersion by Design Report · UT Austin Dell Medical School · Spring 2026
+
+**2 Interviews ****&**** Insights**
+
+**IMMERSION BY DESIGN**
+
+# Voices, Research and Insights
+
+*Who we learned from, what their strongest thoughts were, and the three insights the client brought forward for concepting. Tagged throughout: where our research went beyond what the medical simulation field could arrive at on its own.*
+
+## The Voices
+
+Twenty two primary interviews across medicine, the military, elite athletics, simulation leadership, futures research, and immersive design. These are the people whose thinking shaped this work, and the ideas of theirs that held up under synthesis. Each voice is listed with a short profile, then the one or two thoughts that most directly informed the center’s design.
+
+**A note on the tags.** *Beyond expert consensus* marks thinking that the cross-industry or futures research surfaced. *Within the field* marks thinking the field already knows, which our research organized or confirmed.
+
+### Dr. James Korndorffer, Jr.
+
+*Vice Dean of Education, Dell Medical School. *
+
+Dr. Korndorffer built simulation centers at Tulane and Stanford before coming to Dell Med. His background is surgical. His orientation is visionary. He gave the Design in Health team to focus outside of the spaces he was already familiar, to think big and to consider all possibilities for the future based on trends we saw in analogous industries.
+
+*Two standout ideas from his interview: *
+
+Flexibility is the non-negotiable lesson. What gets built in three to five years is not what will be needed five years after that. The center has to absorb change without capital-intensive rebuilds.
+
+Current VR simulation often fails at environmental realism. The technology has not caught up to the conditions. *The reframe, that this is a narrative design problem rather than a technology fidelity problem, comes from analogous research. *
+
+### Dr. Alisa Coker
+
+*Director of Robotic Surgery and Education, Dell Medical School.*
+
+Coker is the operational ground truth of this project. She currently trains residents on borrowed equipment at Ascension hospitals, and negotiates access. She gave great insight into the challenges associated with scheduling constraint.
+
+She spent time at both John’s Hopkins and UCSD center with tremendous lessons from their sim centers. Built capability and executed capability are different problems, and the second one is harder.
+
+*The cross-industry evidence, specifically aviation mandates and military protected time, reframes this from a technology adoption question into an institutional commitment question.*
+
+### Dr. Ryan Broderick
+
+*Director, Center for the Future of Surgery, UC San Diego.*
+
+Broderick runs a highly effective simulation center. One thousand labs a year. Seventy percent funded by industry partnerships. Apple Vision Pro research in live surgery. His voice is the working operator’s voice, and his model is the one medical simulation currently has.
+
+The industry partnership model is the funding model. Eight million dollars of in-kind equipment from Stryker alone. Without device-company sponsors, it is unlikely UCSD exist in its current form and speaks to an important dependency for planning. *Within the field.*
+
+Haptics remain unbeaten for procedural skills. The Vision Pro is useful for pre-operative planning and remote consultation. Dr. Broderick suggested he believed it could be five to ten years away from replacing the hands-on operating room, and industry investment will set the timeline. *Within the field.*
+
+### Peter W. Singer
+
+*Futurist and author. Advisor to Hollywood, the CIA, and Pentagon. Described by the Wall Street Journal as the premier futurist in the national security environment.*
+
+Singer sits outside medicine entirely. That is the primary reason we sought to speak with him. He thinks for a living about narrative architecture, human-AI teaming, and what simulation fails to prepare people for.
+
+There are four concurrent AI relationships, not a linear progression. AI as decision aid, AI as remote presence, AI as teammate, AI as agent. A clinician graduating in 2035 will face all four. Medical simulation currently trains for the first one.
+
+*This reframes AI readiness from a technology adoption timeline into a curriculum architecture question.*
+
+He provided examples of scenarios that landed as “hokey and sterile” and identified them as a narrative design problem, not a technology fidelity problem. His colleague who designed the Abraham Lincoln Presidential Museum made immersion work through story architecture. Medical simulation traditionally hires technologists and educators. It is less likely to hire experience designers, narrative architects, or spatial audio engineers.
+
+*The talent-pipeline reframe is the sharpest cross-industry contribution in the research. The field should consider hiring talent from non-traditional industries to best shape learner experience.*
+
+General (Ret.) John "Mike" Murray
+
+*First Commanding General, U.S. Army Futures Command. Four decades of leadership in high stakes training and life on the line environments. *
+
+GEN Murray stood up a four-star command from nothing in the middle of downtown Austin. His lens is institutional. How training systems absorb change, how teams beat individuals, how leaders learn from failure.
+
+He shared the overall futility of perfectly predicting the future but the value of design for wide baselines and adaptability instead. In his own words, predicting the future is easy; predicting it well is not, and one thing he will guarantee is that the prediction will be wrong.
+
+*This posture is the counterweight to the architect’s instinct to over-specify the 2030 facility now.*
+
+Failure is the best teacher, and team competition outperforms individual competition. Environments designed to fail safely build resilience. The widgets and gadgets are only as effective as the human behind them.
+
+*Strong advocation for team-competition design. Dell Med leadership shares the aspiration; the military has the operational playbook.*
+
+### Lieutenant General (Ret.) Karen H. Gibson
+
+*Former U.S. Senate Sergeant at Arms. Thirty-three-year Army intelligence career, including Deputy Director of National Intelligence and Director of Intelligence for U.S. Central Command.*
+
+Gibson ran a 150-person intelligence team in Korea across multiple specialties, clearance levels, and time zones. She later led U.S. Senate security during a period of extraordinary institutional stress. Her thinking is structural and across a wide spectrum of considerations i.e. How teams move information, how training progresses, how to navigate human burnout and vulnerability. She also provided insights on risks, in particular how vetting of a vendor or subcontractor is as, if not more, important than internal security. 
+
+She shared insights on the military’s training model of crawl, walk, run as structural progression. Foundational understanding comes before role specialization. Role specialization comes before information flow design. Information flow comes before emergency drills. AI arrives should arguably arrive later in the progression. She uses the calculator analogy: you teach the math before you hand over the shortcut.
+
+*This gives the AI-generated scenario pipeline its pedagogical spine.*
+
+Data governance is a vendor and third-party security problem from day one. Her biggest challenge at the Capitol was vendors and third parties who also had access to the data. A data prioritization scheme determines what partners can touch, and it needs to be written before the partnerships are signed.
+
+*Medical simulation has not imported this framework. Sports (NBA, NFLPA) and national intelligence have had some initial successes worth deeper study of. *
+
+### Lieutenant Colonel Nick Rinaldi
+
+*U.S. Army Applications Laboratory. Kinesiology and education background. Works on how soldiers are trained, measured, and modernized, including emerging work on simulation telemetry and biometric capture.*
+
+Rinaldi is the operator’s voice on the data problem. He has sat inside Army simulators for hours, watched the system record every trigger pull and eye-track, then watched the system miss opportunities to collect valuable training data. His lens is practical. If you are going to measure, you have to keep it, tie it to a person, and use it to tell them something true about themselves over time.
+
+Rich performance data gets generated in every simulation every day and gets discarded at the end of the session. In his own words: I am not player one. I am Rinaldi dot mil. Put it in my system. Tell me how good I am over time. Tell me I am bad at shooting. Maybe I should not be shooting a rifle anymore. The capture is solved. The persistence, the attribution, and the honest feedback loop are not.
+
+*Beyond expert consensus. This is the Dell Med data-governance argument in its most compact form, delivered from inside an institution that has the same problem and has not solved it either. It pairs cleanly with Gibson on vendor governance, Coker on the Hopkins stat-card attempt, and the NBA and NFLPA frameworks.*
+
+Individual capture only matters if it rolls up into a team profile with clear parameters the team has agreed on. Works well with others has to be measurable on a spectrum, not a vibe. His roster-card metaphor for a pre-med-through-graduate learner profile is the sharpest articulation in the research of what a digital learner twin actually feels like from the inside.
+
+### *Beyond expert consensus. Sports and military training have built this. Medicine has the raw data inside robotic surgery systems and has not assembled it into a profile anyone owns.*Helen Schlachtenhaufen
+
+*Nike-sponsored professional middle-distance runner. 2024 U.S. Olympic Trials finalist, 1500m.*
+
+Schlachtenhaufen is the third leg of the high-stakes triangle, the one that is neither medicine nor military. Elite athletics provides a live-performance lens on what daily assessment feels like from the inside.
+
+Progression requires getting wrecked daily. Her first year out of college, she dreaded every practice because every day she got beaten. That was where the improvement came from. Controlled, repeated exposure to pressure above current capacity.
+
+*Athletics gives medical training a model for deliberate exposure to productive failure that the medicine does less deliberately.*
+
+Intrinsic motivation survives only if the rare flow-state moments are protected. Most of the work, even at Olympic level, is not fun. The few moments of flow carry the rest. The design implication is that the center has to create those moments, not just grind reps.
+
+*Medical simulation leaders understand burnout. They do not typically frame its antidote as engineering for flow or proper recovery or resilience practices. *
+
+### Dr. Kimberly Brown
+
+*Dell Medical School non-invasive surgeon and educator.*
+
+Dr. Brown gave the research great insights on some of the critical foundational challenges.
+
+The field does not share a mental model of the resident it wants to graduate. In her words: we still don’t have a shared mental model of what kind of medical student we want in our residency program. And then how do we train, measure, and assess that. 
+
+*Valuable as a direct internal confirmation that the gap is real.*
+
+Relationship-based care moments are where outcomes are actually made. Not the next wonder drug. The institutional investment should be there.
+
+### Dell Medical School Students
+
+*Undergraduate medical education learners. The end users of current simulation.*
+
+The students gave the research its ground-level honesty. What motivates them, what they tolerate, what they avoid.
+
+Current simulation feels hokey and sterile. Current VR tools can cause nausea. Students want psychological authenticity before they want graphical fidelity.
+
+*Within the field as a concern. ** **Outside experts reframed the problem as narrative design rather than technology fidelity.*
+
+Design without clinical input produces rooms that fail the first patient who rolls in. Clinicians have to be in the room during design, not consulted after.
+
+*Within the field.*
+
+### Other Voices Referenced in the Research
+
+*Shorter engagements that shaped specific arguments.*
+
+**Col. Ortiz (medevac pilot). **Flying a Black Hawk in combat, the chaos is not the patient. It is everything else happening around the patient. An environmental-design argument for what realistic simulation needs to contain.
+
+**Special Operations trainer. **Stress inoculation in safe conditions, team orchestration under pressure, measurement in extreme conditions. The design playbook for how learners are exposed to controlled stress before they encounter real stakes.
+
+**Spurs Human Performance Center. **A site visit, not an interview. An environment built to reinforce elite-athlete identity rather than grade performance. The center as identity infrastructure, not just training infrastructure.
+
+**Georgetown Nurse. ** Few of her thoughts here on AI dependency concerns and studying motivations for even becoming a doctor / ties to Dr. Kim Brown’s offramping design thoughts
+
+**Nick Rinadi. ** On training and data
+
+## Selected by the Client
+
+The above research and insights were were presented to the Enterprise Project Management Office in March 2026. After review by Dr. Alisa Coker, Edwin Rodriguez, and Cassandra Fleming, three insights were brought forward for deliverable development. Insight 1 was confirmed as the primary scope for concepting. Insights 2 and 3 were held as the connected territory the final deliverable should continue to reference.
+
+### Insight 1 — Primary scope
+
+**A paired insight.** Simulation has been optimized for the conditions it can reproduce and under-designed for the conditions that determine learning transfer. Relatedly: the most sophisticated simulation capability in the world sits unused when the institution cannot assemble the right team in the same room at the same time.
+
+*How might we* design an immersive learning and assessment environment that clinicians fight to experience, and that is worth the cost of showing up?
+
+This became the primary scope. It pairs two gaps the EPMO already felt, the one about fidelity and the one about access, and names them as one design problem rather than two operational headaches. The narrative-design argument and the talent-pipeline argument both live here. This is where the cross-industry research does the most intellectual work.
+
+*Primarily Beyond expert consensus. Singer (narrative architecture), FLAIM (multi-sensory design), military (protected training time), aviation (regulatory mandates) all contributed evidence the field does not currently integrate.*
+
+### Insight 2 — Held as connected territory
+
+The center’s reach is not determined by its square footage.
+
+*How might we* give architects and faculty a clear framework for what belongs in the center, what works better distributed, and what can happen anywhere, before square footage gets locked?
+
+The hub, spoke, and anywhere framework. The EPMO flagged it as architect-ready and time-sensitive. The framework has to land before the conceptual design phase closes its assumptions. Maritime cloud simulation (Wartsila), oil-and-gas rig-side simulators, military joint operations, and Pfizer manufacturing all supplied working models. No medical voice was going to hand the EPMO this rubric.
+
+*Almost entirely Beyond expert consensus.*
+
+### Insight 3 — Held as connected territory
+
+Technology shifts clinical tasks, and trust with technology shifts with them. Each shift reshapes the training and the space around it.
+
+*How might we* design adaptable spaces and training that can be continuously refreshed as technology changes clinical work, so clinicians learn when to trust, verify, and override technology safely?
+
+This insight carries Singer’s four-pathway AI framework and Murray’s futures posture into the design conversation. The EPMO identified it as the insight that keeps the center from being obsolete at opening.
+
+*Beyond expert consensus in the futures framing. Within the field in the local examples such as Korndorffer on holograms and Broderick on Vision Pro.*
+
+### A note on how the two parts connect
+
+The three selected insights are not evenly weighted in the research. Insight 1 is where the cross-industry voices push hardest against the conventional medical simulation brief. Insight 2 is where the distributed-training models from maritime, oil and gas, and manufacturing reframe the problem entirely. Insight 3 is where the futures research, most of it Beyond the field, gives the EPMO permission to design for a world that does not yet exist. The Voices section shows who gave the research that leverage.
+
+**3 Tech Readiness Framework**
+
+## What It Is
+
+A decision framework mapping five levels of human-AI relationship in simulation rooms from zero-tech "Unplugged" to "AI as Peer" embodied spaces against concrete architectural specs: power, square footage, acoustics, floor reinforcement, data infrastructure, and HVAC. It tells facilities planners and lead architects exactly what flexibility costs and what rigidity risks.
+
+## Why This Concept Matters
+
+The matrix sits at the intersection of the three EPMO-prioritized insights:
+
+- **Insight 1A/1B** (under-designed conditions + team assembly): Each AI level implies a different team configuration. The matrix lets architects design rooms that serve multiple team modes.
+
+- **Insight 2** (reach beyond square footage): The matrix operationalizes this a center with mostly Level 2-3 rooms and only a few Level 4-5 rooms is more future-ready than one betting everything on Level 5.
+
+- **Insight 3** (technology shifts reshape training/space): This IS the deliverable that makes Insight 3 actionable for architects. Without it, the insight is philosophy. With it, it becomes a spec sheet.
+
+It also directly translates the "Design the Pipes, Not the Faucets" principle into floor plan decisions.
+
+## Primary Audience
+
+**Facilities Planners and Lead Architects** with a secondary read for EPMO and AEC leadership who need to understand cost implications and risk profiles of flexibility decisions.
+
+**Front The Matrix:**
+
+- Five columns (Unplugged to AI as Peer), color-coded intensity bands, icons
+
+- Rows: square footage range, power (watts/sqft), data conduit specs, acoustic treatment, HVAC capacity, structural reinforcement, cost premium over base
+
+- A "minimum viable flexibility" callout: what infrastructure to install in ALL rooms regardless of intended level
+
+**Back Decision Logic:**
+
+- Decision tree: learning objective to team size to tech dependency to recommended room level
+
+- "Common Mistakes" sidebar (over-specified rooms that waste investment, under-specified rooms that become stranded assets)
+
+- 2030/2035/2040 timeline showing how room-level distribution shifts as tech matures (connects to Building the System hub/spoke/anywhere concept)
+
+## Content Architecture
+
+**The Five Levels:** Deepen each level with architectural spec tables, example training scenarios grounded in research interviews (Coker's haptics = Level 1-2, Gibson's team crisis = Level 2-3, Korndorffer's AI assessment = Level 3-4), and one cross-industry precedent per level.
+
+**"****Room Zero****"**** Minimum Viable Flexibility:** The most strategically important section. Answers: what do we install in EVERY room at build time so we are never trapped? A one-page baseline spec drawn from Korndorffer's flexibility mandate, Murray's "you'll be wrong" principle, and Broderick's facilities pain points.
+
+**Temporal Overlay (2030 to 2040):** 2030 opening = mostly Level 1-3, few Level 4, one Level 5 showcase. 2035 = software/sensor upgrades push rooms up without construction. 2040 = hub holds only Level 4-5 physical requirements, Level 1-3 migrates to spokes and "anywhere."
+
+**Decision Tree and Warning Signs:** Practical planning-meeting tool with cost-of-retrofit vs. cost-of-over-provision economic argument.
+
+## Connections to Other Deliverables
+
+- **Design Playbook** (1): Matrix becomes a chapter under "Design the Pipes, Not the Faucets"
+
+- **Spatial Catalogue** (3): Each spatial concept tagged with its Tech Readiness Level
+
+- **Building the System** (8): Companion piece one maps WHERE, the other maps WHAT INFRASTRUCTURE
+
+- **Layered Webpage** (4): Interactive digital version lives here
+
+- **Experience Map Generator** (9): Generated scenarios tag required Tech Readiness Level, connecting scenario design to space requirements
+
+## Production Notes
+
+- Refine the five-level icons from the deck for cross-deliverable consistency
+
+- Architectural specs need AEC/MEP review before finalizing
+
+**RESEARCH AND CONTENT TO VISUALIZE:**
+
+**I. THE CORE PROBLEM THE MATRIX SOLVES**
+
+The EPMO is designing a simulation center that opens in ~2030 and needs to serve learners through 2050+. The fundamental tension: specific technology choices made now will be obsolete by opening day, but architectural decisions (power, data, structural) are locked in at construction. The matrix translates this tension into actionable infrastructure specs.
+
+Three EPMO-prioritized insights anchor the concept:
+
+**Insight 1A:** Simulation has been under-designed for the conditions that maximize learning transfer.
+
+**Insight 1B:** The most sophisticated simulation capability in the world sits unused when the institution can't assemble the right team in the same room at the same time.
+
+**Insight 2:** The center's reach is not determined by its square footage.
+
+**Insight 3:** Technology shifts clinical tasks and trust with technology. Each shift reshapes the training and the space around it.
+
+The Direction for Delivery statement from the concepting workshop: Create a future-ready, scalable simulation ecosystem that prioritizes effective and efficient learning transfer and accessibility, ensuring that training is not constrained by space or synchronous availability of personnel, and can continuously adapt as technology evolves.
+
+### II. THE FIVE LEVELS, EVIDENCE BASE
+
+The five levels of human-AI relationship in simulation rooms (from the concepting deck) each have distinct research grounding:
+
+**Level 1: ****"****Unplugged****"**** (Base Case), Direct Human Interaction**
+
+- SOF Trainer: "We don't have to get so complicated… incredibly expensive, hard to manage, lots of hardware. It dates quickly." Team orchestration practice "can be on a plastic doll, it doesn't really matter."
+
+- SOF Trainer: "Make it low tech where you need team sport to come together. The orchestration, who's giving what to who, and the practice of that repetition, can be on a plastic doll."
+
+- Gibson: Design scenarios that deliberately REMOVE technology to build foundational skills. Power-out resilience, what happens when the tech fails?
+
+- Military Strategic Theme, "Foundation-First Technology Layering": Advanced technology must be strictly sequenced to occur only after learners demonstrate mastery in analog environments. Introducing assistive technology too early risks creating dependency and eroding cognitive resilience.
+
+- AMA Panel (SXSW): Medical student forces himself to complete diagnosis independently before using AI, concern about cognitive deskilling. "Conservative approach: add AI familiarity, don't remove core knowledge yet."
+
+- Nurses as Firewall (SXSW): Hurricane Helene caused 300+ mile power outage requiring paper charting. Ascension ransomware attack left systems down for a month. Technology fails, analog competency is safety-critical.
+
+- Other Providers Theme, "Human-Centric AI Integration": The center must use simulation to force hypothesis generation without algorithmic crutches, only layering in technology once core critical thinking is established.
+
+- Architectural implication: Minimal square footage, standard power, basic wall outlets, no tech integration required.
+
+**Level 2: ****"****AI-Augmented****"**** (Assistive), Human Oversees AI**
+
+- Broderick (UCSD): Deployed "simulation backpacks" at remote sites because learners can't always come to the center (15-minute walk, 20-minute drive). Portable, point-of-need assistive tech.
+
+- FLAIM firefighting system: Heated suits and breathing apparatus made trainees 4x more engaged. One trainee "forgot she was in VR." Technology enhances sensory realism without replacing human judgment.
+
+- Dell Students Theme, "Hybridized Human-Digital Interaction": Current VR implementations rejected due to poor UX, nausea, and cognitive load. Future model should prioritize AR or hybrid approaches where technology enhances rather than replaces human interaction.
+
+- Natasha (Dell Med student): Called VR simulation "stupid" and "a waste of my time", not because VR is bad, but because the software was buggy and the experience didn't improve clinical decision-making. "Focus on learning software rather than clinical skills."
+
+- Liana Chen (Dell 1st yr): Dell Med lacks modern simulation tech compared to other schools, but student acknowledged value of learning foundations without tech first. Gap appears when transitioning to tech-enabled hospital environments.
+
+- Secondary Research, Ambient Intelligence: Sensors and microphones embedded in patient rooms can capture encounters and provide automated assessment of communication skills, empathy markers, teach-back usage, interruption rates. Feedback dashboard available by the time the student leaves the room.
+
+- Architectural implication: Slightly increased footprint, moderate power, ceiling sensors, ambient intelligence beginning to appear.
+
+**Level 3: ****"****AI-in-the-Loop****"**** (Co-Participant), Collaborative Decision Making**
+
+- Korndorffer's vision: AI-assisted continuous micro-assessment during team scenarios. "We can't define competency, articulate it, measure it, that's our problem." AI tracks patterns to help close that gap.
+
+- Coker: Robotic surgical data shows expert users have "much tighter" arm movement patterns than novices. "At least you can track improvement." But nobody has studied whether these metrics correlate to actual surgical competence. AI could track this in real time.
+
+- Maritime industry: Cloud-based distributed simulation across continents. Software-defined training on commodity hardware, the physical space stays constant while training content evolves via cloud.
+
+- Gibson on evaluation: AI could help with structured assessment, but "it would take a lot of human work on the rubric." Human-to-human interaction assessment is "really hard, I don't think AI can do that."
+
+- Tech Futures Theme, "Longitudinal Performance via Game Mechanics and Biometric Feedback": Moving beyond binary pass/fail to "campaign mode" with continuous playback of performance, digital portfolios tracking decision-making over time.
+
+- Secondary Research, Digital Learner Twin: Longitudinal, dynamic model of developing competencies. Aggregates data from exam scores, simulation performance, ambient intelligence feedback, and patient outcomes. Predicts struggles before failure occurs.
+
+- Architectural implication: Substantial expansion, heavy server racks, multiple high-fidelity screens, sensor arrays, significant increase in data infrastructure.
+
+**Level 4: ****"****AI-Managed****"**** (Directive), AI Defines Scenario, Directs Flow**
+
+- Concept Garden, "Ambiguity Scenarios with Embedded Metrics (OSCE 2.0)": High-uncertainty scenarios designed with built-in measurement triggers (critical communication acts, escalation timing, values elicitation), with an upgrade path to adaptive scenarios that change in response to learner actions and LLM-in-the-loop conditions.
+
+- Boeing Starliner: VR enables training during pre-launch quarantine when physical simulators are inaccessible. The scenario environment is software-defined and controlled by the system.
+
+- Singer: The room and scenario respond to the learner. AI as scenario director, not just observer.
+
+- Oil and gas industry: Simulation at point-of-need on actual rigs, just-in-time training before complex procedures. The system manages the training flow.
+
+- AMA Panel (SXSW): Agentic AI, AI without a human in the loop, is the emerging frontier. Every physician projected to use AI within 5 years. 80%+ already using it for documentation, chart summarization, diagnosis support.
+
+- Architectural implication: Maximum flexible square footage, maximum power, dedicated voltage lines, edge computing, advanced VR/AR systems, dynamic wall power.
+
+**Level 5: ****"****AI as Peer****"**** (Embodied), AI Is a Physical Partner**
+
+- Singer's embodied AI concept: AI acts as a physical participant in the room, not just a tool or observer.
+
+- Tech Futures Theme, "AI as a Collaborative Team Member": Future clinical environments must transition from viewing technology as a tool to viewing it as a "peer participant" or "another person in the room." Strategic planning should adopt a "diamond arrangement" framework that places the patient, family, provider, and technology at equal eye level.
+
+- Tech Futures Theme: Training must emphasize "teaming" with AI agents, managing trust calibration, and overseeing autonomous systems rather than just operating equipment.
+
+- Technologies of Care (SXSW): Soul Paint VR demonstrates embodied AI interaction where the technology becomes a co-creative partner, breathing ritual builds an avatar, user steps into artwork, technology mediates emotional expression and healing. The experience fundamentally changes with the AI as participant rather than tool.
+
+- Architectural implication: Maximum square footage plus vertical clearance, extreme dedicated industrial-grade power, quantum or high-performance computing clusters, dedicated localized computing, reinforced floors.
+
+### III. THE "ROOM ZERO" CONCEPT, THE PIPES NOT FAUCETS PRINCIPLE
+
+This is the matrix's most strategically important output: what baseline infrastructure goes in EVERY room regardless of intended level.
+
+**Korndorffer, Flexibility is lesson #1:** "What we build in three years is not necessarily going to be what needs to be done five years hence." His experience at Tulane and Stanford: "Once you build it, if you're stuck, then what?"
+
+**Murray, ****"****You'll be wrong****"****:** "Predicting the future is pretty easy. Predicting it well is really, really hard. One thing I'll guarantee, you'll be wrong." Establish a wide baseline rather than betting on specific technologies.
+
+**Singer, Spaces feel dated by opening day:** Arizona State's Decision Theater (staff dress as futuristic, tech is five years behind), military cybersecurity center modeled on the Star Trek Enterprise with sliding doors that "whoosh" for no reason. The centers that try to look futuristic are the ones that fail most spectacularly.
+
+**Broderick, Facilities management pain:** Power requirements change when new equipment arrives. This is a recurring operational headache when infrastructure wasn't over-provisioned.
+
+**SOF Trainer:** "Incredibly expensive, hard to manage, lots of hardware. It dates quickly." Simplicity and modularity beat complexity.
+
+**Military Theme, ****"****High-Frequency, Low-Stakes Repetition Architecture****"****:** Facility design should center on available capacity for repetitive practice rather than exclusively expensive, scheduled scenario rooms. Implies rooms that can flex between uses.
+
+**Tech Futures Theme, ****"****Decentralized and Modular Infrastructure****"****:** Physical spaces must be highly modular, convertible between ICU, OR, and ward setups, while investing in hardware-agnostic platforms. Capital investment should prioritize flexible digital infrastructure over rigid aesthetics that quickly date.
+
+**Other Providers Theme, ****"****Hyper-Flexible Infrastructure Design****"****:** Fixed, purpose-built rooms often become obsolete or underutilized. The physical design must prioritize adaptability, with retractable walls and mobile equipment ("everything on wheels") to allow rapid reconfiguration.
+
+**Secondary Research, ****"****Phygital****"**** Master Plan:** Traditional planning treats IT as a utility; the Hospital 2030 framework treats digital enablers as structural elements defined during conceptual design. The distinction between physical and digital ceases to exist. Digital Twin of the campus enables simulation of patient flows before construction.
+
+**Secondary Research, Table 1 comparison:** Traditional medical centers do "physical space first, IT retrofitted." The 2030 vision does "phygital planning, digital cores established alongside physical schematic design." This ensures infrastructure supports future AI/sensor loads without costly retrofits.
+
+**Room Zero minimum spec (synthesized):** Over-provisioned power conduit (capacity to at least Level 3), data infrastructure that can scale, modular wall attachment points, platform-agnostic networking, acoustic treatment at minimum viable level, HVAC capacity that can handle added heat from computing equipment.
+
+### IV. THE TEMPORAL OVERLAY, HOW THE MATRIX EVOLVES
+
+**2030 (Opening Day)**
+
+- Mostly Level 1-3 rooms, a few Level 4, one Level 5 showcase
+
+- All rooms built with Room Zero baseline
+
+- Physical hub is the primary training location
+
+- Korndorffer: Center should be ready for holograms, quantum, 2040, but the evidence says invest in durable principles, not specific platforms
+
+**2035 (Mid-Cycle Refresh)**
+
+- Software and sensor upgrades push Level 2-3 rooms to Level 3-4 without construction
+
+- Spokes (near clinical spaces) absorb Level 1-2 training
+
+- Maritime model proves this works: software-defined training on commodity hardware, physical space stays constant
+
+- This is where the Room Zero investment pays off, rooms upgrade via software because the pipes were already installed
+
+**2040 (Mature System)**
+
+- Hub holds only Level 4-5: what MUST be physical (haptics, cadavers, team crisis, embodied AI)
+
+- Level 1-3 training has migrated to spokes and "anywhere" (remote/virtual)
+
+- Singer's distributed simulation argument validated: quality decoupled from geography
+
+- The building becomes MORE prestigious because it's reserved for experiences that genuinely require physical presence
+
+**Key supporting evidence for temporal shift:**
+
+- Coker (haptic story): First time on the robot, she "annihilated the suture" because of no haptic feedback. "The robot always wins. The weakest thing will break." Real tissue experience is irreplaceable, this is what stays in the hub.
+
+- Murray: Tactile fidelity is non-negotiable, "the thing you reach over for has to feel just like the instrument you would use in real life." This stays in the hub.
+
+- Broderick: "It's hard to beat anything that's hands-on." UCSD deployed "simulation backpacks" at remote sites. Individual cognitive and communication skills can migrate outward.
+
+- Singer: Distributed simulation works. Quality can be decoupled from geography for many training types.
+
+- Boeing Starliner: VR enables training when physical simulators are inaccessible. Proves remote Level 3-4 experiences are viable.
+
+### V. THE HUB/SPOKE/ANYWHERE MODEL (COMPANION TO THE MATRIX)
+
+The Tech Readiness Matrix maps WHAT INFRASTRUCTURE. The Building the System concept (deck page 13) maps WHERE.
+
+**Hub (Physical Center):**
+
+- 2030: Team crisis sim, haptic procedures
+
+- 2035: Team crisis sim, haptic procedures (same, these require physical co-location)
+
+- 2040: Team crisis sim, haptic procedures (still requires the building)
+
+**Spoke (Near Clinical Spaces):**
+
+- 2030: Communication training, individual assessment
+
+- 2035: Expanding to absorb more training types
+
+- 2040: Haptic procedures begin migrating here as portable tech matures
+
+**Anywhere (Remote/Virtual):**
+
+- 2030: Cognitive rehearsal
+
+- 2035: Communication training, individual assessment migrate here
+
+- 2040: Cognitive rehearsal, communication, individual assessment, individual + cognitive combined
+
+**The principle:** "The hub holds only what must be physical." Each training type has a different threshold for when it can leave the hub. The matrix tells planners what infrastructure each location needs.
+
+### VI. WHAT THE MATRIX MUST ACCOUNT FOR, FRICTION POINTS AND RISKS
+
+**The ****"****Arizona State Trap****"**** (Singer):** Designing for the future makes spaces feel hokey and dated. The matrix must recommend investing in durable infrastructure, not specific technology aesthetics.
+
+**The ****"****UCSD Trap****"**** (Coker):** Building capability nobody uses. UCSD built team training rooms that were "never used for that." The matrix must connect infrastructure to realistic scheduling and usage models.
+
+**The Competency Definition Vacuum (Korndorffer/Coker):** "We can't define competency, articulate it, measure it." Every AI-powered assessment level (3+) depends on being able to define what the AI is measuring. The matrix should flag this as a prerequisite for higher levels.
+
+**The Economic Barrier (Korndorffer):** Simulation training "is not a required part of your job. There is no money that's occurring because you're not treating patients." Higher-level rooms cost more to build AND more to staff. The matrix needs cost-of-retrofit vs. cost-of-over-provision analysis.
+
+**Curriculum is out of scope but everything depends on it:** Insights 1, 3, 7, and 8 from the Claude Insights doc all require curriculum commitments. The matrix can recommend infrastructure, but without curriculum backing, the spaces sit empty.
+
+**AI failures are real (SXSW Nurses panel):** AI scheduling assigned unsafe nurse-to-patient ratios. AI recommended dangerous fluid levels. System hallucinated IV drug use from "pine needles." Newborn labs showed adult reference ranges. The matrix must ensure every level above Unplugged has a graceful degradation path back to Level 1.
+
+**Cognitive deskilling risk (AMA Panel):** Risk of physicians becoming overly reliant on AI. GPS dependency analogy. Medical students already uncomfortable with their AI dependency. The matrix must preserve Level 1 capability as a permanent, non-negotiable feature, not a legacy holdover.
+
+### VII. CROSS-INDUSTRY PRECEDENTS BY LEVEL
+
+**Level 1:** Military tabletop exercises, SOF Trainer's analog team coordination, Gibson's stress inoculation without technology
+
+**Level 2:** FLAIM firefighting heated suits (4x engagement increase), Broderick's UCSD simulation backpacks, oil and gas point-of-need simulation on rigs
+
+**Level 3:** Maritime cloud-based distributed simulation, aviation FAA Level D certification standards (50+ years of fatal accident reduction), Coker's robotic surgical data tracking
+
+**Level 4:** Boeing Starliner VR pre-launch training, military adaptive scenario environments, Singer's AI-directed immersive spaces
+
+**Level 5:** Singer's embodied AI concept, Tech Futures "diamond arrangement" framework, Soul Paint VR (SXSW) where technology becomes co-creative partner, Spurs Human Performance Lab (cameras everywhere measuring everything, culture of excellence where measurement equals celebration)
+
+### VIII. ARCHITECTURAL SPEC DIMENSIONS THE MATRIX CAN INCLUDE
+
+Based on the research, each level needs specs across these dimensions:
+
+**Power:** Standard outlets → moderate → heavy server load → dedicated voltage lines → industrial-grade/quantum-ready
+
+**Data infrastructure:** Basic networking → ceiling sensors + ambient intelligence → heavy server racks + sensor arrays → edge computing + high-bandwidth → quantum/HPC clusters
+
+**Square footage:** Minimal → slightly increased → substantial expansion → maximum flexible → maximum + vertical clearance
+
+**Acoustic treatment:** Basic → basic → moderate (sensor accuracy needs) → significant (multiple audio channels) → maximum (embodied AI interaction fidelity)
+
+**HVAC capacity:** Standard → standard → increased (server heat) → significant (computing heat load) → maximum (reinforced cooling for HPC)
+
+**Structural:** Standard → standard → standard → standard → reinforced floors (heavy computing equipment)
+
+**Cost premium over base:** 0% → ~10-15% → ~30-50% → ~75-100% → ~150%+ (these are directional, need AEC validation)
+
+**4 Building the System**
+
+**5 Spatial**
+
+**6 Design Principles**
+
+**Tab 8**
