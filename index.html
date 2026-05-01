@@ -868,7 +868,12 @@ header {
   line-height: 1.05;
   margin: 14px 0 18px;
 }
-.contribute-intro h2 em { font-family: var(--serif); font-weight: 400; color: var(--burnt); }
+.contribute-intro h2 em {
+  font-style: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  color: var(--burnt);
+}
 .contribute-intro p {
   font-size: 14px;
   line-height: 1.65;
@@ -1047,40 +1052,94 @@ header {
 body.book-fullscreen .fullscreen-btn .fs-icon-expand { display: none; }
 body.book-fullscreen .fullscreen-btn .fs-icon-compress { display: block; }
 
-/* Fullscreen mode — book section takes over the viewport, surrounding UI hides */
-body.book-fullscreen { overflow: hidden; }
+/* ============================================================
+   FULLSCREEN MODE — true edge-to-edge, section nav pinned at top
+   ============================================================ */
+body.book-fullscreen {
+  overflow: hidden;
+}
+/* Hide everything except the book section */
 body.book-fullscreen header,
-body.book-fullscreen .section-nav-wrap,
 body.book-fullscreen #archive,
 body.book-fullscreen .scroll-cue,
 body.book-fullscreen #page-controls,
 body.book-fullscreen .scroll-top-btn {
   display: none !important;
 }
-body.book-fullscreen .book-page-section {
+/* Book section becomes the entire viewport */
+body.book-fullscreen #book-section {
   position: fixed;
   inset: 0;
   z-index: 1000;
   background: var(--paper);
   margin: 0;
   padding: 0;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+}
+/* Section nav: flush against the very top edge, edge-to-edge horizontally */
+body.book-fullscreen .section-nav.above-book {
+  margin: 0;
+  padding: 8px 12px;
+  border: none;
+  border-bottom: 1px solid var(--rule);
+  border-radius: 0;
+  max-width: none;
+  width: 100%;
+  background: var(--paper);
+  /* Respect iPhone notch / home-indicator area */
+  padding-top: max(8px, env(safe-area-inset-top));
+}
+/* Book stage fills the remaining vertical space */
+body.book-fullscreen #book-stage {
+  flex: 1;
+  min-height: 0;
+  position: relative;
   display: grid;
   place-items: center;
-  min-height: 100vh;
-}
-body.book-fullscreen #book-stage {
-  /* re-center within the fixed section */
+  padding: 8px;
+  margin: 0;
+  gap: 0;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 28px;
 }
+/* Book sized to fill the available area while keeping aspect ratio */
 body.book-fullscreen #book {
-  width: min(94vw, calc(94vh * 2));
+  width: min(calc(100vw - 16px), calc((100vh - 80px) * 2));
+  max-width: calc(100vw - 16px);
 }
 body.book-fullscreen #book.cover-only {
-  width: min(47vw, 94vh);
+  width: min(calc((100vw - 16px) / 2), calc(100vh - 80px));
+}
+/* Flip arrows overlay on either side of the book */
+body.book-fullscreen .flip-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+  border: none;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+body.book-fullscreen .flip-arrow:hover {
+  background: rgba(0, 0, 0, 0.65);
+}
+body.book-fullscreen .flip-arrow.prev { left: 16px; right: auto; }
+body.book-fullscreen .flip-arrow.next { right: 16px; left: auto; }
+
+/* Mobile portrait fullscreen: rotate the book 90° to fill the long axis */
+@media (max-width: 768px) and (orientation: portrait) {
+  body.book-fullscreen #book {
+    transform: rotate(90deg);
+    transform-origin: center center;
+    width: min(calc(100vh - 80px), calc((100vw - 16px) * 2));
+  }
+  body.book-fullscreen #book.cover-only {
+    transform: rotate(90deg);
+    width: min(calc((100vh - 80px) / 2), calc(100vw - 16px));
+  }
 }
 .scroll-top-btn {
   position: fixed;
@@ -1222,21 +1281,6 @@ body.book-fullscreen #book.cover-only {
   .arrow-hint { display: none; } /* arrows aren't shown on mobile, so skip the hint */
 }
 
-/* Mobile + portrait + fullscreen: rotate the book 90° clockwise so it fills
-   the phone's long axis (much larger than the natural landscape fit) */
-@media (max-width: 768px) and (orientation: portrait) {
-  body.book-fullscreen #book {
-    transform: rotate(90deg);
-    transform-origin: center center;
-    width: min(94vh, calc(94vw * 2));
-  }
-  body.book-fullscreen #book.cover-only {
-    transform: rotate(90deg);
-    width: min(47vh, 94vw);
-  }
-  /* The fullscreen toggle stays anchored to its (rotated) corner — no extra fix needed */
-}
-
 @media (max-width: 640px) {
   #book-stage { gap: 0; }
   .field-row { grid-template-columns: 1fr; }
@@ -1365,7 +1409,7 @@ body.book-fullscreen #book.cover-only {
   </button>
   <div class="contribute-inner">
     <div class="contribute-intro">
-      <h2 id="contribute-title">This is a <em>living document</em>.<br>We would love your help to expand what's behind it.</h2>
+      <h2 id="contribute-title">This is a <em>living document</em>.</h2>
       <p>
         If you have research, references, files, or thoughts that belong in the appendix, submit them here. We review every contribution and credit accepted additions in the changelog.
       </p>
@@ -1490,7 +1534,7 @@ const CONFIG = {
   sections: [
     {
       id: 'title',
-      name: 'Title',
+      name: 'Introduction',
       startSpread: 1,
       placeholderColor: '#BF5700',
       appendix: {
@@ -1503,8 +1547,8 @@ const CONFIG = {
 
     {
       id: 'scenarios',
-      name: 'Scenarios',
-      startSpread: 4,
+      name: 'Vignettes',
+      startSpread: 5,
       placeholderColor: '#BF5700',
       appendix: {
         eyebrow: 'Lorem ipsum dolor sit',
@@ -1558,7 +1602,7 @@ const CONFIG = {
     {
       id: 'concepts',
       name: 'Concepts',
-      startSpread: 18,
+      startSpread: 13,
       placeholderColor: '#BF5700',
       appendix: {
         eyebrow: 'Lorem ipsum dolor sit',
@@ -1606,7 +1650,7 @@ const CONFIG = {
     {
       id: 'principles',
       name: 'Principles',
-      startSpread: 57,
+      startSpread: 50,
       placeholderColor: '#BF5700',
       appendix: {
         eyebrow: 'Lorem ipsum dolor sit',
@@ -1630,7 +1674,7 @@ const CONFIG = {
     {
       id: 'appendix',
       name: 'Appendix',
-      startSpread: 61,
+      startSpread: 54,
       placeholderColor: '#BF5700',
       appendix: {
         eyebrow: 'Lorem ipsum dolor sit',
@@ -2049,8 +2093,8 @@ function renderArchive(section) {
   const a = section.appendix;
   if (!a) return;
 
-  // Centered bold section title (just the section name, e.g. "Scenarios")
-  $('#archive-section-title').textContent = section.name;
+  // Centered bold appendix title — "Beyond the {section}" (e.g. "Beyond the Vignettes")
+  $('#archive-section-title').textContent = `Beyond the ${section.name}`;
 
   const pieces = [];
   if (a.eyebrow) pieces.push(`<div class="archive-eyebrow">${a.eyebrow}</div>`);
@@ -2490,15 +2534,57 @@ async function init() {
     });
   }
 
-  // Fullscreen toggle for the book
+  // Fullscreen toggle for the book — uses the native Fullscreen API where
+  // supported (so the browser chrome actually disappears edge-to-edge).
+  // Falls back to a CSS-only mode for environments that don't support it
+  // (notably iOS Safari, which restricts requestFullscreen to <video> elements).
   const fullscreenBtn = $('#fullscreen-btn');
+  const isNativeFullscreen = () =>
+    !!(document.fullscreenElement || document.webkitFullscreenElement);
+  const isCssFullscreen = () =>
+    document.body.classList.contains('book-fullscreen') && !isNativeFullscreen();
+
+  const requestNativeFs = (el) => {
+    if (el.requestFullscreen)        return el.requestFullscreen();
+    if (el.webkitRequestFullscreen)  return el.webkitRequestFullscreen();
+    return Promise.reject(new Error('No fullscreen API'));
+  };
+  const exitNativeFs = () => {
+    if (document.exitFullscreen)        return document.exitFullscreen();
+    if (document.webkitExitFullscreen)  return document.webkitExitFullscreen();
+    return Promise.resolve();
+  };
+
   if (fullscreenBtn) {
-    fullscreenBtn.addEventListener('click', () => {
-      document.body.classList.toggle('book-fullscreen');
+    fullscreenBtn.addEventListener('click', async () => {
+      if (isNativeFullscreen()) {
+        await exitNativeFs();
+        return;
+      }
+      if (isCssFullscreen()) {
+        document.body.classList.remove('book-fullscreen');
+        return;
+      }
+      try {
+        await requestNativeFs(document.documentElement);
+        // class will be added by fullscreenchange listener below
+      } catch (err) {
+        // No native API → fall back to CSS-only fullscreen
+        document.body.classList.add('book-fullscreen');
+      }
     });
-    // ESC also exits fullscreen
+
+    // Sync the body class with native fullscreen state (handles ESC key etc.)
+    const syncFs = () => {
+      if (isNativeFullscreen()) document.body.classList.add('book-fullscreen');
+      else document.body.classList.remove('book-fullscreen');
+    };
+    document.addEventListener('fullscreenchange', syncFs);
+    document.addEventListener('webkitfullscreenchange', syncFs);
+
+    // ESC key in CSS-only mode (native fullscreen handles ESC itself)
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && document.body.classList.contains('book-fullscreen')) {
+      if (e.key === 'Escape' && isCssFullscreen()) {
         document.body.classList.remove('book-fullscreen');
       }
     });
