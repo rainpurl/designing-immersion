@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Designing Immersion — Digital Companion</title>
-<meta name="description" content="The Future of Simulation-Based Clinical Education — a digital companion to the printed book." />
+<title>Designing Immersion, Digital Companion</title>
+<meta name="description" content="The Future of Simulation-Based Clinical Education, a digital companion to the printed book." />
 <style>
 /* ============================================================
    DESIGN TOKENS
@@ -137,10 +137,10 @@ img, canvas { display: block; max-width: 100%; }
   position: absolute;
   bottom: 50px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, 8px);
   width: min(420px, 80vw);
   opacity: 0;
-  animation: splashFadeIn 0.6s 1.2s forwards;
+  animation: splashProgressIn 0.6s 1.2s forwards;
 }
 .splash-progress-meta {
   display: flex;
@@ -164,6 +164,10 @@ img, canvas { display: block; max-width: 100%; }
   width: 0%;
   background: var(--burnt);
   transition: width 0.3s ease;
+}
+@keyframes splashProgressIn {
+  from { opacity: 0; transform: translate(-50%, 8px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
 }
 @keyframes splashFadeIn {
   from { opacity: 0; transform: translateY(8px); }
@@ -191,7 +195,7 @@ header {
   align-items: center;
   gap: 18px;
 }
-/* Theme toggle — sits at the very top-left */
+/* Theme toggle, sits at the very top-left */
 .theme-toggle {
   flex-shrink: 0;
   width: 34px;
@@ -381,6 +385,8 @@ header {
   width: min(1100px, calc(100vw - 200px));
   aspect-ratio: 2 / 1;
   transform-style: preserve-3d;
+  perspective: 2400px;
+  perspective-origin: 50% 50%;
   transition: width 0.55s cubic-bezier(0.6, 0, 0.4, 1), aspect-ratio 0.55s cubic-bezier(0.6, 0, 0.4, 1);
 }
 /* Cover-only mode: a single square (the book is closed) */
@@ -469,7 +475,7 @@ header {
   backface-visibility: hidden;
   display: grid;
   place-items: center;
-  box-shadow: 0 8px 28px var(--shadow-lg);
+  box-shadow: 0 12px 40px var(--shadow-lg), 0 4px 12px var(--shadow-md);
 }
 .flip-face.front { border-radius: 0 4px 4px 0; }
 .flip-face.front.bwd { border-radius: 4px 0 0 4px; }
@@ -477,24 +483,44 @@ header {
 .flip-face.back.bwd { border-radius: 0 4px 4px 0; }
 .flip-face canvas { width: 100%; height: 100%; }
 
-@keyframes flipFwd { from { transform: rotateY(0deg); } to { transform: rotateY(-180deg); } }
-@keyframes flipBwd { from { transform: rotateY(0deg); } to { transform: rotateY(180deg); }  }
+/* Forward flip, curls slightly mid-rotation to mimic a real page bending  */
+@keyframes flipFwd {
+  0%   { transform: rotateY(0deg) translateZ(0); }
+  20%  { transform: rotateY(-32deg) translateZ(8px); }
+  50%  { transform: rotateY(-90deg) translateZ(14px); }
+  80%  { transform: rotateY(-148deg) translateZ(8px); }
+  100% { transform: rotateY(-180deg) translateZ(0); }
+}
+@keyframes flipBwd {
+  0%   { transform: rotateY(0deg) translateZ(0); }
+  20%  { transform: rotateY(32deg) translateZ(8px); }
+  50%  { transform: rotateY(90deg) translateZ(14px); }
+  80%  { transform: rotateY(148deg) translateZ(8px); }
+  100% { transform: rotateY(180deg) translateZ(0); }
+}
 
 .flip-shadow {
   position: absolute;
   inset: 0;
   pointer-events: none;
   opacity: 0;
+  border-radius: inherit;
 }
 .flip-shadow.fwd {
-  background: linear-gradient(90deg, transparent 30%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.22) 100%);
-  animation: shadeAnim var(--flip-ms, 850ms) ease-out forwards;
+  /* darker band that travels across the page as it curls */
+  background: linear-gradient(105deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.35) 80%, rgba(0,0,0,0.5) 100%);
+  animation: shadeAnim var(--flip-ms, 850ms) cubic-bezier(0.4, 0, 0.4, 1) forwards;
 }
 .flip-shadow.bwd {
-  background: linear-gradient(90deg, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0) 40%, transparent 70%);
-  animation: shadeAnim var(--flip-ms, 850ms) ease-out forwards;
+  background: linear-gradient(255deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.35) 80%, rgba(0,0,0,0.5) 100%);
+  animation: shadeAnim var(--flip-ms, 850ms) cubic-bezier(0.4, 0, 0.4, 1) forwards;
 }
-@keyframes shadeAnim { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
+@keyframes shadeAnim {
+  0%   { opacity: 0; }
+  35%  { opacity: 1; }
+  60%  { opacity: 1; }
+  100% { opacity: 0; }
+}
 
 /* Placeholder page (when no PDF loaded) */
 .placeholder {
@@ -819,7 +845,7 @@ header {
 }
 
 /* ============================================================
-   CONTRIBUTE — takeover overlay
+   CONTRIBUTE, takeover overlay
    ============================================================ */
 .contribute-overlay {
   position: fixed;
@@ -834,24 +860,26 @@ header {
 .contribute-close {
   position: fixed;
   top: 22px;
-  right: 28px;
-  width: 40px;
-  height: 40px;
+  left: 28px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: transparent;
-  border: 1px solid var(--rule-strong);
-  color: var(--ink);
+  background: var(--burnt);
+  border: none;
+  color: #ffffff;
   display: grid;
   place-items: center;
   z-index: 260;
-  transition: all 0.2s ease;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 14px rgba(191, 87, 0, 0.35);
 }
 .contribute-close:hover {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
+  background: #a64a00;  /* slightly darker burnt on hover */
+  transform: translateX(-2px);
+  box-shadow: 0 6px 18px rgba(191, 87, 0, 0.45);
 }
-.contribute-close svg { width: 18px; height: 18px; }
+.contribute-close svg { width: 20px; height: 20px; }
 
 .contribute-inner {
   max-width: 980px;
@@ -1116,9 +1144,6 @@ footer {
   <div class="splash-eyebrow">UT Austin · Dell Medical School · 2026</div>
   <div class="splash-title">Designing<br>Immersion</div>
   <div class="splash-sub">The Future of Simulation-Based Clinical Education</div>
-  <div class="splash-poetic">
-    The book, on the table.<br>The archive, beyond it.
-  </div>
   <div class="splash-progress-wrap">
     <div class="splash-progress-meta">
       <span id="splash-progress-label">Loading the book</span>
@@ -1188,7 +1213,7 @@ footer {
     <span class="pc-label">Page</span>
     <input type="number" id="page-input" min="1" value="1" aria-label="Page number" />
     <span class="pc-divider">of</span>
-    <span id="page-total">—</span>
+    <span id="page-total">-</span>
   </div>
 
   <div class="scroll-cue">
@@ -1202,24 +1227,23 @@ footer {
      ============================================================ -->
 <section id="archive">
   <div class="archive-inner">
-    <div class="archive-context" id="archive-context">Beyond the book · —</div>
+    <div class="archive-context" id="archive-context">Beyond the book · -</div>
     <div id="archive-content"></div>
   </div>
 </section>
 
 <!-- ============================================================
-     CONTRIBUTE — takeover overlay (only visible when opened)
+     CONTRIBUTE, takeover overlay (only visible when opened)
      ============================================================ -->
 <div id="contribute-overlay" class="contribute-overlay" aria-hidden="true" role="dialog" aria-labelledby="contribute-title">
-  <button class="contribute-close" id="contribute-close" aria-label="Close">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  <button class="contribute-close" id="contribute-close" aria-label="Back to the book">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
   </button>
   <div class="contribute-inner">
     <div class="contribute-intro">
-      <div class="eyebrow">A living document</div>
       <h2 id="contribute-title">This book is the <em>front door</em>.<br>Help expand what's behind it.</h2>
       <p>
-        If you have research, references, files, or thoughts that belong in the appendix — submit them here. We review every contribution and credit accepted additions in the changelog.
+        If you have research, references, files, or thoughts that belong in the appendix, submit them here. We review every contribution and credit accepted additions in the changelog.
       </p>
       <p>
         Files, images, links, or just notes are all welcome.
@@ -1260,14 +1284,14 @@ footer {
           <input type="file" id="cf-file" name="attachment" accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.gif" />
           <div class="field-file-label">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
-            <span id="cf-file-label">Drop a PDF, DOC, or image — or click to choose</span>
+            <span id="cf-file-label">Drop a PDF, DOC, or image, or click to choose</span>
           </div>
           <div class="field-file-meta">Max 10MB</div>
         </div>
       </div>
 
       <input type="hidden" name="access_key" id="cf-access-key" />
-      <input type="hidden" name="subject" value="Designing Immersion — new contribution" />
+      <input type="hidden" name="subject" value="Designing Immersion, new contribution" />
 
       <div class="form-submit-row">
         <div class="helper">We respond within a week to acknowledge each submission.</div>
@@ -1285,7 +1309,7 @@ footer {
       <div class="eyebrow">Changelog</div>
       <h2>Every revision, on the record.</h2>
       <p class="changelog-intro">
-        The book moves with the field. This log records every change to the website — additions, corrections, expansions of the appendix.
+        The book moves with the field. This log records every change to the website, additions, corrections, expansions of the appendix.
       </p>
       <div class="changelog-list" id="changelog-list"></div>
     </div>
@@ -1314,7 +1338,7 @@ footer {
     <div class="modal-header">
       <div class="modal-header-text">
         <div class="modal-header-eyebrow" id="modal-eyebrow">Source document</div>
-        <div class="modal-header-title" id="modal-title">—</div>
+        <div class="modal-header-title" id="modal-title">-</div>
       </div>
       <div class="modal-actions">
         <button class="modal-close" id="modal-close">Close</button>
@@ -1340,7 +1364,7 @@ const CONFIG = {
      Drop your exported PDF next to this HTML file and put its
      filename here. Leaving as `null` shows the placeholder pages
      so you can preview the layout.                                */
-  pdfPath: 'https://pub-439fe19e4416434e9035ac843204d55b.r2.dev/book.pdf',
+  pdfPath: './designing-immersion-book.pdf',
 
   /* 2. SECTIONS
      ─────────────────────────────────────────────────────────────
@@ -1351,7 +1375,7 @@ const CONFIG = {
     {
       id: 'scenarios',
       name: 'Scenarios',
-      startSpread: 2,
+      startSpread: 4,
       placeholderColor: '#BF5700',
       appendix: {
         eyebrow: 'Lorem ipsum dolor sit',
@@ -1381,7 +1405,7 @@ const CONFIG = {
     {
       id: 'research',
       name: 'Research',
-      startSpread: 13,
+      startSpread: 11,
       placeholderColor: '#BF5700',
       appendix: {
         eyebrow: 'Lorem ipsum dolor sit',
@@ -1405,7 +1429,7 @@ const CONFIG = {
     {
       id: 'concepts',
       name: 'Concepts',
-      startSpread: 24,
+      startSpread: 18,
       placeholderColor: '#BF5700',
       appendix: {
         eyebrow: 'Lorem ipsum dolor sit',
@@ -1429,7 +1453,7 @@ const CONFIG = {
     {
       id: 'tools',
       name: 'Tools',
-      startSpread: 35,
+      startSpread: 26,
       placeholderColor: '#BF5700',
       appendix: {
         eyebrow: 'Lorem ipsum dolor sit',
@@ -1453,7 +1477,7 @@ const CONFIG = {
     {
       id: 'principles',
       name: 'Principles',
-      startSpread: 46,
+      startSpread: 57,
       placeholderColor: '#BF5700',
       appendix: {
         eyebrow: 'Lorem ipsum dolor sit',
@@ -1477,7 +1501,7 @@ const CONFIG = {
     {
       id: 'appendix',
       name: 'Appendix',
-      startSpread: 57,
+      startSpread: 61,
       placeholderColor: '#BF5700',
       appendix: {
         eyebrow: 'Lorem ipsum dolor sit',
@@ -1502,12 +1526,12 @@ const CONFIG = {
     },
   ],
 
-  /* 3. TOTAL PAGES (used when no PDF is loaded — auto-detected when PDF is set) */
+  /* 3. TOTAL PAGES (used when no PDF is loaded, auto-detected when PDF is set) */
   totalPagesIfNoPdf: 125,
 
   /* 4. CONTRIBUTE FORM
      ─────────────────────────────────────────────────────────────
-     Get a free access key at https://web3forms.com — it routes
+     Get a free access key at https://web3forms.com, it routes
      submissions (including file attachments) directly to your
      email, no backend required. Paste the key here.               */
   web3FormsKey: '26b29568-a06c-4adf-b8e0-f849d04e096d',
@@ -1547,8 +1571,9 @@ const state = {
   pageCache:     {},           // pageNum -> rendered canvas
 };
 
-const FLIP_MS = 850;
-const FAST_FLIP_MS = 380;
+const FLIP_MS = 950;        // Standard single-spread flip, slightly slower for fluidity
+const FAST_FLIP_MS = 360;   // Mid-speed flip
+const RAPID_FLIP_MS = 180;  // Used in multi-page jumps to feel like rapid page-turning
 
 /* ============================================================================
    UTILITIES
@@ -1736,7 +1761,7 @@ async function renderCurrentSpread() {
   updateArrows();
 }
 
-/* Smooth cross-fade used when transitioning into or out of the cover view —
+/* Smooth cross-fade used when transitioning into or out of the cover view -
    the book also resizes (1 square ↔ 2 squares) via CSS transition simultaneously. */
 async function coverFadeTransition(targetSpread) {
   if (state.flipping) return;
@@ -1793,7 +1818,7 @@ async function flipForward(durationMs = FLIP_MS) {
   const flip = document.createElement('div');
   flip.className = 'flip-page flip-page-fwd';
   flip.style.setProperty('--flip-ms', durationMs + 'ms');
-  flip.style.animation = `flipFwd ${durationMs}ms cubic-bezier(0.45, 0, 0.25, 1) forwards`;
+  flip.style.animation = `flipFwd ${durationMs}ms cubic-bezier(0.55, 0.05, 0.25, 1) forwards`;
 
   const front = document.createElement('div');
   front.className = 'flip-face front';
@@ -1841,7 +1866,7 @@ async function flipBackward(durationMs = FLIP_MS) {
   const flip = document.createElement('div');
   flip.className = 'flip-page flip-page-bwd';
   flip.style.setProperty('--flip-ms', durationMs + 'ms');
-  flip.style.animation = `flipBwd ${durationMs}ms cubic-bezier(0.45, 0, 0.25, 1) forwards`;
+  flip.style.animation = `flipBwd ${durationMs}ms cubic-bezier(0.55, 0.05, 0.25, 1) forwards`;
 
   const front = document.createElement('div');
   front.className = 'flip-face front bwd';
@@ -1873,30 +1898,38 @@ async function jumpToSpread(target) {
   if (state.flipping) return;
 
   // If the cover view is involved (either side), do a single fade transition
-  // — multi-flip animations don't translate well across the cover.
+  // (multi-flip animations don't translate well across the cover).
   if (state.currentSpread === 0 || target === 0) {
     await coverFadeTransition(target);
     return;
   }
 
   const distance = Math.abs(target - state.currentSpread);
-  // 1 spread away → normal flip. Multi-spread → cap at 3 fast flips.
-  const visualFlips = Math.min(distance, 3);
   const direction = target > state.currentSpread ? 'forward' : 'backward';
+
+  // Single spread away, full flip, full duration
+  if (distance === 1) {
+    if (direction === 'forward') await flipForward(FLIP_MS);
+    else await flipBackward(FLIP_MS);
+    return;
+  }
+
+  // Multi-spread jump, rapid page-turning flurry. Show 5 quick flips before
+  // snapping to the target, regardless of how far the actual jump is.
+  const visualFlips = Math.min(distance, 5);
 
   for (let i = 0; i < visualFlips; i++) {
     const isLast = i === visualFlips - 1;
     if (isLast) {
-      // Last flip lands directly on target — snap state then animate
+      // Snap state to one before target so the last flip lands exactly on it
       state.currentSpread = direction === 'forward' ? target - 1 : target + 1;
-      // Re-render with this snapped intermediate state
       await renderCurrentSpread();
-      await sleep(20);
-      if (direction === 'forward') await flipForward(FAST_FLIP_MS);
-      else await flipBackward(FAST_FLIP_MS);
+      await sleep(15);
+      if (direction === 'forward') await flipForward(RAPID_FLIP_MS);
+      else await flipBackward(RAPID_FLIP_MS);
     } else {
-      if (direction === 'forward') await flipForward(FAST_FLIP_MS);
-      else await flipBackward(FAST_FLIP_MS);
+      if (direction === 'forward') await flipForward(RAPID_FLIP_MS);
+      else await flipBackward(RAPID_FLIP_MS);
     }
   }
 }
@@ -1920,7 +1953,7 @@ function renderArchive(section) {
       <div class="pull-quote">
         <span class="q-mark">“</span>
         <div class="pull-quote-text">${a.pullQuote.quote}</div>
-        <div class="pull-quote-attr">— ${a.pullQuote.attribution}</div>
+        <div class="pull-quote-attr">- ${a.pullQuote.attribution}</div>
       </div>
     `);
   }
@@ -1969,11 +2002,11 @@ function renderArchive(section) {
 }
 
 /* ============================================================================
-   PDF MODAL — opens any PDF source in-page (no leaving the site)
+   PDF MODAL, opens any PDF source in-page (no leaving the site)
    ============================================================================ */
 async function openPdfModal(source) {
   $('#modal-eyebrow').textContent = source.type || 'Source document';
-  $('#modal-title').textContent = source.title || '—';
+  $('#modal-title').textContent = source.title || '-';
   const body = $('#modal-body');
   body.innerHTML = '';
   $('#pdf-modal').classList.add('open');
@@ -2058,7 +2091,7 @@ function renderChangelog() {
 }
 
 /* ============================================================================
-   FORM (Web3Forms) — submissions go directly to your inbox
+   FORM (Web3Forms), submissions go directly to your inbox
    ============================================================================ */
 function wireForm() {
   $('#cf-access-key').value = CONFIG.web3FormsKey || '';
@@ -2066,7 +2099,7 @@ function wireForm() {
   // File label updates
   $('#cf-file').addEventListener('change', (e) => {
     const f = e.target.files && e.target.files[0];
-    $('#cf-file-label').textContent = f ? `Attached: ${f.name}` : 'Drop a PDF, DOC, or image — or click to choose';
+    $('#cf-file-label').textContent = f ? `Attached: ${f.name}` : 'Drop a PDF, DOC, or image, or click to choose';
   });
 
   $('#contribute-form').addEventListener('submit', async (e) => {
@@ -2098,10 +2131,10 @@ function wireForm() {
       if (json.success) {
         msg.className = 'form-msg success';
         msg.textContent =
-          'Thank you — your submission is in. We\'ll respond within a week to acknowledge it.';
+          'Thank you, your submission is in. We\'ll respond within a week to acknowledge it.';
         msg.style.display = 'block';
         form.reset();
-        $('#cf-file-label').textContent = 'Drop a PDF, DOC, or image — or click to choose';
+        $('#cf-file-label').textContent = 'Drop a PDF, DOC, or image, or click to choose';
       } else {
         throw new Error(json.message || 'Submission failed');
       }
@@ -2139,10 +2172,10 @@ async function loadPdf() {
   }
 
   if (!CONFIG.pdfPath) {
-    // Placeholder mode — animate the bar quickly so the splash still feels alive
+    // Placeholder mode, animate the bar quickly so the splash still feels alive
     setProgress(15, 'Preparing the layout');
     await sleep(220);
-    setProgress(50, 'No PDF connected — using placeholder pages');
+    setProgress(50, 'No PDF connected, using placeholder pages');
     await sleep(380);
     setProgress(100, 'Ready');
     state.totalSpreads = 1 + Math.ceil(Math.max(0, CONFIG.totalPagesIfNoPdf - 1) / 2);
@@ -2183,8 +2216,8 @@ async function loadPdf() {
     // (like Claude's artifact preview) that sandboxes the HTML and won't serve
     // sibling files. Once the HTML and PDF are deployed together to a real
     // static host, this path works normally.
-    console.info('Designing Immersion: showing placeholder pages (PDF not reachable here — will work once deployed).');
-    setProgress(100, 'Preview mode — placeholder pages');
+    console.info('Designing Immersion: showing placeholder pages (PDF not reachable here, will work once deployed).');
+    setProgress(100, 'Preview mode, placeholder pages');
     state.totalSpreads = 1 + Math.ceil(Math.max(0, CONFIG.totalPagesIfNoPdf - 1) / 2);
     state.previewMode = true;
   }
@@ -2220,7 +2253,7 @@ async function init() {
   renderChangelog();
   wireForm();
 
-  // Theme toggle (no localStorage in artifact preview — just in-memory toggle)
+  // Theme toggle (no localStorage in artifact preview, just in-memory toggle)
   let currentTheme = 'light';
   $('#theme-toggle').addEventListener('click', () => {
     currentTheme = currentTheme === 'light' ? 'dark' : 'light';
@@ -2231,7 +2264,7 @@ async function init() {
   $('#prev-arrow').addEventListener('click', () => flipBackward());
   $('#next-arrow').addEventListener('click', () => flipForward());
 
-  // Page number input — type a page and jump
+  // Page number input, type a page and jump
   const pageInput = $('#page-input');
   const goToTypedPage = () => {
     const n = parseInt(pageInput.value, 10);
@@ -2283,8 +2316,14 @@ async function init() {
     footerContribute.addEventListener('click', (e) => { e.preventDefault(); openContribute(); });
   }
 
+  // Splash should stay up for at least 2 seconds, even if the PDF loaded faster
+  const splashStart = Date.now();
   await loadPdf();
   await renderCurrentSpread();
+
+  const elapsed = Date.now() - splashStart;
+  const minSplashMs = 2000;
+  if (elapsed < minSplashMs) await sleep(minSplashMs - elapsed);
 
   // Fade out splash
   await sleep(420);
