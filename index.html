@@ -1174,6 +1174,223 @@ body.book-fullscreen .flip-arrow.next { right: 16px; left: auto; }
 .scroll-top-btn svg { width: 22px; height: 22px; }
 
 /* ============================================================
+   CHAT WITH THE BOOK
+   ============================================================ */
+.chat-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 88px; /* sits to the LEFT of the scroll-top button */
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  color: var(--paper);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 200;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.chat-btn:hover { transform: translateY(-2px); }
+.chat-btn svg { width: 22px; height: 22px; }
+.chat-btn.open { background: var(--burnt); border-color: var(--burnt); }
+
+#chat-panel {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: min(420px, calc(100vw - 32px));
+  height: min(620px, calc(100vh - 56px));
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  z-index: 250;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(16px) scale(0.98);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.25s ease;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+}
+#chat-panel.open {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+.chat-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--rule);
+}
+.chat-head-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.chat-head-sub {
+  font-size: 11px;
+  color: var(--dust);
+  margin-top: 2px;
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 400;
+}
+.chat-close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  color: var(--ink);
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+.chat-close:hover { opacity: 1; }
+.chat-close svg { width: 18px; height: 18px; display: block; }
+
+.chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scroll-behavior: smooth;
+}
+.chat-empty {
+  font-size: 13px;
+  color: var(--dust);
+  line-height: 1.55;
+  padding: 8px 4px;
+}
+.chat-empty strong { color: var(--ink); font-weight: 700; }
+.chat-suggest {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.chat-suggest button {
+  text-align: left;
+  font-size: 12px;
+  padding: 10px 12px;
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  font-family: inherit;
+}
+.chat-suggest button:hover {
+  background: var(--paper-deep);
+  border-color: var(--ink);
+}
+
+.chat-msg {
+  font-size: 13px;
+  line-height: 1.55;
+  max-width: 86%;
+}
+.chat-msg.user {
+  align-self: flex-end;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 13px;
+  border-radius: 2px;
+}
+.chat-msg.bot {
+  align-self: flex-start;
+  color: var(--ink);
+  white-space: pre-wrap;
+}
+.chat-msg.bot.loading {
+  color: var(--dust);
+  font-style: italic;
+}
+.chat-msg.bot .citation {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--burnt);
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.chat-input-row {
+  border-top: 1px solid var(--rule);
+  padding: 10px 12px 12px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+.chat-input-row textarea {
+  flex: 1;
+  resize: none;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 9px 11px;
+  line-height: 1.4;
+  border-radius: 2px;
+  min-height: 38px;
+  max-height: 120px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.chat-input-row textarea:focus {
+  border-color: var(--ink);
+}
+.chat-input-row button {
+  width: 38px;
+  height: 38px;
+  border-radius: 2px;
+  background: var(--burnt);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+.chat-input-row button:hover { background: #a64a00; }
+.chat-input-row button:disabled { opacity: 0.4; cursor: not-allowed; }
+.chat-input-row button svg { width: 16px; height: 16px; }
+.chat-disclaimer {
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--dust);
+  text-align: center;
+  padding: 0 12px 10px;
+  line-height: 1.4;
+}
+
+/* Hide chat in book-fullscreen mode */
+body.book-fullscreen .chat-btn,
+body.book-fullscreen #chat-panel {
+  display: none !important;
+}
+
+@media (max-width: 640px) {
+  .chat-btn { right: 80px; bottom: 20px; }
+  #chat-panel {
+    right: 12px;
+    bottom: 78px;
+    width: calc(100vw - 24px);
+    height: calc(100vh - 100px);
+  }
+}
+
+/* ============================================================
    PDF MODAL
    ============================================================ */
 #pdf-modal {
@@ -1486,6 +1703,48 @@ body.book-fullscreen .flip-arrow.next { right: 16px; left: auto; }
 </button>
 
 <!-- ============================================================
+     CHAT WITH THE BOOK (floating button + slide-in panel)
+     ============================================================ -->
+<button id="chat-btn" class="chat-btn" aria-label="Chat with the book">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+  </svg>
+</button>
+
+<aside id="chat-panel" aria-hidden="true" aria-label="Chat with the book">
+  <div class="chat-head">
+    <div>
+      <div class="chat-head-title">Chat with the book</div>
+      <div class="chat-head-sub">Ask anything about Designing Immersion</div>
+    </div>
+    <button id="chat-close" class="chat-close" aria-label="Close chat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <div id="chat-body" class="chat-body">
+    <div id="chat-empty" class="chat-empty">
+      <strong>Hi.</strong> I can answer questions about what's in this book — the vignettes, the research, the tech-readiness matrix, the principles, all of it. I'll only speak from the book itself, and I'll tell you when something isn't covered.
+      <div class="chat-suggest">
+        <button data-prompt="Who is Maya Okafor and what does her morning look like?">Who is Maya Okafor and what does her morning look like?</button>
+        <button data-prompt="Summarize the tech readiness matrix and its levels.">Summarize the tech readiness matrix and its levels.</button>
+        <button data-prompt="What are the design principles laid out in the book?">What are the design principles laid out in the book?</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-input-row">
+    <textarea id="chat-input" rows="1" placeholder="Ask a question about the book…" aria-label="Type your question"></textarea>
+    <button id="chat-send" aria-label="Send message">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+  <div class="chat-disclaimer">
+    Grounded in the book. May make mistakes — verify important details.
+  </div>
+</aside>
+
+<!-- ============================================================
      PDF MODAL (for opening source documents in-page)
      ============================================================ -->
 <div id="pdf-modal" role="dialog" aria-hidden="true">
@@ -1705,7 +1964,14 @@ const CONFIG = {
   web3FormsKey: '26b29568-a06c-4adf-b8e0-f849d04e096d',
   contactEmailDisplay: 'team@designing-immersion.org', // shown to users; not actually used for routing
 
-  /* 5. CHANGELOG
+  /* 5. CHAT WITH THE BOOK
+     ─────────────────────────────────────────────────────────────
+     URL of the Cloudflare Worker that handles chat queries.
+     Leave empty until the Worker is deployed; the chat panel will
+     show a "not connected yet" message gracefully if so.            */
+  chatApiUrl: 'https://designing-immersion-chat.katres.workers.dev',
+
+  /* 6. CHANGELOG
      ─────────────────────────────────────────────────────────────
      Add a new entry every time you update the site. Newest first.  */
   changelog: [
@@ -2296,6 +2562,124 @@ function wireForm() {
 }
 
 /* ============================================================================
+   CHAT WITH THE BOOK — UI logic. Hits CONFIG.chatApiUrl which points to a
+   Cloudflare Worker (set up separately) that runs the actual LLM call.
+   ============================================================================ */
+function initChat() {
+  const btn   = $('#chat-btn');
+  const panel = $('#chat-panel');
+  const close = $('#chat-close');
+  const body  = $('#chat-body');
+  const input = $('#chat-input');
+  const send  = $('#chat-send');
+  const empty = $('#chat-empty');
+
+  if (!btn || !panel) return;
+
+  const conversation = []; // [{role: 'user'|'assistant', content: '...'}, ...]
+  let busy = false;
+
+  const openPanel = () => {
+    panel.classList.add('open');
+    btn.classList.add('open');
+    panel.setAttribute('aria-hidden', 'false');
+    setTimeout(() => input.focus(), 240);
+  };
+  const closePanel = () => {
+    panel.classList.remove('open');
+    btn.classList.remove('open');
+    panel.setAttribute('aria-hidden', 'true');
+  };
+  btn.addEventListener('click', () => {
+    if (panel.classList.contains('open')) closePanel(); else openPanel();
+  });
+  close.addEventListener('click', closePanel);
+
+  // Suggested prompt chips
+  $$('.chat-suggest button').forEach(b => {
+    b.addEventListener('click', () => {
+      input.value = b.getAttribute('data-prompt');
+      sendMessage();
+    });
+  });
+
+  // Auto-grow textarea
+  input.addEventListener('input', () => {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+  });
+
+  // Enter to send, Shift+Enter for newline
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+  send.addEventListener('click', sendMessage);
+
+  function appendMsg(role, text, opts = {}) {
+    const div = document.createElement('div');
+    div.className = 'chat-msg ' + role + (opts.loading ? ' loading' : '');
+    div.textContent = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+    return div;
+  }
+
+  async function sendMessage() {
+    const q = input.value.trim();
+    if (!q || busy) return;
+
+    if (!CONFIG.chatApiUrl) {
+      appendMsg('bot',
+        "The chat assistant isn't connected yet. The site owner needs to deploy the Cloudflare Worker and paste its URL into CONFIG.chatApiUrl.");
+      return;
+    }
+
+    busy = true;
+    send.disabled = true;
+    input.disabled = true;
+
+    // Hide the empty/suggestions block on first message
+    if (empty) empty.style.display = 'none';
+
+    appendMsg('user', q);
+    conversation.push({ role: 'user', content: q });
+    input.value = '';
+    input.style.height = 'auto';
+
+    const loadingEl = appendMsg('bot', 'Reading the book…', { loading: true });
+
+    try {
+      const res = await fetch(CONFIG.chatApiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: conversation }),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      const reply = (data && data.reply) ? data.reply : '';
+      if (!reply) throw new Error('Empty response');
+
+      loadingEl.classList.remove('loading');
+      loadingEl.textContent = reply;
+      conversation.push({ role: 'assistant', content: reply });
+    } catch (err) {
+      console.error('Chat error:', err);
+      loadingEl.classList.remove('loading');
+      loadingEl.textContent =
+        "Hmm, the assistant couldn't respond just now. Please try again, or reach out to the site developer at hi@katr.es.";
+    } finally {
+      busy = false;
+      send.disabled = false;
+      input.disabled = false;
+      input.focus();
+    }
+  }
+}
+
+/* ============================================================================
    INIT
    ============================================================================ */
 async function loadPdf() {
@@ -2582,6 +2966,8 @@ async function init() {
       }
     });
   }
+
+  initChat();
 
   // Splash should stay up for at least 2 seconds, even if the PDF loaded faster
   const splashStart = Date.now();
