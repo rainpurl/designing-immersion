@@ -1532,6 +1532,7 @@ body.book-fullscreen #chat-panel {
   flex-direction: column;
   gap: 6px;
   transition: transform 0.2s, background 0.2s;
+  position: relative;
 }
 .visit-card:hover {
   transform: translateY(-3px);
@@ -1544,6 +1545,7 @@ body.book-fullscreen #chat-panel {
   text-transform: uppercase;
   font-weight: 700;
   opacity: 0.7;
+  padding-right: 22px;
 }
 .visit-card-title {
   font-size: 17px;
@@ -1577,6 +1579,7 @@ body.book-fullscreen #chat-panel {
   flex-direction: column;
   gap: 6px;
   transition: border-color 0.2s, transform 0.2s;
+  position: relative;
 }
 .interview-card:hover {
   border-color: var(--burnt);
@@ -1586,10 +1589,43 @@ body.book-fullscreen #chat-panel {
   opacity: 0.55;
   border-style: dashed;
 }
+
+/* Card corner indicator: small right-arrow that signals clickability.
+   Sits in the top-right of interview and visit cards. Brightens on hover. */
+.card-corner-icon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  transition: opacity 0.2s, color 0.2s, transform 0.2s;
+}
+.interview-card .card-corner-icon {
+  color: var(--ink);
+  opacity: 0.3;
+}
+.interview-card:hover .card-corner-icon {
+  color: var(--burnt);
+  opacity: 1;
+  transform: translateX(2px);
+}
+.interview-card.is-placeholder .card-corner-icon {
+  opacity: 0.2;
+}
+.visit-card .card-corner-icon {
+  color: var(--paper);
+  opacity: 0.55;
+}
+.visit-card:hover .card-corner-icon {
+  opacity: 1;
+  transform: translateX(2px);
+}
 .interview-card-name {
   font-size: 15px;
   font-weight: 700;
   line-height: 1.25;
+  padding-right: 22px;
 }
 .interview-card-title {
   font-size: 11px;
@@ -1607,10 +1643,42 @@ body.book-fullscreen #chat-panel {
   margin-top: 4px;
 }
 
+/* Secondary research panel: intro + grid of source-card anchors */
+.secondary-intro {
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  opacity: 0.65;
+  max-width: 580px;
+  margin: 0 auto 28px;
+  line-height: 1.55;
+}
+.secondary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+.secondary-grid .source-card {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.source-card-authors {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--ink);
+  opacity: 0.55;
+  margin: 2px 0 6px;
+  line-height: 1.4;
+}
+
 @media (max-width: 720px) {
   .visits-row { grid-template-columns: 1fr; }
   #interview-modal { padding: 12px; }
   #interview-modal .modal-body { padding: 24px 20px 32px; }
+  .secondary-grid { grid-template-columns: 1fr; }
 }
 
 /* ============================================================
@@ -1999,7 +2067,18 @@ const CONFIG = {
             name: 'SXSW Innovation',
             subtitle: 'Site visit, Austin',
             date: 'March 2026',
-            placeholder: true,
+            summary: 'Three panels at SXSW gave the team a cross-industry read on where healthcare technology is being negotiated in public. The conversations cut across agentic AI in medical decision-making, the role of nurses as the human firewall against automation, and the use of immersive play and ritual as therapeutic interventions. Together they framed the questions the simulation center has to answer about AI integration, identity preservation, and humanization of technology.',
+            observations: [
+              'Panel one, "The future of healthcare is at home" with Ricky Choi (Samsung), Dhruv Kumar, John Whyte (AMA), and Arundhati Parmar. Physician AI usage doubled since 2023, with over 80 percent now using AI for documentation, chart summarization, and diagnostic support. Within five years every physician will use AI in some capacity.',
+              'Cognitive deskilling is the central concern. The current generation of medical students will train fundamentally differently, with comparison drawn to GPS dependency. One student described forcing himself to complete a differential diagnosis independently before consulting AI.',
+              'AI prescribing controversy: Utah\u2019s Doctronic pilot allows AI prescribing for renewals. The AMA opposes prescribing without human oversight, citing slippery-slope concerns and a documented case where researchers tricked the bot into prescribing three times the proper dosage.',
+              'Wearables are moving from fitness tracking to medical detection. Atrial fibrillation, sleep apnea, ADHD management through haptic reminders. The institutional motivation is to remove friction between detection and treatment, not just identify problems.',
+              'Hospital-at-home programs are limited geographically but expanding. Patients prefer their own beds, family proximity, and continuous data generation over hospital admission for stable conditions requiring IV antibiotics or similar.',
+              'Panel two, "Nurses as firewall between AI and patients." Union-organizing context at Mission Regional Medical Center after acquisition by HCA. Cost-cutting, staffing reductions, and shareholder-first culture have made nurses the last human checkpoint between hospital systems and patient harm.',
+              'Panel three, "Technologies of care: ritual play and the future of wellness" with Sarin (Hatsumi) and Nikki (Soul Paint). Demonstration of Soul Paint, a VR body-mapping experience, and Deep, a meditative breathing-controlled game. Both are deployed clinically with published research showing improved emotional regulation and reduced PTSD symptoms in youth detention populations.',
+              'Core argument from the wellness panel: the healthcare system is fragmented along the human experience itself, mental health separated from physical, expression separated from work. Embodied play and ritual are the actionable mechanisms (not the spiritual framing) that historically reconnect these. The center should design for reconnection, not just skill acquisition.',
+              'The XR Health Alliance reports 20 million GBP UK government investment in immersive health products since 2021. The arts-and-health field is finally generating clinical evidence at scale, with WHO, UNESCO, and the NHS all formally engaged.',
+            ],
           },
           {
             name: 'SXSW EDU',
@@ -2282,9 +2361,8 @@ const CONFIG = {
             ],
           },
           {
-            name: 'Ade',
-            title: 'Meta enterprise AR/VR specialist',
-            date: 'Date not recorded',
+            name: 'Ade Ajayi',
+            title: 'Director of Global Sales, Reality Labs at Meta',
             oneLiner: 'The deployment-side view of immersive learning across industries. Today\u2019s headsets are a transitional technology.',
             summary: 'Ade gave the team the deployment-side view of immersive learning that the medical-only interviews could not produce. His central practical observation was about form factor. The Meta Quest 3S is currently heavy enough that practical sessions are limited to about two hours before discomfort sets in, which means today\u2019s headsets are a transitional technology. Meta is investing in lighter wearables like the Ray-Ban Meta smart glasses with displays and built-in AI, and the Orion AR glasses point toward the eventual smaller, more practical form factor. His evidence on training effectiveness was specific and citable. VR/MR training shows higher knowledge retention than traditional 2D or in-person instruction because of the immersive, distraction-free environment. Purdue University nursing students trained in VR have higher pass rates on board exams. Walmart\u2019s VR active-shooter training was so realistic that employees who experienced a real incident reported feeling like they had been there before. His most important deployment lesson was about change management.',
             keyPoints: [
@@ -2299,14 +2377,356 @@ const CONFIG = {
             ],
           },
           {
+            name: 'Denise Worrell',
+            title: 'Futurist and innovation leader; professor of foresight',
+            oneLiner: 'A futurist\u2019s challenge to the project\u2019s premise: the simulation-center building may already be old-think. Decentralized, embedded, and real-time models are the 2030-relevant alternatives.',
+            summary: 'Denise brought the project a futurist\u2019s skepticism about its core premise. Drawing on her own foresight research and concepting work with an analogous academic medical center, where she ran design research and concepting sprints across thirteen topics including embedded education, she pushed the team to question whether a simulation center as a physical building is the right answer at all. Her central argument was that the things being framed as futuristic now (VR, sim labs, NASA-style command centers) are likely to feel dated by 2030, and that the more interesting design moves are decentralized, embedded, and real-time. She offered specific alternatives: a reflective playback studio modeled on the NFL Red Zone, where students review highlights of their own real-patient interactions on a phone rather than in a built environment; mixed reality with patient-specific cultural and personality data; decentralized practice that learners access from home with real-time coaching. Her clearest challenge to the team was that the sim center sells itself as immersive learning but no one inside the project can articulate what is actually valuable about it. The team\u2019s job is to figure out what is worth simulating and what is not. She pointed to a Chinese hospital where AI now diagnoses disease with ninety-three percent accuracy and to UC San Diego using thirty-five-hundred-dollar Apple Vision Pro headsets in actual operating rooms with better spatial awareness than their five-hundred-thousand-dollar specialized equipment, framing both as reasons to question whether VR centers are the technology to plan around at all.',
+            keyPoints: [
+              'The simulation center may be a 2030 anachronism. The things being framed as futuristic now (VR centers, NASA-style command centers) are likely to feel dated by then. The design opportunity is decentralized and embedded models, not bigger buildings.',
+              'Embedded education means learning everywhere all the time, not students shepherded through halls and pushed off to the side. The architecture should design for learning from the start, not retrofit it in.',
+              'The simulation center can be decentralized. Real-time coaching at home, accessible practice that is not place-based and not resource-intensive, may serve more learners than a building can.',
+              'A reflective playback studio idea: an NFL Red Zone style highlight reel of a student\u2019s real patient interactions, played back for self-review. Probably best on a phone, not in an immersive tech studio.',
+              'MD Anderson rejected the NASA-style command center concept for similar reasons. Centralizing real-time information in a room of desks where people will not talk to each other is the wrong design move.',
+              'Knowledge is moving faster than publication cycles. The design challenge is helping clinicians and students learn in the moment, not waiting for a research paper or curriculum revision to catch up.',
+              'AI-tailored treatments are creating clinical complexity that even physicians struggle to follow. The educational design has to address how learners and patients process this complexity in real time.',
+              'Real-world examples to plan around: a Chinese hospital where AI diagnoses with ninety-three percent accuracy, and UC San Diego using thirty-five-hundred-dollar Apple Vision Pro headsets in actual operating rooms with better spatial awareness than their five-hundred-thousand-dollar specialized equipment.',
+            ],
+          },
+          {
             name: 'Col. (Ret.) Enrique Ortiz Jr.',
             title: 'Former BlackHawk medevac pilot; former Chief of Medical Integrations at U.S. Army Futures Command',
-            placeholder: true,
+            oneLiner: 'Aviation moved 80 to 90 percent of pilot training into simulators. The medical analogy breaks down where physiology gets complex, but the operational logic is the same.',
+            summary: 'Rick brought a rare cross-sector view to the project, drawing on aviation, hospital management, military medicine, and UT system leadership. His core framing was that aviation and healthcare are both complex systems that have to function as highly reliable organizations, which positions simulation as part of how an institution builds safety and performance assurance, not just educational support. He pointed to aviation as a useful but imperfect benchmark. Some airlines now run eighty to ninety percent of new-pilot training in simulators, with real aircraft used only for validation, demonstrating that simulation-heavy models are operationally viable at scale. He was equally clear about where the analogy breaks down. Human physiology is more complex than mechanical systems, and care is team-based in broader ways than aviation, involving nurses, monitors, and full procedural teams. His military-medicine experience gave the team a cautionary lesson on proficiency: the military health system struggled to give surgeons enough trauma reps to stay sharp, and simulation was underused as the workaround. That positions the Dell Med simulation center as a direct response to a real operational problem, how to maintain proficiency when real-world exposure is inconsistent or insufficient. Drawing on his work shaping Army medical modernization, his strongest strategic counsel was about ambition. The team should not produce cost-constrained recommendations at this stage. The deliverable should articulate an aspirational vision and leave business-case analysis for later. The project should be about what could be, not what is.',
+            keyPoints: [
+              'Aviation and healthcare are both complex systems that should function as highly reliable organizations. Simulation belongs inside the safety and reliability infrastructure, not just the education function.',
+              'Aviation is a useful benchmark. Some airlines now run eighty to ninety percent of new-pilot training in simulators, with real aircraft used only for validation, proving that simulation-heavy models work at scale.',
+              'The aviation analogy breaks down where physiology and team complexity exceed mechanical systems. Healthcare simulation has to account for biological variability and broader team coordination than a pilot/copilot pair.',
+              'Team-based, high-acuity, high-risk scenarios should be the design priority. The center should rehearse communication, role clarity, escalation, and handoff, not just technical procedures.',
+              'A core operational problem the simulation center can solve: how to maintain proficiency when real-world exposure is inconsistent or insufficient. The military health system has lived this problem and underused simulation as the answer.',
+              'The project should not let cost constrain the first-level vision. Bold proposals should be made now, with feasibility and funding analysis deferred to a later phase.',
+              'Future-oriented language is common (\u2018hospital of the future\u2019), but actual investment and commitment are harder. The recommendation should force a real decision, not echo familiar rhetoric.',
+              'AI and immersive technology should augment clinicians, not replace them. Reversibility is required: human backup capability has to be preserved.',
+            ],
           },
           {
             name: 'Nick Rinaldi',
-            title: 'U.S. Army training and modernization; simulation telemetry and biometric capture',
-            placeholder: true,
+            title: 'U.S. Army training and modernization; kinesiology and biometric capture',
+            oneLiner: 'The simulation center is not a building, it is an ecosystem of access. Reps come from phones and game consoles long before they come from VR rigs.',
+            summary: 'Nick brought the operator\u2019s lens on training systems, drawn from a kinesiology and Army training background working on how soldiers are measured and modernized. His central argument was that the simulation center has to be designed as an ecosystem, not a building, and that the widget matters less than the continuum of access learners have to it. He pushed the team toward a layered model: low-fidelity but highly accessible practice via phone, laptop, or game console at home; physical simulation devices in the facility; cadaveric or real-world practice at the top tier. Mental reps and exposure should start early and be available broadly, so learners arrive at scarce, high-fidelity experiences already familiar and less anxious. He was sharp on motivation. Isolated task practice is too boring to sustain repetition unless the experience is wrapped in a meaningful outcome. Training should be designed around outcomes like \u2018save the patient,\u2019 not decontextualized procedural checklists, with leaderboards, scoring, and goals that drive practice when no instructor is watching. He pushed the team toward team-based simulation. Code situations are a team sport, and team training does not require maximal technical complexity; low-tech mannequins and simpler setups are often sufficient for orchestration practice. His most pointed contribution was on data: if you do not capture the learner\u2019s profile longitudinally, why bother? Individual performance tracking over time should be core to the design, not an afterthought.',
+            keyPoints: [
+              'The widget is not the point. The simulation center should be designed as an end-to-end ecosystem that helps a human learn, not a collection of flashy devices.',
+              'Repetitions matter. The lab should prioritize volume of practice over realism or novelty.',
+              'Build a continuum of access. Low-fidelity practice via phone, laptop, or game console at home; facility-based simulation in the middle; cadaveric or real-world practice at the top.',
+              'A lab-only strategy limits scale. Digital access expands training throughput beyond what physical hardware allows.',
+              'Design training around outcomes, not procedural checklists. The scenario is \u2018save the patient,\u2019 and the technical reps live inside a meaningful clinical mission.',
+              'Medical emergencies are a team sport. The lab should train coordination, communication, and team execution alongside individual technical skill.',
+              'Humans only learn when they are motivated to do it internally. Gamification (leaderboards, scoring, visible feedback) drives self-directed practice when faculty are not watching.',
+              'Capturing a learner\u2019s longitudinal performance profile should be core to the lab\u2019s design, not an afterthought. Without persistent attribution and honest feedback, the data has no value.',
+            ],
+          },
+        ],
+        secondarySources: [
+          {
+            type: 'Strategic plan',
+            year: '2025',
+            title: 'Health Starts Here Strategic Plan',
+            authors: 'Dell Medical School, UT Austin',
+            summary: 'The official Dell Med strategic plan whose framing of integrated, multidisciplinary patient care and community-driven health is the foundation the 2030 medical center vision builds on.',
+            url: 'https://dellmed.utexas.edu/about/strategic-plan',
+          },
+          {
+            type: 'News',
+            year: '2024',
+            title: '$100M private gift accelerates planning for UT\u2019s academic medical center',
+            authors: 'Virtual Builders Exchange',
+            summary: 'Reporting on the Coxe family\u2019s 100 million dollar contribution, which underwrites the connective-tissue investments (technology, recruitment, integrated planning) the new medical center depends on.',
+            url: 'https://www.virtualbx.com/feature-story/100m-private-gift-accelerates-planning-for-uts-academic-medical-center/',
+          },
+          {
+            type: 'Paper',
+            title: 'Embedding Learning in a Learning Health Care System to Improve Quality of Care',
+            authors: 'PMC',
+            summary: 'The foundational argument that medical education has to be structurally embedded inside a learning health system, with feedback loops that translate care variation into curriculum change.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8349926/',
+          },
+          {
+            type: 'Paper',
+            title: 'The Academic Learning Health System: A Framework for Integrating Research, Education, and Care',
+            authors: 'PMC',
+            summary: 'The aLHS framework that proposes integrating UME, GME, and CME under a Chief Learning Officer so educational goals align with health-system goals across the full continuum.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10453356/',
+          },
+          {
+            type: 'Paper',
+            title: 'Precision Education: The Future of Lifelong Learning in Medicine',
+            authors: 'PubMed',
+            summary: 'The original precision-education argument that learning should be tailored to the individual learner\u2019s data trajectory, parallel to how precision medicine tailors treatment.',
+            url: 'https://pubmed.ncbi.nlm.nih.gov/38277444/',
+          },
+          {
+            type: 'Article',
+            year: '2024',
+            title: 'Precision education: What it is and how it\u2019s advancing med ed',
+            authors: 'American Medical Association',
+            summary: 'The AMA\u2019s practitioner-facing primer on precision education, including the digital learner twin concept and predictive analytics for early intervention with struggling residents.',
+            url: 'https://www.ama-assn.org/education/changemeded-initiative/precision-education-what-it-and-how-its-advancing-med-ed',
+          },
+          {
+            type: 'Paper',
+            title: 'Mastery Learning in Critical Care',
+            authors: 'ATS Scholar',
+            summary: 'The critical-care evidence base for simulation-based mastery learning, which uses deliberate practice with strict mastery criteria rather than time-based progression.',
+            url: 'https://www.atsjournals.org/doi/full/10.34197/ats-scholar.2020-0121LE',
+          },
+          {
+            type: 'Paper',
+            title: 'Translational Educational Research: A Necessity for Effective Health-care Improvement',
+            authors: 'PMC',
+            summary: 'Defines T1 through T3 educational outcomes and argues that the metric for educational success is measurable improvement in patient outcomes, not test scores.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3494468/',
+          },
+          {
+            type: 'Article',
+            title: 'Hospital 2030: Digital masterplanning for a smart healthcare campus',
+            authors: 'SALUS Global',
+            summary: 'The phygital planning framework that treats AI, sensors, and telehealth as structural elements requiring schematic-design integration, with the string-of-pearls strategy for staged digital rollout.',
+            url: 'https://salus.global/article-show/hospital-2030-digital-masterplanning-for-a-smart-healthcare-campus',
+          },
+          {
+            type: 'Paper',
+            year: '2025',
+            title: 'Participatory Design Approach in the Use of Scenario Analysis for Medical Education',
+            authors: 'JMIR',
+            summary: 'The Trinity College Dublin scenario-analysis methodology that surfaces megatrends (climate resilience, knowledge economy) and trains learners in complex adaptive systems thinking.',
+            url: 'https://www.jmir.org/2025/1/e73173',
+          },
+          {
+            type: 'Paper',
+            title: 'Approaches to Reach Trustworthy Patient Education: A Narrative Review',
+            authors: 'PMC',
+            summary: 'A narrative review of what makes patient education credible and actionable, applicable to the embedded-education models the medical center is designing for.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11641738/',
+          },
+          {
+            type: 'Master plan',
+            year: '2013',
+            title: 'UT Austin Medical District Master Plan',
+            authors: 'Sasaki Associates',
+            summary: 'The Sasaki master plan that establishes Floor Area Ratio 2.0 density, restored city grid, and pedestrian collision zones designed to force interdisciplinary interaction.',
+            url: 'https://construction.utexas.edu/sites/default/files/MasterPlan-MedicalDistrict-20130509.pdf',
+          },
+          {
+            type: 'Paper',
+            title: 'Teamwork Makes the Dream Work: Infusing Interprofessional Education',
+            authors: 'Journal of Human Services',
+            summary: 'Argues that interprofessional education fails when forced into a classroom and succeeds when it is the natural byproduct of shared space and shared work.',
+            url: 'https://journalhumanservices.org/article/74213-teamwork-makes-the-dream-work-infusing-interprofessional-education-into-human-services-curriculum-and-training',
+          },
+          {
+            type: 'Project',
+            title: 'Dell Medical District Landscape',
+            authors: 'Sasaki',
+            summary: 'The SITES Gold landscape strategy with biophilic elements, supporting both planetary-health curriculum and the burnout-reduction case for connection to nature.',
+            url: 'https://www.sasaki.com/projects/dell-medical-district-landscape/',
+          },
+          {
+            type: 'Paper',
+            title: 'Digital Twin for Personalized Medicine Development',
+            authors: 'PMC',
+            summary: 'The technical case for digital twins in medicine, including the data infrastructure required to maintain a virtual replica of a patient or system in real time.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12369496/',
+          },
+          {
+            type: 'Article',
+            title: 'How Digital Twins Are Shaping the Future of Cancer Care',
+            authors: 'MD Anderson',
+            summary: 'MD Anderson\u2019s pioneering work on patient-specific digital twins for surgical rehearsal, allowing residents to practice on the exact pathology they will operate on the next day.',
+            url: 'https://www.mdanderson.org/cancerwise/how-digital-twins-are-shaping-the-future-of-cancer-care.h00-159775656.html',
+          },
+          {
+            type: 'Industry blog',
+            year: '2025',
+            title: 'A New Era of Ambient Intelligence in Healthcare',
+            authors: 'Microsoft Industry Blogs',
+            summary: 'Microsoft\u2019s framing of ambient intelligence (AI scribes, automated coding, embedded sensors) as the path to eliminating pajama time and creating frictionless clinical workspaces.',
+            url: 'https://www.microsoft.com/en-us/industry/blog/healthcare/2025/02/27/a-new-era-of-ambient-intelligence-in-healthcare/',
+          },
+          {
+            type: 'Article',
+            title: 'Re-Tooling Architectural Education: Healthcare 2030 Design Studio in Singapore',
+            authors: 'Studio Chronotope',
+            summary: 'The Singapore healthcare-2030 design studio that prototyped climate-adaptive medical facilities with biophilic and resilience features designed for extreme-weather continuity.',
+            url: 'https://www.studiochronotope.com/re-tooling-architectural-education-ideas-from-the-healthcare-2030-design-studio-in-singapore.html',
+          },
+          {
+            type: 'Report',
+            year: '2025',
+            title: 'Adoption of Artificial Intelligence in Healthcare Delivery Systems',
+            authors: 'Peterson Health Technology Institute',
+            summary: 'Field-evidence on early AI deployments, including ambient intelligence systems that automatically assess clinician communication skills (empathy markers, teach-back, interruption rate) in real time.',
+            url: 'https://phti.org/wp-content/uploads/sites/3/2025/03/PHTI-Adoption-of-AI-in-Healthcare-Delivery-Systems-Early-Applications-Impacts.pdf',
+          },
+          {
+            type: 'Paper',
+            year: '2024',
+            title: 'A Value Analysis of Longitudinal Integrated Clerkships',
+            authors: 'PubMed',
+            summary: 'The cost-effectiveness analysis showing that single-unified All-LIC programs are cheaper than dual-track block-plus-LIC models and produce higher educational value.',
+            url: 'https://pubmed.ncbi.nlm.nih.gov/38565150/',
+          },
+          {
+            type: 'Paper',
+            title: 'Structuring Medical Education for Workforce Transformation: Continuity and Longitudinal Integrated Clerkships',
+            authors: 'MDPI Education Sciences',
+            summary: 'Defines the three continuities (care, supervision, curriculum) that distinguish LICs from block rotations and explains how they produce systems citizens.',
+            url: 'https://www.mdpi.com/2227-7102/7/2/58',
+          },
+          {
+            type: 'Curriculum',
+            title: 'Longitudinal Integrated Clerkships at Spencer Fox Eccles School of Medicine',
+            authors: 'University of Utah',
+            summary: 'A working LIC curriculum at Utah, with documented preceptor satisfaction citing authentic relationships and meaningful feedback opportunities not available in block models.',
+            url: 'https://medicine.utah.edu/programs/md/curriculum/longitudinal-clerkships',
+          },
+          {
+            type: 'Report',
+            title: 'The Current Landscape of Faculty Development: Challenges and Opportunities',
+            authors: 'Zucker School of Medicine',
+            summary: 'A faculty-development landscape review supplying the institutional context for retraining preceptors to operate effectively inside LIC and aLHS models.',
+            url: 'https://medicine.hofstra.edu/pdf/faculty/facdev/facdev-prodev-current.pdf',
+          },
+          {
+            type: 'Paper',
+            year: '2025',
+            title: 'Effects of the Hidden Curriculum in Medical Education: Scoping Review',
+            authors: 'JMIR Medical Education',
+            summary: 'A scoping review of legitimate peripheral participation, the workplace-learning mechanism that justifies transparent glass-walled team rooms where novices absorb tacit professional culture.',
+            url: 'https://mededu.jmir.org/2025/1/e68481',
+          },
+          {
+            type: 'Industry article',
+            title: '4 Ways Simulation Can Assess Foundational Competencies',
+            authors: 'Laerdal Medical',
+            summary: 'A practitioner reference on competency-assessment uses of simulation, used to support the case that SBME with mastery thresholds outperforms unstructured simulation.',
+            url: 'https://laerdal.com/us/information/4-ways-simulation-can-assess-foundational-competencies/',
+          },
+          {
+            type: 'Paper',
+            year: '2025',
+            title: 'Comparing Multimodal Learning Using Computer-Based and Immersive VR Simulation for Medical Training',
+            authors: 'JMIR Medical Education',
+            summary: 'A quasi-experimental study showing immersive VR simulation outperforms computer-based formats on retention and burnout reduction, supporting the multi-modality sim-gym argument.',
+            url: 'https://mededu.jmir.org/2025/1/e70726',
+          },
+          {
+            type: 'Programs',
+            title: 'Educator Community Programs and Resources',
+            authors: 'NYU Langone Health',
+            summary: 'NYU\u2019s educator-community resources, model for the warm-up sim gym concept where residents access task trainers and VR stations immediately before patient procedures.',
+            url: 'https://med.nyu.edu/for-faculty/educator-community/programs-resources',
+          },
+          {
+            type: 'Paper',
+            year: '2025',
+            title: 'Could Digital Twins Be the Next Revolution in Healthcare?',
+            authors: 'European Journal of Public Health',
+            summary: 'A public-health framing of digital twins, including the imaging-derived 3D anatomical models that allow surgical residents to rehearse on patient-specific pathology before operating.',
+            url: 'https://academic.oup.com/eurpub/article/35/1/19/7909469',
+          },
+          {
+            type: 'Paper',
+            title: 'Artificial Intelligence in Healthcare: Transforming the Practice of Medicine',
+            authors: 'PMC',
+            summary: 'A broad review of AI in clinical practice that includes XR and Holomics (holographic interaction with patient data) as the visualization layer over digital twins.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8285156/',
+          },
+          {
+            type: 'Position paper',
+            title: 'Systems-Integrated CME: Implementation and Outcomes Imperative',
+            authors: 'National Academy of Medicine',
+            summary: 'The NAM perspective that traditional CME (lectures, conferences) has negligible impact and that the future is systems-integrated, embedded in clinical workflow with measurable outcomes.',
+            url: 'https://nam.edu/perspectives/systems-integrated-cme-the-implementation-and-outcomes-imperative-for-continuing-medical-education-in-the-learning-health-care-enterprise/',
+          },
+          {
+            type: 'Report',
+            year: '2025',
+            title: 'Proceedings of the 2025 Annual Meeting',
+            authors: 'American Medical Association',
+            summary: 'The AMA proceedings on Performance Improvement CME, where physicians earn credit for using data to identify a practice gap, intervene, and measure the result.',
+            url: 'https://www.ama-assn.org/system/files/a25-cme-reports.pdf',
+          },
+          {
+            type: 'Paper',
+            title: 'Primary Health Care Providers\u2019 Roles and Responsibilities: Treatment of Persons Affected by Obesity',
+            authors: 'Taylor & Francis Online',
+            summary: 'A qualitative study of primary-care role distribution, used to ground the just-in-time learning argument that EHRs should push contextual primers at the point of decision.',
+            url: 'https://www.tandfonline.com/doi/full/10.1080/17538068.2016.1270874',
+          },
+          {
+            type: 'Paper',
+            title: 'Attitudes and Perceptions of Health Leaders for Quality Enhancement of Workforce in Saudi Arabia',
+            authors: 'PMC',
+            summary: 'Health-leader survey supplying international context for embedded-education adoption and the gap between recognized need and operational implementation.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9141873/',
+          },
+          {
+            type: 'Position paper',
+            year: '2030',
+            title: 'The Future of External Education 2030',
+            authors: 'Medical Affairs Professional Society',
+            summary: 'Position paper on the 2030 horizon for external medical education, supporting the case that CME credits should be awarded for QI leadership and wellness initiatives.',
+            url: 'https://medicalaffairs.org/position-paper-the-future-of-external-education-2030/',
+          },
+          {
+            type: 'Workshop',
+            year: '2018',
+            title: 'Graduate Medical Education Outcomes and Metrics: Proceedings of a Workshop',
+            authors: 'National Academies',
+            summary: 'The handover-problem documentation: residency program directors know little about incoming interns\u2019 specific strengths and weaknesses, which the digital learner twin is meant to solve.',
+            url: 'https://www.nationalacademies.org/read/25003/chapter/2',
+          },
+          {
+            type: 'Curriculum',
+            title: 'GME Competencies and Assessment',
+            authors: 'UCSF Medical Education',
+            summary: 'UCSF\u2019s competency-assessment framework, the operational reference for the portable competency passport that travels with learners from UME to GME.',
+            url: 'https://meded.ucsf.edu/gme-competencies-assessment',
+          },
+          {
+            type: 'Paper',
+            title: 'Ambient Intelligence Based on IoT for Assisting People with Alzheimer\u2019s Disease',
+            authors: 'MDPI Electronics',
+            summary: 'An IoT-based ambient intelligence study used as evidence for sensor-equipped smart patient rooms that simultaneously support patient safety (fall detection) and educational competency monitoring.',
+            url: 'https://www.mdpi.com/2079-9292/10/11/1260',
+          },
+          {
+            type: 'Paper',
+            title: 'A Survey on Ambient Intelligence in Health Care',
+            authors: 'PMC',
+            summary: 'The foundational survey of ambient-intelligence applications in healthcare, framing the technology as a continuous, unobtrusive feedback layer over clinical work.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3890262/',
+          },
+          {
+            type: 'Paper',
+            year: '2025',
+            title: 'Envisioning the Future of Primary Care: Patient-Centered Communication Feedback Technology',
+            authors: 'PubMed',
+            summary: 'Evidence for AI-powered communication feedback that detects bias patterns (such as differential time spent with patients by demographic) that self-reflection alone cannot match.',
+            url: 'https://pubmed.ncbi.nlm.nih.gov/40848279/',
+          },
+          {
+            type: 'Paper',
+            title: 'Ethical and Legal Challenges of Artificial Intelligence-Driven Healthcare',
+            authors: 'PMC',
+            summary: 'The ethical-and-legal frame for AmI deployment, including consent protocols, dual-use justification, and the privacy guardrails the smart patient room requires.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC7332220/',
+          },
+          {
+            type: 'Paper',
+            title: 'Exploring the Need for Medical Futures Studies: A Scoping Review',
+            authors: 'PMC',
+            summary: 'A scoping review of healthcare foresight methodology, supporting the community-integration argument that medical education has to extend into FQHCs and treat SDOH as core curriculum.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11499746/',
           },
         ],
       },
@@ -2953,6 +3373,7 @@ function renderResearchAppendix(container, section) {
   const data = section.appendix;
   const interviews = data.interviews || [];
   const visits = data.siteVisits || [];
+  const secondarySources = data.secondarySources || [];
 
   container.innerHTML = `
     <div class="research-tabs">
@@ -2960,20 +3381,22 @@ function renderResearchAppendix(container, section) {
       <button class="research-tab" data-tab="secondary">Secondary</button>
     </div>
     <div class="research-panel" data-panel="primary"></div>
-    <div class="research-panel hidden" data-panel="secondary">
-      <p class="archive-intro" style="text-align: center; max-width: 600px; margin: 32px auto;">Secondary research, including the analogous-industry studies and published frameworks that shaped this work, is being added soon.</p>
-    </div>
+    <div class="research-panel hidden" data-panel="secondary"></div>
   `;
 
   const primaryPanel = container.querySelector('[data-panel="primary"]');
+  const secondaryPanel = container.querySelector('[data-panel="secondary"]');
 
   // Site visit cards row, distinct visual treatment
   if (visits.length) {
     const visitsHTML = visits.map((v, i) => `
       <button class="visit-card" data-visit-idx="${i}">
+        <svg class="card-corner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+        </svg>
         <div class="visit-card-eyebrow">Site visit</div>
         <div class="visit-card-title">${v.name}</div>
-        <div class="visit-card-summary">${v.summary || ''}</div>
+        <div class="visit-card-summary">${v.summary ? v.summary.slice(0, 110) + (v.summary.length > 110 ? '\u2026' : '') : 'Notes coming soon.'}</div>
       </button>
     `).join('');
     primaryPanel.insertAdjacentHTML('beforeend', `
@@ -2985,6 +3408,9 @@ function renderResearchAppendix(container, section) {
   if (interviews.length) {
     const interviewsHTML = interviews.map((iv, i) => `
       <button class="interview-card${iv.placeholder ? ' is-placeholder' : ''}" data-interview-idx="${i}">
+        <svg class="card-corner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+        </svg>
         <div class="interview-card-name">${iv.name}</div>
         <div class="interview-card-title">${iv.title}</div>
         <div class="interview-card-summary">${iv.placeholder ? 'Content coming soon.' : (iv.oneLiner || '')}</div>
@@ -2993,6 +3419,32 @@ function renderResearchAppendix(container, section) {
     primaryPanel.insertAdjacentHTML('beforeend', `
       <div class="interviews-grid">${interviewsHTML}</div>
     `);
+  }
+
+  // Secondary research: citation card grid
+  if (secondarySources.length) {
+    const intro = `
+      <p class="secondary-intro">
+        These are the secondary sources that shaped the research synthesis. Click any card to open the original.
+      </p>
+    `;
+    const sourcesHTML = secondarySources.map((s, i) => `
+      <a class="source-card" href="${s.url}" target="_blank" rel="noopener noreferrer">
+        <div class="source-card-meta">
+          <span>${s.type}${s.year ? ' \u00B7 ' + s.year : ''}</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M14 3h7v7"/><path d="M10 14L21 3"/>
+            <path d="M21 14v5a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h5"/>
+          </svg>
+        </div>
+        <div class="source-card-title">${s.title}</div>
+        ${s.authors ? `<div class="source-card-authors">${s.authors}</div>` : ''}
+        <div class="source-card-snippet">${s.summary || ''}</div>
+      </a>
+    `).join('');
+    secondaryPanel.insertAdjacentHTML('beforeend', `${intro}<div class="secondary-grid">${sourcesHTML}</div>`);
+  } else {
+    secondaryPanel.innerHTML = '<p class="archive-intro" style="text-align: center; max-width: 600px; margin: 32px auto;">Secondary research is being added soon.</p>';
   }
 
   // Tab switching
@@ -3028,7 +3480,7 @@ function openInterviewModal(iv) {
   const modal = $('#interview-modal');
   $('#im-name').textContent = iv.name;
   $('#im-title').textContent = iv.title;
-  $('#im-date').textContent = iv.date ? `Interview date: ${iv.date}` : '';
+  $('#im-date').textContent = '';
 
   const body = $('#im-body');
   body.innerHTML = '';
@@ -3067,7 +3519,7 @@ function openVisitModal(v) {
   const modal = $('#interview-modal');
   $('#im-name').textContent = v.name;
   $('#im-title').textContent = v.subtitle || 'Site visit';
-  $('#im-date').textContent = v.date ? `Date: ${v.date}` : '';
+  $('#im-date').textContent = '';
 
   const body = $('#im-body');
   body.innerHTML = '';
