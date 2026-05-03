@@ -242,7 +242,9 @@ header {
   text-align: center;
   white-space: nowrap;
   margin: 0 auto;
+  transition: opacity 0.1s ease;
 }
+.header-wordmark.fading { opacity: 0; }
 
 .section-nav {
   display: flex;
@@ -1171,7 +1173,8 @@ body.book-fullscreen header,
 body.book-fullscreen #archive,
 body.book-fullscreen .scroll-cue,
 body.book-fullscreen #page-controls,
-body.book-fullscreen .scroll-top-btn {
+body.book-fullscreen .scroll-top-btn,
+body.book-fullscreen .scroll-down-btn {
   display: none !important;
 }
 /* Book section becomes the entire viewport */
@@ -1261,6 +1264,39 @@ body.book-fullscreen #book.cover-only {
   transform: translateY(-2px);
 }
 .scroll-top-btn svg { width: 22px; height: 22px; }
+
+/* Scroll-down button — mirrors scroll-top, visible when at the top of the
+   page (when the book is in view) and hidden once you scroll past it.
+   Same fixed slot at bottom-right; the two buttons are mutually exclusive. */
+.scroll-down-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--burnt);
+  border: none;
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease;
+}
+.scroll-down-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.scroll-down-btn:hover {
+  background: #a64a00;
+  transform: translateY(-2px);
+}
+.scroll-down-btn svg { width: 22px; height: 22px; }
 
 /* ============================================================
    CHAT WITH THE BOOK
@@ -2106,6 +2142,13 @@ body.book-fullscreen #chat-panel {
      ============================================================ -->
 <button id="scroll-top-btn" class="scroll-top-btn" aria-label="Back to the book">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- ============================================================
+     SCROLL TO BEYOND (floating button, appears while viewing the book)
+     ============================================================ -->
+<button id="scroll-down-btn" class="scroll-down-btn" aria-label="Scroll to Beyond the section">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
 </button>
 
 <!-- ============================================================
@@ -4661,14 +4704,65 @@ async function init() {
 
   // Scroll-to-top button (visible when scrolled past the book)
   const scrollTop = $('#scroll-top-btn');
+  const scrollDown = $('#scroll-down-btn');
   if (scrollTop) {
     scrollTop.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-    window.addEventListener('scroll', () => {
-      const showAt = window.innerHeight * 0.6;
-      scrollTop.classList.toggle('visible', window.scrollY > showAt);
+  }
+  if (scrollDown) {
+    scrollDown.addEventListener('click', () => {
+      const archive = document.getElementById('archive');
+      if (archive) {
+        archive.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+      }
     });
+  }
+  // Visibility toggle: top button shows after scrolling past the book; down
+  // button shows the rest of the time (i.e. while the book is in view).
+  // The two buttons are mutually exclusive in the same fixed slot.
+  if (scrollTop || scrollDown) {
+    const updateScrollBtns = () => {
+      const showAt = window.innerHeight * 0.6;
+      const pastBook = window.scrollY > showAt;
+      if (scrollTop) scrollTop.classList.toggle('visible', pastBook);
+      if (scrollDown) scrollDown.classList.toggle('visible', !pastBook);
+    };
+    window.addEventListener('scroll', updateScrollBtns);
+    updateScrollBtns(); // initial state on load
+  }
+
+  // Header wordmark: morphs from "Designing Immersion: Beyond the Book" to
+  // "Designing Immersion: Beyond the {section}" as the user scrolls into the
+  // archive. The reverse happens scrolling back up. 0.1s fade on each swap.
+  const wordmark = document.querySelector('.header-wordmark');
+  const archive  = document.getElementById('archive');
+  const archiveTitle = document.getElementById('archive-section-title');
+  if (wordmark && archive && archiveTitle) {
+    const updateWordmark = () => {
+      const rect = archive.getBoundingClientRect();
+      // Trigger when the top of the archive crosses into the upper half of
+      // the viewport — feels natural as the user begins reading the panel.
+      const inArchive = rect.top < window.innerHeight / 2;
+      const desired = inArchive
+        ? `Designing Immersion: ${archiveTitle.textContent}`
+        : 'Designing Immersion: Beyond the Book';
+      if (wordmark.textContent === desired) return;
+      wordmark.classList.add('fading');
+      setTimeout(() => {
+        wordmark.textContent = desired;
+        wordmark.classList.remove('fading');
+      }, 100);
+    };
+    window.addEventListener('scroll', updateWordmark);
+    // Also update when the section changes (renderArchive rewrites the title);
+    // a MutationObserver on the title text keeps the wordmark in sync without
+    // needing to instrument every render path.
+    const titleObserver = new MutationObserver(updateWordmark);
+    titleObserver.observe(archiveTitle, { childList: true, characterData: true, subtree: true });
+    updateWordmark(); // initial state
   }
 
   // Fullscreen toggle for the book — uses the native Fullscreen API where
