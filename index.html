@@ -668,6 +668,16 @@ header {
   color: var(--ink);
   margin: 0 0 64px;
 }
+.archive-coming-soon {
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  opacity: 0.45;
+  font-style: italic;
+  padding: 32px 0 80px;
+  margin: 0;
+}
 .archive-eyebrow {
   font-size: 10px;
   letter-spacing: 0.07em;
@@ -973,22 +983,6 @@ header {
    ============================================================ */
 /* Cover hint — a small line of text below the book, visible only when the
    book is in cover-only mode, telling users how to navigate. */
-.cover-hint {
-  text-align: center;
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: var(--dust);
-  margin: 22px auto 0;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-.cover-hint.visible {
-  opacity: 1;
-}
-
 /* ============================================================
    FULLSCREEN BUTTON (overlaid on the spread, auto-contrasts via blend mode)
    ============================================================ */
@@ -1837,8 +1831,6 @@ body.book-fullscreen #chat-panel {
     </div>
   </div>
 
-  <div id="cover-hint" class="cover-hint" aria-hidden="false">Click the page or use your arrow keys to turn the page.</div>
-
   <div id="page-controls">
     <span class="pc-label">Page</span>
     <input type="number" id="page-input" min="1" value="1" aria-label="Page number" />
@@ -2022,6 +2014,7 @@ body.book-fullscreen #chat-panel {
      CURSOR TOOLTIP (follows the mouse over clickable cards)
      ============================================================ -->
 <div id="cursor-tip" class="cursor-tip" aria-hidden="true">Click to expand</div>
+<div id="book-hint" class="cursor-tip cursor-tip--book" aria-hidden="true">Click the page, or use arrow keys</div>
 
 <!-- ============================================================
      SCRIPTS
@@ -2058,12 +2051,7 @@ const CONFIG = {
       name: 'Introduction',
       startSpread: 1,
       placeholderColor: '#BF5700',
-      appendix: {
-        eyebrow: 'Lorem ipsum',
-        heading: 'Lorem ipsum dolor sit amet.',
-        intro:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      },
+      appendix: { comingSoon: true },
     },
 
     {
@@ -2071,29 +2059,7 @@ const CONFIG = {
       name: 'Vignettes',
       startSpread: 5,
       placeholderColor: '#BF5700',
-      appendix: {
-        eyebrow: 'Lorem ipsum dolor sit',
-        heading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        intro:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-        pullQuote: {
-          quote:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-          attribution: 'Lorem Ipsum, Dolor Sit Amet',
-        },
-        sourcesEyebrow: 'Lorem ipsum sources',
-        sources: [
-          { title: 'Lorem ipsum dolor sit amet',     type: 'Lorem ipsum', snippet: 'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', pdf: 'sources/lorem-1.pdf' },
-          { title: 'Consectetur adipiscing elit',    type: 'Lorem ipsum', snippet: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', pdf: 'sources/lorem-2.pdf' },
-          { title: 'Sed do eiusmod tempor',          type: 'Lorem ipsum', snippet: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', pdf: 'sources/lorem-3.pdf' },
-          { title: 'Ut labore et dolore magna',      type: 'Lorem ipsum', snippet: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', pdf: 'sources/lorem-4.pdf' },
-        ],
-        endNote: {
-          eyebrow: 'Lorem ipsum',
-          title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-          body: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        },
-      },
+      appendix: { comingSoon: true },
     },
 
     {
@@ -2477,22 +2443,6 @@ const CONFIG = {
         ],
         secondarySources: [
           {
-            type: 'Strategic plan',
-            year: '2025',
-            title: 'Health Starts Here Strategic Plan',
-            authors: 'Dell Medical School, UT Austin',
-            summary: 'The official Dell Med strategic plan whose framing of integrated, multidisciplinary patient care and community-driven health is the foundation the 2030 medical center vision builds on.',
-            url: 'https://dellmed.utexas.edu/about/strategic-plan',
-          },
-          {
-            type: 'News',
-            year: '2024',
-            title: '$100M private gift accelerates planning for UT\u2019s academic medical center',
-            authors: 'Virtual Builders Exchange',
-            summary: 'Reporting on the Coxe family\u2019s 100 million dollar contribution, which underwrites the connective-tissue investments (technology, recruitment, integrated planning) the new medical center depends on.',
-            url: 'https://www.virtualbx.com/feature-story/100m-private-gift-accelerates-planning-for-uts-academic-medical-center/',
-          },
-          {
             type: 'Paper',
             title: 'Embedding Learning in a Learning Health Care System to Improve Quality of Care',
             authors: 'PMC',
@@ -2514,14 +2464,6 @@ const CONFIG = {
             url: 'https://pubmed.ncbi.nlm.nih.gov/38277444/',
           },
           {
-            type: 'Article',
-            year: '2024',
-            title: 'Precision education: What it is and how it\u2019s advancing med ed',
-            authors: 'American Medical Association',
-            summary: 'The AMA\u2019s practitioner-facing primer on precision education, including the digital learner twin concept and predictive analytics for early intervention with struggling residents.',
-            url: 'https://www.ama-assn.org/education/changemeded-initiative/precision-education-what-it-and-how-its-advancing-med-ed',
-          },
-          {
             type: 'Paper',
             title: 'Mastery Learning in Critical Care',
             authors: 'ATS Scholar',
@@ -2534,13 +2476,6 @@ const CONFIG = {
             authors: 'PMC',
             summary: 'Defines T1 through T3 educational outcomes and argues that the metric for educational success is measurable improvement in patient outcomes, not test scores.',
             url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3494468/',
-          },
-          {
-            type: 'Article',
-            title: 'Hospital 2030: Digital masterplanning for a smart healthcare campus',
-            authors: 'SALUS Global',
-            summary: 'The phygital planning framework that treats AI, sensors, and telehealth as structural elements requiring schematic-design integration, with the string-of-pearls strategy for staged digital rollout.',
-            url: 'https://salus.global/article-show/hospital-2030-digital-masterplanning-for-a-smart-healthcare-campus',
           },
           {
             type: 'Paper',
@@ -2558,63 +2493,20 @@ const CONFIG = {
             url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11641738/',
           },
           {
-            type: 'Master plan',
-            year: '2013',
-            title: 'UT Austin Medical District Master Plan',
-            authors: 'Sasaki Associates',
-            summary: 'The Sasaki master plan that establishes Floor Area Ratio 2.0 density, restored city grid, and pedestrian collision zones designed to force interdisciplinary interaction.',
-            url: 'https://construction.utexas.edu/sites/default/files/MasterPlan-MedicalDistrict-20130509.pdf',
+            type: 'Paper',
+            year: '2025',
+            title: 'Effects of the Hidden Curriculum in Medical Education: Scoping Review',
+            authors: 'JMIR Medical Education',
+            summary: 'A scoping review of legitimate peripheral participation, the workplace-learning mechanism that justifies transparent glass-walled team rooms where novices absorb tacit professional culture.',
+            url: 'https://mededu.jmir.org/2025/1/e68481',
           },
           {
             type: 'Paper',
-            title: 'Teamwork Makes the Dream Work: Infusing Interprofessional Education',
-            authors: 'Journal of Human Services',
-            summary: 'Argues that interprofessional education fails when forced into a classroom and succeeds when it is the natural byproduct of shared space and shared work.',
-            url: 'https://journalhumanservices.org/article/74213-teamwork-makes-the-dream-work-infusing-interprofessional-education-into-human-services-curriculum-and-training',
-          },
-          {
-            type: 'Project',
-            title: 'Dell Medical District Landscape',
-            authors: 'Sasaki',
-            summary: 'The SITES Gold landscape strategy with biophilic elements, supporting both planetary-health curriculum and the burnout-reduction case for connection to nature.',
-            url: 'https://www.sasaki.com/projects/dell-medical-district-landscape/',
-          },
-          {
-            type: 'Paper',
-            title: 'Digital Twin for Personalized Medicine Development',
-            authors: 'PMC',
-            summary: 'The technical case for digital twins in medicine, including the data infrastructure required to maintain a virtual replica of a patient or system in real time.',
-            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12369496/',
-          },
-          {
-            type: 'Article',
-            title: 'How Digital Twins Are Shaping the Future of Cancer Care',
-            authors: 'MD Anderson',
-            summary: 'MD Anderson\u2019s pioneering work on patient-specific digital twins for surgical rehearsal, allowing residents to practice on the exact pathology they will operate on the next day.',
-            url: 'https://www.mdanderson.org/cancerwise/how-digital-twins-are-shaping-the-future-of-cancer-care.h00-159775656.html',
-          },
-          {
-            type: 'Industry blog',
             year: '2025',
-            title: 'A New Era of Ambient Intelligence in Healthcare',
-            authors: 'Microsoft Industry Blogs',
-            summary: 'Microsoft\u2019s framing of ambient intelligence (AI scribes, automated coding, embedded sensors) as the path to eliminating pajama time and creating frictionless clinical workspaces.',
-            url: 'https://www.microsoft.com/en-us/industry/blog/healthcare/2025/02/27/a-new-era-of-ambient-intelligence-in-healthcare/',
-          },
-          {
-            type: 'Article',
-            title: 'Re-Tooling Architectural Education: Healthcare 2030 Design Studio in Singapore',
-            authors: 'Studio Chronotope',
-            summary: 'The Singapore healthcare-2030 design studio that prototyped climate-adaptive medical facilities with biophilic and resilience features designed for extreme-weather continuity.',
-            url: 'https://www.studiochronotope.com/re-tooling-architectural-education-ideas-from-the-healthcare-2030-design-studio-in-singapore.html',
-          },
-          {
-            type: 'Report',
-            year: '2025',
-            title: 'Adoption of Artificial Intelligence in Healthcare Delivery Systems',
-            authors: 'Peterson Health Technology Institute',
-            summary: 'Field-evidence on early AI deployments, including ambient intelligence systems that automatically assess clinician communication skills (empathy markers, teach-back, interruption rate) in real time.',
-            url: 'https://phti.org/wp-content/uploads/sites/3/2025/03/PHTI-Adoption-of-AI-in-Healthcare-Delivery-Systems-Early-Applications-Impacts.pdf',
+            title: 'Comparing Multimodal Learning Using Computer-Based and Immersive VR Simulation for Medical Training',
+            authors: 'JMIR Medical Education',
+            summary: 'A quasi-experimental study showing immersive VR simulation outperforms computer-based formats on retention and burnout reduction, supporting the multi-modality sim-gym argument.',
+            url: 'https://mededu.jmir.org/2025/1/e70726',
           },
           {
             type: 'Paper',
@@ -2632,48 +2524,11 @@ const CONFIG = {
             url: 'https://www.mdpi.com/2227-7102/7/2/58',
           },
           {
-            type: 'Curriculum',
-            title: 'Longitudinal Integrated Clerkships at Spencer Fox Eccles School of Medicine',
-            authors: 'University of Utah',
-            summary: 'A working LIC curriculum at Utah, with documented preceptor satisfaction citing authentic relationships and meaningful feedback opportunities not available in block models.',
-            url: 'https://medicine.utah.edu/programs/md/curriculum/longitudinal-clerkships',
-          },
-          {
-            type: 'Report',
-            title: 'The Current Landscape of Faculty Development: Challenges and Opportunities',
-            authors: 'Zucker School of Medicine',
-            summary: 'A faculty-development landscape review supplying the institutional context for retraining preceptors to operate effectively inside LIC and aLHS models.',
-            url: 'https://medicine.hofstra.edu/pdf/faculty/facdev/facdev-prodev-current.pdf',
-          },
-          {
             type: 'Paper',
-            year: '2025',
-            title: 'Effects of the Hidden Curriculum in Medical Education: Scoping Review',
-            authors: 'JMIR Medical Education',
-            summary: 'A scoping review of legitimate peripheral participation, the workplace-learning mechanism that justifies transparent glass-walled team rooms where novices absorb tacit professional culture.',
-            url: 'https://mededu.jmir.org/2025/1/e68481',
-          },
-          {
-            type: 'Industry article',
-            title: '4 Ways Simulation Can Assess Foundational Competencies',
-            authors: 'Laerdal Medical',
-            summary: 'A practitioner reference on competency-assessment uses of simulation, used to support the case that SBME with mastery thresholds outperforms unstructured simulation.',
-            url: 'https://laerdal.com/us/information/4-ways-simulation-can-assess-foundational-competencies/',
-          },
-          {
-            type: 'Paper',
-            year: '2025',
-            title: 'Comparing Multimodal Learning Using Computer-Based and Immersive VR Simulation for Medical Training',
-            authors: 'JMIR Medical Education',
-            summary: 'A quasi-experimental study showing immersive VR simulation outperforms computer-based formats on retention and burnout reduction, supporting the multi-modality sim-gym argument.',
-            url: 'https://mededu.jmir.org/2025/1/e70726',
-          },
-          {
-            type: 'Programs',
-            title: 'Educator Community Programs and Resources',
-            authors: 'NYU Langone Health',
-            summary: 'NYU\u2019s educator-community resources, model for the warm-up sim gym concept where residents access task trainers and VR stations immediately before patient procedures.',
-            url: 'https://med.nyu.edu/for-faculty/educator-community/programs-resources',
+            title: 'Digital Twin for Personalized Medicine Development',
+            authors: 'PMC',
+            summary: 'The technical case for digital twins in medicine, including the data infrastructure required to maintain a virtual replica of a patient or system in real time.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12369496/',
           },
           {
             type: 'Paper',
@@ -2689,58 +2544,6 @@ const CONFIG = {
             authors: 'PMC',
             summary: 'A broad review of AI in clinical practice that includes XR and Holomics (holographic interaction with patient data) as the visualization layer over digital twins.',
             url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8285156/',
-          },
-          {
-            type: 'Position paper',
-            title: 'Systems-Integrated CME: Implementation and Outcomes Imperative',
-            authors: 'National Academy of Medicine',
-            summary: 'The NAM perspective that traditional CME (lectures, conferences) has negligible impact and that the future is systems-integrated, embedded in clinical workflow with measurable outcomes.',
-            url: 'https://nam.edu/perspectives/systems-integrated-cme-the-implementation-and-outcomes-imperative-for-continuing-medical-education-in-the-learning-health-care-enterprise/',
-          },
-          {
-            type: 'Report',
-            year: '2025',
-            title: 'Proceedings of the 2025 Annual Meeting',
-            authors: 'American Medical Association',
-            summary: 'The AMA proceedings on Performance Improvement CME, where physicians earn credit for using data to identify a practice gap, intervene, and measure the result.',
-            url: 'https://www.ama-assn.org/system/files/a25-cme-reports.pdf',
-          },
-          {
-            type: 'Paper',
-            title: 'Primary Health Care Providers\u2019 Roles and Responsibilities: Treatment of Persons Affected by Obesity',
-            authors: 'Taylor & Francis Online',
-            summary: 'A qualitative study of primary-care role distribution, used to ground the just-in-time learning argument that EHRs should push contextual primers at the point of decision.',
-            url: 'https://www.tandfonline.com/doi/full/10.1080/17538068.2016.1270874',
-          },
-          {
-            type: 'Paper',
-            title: 'Attitudes and Perceptions of Health Leaders for Quality Enhancement of Workforce in Saudi Arabia',
-            authors: 'PMC',
-            summary: 'Health-leader survey supplying international context for embedded-education adoption and the gap between recognized need and operational implementation.',
-            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9141873/',
-          },
-          {
-            type: 'Position paper',
-            year: '2030',
-            title: 'The Future of External Education 2030',
-            authors: 'Medical Affairs Professional Society',
-            summary: 'Position paper on the 2030 horizon for external medical education, supporting the case that CME credits should be awarded for QI leadership and wellness initiatives.',
-            url: 'https://medicalaffairs.org/position-paper-the-future-of-external-education-2030/',
-          },
-          {
-            type: 'Workshop',
-            year: '2018',
-            title: 'Graduate Medical Education Outcomes and Metrics: Proceedings of a Workshop',
-            authors: 'National Academies',
-            summary: 'The handover-problem documentation: residency program directors know little about incoming interns\u2019 specific strengths and weaknesses, which the digital learner twin is meant to solve.',
-            url: 'https://www.nationalacademies.org/read/25003/chapter/2',
-          },
-          {
-            type: 'Curriculum',
-            title: 'GME Competencies and Assessment',
-            authors: 'UCSF Medical Education',
-            summary: 'UCSF\u2019s competency-assessment framework, the operational reference for the portable competency passport that travels with learners from UME to GME.',
-            url: 'https://meded.ucsf.edu/gme-competencies-assessment',
           },
           {
             type: 'Paper',
@@ -2778,6 +2581,169 @@ const CONFIG = {
             summary: 'A scoping review of healthcare foresight methodology, supporting the community-integration argument that medical education has to extend into FQHCs and treat SDOH as core curriculum.',
             url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11499746/',
           },
+          {
+            type: 'Paper',
+            title: 'Primary Health Care Providers\u2019 Roles and Responsibilities: Treatment of Persons Affected by Obesity',
+            authors: 'Taylor & Francis Online',
+            summary: 'A qualitative study of primary-care role distribution, used to ground the just-in-time learning argument that EHRs should push contextual primers at the point of decision.',
+            url: 'https://www.tandfonline.com/doi/full/10.1080/17538068.2016.1270874',
+          },
+          {
+            type: 'Paper',
+            title: 'Attitudes and Perceptions of Health Leaders for Quality Enhancement of Workforce in Saudi Arabia',
+            authors: 'PMC',
+            summary: 'Health-leader survey supplying international context for embedded-education adoption and the gap between recognized need and operational implementation.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9141873/',
+          },
+          {
+            type: 'Paper',
+            title: 'Teamwork Makes the Dream Work: Infusing Interprofessional Education',
+            authors: 'Journal of Human Services',
+            summary: 'Argues that interprofessional education fails when forced into a classroom and succeeds when it is the natural byproduct of shared space and shared work.',
+            url: 'https://journalhumanservices.org/article/74213-teamwork-makes-the-dream-work-infusing-interprofessional-education-into-human-services-curriculum-and-training',
+          },
+          {
+            type: 'Position paper',
+            title: 'Systems-Integrated CME: Implementation and Outcomes Imperative',
+            authors: 'National Academy of Medicine',
+            summary: 'The NAM perspective that traditional CME (lectures, conferences) has negligible impact and that the future is systems-integrated, embedded in clinical workflow with measurable outcomes.',
+            url: 'https://nam.edu/perspectives/systems-integrated-cme-the-implementation-and-outcomes-imperative-for-continuing-medical-education-in-the-learning-health-care-enterprise/',
+          },
+          {
+            type: 'Report',
+            year: '2025',
+            title: 'Proceedings of the 2025 Annual Meeting',
+            authors: 'American Medical Association',
+            summary: 'The AMA proceedings on Performance Improvement CME, where physicians earn credit for using data to identify a practice gap, intervene, and measure the result.',
+            url: 'https://www.ama-assn.org/system/files/a25-cme-reports.pdf',
+          },
+          {
+            type: 'Position paper',
+            year: '2030',
+            title: 'The Future of External Education 2030',
+            authors: 'Medical Affairs Professional Society',
+            summary: 'Position paper on the 2030 horizon for external medical education, supporting the case that CME credits should be awarded for QI leadership and wellness initiatives.',
+            url: 'https://medicalaffairs.org/position-paper-the-future-of-external-education-2030/',
+          },
+          {
+            type: 'Workshop',
+            year: '2018',
+            title: 'Graduate Medical Education Outcomes and Metrics: Proceedings of a Workshop',
+            authors: 'National Academies',
+            summary: 'The handover-problem documentation: residency program directors know little about incoming interns\u2019 specific strengths and weaknesses, which the digital learner twin is meant to solve.',
+            url: 'https://www.nationalacademies.org/read/25003/chapter/2',
+          },
+          {
+            type: 'Report',
+            year: '2025',
+            title: 'Adoption of Artificial Intelligence in Healthcare Delivery Systems',
+            authors: 'Peterson Health Technology Institute',
+            summary: 'Field-evidence on early AI deployments, including ambient intelligence systems that automatically assess clinician communication skills (empathy markers, teach-back, interruption rate) in real time.',
+            url: 'https://phti.org/wp-content/uploads/sites/3/2025/03/PHTI-Adoption-of-AI-in-Healthcare-Delivery-Systems-Early-Applications-Impacts.pdf',
+          },
+          {
+            type: 'Article',
+            year: '2024',
+            title: 'Precision education: What it is and how it\u2019s advancing med ed',
+            authors: 'American Medical Association',
+            summary: 'The AMA\u2019s practitioner-facing primer on precision education, including the digital learner twin concept and predictive analytics for early intervention with struggling residents.',
+            url: 'https://www.ama-assn.org/education/changemeded-initiative/precision-education-what-it-and-how-its-advancing-med-ed',
+          },
+          {
+            type: 'Industry article',
+            title: '4 Ways Simulation Can Assess Foundational Competencies',
+            authors: 'Laerdal Medical',
+            summary: 'A practitioner reference on competency-assessment uses of simulation, used to support the case that SBME with mastery thresholds outperforms unstructured simulation.',
+            url: 'https://laerdal.com/us/information/4-ways-simulation-can-assess-foundational-competencies/',
+          },
+          {
+            type: 'Curriculum',
+            title: 'Longitudinal Integrated Clerkships at Spencer Fox Eccles School of Medicine',
+            authors: 'University of Utah',
+            summary: 'A working LIC curriculum at Utah, with documented preceptor satisfaction citing authentic relationships and meaningful feedback opportunities not available in block models.',
+            url: 'https://medicine.utah.edu/programs/md/curriculum/longitudinal-clerkships',
+          },
+          {
+            type: 'Curriculum',
+            title: 'GME Competencies and Assessment',
+            authors: 'UCSF Medical Education',
+            summary: 'UCSF\u2019s competency-assessment framework, the operational reference for the portable competency passport that travels with learners from UME to GME.',
+            url: 'https://meded.ucsf.edu/gme-competencies-assessment',
+          },
+          {
+            type: 'Programs',
+            title: 'Educator Community Programs and Resources',
+            authors: 'NYU Langone Health',
+            summary: 'NYU\u2019s educator-community resources, model for the warm-up sim gym concept where residents access task trainers and VR stations immediately before patient procedures.',
+            url: 'https://med.nyu.edu/for-faculty/educator-community/programs-resources',
+          },
+          {
+            type: 'Report',
+            title: 'The Current Landscape of Faculty Development: Challenges and Opportunities',
+            authors: 'Zucker School of Medicine',
+            summary: 'A faculty-development landscape review supplying the institutional context for retraining preceptors to operate effectively inside LIC and aLHS models.',
+            url: 'https://medicine.hofstra.edu/pdf/faculty/facdev/facdev-prodev-current.pdf',
+          },
+          {
+            type: 'Industry blog',
+            year: '2025',
+            title: 'A New Era of Ambient Intelligence in Healthcare',
+            authors: 'Microsoft Industry Blogs',
+            summary: 'Microsoft\u2019s framing of ambient intelligence (AI scribes, automated coding, embedded sensors) as the path to eliminating pajama time and creating frictionless clinical workspaces.',
+            url: 'https://www.microsoft.com/en-us/industry/blog/healthcare/2025/02/27/a-new-era-of-ambient-intelligence-in-healthcare/',
+          },
+          {
+            type: 'Article',
+            title: 'Hospital 2030: Digital masterplanning for a smart healthcare campus',
+            authors: 'SALUS Global',
+            summary: 'The phygital planning framework that treats AI, sensors, and telehealth as structural elements requiring schematic-design integration, with the string-of-pearls strategy for staged digital rollout.',
+            url: 'https://salus.global/article-show/hospital-2030-digital-masterplanning-for-a-smart-healthcare-campus',
+          },
+          {
+            type: 'Article',
+            title: 'How Digital Twins Are Shaping the Future of Cancer Care',
+            authors: 'MD Anderson',
+            summary: 'MD Anderson\u2019s pioneering work on patient-specific digital twins for surgical rehearsal, allowing residents to practice on the exact pathology they will operate on the next day.',
+            url: 'https://www.mdanderson.org/cancerwise/how-digital-twins-are-shaping-the-future-of-cancer-care.h00-159775656.html',
+          },
+          {
+            type: 'Article',
+            title: 'Re-Tooling Architectural Education: Healthcare 2030 Design Studio in Singapore',
+            authors: 'Studio Chronotope',
+            summary: 'The Singapore healthcare-2030 design studio that prototyped climate-adaptive medical facilities with biophilic and resilience features designed for extreme-weather continuity.',
+            url: 'https://www.studiochronotope.com/re-tooling-architectural-education-ideas-from-the-healthcare-2030-design-studio-in-singapore.html',
+          },
+          {
+            type: 'Strategic plan',
+            year: '2025',
+            title: 'Health Starts Here Strategic Plan',
+            authors: 'Dell Medical School, UT Austin',
+            summary: 'The official Dell Med strategic plan whose framing of integrated, multidisciplinary patient care and community-driven health is the foundation the 2030 medical center vision builds on.',
+            url: 'https://dellmed.utexas.edu/about/strategic-plan',
+          },
+          {
+            type: 'Master plan',
+            year: '2013',
+            title: 'UT Austin Medical District Master Plan',
+            authors: 'Sasaki Associates',
+            summary: 'The Sasaki master plan that establishes Floor Area Ratio 2.0 density, restored city grid, and pedestrian collision zones designed to force interdisciplinary interaction.',
+            url: 'https://construction.utexas.edu/sites/default/files/MasterPlan-MedicalDistrict-20130509.pdf',
+          },
+          {
+            type: 'Project',
+            title: 'Dell Medical District Landscape',
+            authors: 'Sasaki',
+            summary: 'The SITES Gold landscape strategy with biophilic elements, supporting both planetary-health curriculum and the burnout-reduction case for connection to nature.',
+            url: 'https://www.sasaki.com/projects/dell-medical-district-landscape/',
+          },
+          {
+            type: 'News',
+            year: '2024',
+            title: '$100M private gift accelerates planning for UT\u2019s academic medical center',
+            authors: 'Virtual Builders Exchange',
+            summary: 'Reporting on the Coxe family\u2019s 100 million dollar contribution, which underwrites the connective-tissue investments (technology, recruitment, integrated planning) the new medical center depends on.',
+            url: 'https://www.virtualbx.com/feature-story/100m-private-gift-accelerates-planning-for-uts-academic-medical-center/',
+          },
         ],
       },
     },
@@ -2787,23 +2753,7 @@ const CONFIG = {
       name: 'Concepts',
       startSpread: 13,
       placeholderColor: '#BF5700',
-      appendix: {
-        eyebrow: 'Lorem ipsum dolor sit',
-        heading: 'Duis aute irure dolor in reprehenderit.',
-        intro:
-          'In voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        pullQuote: {
-          quote: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.',
-          attribution: 'Lorem Ipsum, Sed Ut',
-        },
-        sourcesEyebrow: 'Lorem ipsum sources',
-        sources: [
-          { title: 'Sed ut perspiciatis unde omnis',  type: 'Lorem ipsum', snippet: 'Iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.', pdf: 'sources/lorem-9.pdf' },
-          { title: 'Eaque ipsa quae ab illo',          type: 'Lorem ipsum', snippet: 'Inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.', pdf: 'sources/lorem-10.pdf' },
-          { title: 'Nemo enim ipsam voluptatem',       type: 'Lorem ipsum', snippet: 'Quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.', pdf: 'sources/lorem-11.pdf' },
-          { title: 'Eos qui ratione voluptatem',       type: 'Lorem ipsum', snippet: 'Sequi nesciunt, neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.', pdf: 'sources/lorem-12.pdf' },
-        ],
-      },
+      appendix: { comingSoon: true },
     },
 
     {
@@ -2811,23 +2761,7 @@ const CONFIG = {
       name: 'Tools',
       startSpread: 26,
       placeholderColor: '#BF5700',
-      appendix: {
-        eyebrow: 'Lorem ipsum dolor sit',
-        heading: 'Neque porro quisquam est qui dolorem ipsum.',
-        intro:
-          'Quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.',
-        pullQuote: {
-          quote: 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti.',
-          attribution: 'Lorem Ipsum, At Vero',
-        },
-        sourcesEyebrow: 'Lorem ipsum sources',
-        sources: [
-          { title: 'At vero eos et accusamus',         type: 'Lorem ipsum', snippet: 'Et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti.', pdf: 'sources/lorem-13.pdf' },
-          { title: 'Quos dolores et quas molestias',    type: 'Lorem ipsum', snippet: 'Excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt.', pdf: 'sources/lorem-14.pdf' },
-          { title: 'Mollitia animi id est laborum',     type: 'Lorem ipsum', snippet: 'Et dolorum fuga, et harum quidem rerum facilis est et expedita distinctio.', pdf: 'sources/lorem-15.pdf' },
-          { title: 'Nam libero tempore cum soluta',     type: 'Lorem ipsum', snippet: 'Nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat.', pdf: 'sources/lorem-16.pdf' },
-        ],
-      },
+      appendix: { comingSoon: true },
     },
 
     {
@@ -2835,23 +2769,7 @@ const CONFIG = {
       name: 'Principles',
       startSpread: 50,
       placeholderColor: '#BF5700',
-      appendix: {
-        eyebrow: 'Lorem ipsum dolor sit',
-        heading: 'Temporibus autem quibusdam et aut officiis.',
-        intro:
-          'Debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.',
-        pullQuote: {
-          quote: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized.',
-          attribution: 'Lorem Ipsum, On The Other Hand',
-        },
-        sourcesEyebrow: 'Lorem ipsum sources',
-        sources: [
-          { title: 'On the other hand we denounce',     type: 'Lorem ipsum', snippet: 'With righteous indignation and dislike men who are so beguiled and demoralized by the charms.', pdf: 'sources/lorem-17.pdf' },
-          { title: 'By the charms of pleasure',          type: 'Lorem ipsum', snippet: 'Of the moment, so blinded by desire, that they cannot foresee the pain and trouble.', pdf: 'sources/lorem-18.pdf' },
-          { title: 'Equal blame belongs to those',       type: 'Lorem ipsum', snippet: 'Who fail in their duty through weakness of will, which is the same as saying through shrinking.', pdf: 'sources/lorem-19.pdf' },
-          { title: 'These cases are perfectly simple',   type: 'Lorem ipsum', snippet: 'In a free hour, when our power of choice is untrammelled and when nothing prevents.', pdf: 'sources/lorem-20.pdf' },
-        ],
-      },
+      appendix: { comingSoon: true },
     },
 
     {
@@ -2859,26 +2777,7 @@ const CONFIG = {
       name: 'Appendix',
       startSpread: 54,
       placeholderColor: '#BF5700',
-      appendix: {
-        eyebrow: 'Lorem ipsum dolor sit',
-        heading: 'The wise man therefore always holds in these matters.',
-        intro:
-          'To this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        sourcesEyebrow: 'Lorem ipsum complete archive',
-        sources: [
-          { title: 'The wise man therefore always',     type: 'Lorem ipsum', snippet: 'Holds in these matters to this principle of selection: he rejects pleasures to secure other.', pdf: 'sources/lorem-21.pdf' },
-          { title: 'Greater pleasures or else he',       type: 'Lorem ipsum', snippet: 'Endures pains to avoid worse pains, lorem ipsum dolor sit amet consectetur.', pdf: 'sources/lorem-22.pdf' },
-          { title: 'Lorem ipsum dolor sit amet',          type: 'Lorem ipsum', snippet: 'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.', pdf: 'sources/lorem-23.pdf' },
-          { title: 'Ut enim ad minim veniam',             type: 'Lorem ipsum', snippet: 'Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', pdf: 'sources/lorem-24.pdf' },
-          { title: 'Duis aute irure dolor',               type: 'Lorem ipsum', snippet: 'In reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', pdf: 'sources/lorem-25.pdf' },
-          { title: 'Excepteur sint occaecat',              type: 'Lorem ipsum', snippet: 'Cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', pdf: 'sources/lorem-26.pdf' },
-        ],
-        endNote: {
-          eyebrow: 'Lorem ipsum',
-          title: 'Lorem ipsum dolor sit amet, consectetur adipiscing.',
-          body: 'Elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        },
-      },
+      appendix: { comingSoon: true },
     },
   ],
 
@@ -3075,9 +2974,6 @@ async function setPageSlot(slotEl, pageNum) {
    FLIP MECHANICS
    ============================================================================ */
 function updateArrows() {
-  // Show cover hint only when the book is in cover-only mode
-  const coverHint = $('#cover-hint');
-  if (coverHint) coverHint.classList.toggle('visible', state.currentSpread === 0);
   // Page number reflected in the editable input below the book
   const [lp, rp] = spreadPages(state.currentSpread);
   // For the cover view, lp is null and rp is page 1
@@ -3357,6 +3253,12 @@ function renderArchive(section) {
     return;
   }
 
+  // If marked coming soon, show a placeholder line and stop.
+  if (a.comingSoon) {
+    $('#archive-content').innerHTML = '<p class="archive-coming-soon">Content coming soon.</p>';
+    return;
+  }
+
   const pieces = [];
   if (a.eyebrow) pieces.push(`<div class="archive-eyebrow">${a.eyebrow}</div>`);
   if (a.heading) pieces.push(`<h2 class="archive-heading">${a.heading}</h2>`);
@@ -3429,7 +3331,7 @@ function renderResearchAppendix(container, section) {
     <div class="research-tabs">
       <button class="research-tab active" data-tab="interviews">Interviews</button>
       <button class="research-tab" data-tab="visits">Site visits</button>
-      <button class="research-tab" data-tab="secondary">Secondary</button>
+      <button class="research-tab" data-tab="secondary">Literature</button>
     </div>
     <div class="research-panel" data-panel="interviews"></div>
     <div class="research-panel hidden" data-panel="visits"></div>
@@ -3473,26 +3375,14 @@ function renderResearchAppendix(container, section) {
 
   // Secondary research: citation card grid
   if (secondarySources.length) {
-    const intro = `
-      <p class="secondary-intro">
-        These are the secondary sources that shaped the research synthesis. Click any card to open the original.
-      </p>
-    `;
     const sourcesHTML = secondarySources.map((s, i) => `
       <a class="source-card" href="${s.url}" target="_blank" rel="noopener noreferrer">
-        <div class="source-card-meta">
-          <span>${s.type}${s.year ? ' \u00B7 ' + s.year : ''}</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-            <path d="M14 3h7v7"/><path d="M10 14L21 3"/>
-            <path d="M21 14v5a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h5"/>
-          </svg>
-        </div>
         <div class="source-card-title">${s.title}</div>
         ${s.authors ? `<div class="source-card-authors">${s.authors}</div>` : ''}
         <div class="source-card-snippet">${s.summary || ''}</div>
       </a>
     `).join('');
-    secondaryPanel.insertAdjacentHTML('beforeend', `${intro}<div class="secondary-grid">${sourcesHTML}</div>`);
+    secondaryPanel.insertAdjacentHTML('beforeend', `<div class="secondary-grid">${sourcesHTML}</div>`);
   } else {
     secondaryPanel.innerHTML = '<p class="archive-intro" style="text-align: center; max-width: 600px; margin: 32px auto;">Secondary research is being added soon.</p>';
   }
@@ -3518,7 +3408,7 @@ function renderResearchAppendix(container, section) {
       const idx = parseInt(card.dataset.interviewIdx, 10);
       openInterviewModal(interviews[idx]);
     });
-    attachCursorTip(card);
+    attachCursorTip(card, 'Click to expand');
   });
 
   // Wire visit card clicks
@@ -3528,7 +3418,13 @@ function renderResearchAppendix(container, section) {
       const idx = parseInt(card.dataset.visitIdx, 10);
       openVisitModal(visits[idx]);
     });
-    attachCursorTip(card);
+    attachCursorTip(card, 'Click to expand');
+  });
+
+  // Source cards (Literature tab) get the cursor tooltip too, with their own label
+  container.querySelectorAll('.source-card').forEach((card) => {
+    card.addEventListener('click', hideCursorTip);
+    attachCursorTip(card, 'Click for full text');
   });
 }
 
@@ -3536,14 +3432,17 @@ function renderResearchAppendix(container, section) {
    CURSOR-FOLLOWING TOOLTIP
    Shows "Click to expand" near the mouse when hovering interview/visit cards.
    ============================================================================ */
-function attachCursorTip(el) {
-  el.addEventListener('mouseenter', showCursorTip);
+function attachCursorTip(el, text) {
+  const label = text || 'Click to expand';
+  el.addEventListener('mouseenter', () => showCursorTip(label));
   el.addEventListener('mouseleave', hideCursorTip);
   el.addEventListener('mousemove', moveCursorTip);
 }
-function showCursorTip() {
+function showCursorTip(text) {
   const tip = document.getElementById('cursor-tip');
-  if (tip) tip.classList.add('visible');
+  if (!tip) return;
+  if (text) tip.textContent = text;
+  tip.classList.add('visible');
 }
 function hideCursorTip() {
   const tip = document.getElementById('cursor-tip');
@@ -4084,6 +3983,41 @@ async function init() {
   $('#page-left').addEventListener('click', () => {
     if (!state.flipping) smartFlipBackward();
   });
+
+  /* ----------------------------------------------------------
+     Book hint: cursor-attached pill that says
+     "Click the page, or use arrow keys" when the user hovers
+     the book on the cover view. Disappears permanently after
+     the first book click. Resets on each page load (no cookie).
+     ---------------------------------------------------------- */
+  let bookHintDismissed = false;
+  const bookHintEl = $('#book-hint');
+  const bookHintTarget = $('#book');
+  const isOnCoverView = () => state.currentSpread === 0;
+  const showBookHint = () => {
+    if (bookHintDismissed || !isOnCoverView()) return;
+    bookHintEl.classList.add('visible');
+  };
+  const hideBookHint = () => bookHintEl.classList.remove('visible');
+  const moveBookHint = (e) => {
+    bookHintEl.style.top = e.clientY + 'px';
+    bookHintEl.style.left = e.clientX + 'px';
+  };
+  if (bookHintTarget && bookHintEl) {
+    bookHintTarget.addEventListener('mouseenter', showBookHint);
+    bookHintTarget.addEventListener('mouseleave', hideBookHint);
+    bookHintTarget.addEventListener('mousemove', (e) => {
+      moveBookHint(e);
+      if (!bookHintDismissed && isOnCoverView() && !bookHintEl.classList.contains('visible')) {
+        bookHintEl.classList.add('visible');
+      }
+    });
+    // Any click anywhere inside the book counts as the user engaging with it.
+    bookHintTarget.addEventListener('click', () => {
+      bookHintDismissed = true;
+      hideBookHint();
+    });
+  }
 
   // Touch swipe gestures (mobile): swipe left = next, swipe right = previous.
   // Tap (small movement) falls through to the click handlers above.
