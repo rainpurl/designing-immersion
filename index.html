@@ -1953,7 +1953,7 @@ body.book-fullscreen #chat-panel {
 
   <div id="chat-body" class="chat-body">
     <div id="chat-empty" class="chat-empty">
-      <strong>Hi.</strong> I can answer questions about what's in this book — the vignettes, the research, the tech-readiness matrix, the principles, all of it. I'll only speak from the book itself, and I'll tell you when something isn't covered.
+      <strong>Hi.</strong> I am a language model trained on the research and insights of the Designing Immersion team. Feel free to use natural language to help me guide you Beyond the Book. What are you curious about?
       <div class="chat-suggest">
         <button data-prompt="Who is Maya Okafor and what does her morning look like?">Who is Maya Okafor and what does her morning look like?</button>
         <button data-prompt="Summarize the tech readiness matrix and its levels.">Summarize the tech readiness matrix and its levels.</button>
@@ -3987,15 +3987,15 @@ async function init() {
   /* ----------------------------------------------------------
      Book hint: cursor-attached pill that says
      "Click the page, or use arrow keys" when the user hovers
-     the book on the cover view. Disappears permanently after
-     the first book click. Resets on each page load (no cookie).
+     the book on any spread (not just the cover, since visitors
+     may land on a direct link to a section). Auto-dismisses
+     30 seconds after the page loads. Resets on each page load.
      ---------------------------------------------------------- */
   let bookHintDismissed = false;
   const bookHintEl = $('#book-hint');
   const bookHintTarget = $('#book');
-  const isOnCoverView = () => state.currentSpread === 0;
   const showBookHint = () => {
-    if (bookHintDismissed || !isOnCoverView()) return;
+    if (bookHintDismissed) return;
     bookHintEl.classList.add('visible');
   };
   const hideBookHint = () => bookHintEl.classList.remove('visible');
@@ -4008,15 +4008,15 @@ async function init() {
     bookHintTarget.addEventListener('mouseleave', hideBookHint);
     bookHintTarget.addEventListener('mousemove', (e) => {
       moveBookHint(e);
-      if (!bookHintDismissed && isOnCoverView() && !bookHintEl.classList.contains('visible')) {
+      if (!bookHintDismissed && !bookHintEl.classList.contains('visible')) {
         bookHintEl.classList.add('visible');
       }
     });
-    // Any click anywhere inside the book counts as the user engaging with it.
-    bookHintTarget.addEventListener('click', () => {
+    // Auto-dismiss the hint 30 seconds into the session.
+    setTimeout(() => {
       bookHintDismissed = true;
       hideBookHint();
-    });
+    }, 30000);
   }
 
   // Touch swipe gestures (mobile): swipe left = next, swipe right = previous.
