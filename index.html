@@ -702,6 +702,111 @@ header {
   margin-bottom: 56px;
 }
 
+/* ============================================================================
+   BEYOND-PROSE — long-form content for the section appendix panels
+   (Introduction, Vignettes, Concepts, Principles).
+   ============================================================================ */
+.beyond-prose {
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink);
+  padding-bottom: 64px;
+}
+.beyond-prose .lede {
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 0 0 40px;
+  opacity: 0.9;
+}
+.beyond-prose h3 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 48px 0 14px;
+  color: var(--ink);
+}
+.beyond-prose h4 {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--burnt);
+  margin: 28px 0 8px;
+}
+.beyond-prose p {
+  margin: 0 0 18px;
+  opacity: 0.92;
+}
+.beyond-prose p.q-prompt {
+  font-style: italic;
+  opacity: 0.75;
+  border-left: 2px solid var(--burnt);
+  padding-left: 16px;
+  margin-left: 0;
+}
+.beyond-prose strong { font-weight: 700; }
+
+.beyond-prose .person-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  color: var(--burnt);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: opacity 0.15s ease;
+}
+.beyond-prose .person-link:hover {
+  opacity: 0.7;
+}
+.beyond-prose .person-link:focus-visible {
+  outline: 2px solid var(--burnt);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.beyond-prose .insight-card {
+  border: 1px solid rgba(26, 26, 26, 0.12);
+  padding: 22px 24px 12px;
+  margin: 14px 0;
+  background: rgba(191, 87, 0, 0.025);
+}
+.beyond-prose .insight-card.is-cut {
+  background: transparent;
+  border-color: rgba(26, 26, 26, 0.08);
+  border-style: dashed;
+}
+.beyond-prose .insight-card .insight-tag {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--burnt);
+  margin-bottom: 4px;
+}
+.beyond-prose .insight-card.is-cut .insight-tag {
+  color: rgba(26, 26, 26, 0.5);
+}
+.beyond-prose .insight-card .insight-num {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+}
+.beyond-prose .insight-card.is-cut .insight-num {
+  opacity: 0.7;
+}
+
+@media (max-width: 720px) {
+  .beyond-prose { font-size: 14px; }
+  .beyond-prose .lede { font-size: 16px; }
+  .beyond-prose h3 { font-size: 18px; }
+  .beyond-prose .insight-card { padding: 16px 18px 8px; }
+}
+
 .pull-quote {
   position: relative;
   padding: 32px 0 32px 48px;
@@ -2051,7 +2156,7 @@ const CONFIG = {
       name: 'Introduction',
       startSpread: 1,
       placeholderColor: '#BF5700',
-      appendix: { comingSoon: true },
+      appendix: { customRender: (container) => renderBeyondProse(container, 'title') },
     },
 
     {
@@ -2059,13 +2164,45 @@ const CONFIG = {
       name: 'Vignettes',
       startSpread: 5,
       placeholderColor: '#BF5700',
-      appendix: { comingSoon: true },
+      appendix: { customRender: (container) => renderBeyondProse(container, 'scenarios') },
     },
 
     {
       id: 'research',
       name: 'Research',
       startSpread: 11,
+      placeholderColor: '#BF5700',
+      appendix: { comingSoon: true },
+    },
+
+    {
+      id: 'concepts',
+      name: 'Concepts',
+      startSpread: 13,
+      placeholderColor: '#BF5700',
+      appendix: { customRender: (container) => renderBeyondProse(container, 'concepts') },
+    },
+
+    {
+      id: 'tools',
+      name: 'Tools',
+      startSpread: 26,
+      placeholderColor: '#BF5700',
+      appendix: { comingSoon: true },
+    },
+
+    {
+      id: 'principles',
+      name: 'Principles',
+      startSpread: 50,
+      placeholderColor: '#BF5700',
+      appendix: { customRender: (container) => renderBeyondProse(container, 'principles') },
+    },
+
+    {
+      id: 'appendix',
+      name: 'Appendix',
+      startSpread: 54,
       placeholderColor: '#BF5700',
       appendix: {
         customRender: (container, section) => renderResearchAppendix(container, section),
@@ -2763,38 +2900,6 @@ const CONFIG = {
         ],
       },
     },
-
-    {
-      id: 'concepts',
-      name: 'Concepts',
-      startSpread: 13,
-      placeholderColor: '#BF5700',
-      appendix: { comingSoon: true },
-    },
-
-    {
-      id: 'tools',
-      name: 'Tools',
-      startSpread: 26,
-      placeholderColor: '#BF5700',
-      appendix: { comingSoon: true },
-    },
-
-    {
-      id: 'principles',
-      name: 'Principles',
-      startSpread: 50,
-      placeholderColor: '#BF5700',
-      appendix: { comingSoon: true },
-    },
-
-    {
-      id: 'appendix',
-      name: 'Appendix',
-      startSpread: 54,
-      placeholderColor: '#BF5700',
-      appendix: { comingSoon: true },
-    },
   ],
 
   /* 3. TOTAL PAGES (used when no PDF is loaded, auto-detected when PDF is set) */
@@ -3250,6 +3355,229 @@ async function smartFlipBackward() {
     await flipBackward();
   }
 }
+
+/* ============================================================================
+   BEYOND-PROSE — long-form content for Introduction / Vignettes / Concepts /
+   Principles. Names of interview subjects are rendered as buttons that, when
+   clicked, jump to the Appendix section and open the matching interview modal.
+   ============================================================================ */
+
+/** Render an inline clickable person link.
+ *  `displayName` is what the reader sees; `interviewName` must match exactly
+ *  the `name` field of an entry in the appendix `interviews` array. */
+function personLink(displayName, interviewName) {
+  const safeName = String(interviewName).replace(/"/g, '&quot;');
+  return `<button type="button" class="person-link" data-interview-name="${safeName}">${displayName}</button>`;
+}
+
+/** Jump the book to the Appendix section and open the modal for `name`. */
+function goToInterview(name) {
+  const appendixSec = CONFIG.sections.find((s) => s.id === 'appendix');
+  if (!appendixSec) return;
+  const interviews = appendixSec.appendix.interviews || [];
+  const iv = interviews.find((x) => x.name === name);
+  if (!iv) {
+    console.warn('goToInterview: no match for', name);
+    return;
+  }
+  // Switch to appendix in the book; then open the modal once the archive
+  // has re-rendered.
+  setRoute(pathForSection(appendixSec));
+  jumpToSpread(appendixSec.startSpread);
+  setTimeout(() => openInterviewModal(iv), 80);
+}
+
+/** Inject prose HTML for `sectionId` into `container` and wire person-link clicks. */
+function renderBeyondProse(container, sectionId) {
+  const html = BEYOND_PROSE[sectionId];
+  if (!html) {
+    container.innerHTML = '<p class="archive-coming-soon">Content coming soon.</p>';
+    return;
+  }
+  container.innerHTML = `<div class="beyond-prose">${html}</div>`;
+  container.querySelectorAll('.person-link').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      goToInterview(btn.dataset.interviewName);
+    });
+  });
+}
+
+/* ----------------------------------------------------------------------------
+   PROSE CONTENT — Beyond the Book section drafts (revised May 2026).
+   Names use personLink() so they hyperlink to the appendix interview cards.
+   ---------------------------------------------------------------------------- */
+const _PL = {
+  KORN_FULL: () => personLink('Dr. James Korndorffer Jr.',           'Dr. James R. Korndorffer Jr.'),
+  KORN:      () => personLink('Dr. Korndorffer',                     'Dr. James R. Korndorffer Jr.'),
+  COKER_FULL:() => personLink('Dr. Alisa Coker',                     'Dr. Alisa Coker'),
+  COKER:     () => personLink('Dr. Coker',                           'Dr. Alisa Coker'),
+  BROWN:     () => personLink('Dr. Kimberly Brown',                  'Dr. Kimberly Brown'),
+  MURRAY:    () => personLink('General (Ret.) Mike Murray',          'General James C. Murray'),
+  GIBSON:    () => personLink('Lieutenant General (Ret.) Karen H. Gibson', 'Lt. General (Ret.) Karen H. Gibson'),
+  RINALDI:   () => personLink('Lieutenant Colonel Nick Rinaldi',     'Nick Rinaldi'),
+  SCHLACH:   () => personLink('Helen Schlachtenhaufen',              'Helen Schlachtenhaufen'),
+  WORRELL:   () => personLink('Denise Worrell',                      'Denise Worrell'),
+  SINGER_FULL:() => personLink('Peter W. Singer',                    'Peter W. Singer'),
+  SINGER:    () => personLink('Singer',                              'Peter W. Singer'),
+  BRODERICK: () => personLink('Dr. Ryan Broderick',                  'Dr. Ryan Broderick'),
+  RODRIGUEZ: () => personLink('Edwin Rodriguez',                     'Edwin Rodriguez (with Kathy Johnson, ACS)'),
+};
+
+const BEYOND_PROSE = {
+  // ============================ INTRODUCTION ============================
+  title: `
+    <p class="lede">The opening pages of the book establish the design challenge and the scenario. Beyond those pages sits the work behind the work: who asked the team to take this on, who the team was, how to read what follows, and the framing decisions that shape every section after.</p>
+
+    <h3>The Brief</h3>
+    <p>In late 2025, Dell Medical School's Enterprise Project Management Office approached a UT Austin Master of Design Capstone team with a problem the EPMO knew it could not solve from inside the field. Dell Med is planning a Simulation, Immersive Learning and Assessment Center as part of a new academic medical center opening in 2030. The center has to serve learners through 2050 and beyond. The brief was open: study what the field is doing, study what the field cannot see, and propose a direction the EPMO can defend to leadership and architects.</p>
+    <p>${_PL.KORN_FULL()}, Dell Med's Vice Dean of Education, framed it more directly. He had built simulation centers at Tulane and Stanford. ${_PL.KORN()} told the team to focus outside the spaces he was already familiar with, to think big, and to consider all possibilities for the future based on trends in analogous industries. The team took that framing seriously and treated non-medical training systems as primary research, not as illustrative color.</p>
+
+    <h3>The Team and the Method</h3>
+    <p>Three graduate design students worked the project for five months inside a one-year program. The methodology mixed design research and futures research. Over twenty-two primary interviews. Three site visits. More than a hundred secondary sources. Concepting sprints across thirteen directions, narrowed by the EPMO to one primary scope and two connected territories.</p>
+    <p>The decision to interview outside medicine was a hypothesis: medical simulation has been studying itself long enough that the field's own consensus is now the constraint. The team interviewed military intelligence leaders, Special Operations trainers, an Army modernization officer, a former medevac pilot, an Olympic-level middle-distance runner, a national-security futurist, and a Meta Reality Labs sales lead, alongside the Dell Med faculty, surgical residents, Dell Med students, and analogous-medicine experts the field would expect.</p>
+
+    <h3>How to Read This Book</h3>
+    <p>The book is designed as a workbook. The vignettes carry questions in the margins. The voices section tags every claim as either &ldquo;within the field&rdquo; or &ldquo;beyond expert consensus,&rdquo; so the reader can see where the cross-industry research did intellectual work the field's own voices had not done.</p>
+    <p>The opening instruction sets the tone: <em>Circle what excites you. Question what doesn't convince you. Name the people and organizations who belong in this conversation. The future described here will be shaped by the people who engage with it, not the people who wrote it.</em></p>
+
+    <h3>A Note on the Title-Page Quote</h3>
+    <p>The opening epigraph is from ${_PL.KORN_FULL()}, an interview subject whose voice shaped the project's strategic frame. The quote was chosen because it disciplines the rest of the book. Every prediction that follows is acknowledged in advance to be partially wrong. Being right is not the goal. Being more right than wrong, and designing infrastructure that absorbs being wrong, is.</p>
+
+    <h3>What's on the Site</h3>
+    <p>This site has five components. A full-resolution PDF of the printed book, available for download. A research-trained language model that answers questions using only the book's content (Book Chat in the header). A Contribute tab where readers can submit research, references, files, and thoughts and ideas that may find a home in the book, with every accepted addition logged in the changelog. A book flip-through with a section-by-section navigator. And a Beyond the Book expansion for each section of the book, holding the longer-form material the print pages did not have room for.</p>
+  `,
+
+  // ============================ VIGNETTES ============================
+  scenarios: `
+    <p class="lede">The opening section is a 2045 Day in the Life across three personas: Maya Okafor (third-year medical student), Dr. Doug Williams (PGY-3 surgical resident), and Dr. Sam Sharma (practicing cardiologist). The section is followed by The Work Behind the Scenes, the Doctors' Morning Briefing with ${_PL.KORN_FULL()} and ${_PL.COKER_FULL()}, and a closing note that this is a scenario, not a prediction.</p>
+
+    <h3>Why Three Personas</h3>
+    <p>Maya Okafor, Dr. Doug Williams, and Dr. Sam Sharma represent three points along the medical career arc that the center has to serve simultaneously: pre-clerkship learner, early-career resident, and mid-career attending. The team chose the trio to test whether the same physical infrastructure can serve all three without one population dominating the design. The hub-spoke-anywhere framework comes directly from this stress test.</p>
+    <p>Each persona was built from specific research. Maya Okafor's competency-gate progression draws on the precision-education literature (PMC, AMA) and on ${_PL.KORN_FULL()}'s repeated framing of competency as the unsolved measurement problem. Dr. Doug Williams's AI-failure scenario comes from ${_PL.GIBSON()}'s argument that learners must train to override a system that has been right two hundred times. Dr. Sam Sharma's ambient feedback comes from the Microsoft and Peterson Health Technology Institute publications on ambient intelligence in clinical encounters, and from ${_PL.SINGER_FULL()}'s argument that the four AI relationships are concurrent.</p>
+
+    <h3>Where the Specifics Came From</h3>
+    <p>Every feature in the vignettes traces to a specific source. The Sim Gym, the on-demand low-fidelity practice space, comes from ${_PL.RINALDI()}'s argument that &ldquo;the widget is not the point&rdquo; and that the lab's value lives in its access continuum. The Porch, the emotional decompression suite, was named in the Future Learners synthesis as &ldquo;a total game-changer&rdquo; set against &ldquo;making people cry in stairwells.&rdquo; The AI scenario engine generating overnight variations is the operational form of ${_PL.SINGER_FULL()}'s narrative-architecture argument and the OSCE 2.0 ambiguity-scenario concept from the team's concepting workshop.</p>
+    <p>The 2034 study correlating simulation performance with patient outcomes is placed at the institutional turning point. ${_PL.KORN_FULL()} and ${_PL.COKER_FULL()} both flagged the absence of this study as the single biggest obstacle to protected team-training time. The vignette imagines a future in which the study has been done, and traces what that one piece of evidence makes possible.</p>
+
+    <h3>The 8 Workstreams Backstory</h3>
+    <p>The Work Behind the Scenes section treats the EPMO's eight parallel education workstreams as a real institutional fact, not a narrative device. The team learned during research that these workstreams existed and were operating largely independently. The vignette imagines the version of this story where the workstreams stayed intact but learned to collaborate, drawing on ${_PL.KORN_FULL()}'s and ${_PL.COKER_FULL()}'s repeated framing of Dell Med's situation: capability built does not equal capability executed, and the harder of the two problems is the second one.</p>
+
+    <h3>The Workbook Prompts</h3>
+    <p>The questions in the margins (&ldquo;Who in Austin designs narrative environments like this?&rdquo;, &ldquo;What would your version of the Porch look like?&rdquo;, &ldquo;Who at Dell Med could lead the sim-to-outcome study?&rdquo;) are not rhetorical. They are real next-action prompts the team identified during synthesis but could not resolve inside the project's scope. They are placed in the book as the most efficient way to hand work forward.</p>
+
+    <h3>Cut Vignettes</h3>
+    <p>Two scenarios were drafted and removed. The first imagined a 2050 patient-side encounter where Maya Okafor, now an attending, navigates a diagnostic conversation with an embodied AI peer. It was cut because the Level 5 evidence base was thinner than the other levels and the scenario started to feel like prediction rather than design provocation. The second imagined a 2032 facilities team doing a software-only Level 2-to-3 upgrade across a wing of rooms, demonstrating the Room Zero argument. It was cut for length and is preserved here as a reference for the Tools section.</p>
+  `,
+
+  // ============================ CONCEPTS ============================
+  concepts: `
+    <h3>The Synthesis Process</h3>
+    <p>The team ran three rounds of analysis. The first was a closed clustering of the primary interview transcripts, generating roughly thirty themes. The second compared those themes against the secondary literature, tagging each theme as confirmed by the field, surfaced primarily by the cross-industry voices, or contested between the two. The third filtered the themes for actionability: which ones would change a design decision, and which ones were observations the EPMO already lived with.</p>
+    <p>The &ldquo;beyond expert consensus&rdquo; tags are an artifact of round two. They mark the places where the cross-industry research did the work the field could not do for itself. The single sharpest example is ${_PL.SINGER_FULL()}'s narrative-architecture reframe of the &ldquo;hokey and sterile&rdquo; VR problem. The field had named the symptom for years. No medical voice in the research had named the cause as a talent-pipeline problem (medicine hires technologists and educators; immersive theater hires experience designers and spatial audio engineers).</p>
+
+    <h3>The Insights, Selected and Cut</h3>
+    <p>The synthesis surfaced seven opportunity areas. After review by ${_PL.KORN_FULL()}, ${_PL.COKER_FULL()}, ${_PL.RODRIGUEZ()}, and Cassandra Fleming, the EPMO confirmed three for forward development. Insight 1 was designated the primary scope. Insights 2 and 3 were held as connected territory the deliverables should continue to reference. Insights 4 through 7 were named, defended in the room, and ultimately not pursued for this phase. The four cut insights are listed here in their working form, with the team's read on why each one did not make the final brief.</p>
+
+    <div class="insight-card">
+      <div class="insight-tag">Insight 1 — Primary scope</div>
+      <div class="insight-num">1</div>
+      <p>Simulation has been optimized for the conditions it can reproduce and under-designed for the conditions that determine learning transfer. Relatedly: the most sophisticated simulation capability in the world sits unused when the institution cannot assemble the right team in the same room at the same time.</p>
+      <p class="q-prompt">How might we design an immersive learning and assessment environment that clinicians fight to experience, and that is worth the cost of showing up?</p>
+      <p>The narrative-design argument and the talent-pipeline argument both live here. The cross-industry voices (${_PL.SINGER_FULL()}, the FLAIM firefighting case, military protected-time mandates, aviation regulatory requirements) supplied evidence the field does not currently integrate.</p>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-tag">Insight 2 — Connected territory</div>
+      <div class="insight-num">2</div>
+      <p>The center's reach is not determined by its square footage.</p>
+      <p class="q-prompt">How might we give architects and faculty a clear framework for what belongs in the center, what works better distributed, and what can happen anywhere, before square footage gets locked?</p>
+      <p>The hub, spoke, and anywhere framework. Maritime cloud simulation (Wartsila), oil-and-gas rig-side simulators, military joint operations, and Pfizer manufacturing all supplied working models. No medical voice was going to hand the EPMO this rubric.</p>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-tag">Insight 3 — Connected territory</div>
+      <div class="insight-num">3</div>
+      <p>Technology shifts clinical tasks, and trust with technology shifts with them. Each shift reshapes the training and the space around it.</p>
+      <p class="q-prompt">How might we design adaptable spaces and training that can be continuously refreshed as technology changes clinical work, so clinicians learn when to trust, verify, and override technology safely?</p>
+      <p>${_PL.SINGER_FULL()}'s four concurrent AI relationships and ${_PL.MURRAY()}'s futures posture carry this insight. The EPMO identified it as the insight that keeps the center from being obsolete at opening day.</p>
+    </div>
+
+    <div class="insight-card is-cut">
+      <div class="insight-tag">Insight 4 — Not pursued</div>
+      <div class="insight-num">4</div>
+      <p>How assessment is designed, and whether the environment supports both success and recovery, determines whether learners build resilience or burn out.</p>
+      <p class="q-prompt">How might we embed debrief spaces and prioritize clinician wellbeing education in a way that builds and maintains self-regulation and resilience over time?</p>
+      <p>Cut from the deliverable scope because wellbeing infrastructure is primarily a curriculum and policy problem, not a facilities one. The Porch (Spatial 2 in the Principles section) carries the strongest architectural claim from this insight forward. The rest belongs to a wellbeing workstream the EPMO already runs.</p>
+    </div>
+
+    <div class="insight-card is-cut">
+      <div class="insight-tag">Insight 5 — Not pursued</div>
+      <div class="insight-num">5</div>
+      <p>The skills that most determine clinical outcomes are ones medicine has not defined, technology cannot assess, and therefore cannot guarantee a clinician is trained on.</p>
+      <p class="q-prompt">How might we make clinical intuition in high-stakes, ambiguous situations assessable by capturing how learners communicate, empathize, and decide under pressure, so soft skills become objectively coachable and trackable over time?</p>
+      <p>Cut because it is a competency-definition problem before it is an assessment problem. ${_PL.KORN_FULL()} named the gap directly: the field cannot define competency, articulate it, or measure it. Until the curriculum side moves, building rooms to capture intuition is premature. The team flagged this as a prerequisite for higher levels of the Tech Readiness Matrix and recommended it as a parallel curriculum project.</p>
+    </div>
+
+    <div class="insight-card is-cut">
+      <div class="insight-tag">Insight 6 — Not pursued</div>
+      <div class="insight-num">6</div>
+      <p>Peer institutions are moving fast. Whoever figures out the governance layer first has the advantage.</p>
+      <p class="q-prompt">How might we make the data governance challenge visible and owned across workstreams before it becomes a blocker?</p>
+      <p>Cut as a deliverable but preserved as a recommended next-phase project. ${_PL.GIBSON()}'s national-security work and the NBA/NFLPA athlete-data agreements supplied working models. The team flagged a Data Governance and Information Security Framework as one of the three concepts the EPMO should fund in a follow-on phase.</p>
+    </div>
+
+    <div class="insight-card is-cut">
+      <div class="insight-tag">Insight 7 — Not pursued</div>
+      <div class="insight-num">7</div>
+      <p>When measurement feels like competition, people chase it. When it feels like surveillance, they avoid it.</p>
+      <p class="q-prompt">How might we motivate continuous improvement in clinical performance by focusing on team-based, game-like portfolios, so competition stays healthy, feedback feels identity-supporting, and progress is visible over time?</p>
+      <p>Cut because it is primarily a culture and leadership question, with infrastructure as a supporting factor. The Spurs Human Performance Center site visit (covered in the Principles section as &ldquo;identity infrastructure, not training infrastructure&rdquo;) carries the cultural argument forward. The full insight, including team-based portfolios and identity-supporting feedback, is named here as work the EPMO will need a separate workstream to take on.</p>
+    </div>
+
+    <h3>The Concepting Workshop</h3>
+    <p>Before narrowing, the team developed thirteen concept directions across three workshops. The deliverables that survived to final development were a Design Playbook, a Tech Readiness Matrix, a Spatial Catalogue, a Layered Webpage (this site), and a Building the System hub-spoke-anywhere framework. The cut concepts included an Experience Map Generator (a tool for faculty to build narrative scenarios), a Faculty-Operator Onboarding Playbook, and a Data Governance and Information Security Framework drawn from ${_PL.GIBSON()}'s Senate-security work and the NBA/NFLPA athlete-data agreements. The three cut concepts are preserved as recommended next-phase deliverables.</p>
+  `,
+
+  // ============================ PRINCIPLES ============================
+  principles: `
+    <p class="lede">The Principles section in the book carries the four spatial concepts and the synthesized design principles. The book is compact here. Beyond it sits the longer-form spatial reasoning, the design principles in their working form, and the anti-patterns the team chose not to belabor in print.</p>
+
+    <h3>The Four Spatial Concepts</h3>
+
+    <h4>Spatial 1 — The Sim Gym</h4>
+    <p>An on-demand low-fidelity practice space. Open hours, no scheduling required, low staff overhead. Task trainers, plastic manikins, basic audiovisual recording. Modeled on ${_PL.RINALDI()}'s continuum-of-access argument and on the Future Learners synthesis observation that students running reps on their own time is the cultural signal that distinguishes a working center from a showpiece. The Sim Gym is where reps come from. Without it, the high-fidelity rooms become bottlenecks and the lab as a whole serves fewer learners than it should.</p>
+
+    <h4>Spatial 2 — The Porch</h4>
+    <p>An emotional decompression suite. Sound-isolated, soft furniture, no clinical equipment, no recording. A protected space for processing the emotional weight of a difficult scenario before moving back into the building. Named by the Future Learners synthesis as the alternative to &ldquo;making people cry in stairwells.&rdquo; ${_PL.SCHLACH()}'s argument from elite athletics: intrinsic motivation survives only if rare flow-state moments are protected. The Porch is the architectural form of that protection.</p>
+
+    <h4>Spatial 3 — The Team Crisis Suite</h4>
+    <p>A dedicated, protected-time, full-team simulation environment. The OR team, the trauma team, the code team, in the same room with the right scenario and the right debrief space attached. This is the room that Insight 1B (the most sophisticated simulation capability sits unused when the institution cannot assemble the right team) was written to address. ${_PL.COKER_FULL()}'s lesson from Johns Hopkins and UCSD: built capability and executed capability are different problems, and the second one is harder. The room must come with an institutional commitment to protected time, not just with the right walls.</p>
+
+    <h4>Spatial 4 — The Reflective Playback Studio</h4>
+    <p>A space (or, more likely, a phone-based process scaffolded by a small physical room) where students review highlights of their own real-patient interactions. Modeled on ${_PL.WORRELL()}'s NFL Red Zone analogy: a curated highlight reel that surfaces the moments that mattered, delivered to the learner in a way they can absorb privately. The ambient-intelligence literature (Microsoft, Peterson Health Technology Institute, the JMIR scoping review on patient-centered communication feedback) supplies the technical case for what can be captured. The design problem is what to do with it.</p>
+
+    <h3>The Five Design Principles</h3>
+    <p><strong>Design the pipes, not the faucets.</strong> Specific technology choices made now will be wrong by opening day. Architectural decisions are permanent. Over-provision the infrastructure that cannot be added later, and let the technology layer be replaceable.</p>
+    <p><strong>Reps before realism.</strong> Volume of practice matters more than fidelity of the practice environment. ${_PL.RINALDI()}'s framing of the access continuum: low-fidelity at home and on phones, mid-fidelity in the facility, high-fidelity reserved for the experiences that genuinely need it.</p>
+    <p><strong>Narrative architecture is the design problem.</strong> ${_PL.SINGER_FULL()}'s reframe of the &ldquo;hokey and sterile&rdquo; VR critique. Hire the talent that builds immersive experiences elsewhere (museums, immersive theater, Disney Imagineering, narrative game design). The technology layer is the easier of the two problems.</p>
+    <p><strong>Failure is a feature, not a bug.</strong> ${_PL.MURRAY()}'s argument: failure is the best teacher and team competition outperforms individual competition. ${_PL.SCHLACH()}'s argument from Olympic-level athletics: progression requires getting wrecked daily. The center has to design for safe, repeated failure separated from grading. The Future Learners synthesis confirms this from the learner side: if the lab evaluates them on mistakes, they will play it safe and never take risks.</p>
+    <p><strong>The hub holds only what must be physical.</strong> ${_PL.COKER_FULL()}'s haptic story: first time on the surgical robot, no haptic feedback, &ldquo;annihilated the suture.&rdquo; Real-tissue experience is irreplaceable. So is full-team co-location for crisis training. Everything else can migrate, and most of it should.</p>
+
+    <h3>Other Things to Consider</h3>
+    <p><strong>Data governance is a vendor problem from day one.</strong> ${_PL.GIBSON()}'s strongest insight: the biggest data risk at the U.S. Capitol came from vendors and third parties who also had access. A data prioritization scheme determines what partners can touch, and it has to be written before partnerships are signed. Medical simulation has not imported this framework. Sports (NBA, NFLPA athlete-data agreements) and national intelligence have working models.</p>
+    <p><strong>Identity infrastructure, not just training infrastructure.</strong> The Spurs Human Performance Center site visit reframed the building's purpose. The center is not primarily a place for skill acquisition; it is a place that reinforces elite-athlete identity. Cameras everywhere, measurement is celebration, the culture says &ldquo;you are someone who is watched closely because you matter.&rdquo; That cultural function is missing from most medical simulation centers and is more difficult to retrofit than any piece of equipment.</p>
+    <p><strong>The competency-definition prerequisite.</strong> Every higher-level room in the Tech Readiness Matrix depends on being able to define what is being measured. ${_PL.KORN_FULL()} named this gap directly: &ldquo;we can't define competency, articulate it, measure it.&rdquo; Resolving it is curriculum work, not architecture work, but the architecture cannot be over-provisioned into Level 4 or 5 capability without the curriculum side moving in parallel.</p>
+
+    <h3>Anti-Patterns</h3>
+    <p><strong>The Star Trek bridge.</strong> ${_PL.SINGER_FULL()}'s catalog of training environments that aged badly because the design tried to look futuristic. Sliding doors that whoosh, staff dressed for 2050, wall screens that play abstract data. The Future Learners synthesis confirms this from the learner side: a futuristic-looking sim center reads as a red flag, donor-photoshoot architecture rather than functional education.</p>
+    <p><strong>The empty showcase.</strong> Beautiful equipment nobody uses. ${_PL.COKER_FULL()}'s lesson from UCSD. The architectural fix is to design for the cultural context that drives use, not just for the equipment specification.</p>
+    <p><strong>The locked room.</strong> Restricted access on the assumption that the equipment is too valuable to be used freely. The Future Learners synthesis is direct: &ldquo;I want to see it messy and in use.&rdquo; A pristine mannequin on a guided tour is the failure case, not the success case.</p>
+  `,
+
+  // Research and Tools intentionally absent — those panels remain "Content
+  // coming soon" until the team supplies the drafts.
+};
 
 /* ============================================================================
    ARCHIVE (BELOW THE FOLD) RENDERING
