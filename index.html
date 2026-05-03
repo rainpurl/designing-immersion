@@ -1400,6 +1400,30 @@ body.book-fullscreen #chat-panel {
   color: var(--burnt);
 }
 
+/* Cursor-following tooltip shown when hovering over clickable cards */
+.cursor-tip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border-radius: 2px;
+  z-index: 250;
+  opacity: 0;
+  transform: translate(16px, 16px);
+  transition: opacity 0.12s ease;
+  white-space: nowrap;
+  will-change: transform, opacity;
+}
+.cursor-tip.visible { opacity: 1; }
+
 /* ============================================================
    INTERVIEW MODAL — shares structure with PDF modal but with
    more space for prose
@@ -1532,7 +1556,6 @@ body.book-fullscreen #chat-panel {
   flex-direction: column;
   gap: 6px;
   transition: transform 0.2s, background 0.2s;
-  position: relative;
 }
 .visit-card:hover {
   transform: translateY(-3px);
@@ -1545,7 +1568,6 @@ body.book-fullscreen #chat-panel {
   text-transform: uppercase;
   font-weight: 700;
   opacity: 0.7;
-  padding-right: 22px;
 }
 .visit-card-title {
   font-size: 17px;
@@ -1579,7 +1601,6 @@ body.book-fullscreen #chat-panel {
   flex-direction: column;
   gap: 6px;
   transition: border-color 0.2s, transform 0.2s;
-  position: relative;
 }
 .interview-card:hover {
   border-color: var(--burnt);
@@ -1589,43 +1610,10 @@ body.book-fullscreen #chat-panel {
   opacity: 0.55;
   border-style: dashed;
 }
-
-/* Card corner indicator: small right-arrow that signals clickability.
-   Sits in the top-right of interview and visit cards. Brightens on hover. */
-.card-corner-icon {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 14px;
-  height: 14px;
-  pointer-events: none;
-  transition: opacity 0.2s, color 0.2s, transform 0.2s;
-}
-.interview-card .card-corner-icon {
-  color: var(--ink);
-  opacity: 0.3;
-}
-.interview-card:hover .card-corner-icon {
-  color: var(--burnt);
-  opacity: 1;
-  transform: translateX(2px);
-}
-.interview-card.is-placeholder .card-corner-icon {
-  opacity: 0.2;
-}
-.visit-card .card-corner-icon {
-  color: var(--paper);
-  opacity: 0.55;
-}
-.visit-card:hover .card-corner-icon {
-  opacity: 1;
-  transform: translateX(2px);
-}
 .interview-card-name {
   font-size: 15px;
   font-weight: 700;
   line-height: 1.25;
-  padding-right: 22px;
 }
 .interview-card-title {
   font-size: 11px;
@@ -1981,6 +1969,11 @@ body.book-fullscreen #chat-panel {
     <div class="modal-body" id="im-body"></div>
   </div>
 </div>
+
+<!-- ============================================================
+     CURSOR TOOLTIP (follows the mouse over clickable cards)
+     ============================================================ -->
+<div id="cursor-tip" class="cursor-tip" aria-hidden="true">Click to expand</div>
 
 <!-- ============================================================
      SCRIPTS
@@ -3377,47 +3370,44 @@ function renderResearchAppendix(container, section) {
 
   container.innerHTML = `
     <div class="research-tabs">
-      <button class="research-tab active" data-tab="primary">Primary</button>
+      <button class="research-tab active" data-tab="interviews">Interviews</button>
+      <button class="research-tab" data-tab="visits">Site visits</button>
       <button class="research-tab" data-tab="secondary">Secondary</button>
     </div>
-    <div class="research-panel" data-panel="primary"></div>
+    <div class="research-panel" data-panel="interviews"></div>
+    <div class="research-panel hidden" data-panel="visits"></div>
     <div class="research-panel hidden" data-panel="secondary"></div>
   `;
 
-  const primaryPanel = container.querySelector('[data-panel="primary"]');
+  const interviewsPanel = container.querySelector('[data-panel="interviews"]');
+  const visitsPanel = container.querySelector('[data-panel="visits"]');
   const secondaryPanel = container.querySelector('[data-panel="secondary"]');
 
-  // Site visit cards row, distinct visual treatment
-  if (visits.length) {
-    const visitsHTML = visits.map((v, i) => `
-      <button class="visit-card" data-visit-idx="${i}">
-        <svg class="card-corner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
-        </svg>
-        <div class="visit-card-eyebrow">Site visit</div>
-        <div class="visit-card-title">${v.name}</div>
-        <div class="visit-card-summary">${v.summary ? v.summary.slice(0, 110) + (v.summary.length > 110 ? '\u2026' : '') : 'Notes coming soon.'}</div>
-      </button>
-    `).join('');
-    primaryPanel.insertAdjacentHTML('beforeend', `
-      <div class="visits-row">${visitsHTML}</div>
-    `);
-  }
-
-  // Interview cards grid
+  // Interview cards (interviews tab)
   if (interviews.length) {
     const interviewsHTML = interviews.map((iv, i) => `
       <button class="interview-card${iv.placeholder ? ' is-placeholder' : ''}" data-interview-idx="${i}">
-        <svg class="card-corner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
-        </svg>
         <div class="interview-card-name">${iv.name}</div>
         <div class="interview-card-title">${iv.title}</div>
         <div class="interview-card-summary">${iv.placeholder ? 'Content coming soon.' : (iv.oneLiner || '')}</div>
       </button>
     `).join('');
-    primaryPanel.insertAdjacentHTML('beforeend', `
+    interviewsPanel.insertAdjacentHTML('beforeend', `
       <div class="interviews-grid">${interviewsHTML}</div>
+    `);
+  }
+
+  // Site visit cards (site visits tab)
+  if (visits.length) {
+    const visitsHTML = visits.map((v, i) => `
+      <button class="visit-card" data-visit-idx="${i}">
+        <div class="visit-card-eyebrow">Site visit</div>
+        <div class="visit-card-title">${v.name}</div>
+        <div class="visit-card-summary">${v.summary ? v.summary.slice(0, 110) + (v.summary.length > 110 ? '\u2026' : '') : 'Notes coming soon.'}</div>
+      </button>
+    `).join('');
+    visitsPanel.insertAdjacentHTML('beforeend', `
+      <div class="visits-row">${visitsHTML}</div>
     `);
   }
 
@@ -3456,24 +3446,55 @@ function renderResearchAppendix(container, section) {
       container.querySelectorAll('.research-panel').forEach((p) => {
         p.classList.toggle('hidden', p.dataset.panel !== panelName);
       });
+      // Hide tooltip on tab change
+      hideCursorTip();
     });
   });
 
   // Wire interview card clicks
   container.querySelectorAll('.interview-card').forEach((card) => {
     card.addEventListener('click', () => {
+      hideCursorTip();
       const idx = parseInt(card.dataset.interviewIdx, 10);
       openInterviewModal(interviews[idx]);
     });
+    attachCursorTip(card);
   });
 
   // Wire visit card clicks
   container.querySelectorAll('.visit-card').forEach((card) => {
     card.addEventListener('click', () => {
+      hideCursorTip();
       const idx = parseInt(card.dataset.visitIdx, 10);
       openVisitModal(visits[idx]);
     });
+    attachCursorTip(card);
   });
+}
+
+/* ============================================================================
+   CURSOR-FOLLOWING TOOLTIP
+   Shows "Click to expand" near the mouse when hovering interview/visit cards.
+   ============================================================================ */
+function attachCursorTip(el) {
+  el.addEventListener('mouseenter', showCursorTip);
+  el.addEventListener('mouseleave', hideCursorTip);
+  el.addEventListener('mousemove', moveCursorTip);
+}
+function showCursorTip() {
+  const tip = document.getElementById('cursor-tip');
+  if (tip) tip.classList.add('visible');
+}
+function hideCursorTip() {
+  const tip = document.getElementById('cursor-tip');
+  if (tip) tip.classList.remove('visible');
+}
+function moveCursorTip(e) {
+  const tip = document.getElementById('cursor-tip');
+  if (!tip) return;
+  // Position fixed; offset from cursor by translate set in CSS
+  tip.style.top = e.clientY + 'px';
+  tip.style.left = e.clientX + 'px';
 }
 
 function openInterviewModal(iv) {
