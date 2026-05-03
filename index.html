@@ -1298,6 +1298,22 @@ body.book-fullscreen #book.cover-only {
 }
 .scroll-down-btn svg { width: 22px; height: 22px; }
 
+/* Heartbeat attention cue — runs on the inner SVG only, so the button's own
+   transform stays available for the hover lift. Two quick downward "pulses"
+   followed by a long rest, looped. The .heartbeat class is added on page load
+   and removed on first scroll, click, or after 10 seconds (whichever first). */
+@keyframes heartbeat-down {
+  0%, 100%        { transform: translateY(0); }
+  10%             { transform: translateY(5px); }
+  20%             { transform: translateY(0); }
+  30%             { transform: translateY(5px); }
+  40%             { transform: translateY(0); }
+  /* 40% → 100% is the rest, ~1s of stillness before the next double-tap */
+}
+.scroll-down-btn.heartbeat svg {
+  animation: heartbeat-down 1.6s ease-in-out infinite;
+}
+
 /* ============================================================
    CHAT WITH THE BOOK
    ============================================================ */
@@ -4719,6 +4735,21 @@ async function init() {
         window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
       }
     });
+
+    // Heartbeat attention cue: the button pulses with a double-tap rhythm
+    // until the user demonstrates they have noticed it (scroll or click), or
+    // a 10-second timeout elapses. After that it sits still.
+    scrollDown.classList.add('heartbeat');
+    const stopHeartbeat = () => {
+      scrollDown.classList.remove('heartbeat');
+      window.removeEventListener('scroll', stopHeartbeat);
+      scrollDown.removeEventListener('click', stopHeartbeat);
+      clearTimeout(heartbeatTimer);
+    };
+    const heartbeatTimer = setTimeout(stopHeartbeat, 10000);
+    // First scroll OR first click on the button stops the animation early.
+    window.addEventListener('scroll', stopHeartbeat, { once: true });
+    scrollDown.addEventListener('click', stopHeartbeat, { once: true });
   }
   // Visibility toggle: top button shows after scrolling past the book; down
   // button shows the rest of the time (i.e. while the book is in view).
