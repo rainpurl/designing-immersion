@@ -2362,7 +2362,18 @@ const CONFIG = {
             image: VISIT_IMAGES.sxsw_edu,
             subtitle: 'Site visit, Austin',
             date: 'March 2026',
-            placeholder: true,
+            summary: 'A live podcast recording at SXSW EDU 2026, \u201cVoice AI Is Listening. But Is It Actually Hearing?,\u201d gave the team the technical vocabulary and field evidence the ambient-intelligence arguments in the book depend on. The panel separated the two technologies usually conflated under \u201cvoice AI\u201d and showed what each one is actually good for: generic speech-to-text captures intended meaning and removes disfluencies; Automatic Speech Recognition transcribes exact speech, including errors, and is what educational and clinical assessment actually require. The hospital implications threaded directly back to the Reflective Playback Studio, the data governance argument (voice as biometric data under HIPAA), and the soft-skills assessment thread of Insight 5.',
+            observations: [
+              'Speakers: Owen Henkel, Patti Ura (Digital Promise), Amelia Kelly (Curriculum Associates, former Soapbox Labs CTO), and Kristen Huff (Curriculum Associates).',
+              'Two voice technologies that get confused: generic speech-to-text smooths intended meaning by removing disfluencies, while Automatic Speech Recognition (ASR) transcribes exact speech including errors. Educational and clinical assessment require ASR precision down to the phoneme level, not the cleaned-up version.',
+              'Different training data, different blind spots. LLMs train on broad internet text; speech models train heavily on lower-quality YouTube transcripts, which carries forward into accent sensitivity. Pronunciation assessment is the use case where this matters most.',
+              'Soapbox Labs reported 96-99 percent agreement with human assessors on child-specific speech recognition, in fall 2025 testing across rural Georgia K-2 classrooms. Use cases: letter-naming fluency, word recognition, passage reading.',
+              'Implementation pattern in classrooms: students navigate independently with headsets and Chromebooks. Teacher response was immediate adoption requests, framed as time savings on administrative assessment that frees teachers for targeted instruction. Privacy was protected by a closed system, with voices not shared with external companies.',
+              'Limitations the panel was direct about. The technology is effective for one-on-one assessment; whole-class capture is still a hardware problem. Regional accent bias requires careful model training to avoid penalizing students for how they speak. Assessment validity has to be construct-relevant, not just technically possible. The technology should augment rather than replace teacher expertise and judgment.',
+              'A useful side claim: voice assessment can identify both struggling students and \u201ccoasting\u201d middle performers, the population that traditional assessment misses entirely.',
+              'Implications for hospitals (the panel\u2019s own framing). Clinical documentation relief through automated transcription of patient encounters. Communication training using voice-pattern analysis for soft-skills assessment. Real-time clinical support that captures physician-patient dialogue for quality improvement.',
+              'Preconditions for any of those clinical applications. Rigorous validation testing for medical accuracy and bias prevention. HIPAA compliance and secure handling, since voice is biometric data. And explicit attention to physician adoption, addressing skepticism and ego barriers through collaborative implementation rather than top-down deployment.',
+            ],
           },
         ],
         interviews: [
@@ -3235,13 +3246,6 @@ const CONFIG = {
           // ============================================================
           // PERFORMANCE STUDIES AND PEDAGOGICAL REFERENCES
           // ============================================================
-          {
-            type: 'Talk',
-            year: '2026',
-            title: 'Voice AI Is Listening. But Is It Actually Hearing?',
-            authors: 'Owen Henkel, Patti Ura (Digital Promise), Amelia Kelly (Curriculum Associates / former Soapbox Labs CTO), Kristen Huff (Curriculum Associates) \u2014 SXSW EDU 2026, live podcast recording',
-            summary: 'Educational voice-AI panel that surfaced the technical distinctions the project relies on for ambient-intelligence arguments. Generic speech-to-text captures intended meaning and removes disfluencies; Automatic Speech Recognition (ASR) transcribes exact speech, including errors, and is what educational and clinical assessment actually require. Soapbox Labs reported 96-99 percent agreement with human assessors on child-specific speech recognition during fall 2025 testing in rural Georgia K-2 classrooms (letter-naming fluency, word recognition, passage reading). The panel\u2019s implications-for-hospitals discussion fed directly into the Reflective Playback Studio, the data governance argument (voice as biometric data under HIPAA), and the soft-skills assessment thread of Insight 5: ambient transcription for documentation, voice-pattern analysis for communication training, real-time clinical support, with rigorous validation, accent-bias mitigation, and physician-adoption design as preconditions.',
-          },
           {
             type: 'Paper',
             year: '2023',
