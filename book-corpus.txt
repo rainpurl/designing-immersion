@@ -836,3 +836,721 @@ Based on the research, each level needs specs across these dimensions:
 **6 Design Principles**
 
 **Tab 8**
+
+
+==============================================================================
+# RESEARCH APPENDIX — INTERVIEWS, SITE VISITS, AND LITERATURE
+==============================================================================
+
+What follows is the research data referenced throughout the book.
+It is treated as primary source material and may be cited in answers.
+
+
+------------------------------------------------------------------------------
+## INTERVIEWS (PRIMARY RESEARCH)
+------------------------------------------------------------------------------
+
+### 1. Dr. Kimberly Brown
+_Surgical oncologist; Associate Chair of Education, Dell Med_
+
+**Headline takeaway.** Why simulation is no longer optional for a 2026-era medical school, and why funding has to come from clinical revenue.
+
+**Summary.**
+Dr. Brown anchored the conversation in the realities of collaborative care for vulnerable Central Texas patients and the gaps that current medical education leaves unaddressed. She described how multidisciplinary care actually works at the Cancer Care Collaborative at Seton, where it works, and where the system breaks down, particularly when students rotate through specialties separately and never see a coordinated team in motion. She made a strong case that simulation is no longer optional for a 2026-era medical school, that Dell Med is behind the standards set by peers like Harvard, UT Southwestern, and UTMB, and that the center’s funding has to be tied to clinical revenue rather than philanthropy if it is going to last. Her perspective on assessment was direct. Confidence and competence are not the same, and a culture focused on validation rather than learning is producing students who fear mistakes more than they pursue mastery.
+
+**Key points:**
+- The Cancer Care Collaborative at Seton serves uninsured and underinsured patients with built-in support systems, including Spanish-speaking navigators, Lyft vouchers, HEB gift cards, and hotel vouchers, plus a Social Determinants of Health questionnaire for every patient.
+- Almost every patient needs radiation consultation, but radiation services are not in-system. The gap forces external partnerships and creates communication breakdowns across separate locations.
+- Students rotate through specialties separately (internal medicine, surgery, ob-gyn, psych) and may never experience collaborative care depending on which assignments they draw.
+- Competence has to be observed multiple times against clear, agreed-upon success criteria. Trained evaluators must be able to articulate specific deficiencies down to needle angle, force, and knot-tying technique.
+- The current student culture is focused on validation rather than learning. Helicopter parenting has produced a fear of mistakes and a grade-focused mindset that treats every error as an existential threat.
+- Every other comparable medical school has a simulation center. Dell Med is so far behind that current passive learning is creating inequality, with strong students getting richer in opportunity and struggling students falling further behind.
+- The sustainability model has to tie simulation costs to clinical revenue, making it part of the cost of delivering care rather than a one-time philanthropic line item.
+- Medical education should start much earlier. Middle school exposure, then high school and college work-study pathways, with viable career exits at every stage so no one ends up in debt without prospects.
+
+### 2. Dr. James R. Korndorffer Jr.
+_Vice Dean of Education, Dell Medical School_
+
+**Headline takeaway.** Build for change, not for ribbon-cutting. The strategic frame for the project, from a builder of two simulation centers.
+
+**Summary.**
+Dr. Korndorffer set the strategic frame for the project: build for change, not for what looks impressive at ribbon-cutting. Drawing on his experience founding the Tulane Center for Advanced Medical Simulation and directing Stanford’s Goodman Surgical Simulation Center, he treated flexibility as the non-negotiable design lesson. What gets built in three to five years is not what will be needed five years after that, and the center has to absorb change without capital-intensive rebuilds. He argued for competency-based education over time-based requirements, pushed hard on the distinction between confidence and competence, and pointed to the structural reasons simulation has not scaled in medicine the way it has in aviation. His framing of the project as preparing learners for a ‘hospital of the future’ that may be transformed by AI and quantum computing set the long-horizon brief the team carried forward.
+
+**Key points:**
+- Flexibility is the top priority for the new facility. Technology and needs will change dramatically in three to five years, and the center cannot be locked into current design assumptions.
+- AI and quantum computing may completely transform training methods. Storage, infrastructure, and ‘hospital of the future’ goals all need to be designed for now.
+- Team-based training is currently siloed despite medicine being a team sport. Students train individually but work collaboratively in practice, and the realistic environments needed to bridge that gap do not yet exist.
+- The cultural barriers to simulation adoption are structural, not philosophical. Simulation produces no immediate revenue, it is not mandated the way aviation simulator hours are, and staff have to be paid for non-patient-care activities.
+- Confidence versus competence is the assessment problem. Self-efficacy is measurable and meaningful in a way that general confidence is not, and expert observation remains the best method despite being extremely time-intensive.
+- Micro-assessments (short three-question formats given repeatedly with multiple evaluators) beat single comprehensive twenty-question batteries for both compliance and accuracy.
+- Competency-based education should replace time-based requirements. AI is reducing the burden of memorization and freeing curriculum to focus on application, soft skills, communication, clinical reasoning, and teamwork.
+- Simulation is essential, not optional, for competency-based education. No one should perform a key procedure on a patient for the first time without first being trained and checked off in a sim center against clear criteria.
+
+### 3. Lucas Artusi
+_Systems and service designer, Apple; formerly Design Institute for Health, IDEO_
+
+**Headline takeaway.** Technology in clinical and learning environments has to be treated as another person in the room, not a barrier between provider and patient.
+
+**Summary.**
+Lucas brought the design-first lens to the work, the kind of perspective an outsider with deep medical-design experience would notice that insiders would miss. His central argument was that technology in clinical and learning environments has to be treated as ‘another person in the room,’ an equal participant in the patient-provider conversation, arranged at eye level rather than as a barrier. He drew a sharp line between elevated technology (visible to the patient, part of the conversation) and invisible technology (background enablement that does not interrupt the relationship), and warned that current EHRs fail this test badly. On AI in medical education, he was sober. Today’s LLMs are likely close to plateaued, the hallucination problem is not getting solved, and the right move is to focus on what AI can actually do today (translation, sentiment analysis, scaling mock-patient practice) rather than tomorrow’s promises. He offered the team a practical research tool: plot every problem on multiple spectrums (tangible/intangible, training/practice, immersive/invisible, high-touch/low-touch, utilitarian/hedonic) to narrow scope and avoid trying to solve everything at once.
+
+**Key points:**
+- Technology should function as ‘another person in the room,’ with patient, family, provider, and technology arranged in a diamond at eye level as equal participants in the conversation.
+- There are two distinct categories of healthcare tech: elevated technology (visible to patients, part of the conversation) and invisible technology (background enablement that does not create a provider-patient barrier).
+- Current EHRs create a gulf between patients and providers. They are too complex and clinician-facing for shared viewing, and providers themselves resist the transparency that would make them shareable.
+- Current AI capabilities have likely plateaued. LLMs will not get significantly smarter, the inherent hallucination problem will not be solved, and the design move is to focus on what AI can do today, not future promises.
+- Promising near-term AI applications include medical translation for diverse patient populations, sentiment analysis during patient interactions, real-time feedback on communication tone, and scaling mock-patient conversations to ten times current practice volume.
+- Power asymmetry concerns matter. Patients are already disadvantaged in the healthcare system, so any AI tool needs explicit consent, an ‘off the record’ option, and clear benefit to patients themselves rather than just providers.
+- A practical research framing tool: plot the problem on multiple spectrums (tangible/intangible, training/practice, immersive/invisible, high-touch/low-touch, utilitarian/hedonic) to narrow the problem space.
+- The simulation center’s primary focus should be preserving the patient-provider relationship and addressing the soft-skills gap in medical education, including communication across health-literacy levels and cultural competency.
+
+### 4. Pilar Gormley
+_Nurse educator, Georgetown / MedStar system_
+
+**Headline takeaway.** The operational ground truth of what makes a sim center actually get used, from inside a working academic medical center.
+
+**Summary.**
+Pilar gave the team an operational ground-truth view from inside a working academic medical center’s simulation program. Her lens was nurse education and continuing competency, and her concerns were the ones that determine whether a sim center actually gets used: space, scheduling, staffing, maintenance, and clinician involvement in design. She described what works at Georgetown, including the ‘hot topics’ annual competency validation in three-to-four-hour hands-on sessions, multi-disciplinary participation that exposes different specialty approaches, and spacing training across the year rather than front-loading. She also described what fails: rooms too small for the staff volumes that need them, equipment that breaks faster than it gets fixed, only four to six hours of availability some days because of scheduling conflicts. Her perspective on AI in medical education was specific. Residents are already scoring around forty percent on specialty exams while ChatGPT scores higher, and the risk is not that AI replaces clinicians but that newer graduates lose the clinical judgment to catch when the algorithm is wrong on an outlier case.
+
+**Key points:**
+- Working in nurse education at the Georgetown / MedStar system, the recurring constraints on simulation are size, technology limits, competing priorities for space, four-to-six-hour availability windows due to scheduling conflicts, and equipment maintenance issues.
+- The ‘hot topics’ annual competency validation, with three-to-four-hour hands-on sessions spaced across the year, works far better than overwhelming front-loaded training.
+- Multi-disciplinary participation in simulation matters because it surfaces how different specialties approach the same scenario.
+- Critical success factors for a new center: adequate space, sufficient staffing, scenarios realistic to the actual facility’s capabilities, and strong clinician involvement in the design process from the start.
+- Healthcare systems are slow to adapt new technology and need interoperability between systems.
+- Physicians are already using AI for dictation and billing. Medical residents have scored around forty percent on specialty exams compared to ChatGPT.
+- The risk is not replacement but erosion of clinical judgment. Newer graduates may lack the hands-on patient interaction needed to catch the outlier case where the algorithm does not fit.
+- Current medical education front-loads classroom time before patient exposure, the helicopter-parent generation struggles with failure, and discipline silos persist. Simulation has to address all three.
+
+### 5. Dr. Alisa Coker
+_Director of Robotic Surgery and Education, Dell Medical School_
+
+**Headline takeaway.** The operational ground truth of training residents on borrowed equipment. Identity formation, not just skill acquisition.
+
+**Summary.**
+Dr. Coker is the operational ground truth of the project. She trains residents on borrowed equipment at Ascension hospitals and negotiates access shutdown by shutdown (Dell Med owns zero robots), which gave her conversation a hard-edged practicality that none of the other interviews matched. She described how robotic surgery training has changed in a single decade, from a field with no formal curriculum and residents who avoided robotic cases, to one where most programs have formal robotic curricula and robotic surgery is the main modality for soft-tissue cases. She was clear about what physical simulation can and cannot replace. Virtual simulators help with muscle memory but are insufficient alone, real tissue (pig models with veterinary oversight) remains necessary, and the environment matters as much as the equipment. OR noise simulation accelerates acclimation, and emergency-scenario training requires coordinated team response that no individual rig can produce. Her quoted reflection from the project, that she sought out robotic cases as a resident because she wanted to be a robotic surgeon as an identity, captured something the team came back to repeatedly: the center has to be designed to support identity formation, not just skill acquisition.
+
+**Key points:**
+- Robotic surgery offers ergonomic benefits over traditional surgery, but many do not realize the benefit because of poor console setup and posture.
+- There is real opportunity for objective ergonomics data collection through sensors monitoring back posture and motion patterns. The Texas Robotics Lab is a possible collaboration.
+- Robotic surgery training has transformed in a decade. Most programs now have formal robotic curricula, robotic surgery is the main modality for soft-tissue cases.
+- All surgeons still need open emergency techniques, but the future will likely be open plus robotic only. Laparoscopic training will remain necessary for now but may become obsolete.
+- Most issues with robotic systems are user error, not technology failure. Lack of haptic feedback was the biggest historical limitation.
+- Real tissue experience is critical. Pig models are expensive but necessary; virtual simulators help muscle memory but are insufficient alone.
+- Environmental factors matter. OR noise simulation helps faster acclimation, and emergency scenario training is essential for team coordination.
+- Dell Med currently owns zero robots and operates at Ascension hospitals with limited resident access. The access barrier is the binding constraint.
+
+### 6. General James C. Murray
+_Retired U.S. Army general; former leadership of Army Futures Command_
+
+**Headline takeaway.** How an institution decides what to simulate, designs for failure, and manages the gap between trained reactions and conscious decisions.
+
+**Summary.**
+General Murray gave the team the cross-industry argument the medical field could not give itself: how an institution decides what to simulate, how it designs for failure, and how it manages the gap between trained reactions and conscious decisions in high-stakes environments. The Army embraces simulation because live training is too expensive and too rare. That economic logic, more than any pedagogical argument, is what converted the institution. He described the Integrated Visual Augmentation System and the Synthetic Training Environment as proof that AR/VR overlays in familiar settings, with authentic instrument feel, can produce the repetition that high-stakes performance requires. Ninety percent of decisions in operational settings are trained reactions, not deep thought. His most direct message to the team was about failure. Medical school’s twenty-five percent attrition among A+ students who have never failed before is a design problem, not a fitness problem, and the Army’s experience with deliberately-engineered failure (some programs have seventy percent attrition by design) shows that preparation before failure is far more effective than recovery after. His parting frame on technology forecasting, that specific five-year predictions will be wrong and the goal is to be more right than wrong with a wide baseline, became the project’s working principle.
+
+**Key points:**
+- The Army embraces simulation primarily because live training is too costly and too rare. That economic logic, not pedagogy, is what converted the institution.
+- Tactical simulators mirror actual vehicle controls (Bradley, Abrams) so the instruments feel identical to the real equipment.
+- The Integrated Visual Augmentation System (IVAS) overlays training scenarios on real environments via AR/VR goggles. Ninety percent of decisions are trained reactions, not deep thought.
+- Medical school’s twenty-five percent attrition rate among A+ students is a failure-design problem. Many have never experienced real failure.
+- Some Army programs have seventy percent attrition by design. Preparation before failure is far more effective than recovery after.
+- Each person has a different breaking point. Institutions need a deliberate plan for before, during, and after failure events.
+- Specific five-year technology predictions will always be wrong. The goal is to be more right than wrong with a wide baseline.
+- Trust in AI is a generational issue. The working model is human-AI collaboration with humans as decision makers.
+
+### 7. Jay Simpson
+_Special operations training leader and consultant_
+
+**Headline takeaway.** Foundation-first: teach basics without tools, then add selective technology only after fundamentals are mastered.
+
+**Summary.**
+Jay’s contribution was the special-operations training playbook translated into terms a medical institution could act on. His core principle was foundation-first: establish clear outcomes before any instruction begins, teach the basics without tools, and add selective technology only after fundamentals are mastered, so the operator can still function when the technology fails. He described a multi-layered selection and assessment process (cognitive screening, IQ and problem-solving, psychological evaluation against proven trait profiles, and stress testing aimed at each candidate’s identified weaknesses) designed to break candidates during training rather than during real operations. His peer-review system, where top-three and bottom-three rankings come with written explanations and feed directly into grades, gave the team a model for accountability culture that medicine has struggled to build. He was frank about the constraints. Training time equals lost revenue for hospitals and doctors, staff shortages limit availability, and current medical education values test scores over team dynamics. The path forward is policy-driven requirements for continuing education and cross-training that produces both networking and resilience.
+
+**Key points:**
+- Foundation-first: establish clear outcomes before starting instruction. Teach basics without tools first, then add selective technology only after fundamentals are mastered.
+- Stress simulation requires creating an operational environment, and individual stress triggers vary. Instructors must adapt approach per person.
+- Contingency planning is essential. Layer backup plans from most to least likely scenarios, and induce realistic failures during training.
+- Selection uses multi-layered screening: cognitive and professional networking, IQ and problem-solving assessments, psychological evaluation, and stress testing on identified weaknesses.
+- Peer review is built in. Top-three and bottom-three rankings with written explanations feed directly into grades, creating an accountability culture.
+- Resilience can be taught through repetition and unavoidable discomfort. Team dynamics are critical and cultural fit matters more than individual excellence.
+- Leadership is tested by making top performers manage struggling teammates. The medical field needs earlier assessment, not waiting until clinical rotations.
+- The implementation barriers are concrete: training time is lost revenue, staffing shortages limit availability, and the cultural value system rewards test scores over team dynamics.
+
+### 8. Natasha Gengler
+_Medical student, Dell Medical School_
+
+**Headline takeaway.** The unvarnished student view of three different generations of simulation, all encountered within her own medical school training.
+
+**Summary.**
+Natasha gave the team the unvarnished student view of three different generations of simulation, all encountered within her own medical school training. First-year actor-based physical exams worked well; she preferred real actors over the technology that came later. Second-year emergency medicine simulation with responsive mannequins, run as four-or-five-student rotating-role scenarios with EKG connections and emergency protocols, was the strongest experience: collaborative, time-pressured, and tied to real clinical decision-making. Third-year, the curriculum included a five-hour VR medicine session as a simulated intern, and the experience was buggy software, nausea, and a focus on learning the software rather than the clinical content it was supposed to teach. Her account of robotic surgery exposure was equally direct. Students get the camera and the uterus manipulator while the attending operates, so they avoid robotic cases because the learning opportunity is minimal. She drew a sharp distinction between two kinds of failure: ego failure (personal performance, easy to simulate) and patient harm failure (cannot be effectively simulated, the ‘graveyard in your mind’ surgeons carry).
+
+**Key points:**
+- First-year simulation used local actors for physical exams and patient history practice. Real actors were strongly preferred over the VR that came later.
+- Second-year emergency medicine simulation with responsive mannequins was the strongest collaborative experience and tied closely to real clinical decision-making.
+- Third-year included a five-hour VR medicine session as a simulated intern. The experience was negative: buggy software, nausea, and a focus on learning the software rather than the clinical skills.
+- VR cannot replicate real-world multitasking, and the timing for procedures and communications is unrealistic.
+- Robotic surgery exposure is limited. Students clean the camera and manipulate the uterus, so they avoid robotic cases because there is minimal learning opportunity.
+- Emergency simulations integrate teamwork well. Surgery clerkships provide the least collaborative opportunities.
+- Two distinct kinds of failure: ego failure (easy to simulate) and patient harm failure (cannot be effectively simulated). Current simulation only addresses the first.
+- Equipment quality issues are persistent: old, smelly mannequins, oversized airways, turf-war dynamics between departments. These are invisible to administration.
+
+### 9. Liana Chen
+_First-year medical student, Dell Medical School_
+
+**Headline takeaway.** What the first-year experience at Dell actually looks like from inside it. The gap between standardized patients and real ones.
+
+**Summary.**
+Liana described what the first-year experience at Dell actually looks like from inside it. Her simulation exposure has been limited so far: standardized patients (local Austin actors) for history-taking and physicals, a recent neurosurgery simulation with a Styrofoam skull and a probe, and hospital rotations that started just weeks before the interview. She sees a real gap between Dell’s foundational, traditional approach and the modern simulation tech other schools offer, but expects more in years two and three. Her clearest contribution was the contrast between standardized patients (healthy, mobile, can perform full physical exams) and real hospital patients (attached to IVs, post-surgery, in pain, mobility-limited). Many of the maneuvers students are taught cannot be performed on the patients they actually meet. She advocated for diving into the deep end rather than gradual introduction, and described a learning culture that supports failure: pass/fail grading first year, small groups of five-to-six students that reduce the fear of mistakes, faculty mentors present during standardized-patient encounters, recorded OSCE reviews, weekly competency checks with a seventy-percent threshold and three attempts.
+
+**Key points:**
+- First-year simulation exposure is limited: standardized patients for history-taking and physical exams, plus a recent neurosurgery simulation with a Styrofoam skull and probe placement.
+- Dell Med lacks modern simulation technology compared to peer schools. The current approach focuses on foundational skills without AI or tech integration.
+- The biggest learning gap is between standardized patients (healthy, mobile, full physical exams possible) and real hospital patients (attached to IVs, post-surgery, in pain).
+- Hospital noise and distraction are significant adjustments. Preferred approach is diving into the deep end rather than gradual introduction.
+- Dell encourages safe failure and learning from mistakes. Pass/fail grading first year, small groups reduce the fear of mistakes, faculty mentors present during encounters.
+- Feedback works through one-on-one mid-block goal-setting sessions, recorded OSCE reviews with specific feedback, and an emphasis on improvement over punishment.
+- Two main class types provide feedback: ‘Pillars’ (small groups, case study analysis with self-generated learning objectives) and doc sessions with standardized patients.
+- Weekly competency checks cover only that week’s material with a seventy-percent passing threshold and three attempts. Interprofessional education runs monthly.
+
+### 10. Dr. Beauvais
+_Family physician with twenty-plus years in practice; concierge medicine in Arlington and Washington, D.C._
+
+**Headline takeaway.** Physician wellness as a design problem. Healthcare structures are often unhealthy for the people working in them.
+
+**Summary.**
+Dr. Beauvais brought the conversation onto a subject medical simulation leaders rarely frame as a design problem: physician wellness. Her core argument is that healthcare structures are often unhealthy for the people working inside them, and that the curriculum, the schedule, and the physical space all participate in producing burnout that no amount of resilience training can offset. She graduated medical school in 2000 and finished residency in 2003. Neither year provided any training on personal needs or self-care. A recent Harvard graduate she works with, five years out of school, also got none. She gave a concrete example, an exhausted neurosurgeon considering leaving the field after never building the resiliency practices that would have made the work sustainable, and proposed equally concrete interventions: fifteen-minute group movement or meditation before surgical teams start, coaching that counts as CME with institutional support (citing Mayo and Cleveland Clinic data showing a million-dollar coaching investment saved three million in turnover), and structured psychological support for processing the trauma that medical training routinely exposes learners to.
+
+**Key points:**
+- Healthcare structures are often unhealthy for the people working in them despite the altruistic intentions. Curriculum has to care for caretakers as part of its design.
+- Medical education has historically provided no training on personal needs or self-care. Even a recent Harvard graduate five years out received none.
+- Concrete example: an exhausted neurosurgeon considering leaving the field because no resiliency practices were built during training. This is a predictable outcome of the system.
+- AI-based charting software is already helping doctors complete notes more efficiently. Doctors do not fully use existing software because they are too busy to get retrained.
+- AI diagnostic capabilities may already exceed unaided doctors and could democratize healthcare access in underserved areas.
+- Concrete physician-wellness interventions: normalize discussion of self-care; suggest fifteen-minute group movement or meditation before surgical teams start.
+- Continuing medical education is currently ‘choose your own adventure.’ Coaching should count as CME with institutional support. Mayo and Cleveland Clinic data show a $1M coaching investment saved $3M in turnover.
+- Medical training routinely exposes learners to death and suffering without structured psychological support. About half of physicians and nurses are considering leaving.
+
+### 11. Lt. General (Ret.) Karen H. Gibson
+_Former Sergeant at Arms of the U.S. Senate; former Deputy Director of National Intelligence_
+
+**Headline takeaway.** How high-stakes institutions handle data security, build progressive stress exposure, and coordinate large teams.
+
+**Summary.**
+LTG Gibson brought a perspective the team could not have built from medical interviews alone: how high-stakes institutions handle data security, build progressive stress exposure, and coordinate large teams across specialties under operational pressure. On data security, her message to a center being designed from the ground up was direct. The biggest risk is third-party vendors with data access, not internal networks, and the right move is tiered protection based on sensitivity rather than treating every byte the same way. She illustrated with a Senate-side example: contractor security cameras that, if compromised, could expose senators’ addresses and floor plans. On training philosophy, she described the military approach. Master the basics in a controlled environment, add environmental challenges, introduce equipment constraints, and never train at lower difficulty than operational requirements demand. Her medical-application argument was clear: design for failure early and often, because students raised on success will not survive the real operating environment otherwise.
+
+**Key points:**
+- Medical information protection has to be designed from the ground up. The biggest risk is third-party vendors with data access, not internal networks.
+- Implement tiered data protection based on sensitivity. Vet vendor cybersecurity posture for high-risk contracts. Accept calculated risk for low-sensitivity areas.
+- Military training builds complexity gradually: master basics in a controlled environment, add environmental challenges, introduce equipment constraints, and never train at lower difficulty than operational requirements.
+- For medicine, design for failure early and often. It is far better to fail in simulation than with a real patient.
+- Stress response management requires physiological and emotional education. Normalize stress reactions, make counseling resources available without stigma.
+- Medical practice is inherently team-based, not individual. The military parallel is one-hundred-fifty-person intelligence team coordination.
+- Medical simulation faces structural team-coordination constraints. Scheduling for multi-discipline training is hard.
+- Introduce AI very late in training. AI tools make you faster, not smarter. Calculators do not teach mathematics; students must master the work without the tool first.
+
+### 12. Edwin Rodriguez (with Kathy Johnson, ACS)
+_UT Austin EPMO; ACS Accredited Education Institute program leadership_
+
+**Headline takeaway.** The project’s encounter with the actual standards body for surgical simulation. Sustainability requires multiple revenue streams from day one.
+
+**Summary.**
+This conversation was the project’s encounter with the actual standards body for surgical simulation. Kathy Johnson runs the ACS Accredited Education Institute program, with ninety-seven accredited simulation centers worldwide and annual compliance reporting on space, learners, and curriculum that marries physical-plant requirements (square footage minimums, lockers, offices) directly to curriculum needs. Architects can use the AEI standards as a blueprint, and the ‘everything on wheels’ principle for maximum flexibility runs throughout the best-practices documentation. She named centers worth visiting before designing: UT Southwestern, All Star, the TASSEL consortium of Texas AEIs, and outliers like the 100,000-square-foot center in Argentina, Wake Forest’s overall excellence, and UC Irvine’s specialization in urology. Her sustainability frame was the most useful single output of the meeting: weekend industry courses, annual fees from external organizations, medical-device-company partnerships, and the emerging insurance-company model where carriers like CRICO offer ten-percent premium discounts for completed simulation training.
+
+**Key points:**
+- The American College of Surgeons Accredited Education Institute program covers ninety-seven accredited simulation centers worldwide.
+- AEI standards marry physical plant requirements with curriculum needs. ‘Everything on wheels for maximum flexibility’ runs through the best-practices guidance.
+- Best practices to study: Wake Forest is noted for overall excellence; UC Irvine specialized in urology; the Argentina center has 100,000 square feet.
+- Define stakeholder priorities first: residents and medical students vs. comprehensive approach, surgery-specific vs. multidisciplinary training.
+- Visit existing Texas AEIs before designing (UT Southwestern, All Star) and engage the Texas Association of Simulation (TASSEL) consortium.
+- Maximize space flexibility. Retractable walls and mobile equipment are essential. Specialty rooms get built and then go unused.
+- Revenue streams beyond initial funding determine sustainability: industry courses, annual fees, medical-device partnerships, and insurance-company partnerships.
+- Space constraints limit growth. The AEI Annual Meeting (March 12-13, Chicago) is where these patterns are most visible.
+
+### 13. Helen Schlachtenhaufen
+_Nike-sponsored professional middle-distance runner; 2024 U.S. Olympic Trials finalist_
+
+**Headline takeaway.** High achievers in medicine arrive having never failed. Athletes treat recovery infrastructure as fundamental.
+
+**Summary.**
+Helen’s contribution was the elite-athletics frame the team carried into the resilience and failure-management arguments throughout the work. Her central observation was that high achievers in medicine arrive having never failed, and the system processes them into clinicians without ever building the recovery infrastructure that athletes treat as fundamental. She described deliberate adversity training as essential: altitude work that makes sea-level performance feel manageable, surge workouts with unknown timing that build responsiveness, eighty-to-ninety-percent completion targets that prevent perfectionist paralysis. Her failure-management strategies were specific and portable: a twenty-four-hour rule (upset is allowed for one day, then move forward), the ‘don’t let perfection get in the way of progress’ mindset, self-worth development outside performance metrics. On training environment, she preferred group settings for pushing limits and individual sessions for specific skill development, and was clear that training with superior athletes accelerates improvement.
+
+**Key points:**
+- Deliberate adversity training is essential. Altitude work makes sea-level performance feel manageable, surge workouts build responsiveness, completion targets prevent perfectionist paralysis.
+- Failure-management strategies have to be explicit: a twenty-four-hour rule, ‘don’t let perfection get in the way of progress’ as a working mindset, self-worth development outside performance metrics.
+- Training environment preferences are not the same for every learner. Group training is preferred for pushing limits, individual sessions for specific skills.
+- Training with superior athletes accelerates improvement. Mix experience levels in the room rather than segregating by skill.
+- Gamification has potential for medical skill development. Low-stakes competition focused on collaborative rather than toxic competitiveness.
+- Early exposure recommendations: simulation of actual hospital environments before advanced coursework, hospital job shadowing in high school.
+- Communication and teamwork should be built around relay-style handoffs and a culture of collective responsibility rather than individual blame.
+- Leadership has a specific role in fostering supportive competition. The tone in the room determines whether competition becomes motivating or corrosive.
+
+### 14. Peter W. Singer
+_Strategist, futurist, and author; advisor to the Pentagon, CIA, FBI_
+
+**Headline takeaway.** AI in medical training is not one adoption decision. It is four distinct relationships, and a 2035 graduate will face all four on the same day.
+
+**Summary.**
+Peter Singer reframed AI in medical training as four distinct relationships, not a single adoption decision. His categorization (decision aid, remote presence, teaming, and agent representation) became one of the project’s load-bearing intellectual contributions, because a learner graduating in 2035 will face all four on the same day. He observed that healthcare’s resistance pattern mirrors what he watched in the military and aviation: initial resistance, then acceptance of remote operations, then collaborative teaming, then concerns about replacement. DARPA’s medical robotics work is already exploring full AI team integration, with cost savings (fewer humans per patient, more patients treated) as the institutional motivation and training-data collection as the long-horizon goal. His most useful design warning was about what makes simulation centers fail: the centers that try hardest to look futuristic are the ones that fail most spectacularly. He named Arizona State’s Decision Theater (staff dressed as futuristic, technology already five years behind) and the military cybersecurity center modeled on the Star Trek Enterprise with sliding doors that ‘whoosh’ for no reason. Sterile environments without real-world messiness read as theater, not training.
+
+**Key points:**
+- AI in medical training is not one adoption. It is four distinct relationships: decision aid, remote presence, teaming, and agent representation.
+- A learner graduating in 2035 will face all four AI relationships on the same day. The curriculum has to prepare for that.
+- Healthcare’s resistance pattern mirrors military and aviation adoption: initial resistance, acceptance of remote operations, collaborative teaming, eventual replacement concerns.
+- The institutional motivation for AI in medicine is the cost-savings logic. Training-data collection is the long-horizon goal.
+- Common failures in immersive environments to avoid: technical bells-and-whistles focus, sci-fi-influenced designs, sterile environments lacking humanity.
+- The centers that try hardest to look futuristic are the ones that fail most spectacularly. Arizona State’s Decision Theater is the cautionary example.
+- Successful realistic simulation covers the full gamut of medical work, includes narrative elements, and focuses on collaborative decision-making.
+- Gamification potential extends beyond individual skills training: narrative games, resource management simulations, collaborative problem-solving scenarios.
+
+### 15. Amber Schleuning
+_Design consultant; former Army engineer; Vice Chair of the Commission on Veterans Affairs_
+
+**Headline takeaway.** A working approach for organizing twenty-plus interviews into something a client could act on.
+
+**Summary.**
+Amber’s role in the project was a synthesis-strategy consultation rather than a domain interview. She gave the team a working approach for organizing twenty-plus interviews into something a client could act on. Her recommendation was to organize the synthesis around Dell Med stakeholders (hopes, fears, blockers), user groups including students and external clinicians (emotions, identity, personal goal blockers), and analogous research (best practices, what works under specific conditions), and then look for the intersection points where shared needs across stakeholder groups could produce maximum impact. She flagged the tension the team would have to navigate between student needs and institutional goals, and named continuing medical education as a poorly-incentivized area where doctors lack meaningful touchpoints for skill updates. Her tactical advice was about cognitive economy in synthesis: tight time constraints, focus on the ‘so what’ implications, lightweight proto-personas for client storytelling.
+
+**Key points:**
+- MD Anderson is building a new medical center for 2030 launch with a focus on undergraduate, graduate, and continuing medical education.
+- Dell Med falls behind in technological advancement. The deliverable should be a planning instrument, not a spec sheet.
+- Dr. Korndorffer wants analogous-industry research specifically to avoid bias from existing medical simulation centers.
+- Recommended synthesis organization: Dell Med stakeholders, user groups, analogous research. Intersection points are where shared needs produce maximum impact.
+- There is a tension between student needs and institutional goals that will surface throughout the work.
+- Continuing medical education is identified as a poorly-incentivized area. Doctors lack meaningful touchpoints for skill updates.
+- Synthesis tactics: set tight time constraints, focus on the ‘so what’ implications, consider lightweight proto-personas.
+- Deliverable structure: stakeholder themes, user insights, intersection points, future research recommendations, in that order.
+
+### 16. Dr. Ryan Broderick
+_Director, Center for the Future of Surgery, UC San Diego_
+
+**Headline takeaway.** The working operator’s view of what a high-functioning simulation center actually looks like, and the financial model that keeps it running.
+
+**Summary.**
+Dr. Broderick gave the team the working operator’s view of what a high-functioning simulation center actually looks like, and the financial model that keeps it running. The Center for the Future of Surgery opened in 2011 and expanded pre-COVID to 9,000 square feet, with twenty-two laparoscopic stations, two DaVinci Xi training robots, the world’s only hybrid training OR with robotic C-arm capability, and a fifteen-station microsurgery suite. Annual operations run about a thousand labs and trainings per year, seventy percent external and thirty percent internal, on an industry-sponsored model where companies pay for equipment and models. Five full-time veterinary tech staff support animal lab work. The business structure is medical director, business director, and CFS manager: the operational unit that keeps the funding model and the educational mission aligned. On technology, his Apple Vision Pro work uses a local area network to port footage from endoscope, laparoscope, vitals, and robot to the headset.
+
+**Key points:**
+- The Center for the Future of Surgery opened in 2011 and expanded pre-COVID. 9,000 square feet, with twenty-two laparoscopic stations, two DaVinci Xi training robots.
+- Annual operations: about a thousand labs and trainings per year, seventy percent external, thirty percent internal.
+- The business structure is medical director, business director, and CFS manager.
+- Apple Vision Pro implementation uses a local area network to port footage from endoscope, laparoscope, vitals, and the robot.
+- The space was designed to absorb the next wave of technology. Multiple FDA-approved robots are in use.
+- The surgeon deficit is projected at thirty thousand by 2030. Population is aging faster than the training system can produce surgeons.
+- Telesurgery, telepresence, and remote robotic operations are likely the only viable response at scale.
+- The industry-partnership funding model is the model. Without device-company sponsors, a center at this scale would not exist in its current form.
+
+### 17. Ade Ajayi
+_Director of Global Sales, Reality Labs at Meta_
+
+**Headline takeaway.** The deployment-side view of immersive learning across industries. Today’s headsets are a transitional technology.
+
+**Summary.**
+Ade gave the team the deployment-side view of immersive learning that the medical-only interviews could not produce. His central practical observation was about form factor. The Meta Quest 3S is currently heavy enough that practical sessions are limited to about two hours before discomfort sets in, which means today’s headsets are a transitional technology. Meta is investing in lighter wearables like the Ray-Ban Meta smart glasses with displays and built-in AI, and the Orion AR glasses point toward the eventual smaller, more practical form factor. His evidence on training effectiveness was specific and citable. VR/MR training shows higher knowledge retention than traditional 2D or in-person instruction because of the immersive, distraction-free environment. Purdue University nursing students trained in VR have higher pass rates on board exams. Walmart’s VR active-shooter training was so realistic that employees who experienced a real incident reported feeling like they had been there before. His most important deployment lesson was about change management.
+
+**Key points:**
+- The Meta Quest 3S is currently heavy enough that practical sessions are limited to about two hours. Today’s headsets are a transitional technology.
+- Meta is investing in more practical wearables (Ray-Ban Meta smart glasses, Orion AR glasses) toward the smaller, more practical form factor.
+- VR/MR training shows higher knowledge retention than traditional training. Purdue University nursing students trained in VR have higher pass rates on board exams.
+- Walmart uses VR for active-shooter training. Employees who experienced a real incident reported feeling like they had been there before.
+- Infrastructure requirements are simpler than many institutions assume. Reliable internet is the key requirement, though many applications run offline.
+- Change management is the biggest barrier to adoption. Without proper support, new technology fails on first impression.
+- Successful adoption requires (1) helping users understand the problem being solved and (2) thorough training and coaching on use.
+- Healthcare-specific applications: AstraZeneca uses VR to train new pharmacists, Pfizer used VR to train vaccine production operators during COVID.
+
+### 18. Denise Worrell
+_Futurist and innovation leader; professor of foresight_
+
+**Headline takeaway.** A futurist’s challenge to the project’s premise: the simulation-center building may already be old-think. Decentralized, embedded, and real-time models are the 2030-relevant alternatives.
+
+**Summary.**
+Denise brought the project a futurist’s skepticism about its core premise. Drawing on her own foresight research and concepting work with an analogous academic medical center, where she ran design research and concepting sprints across thirteen topics including embedded education, she pushed the team to question whether a simulation center as a physical building is the right answer at all. Her central argument was that the things being framed as futuristic now (VR, sim labs, NASA-style command centers) are likely to feel dated by 2030, and that the more interesting design moves are decentralized, embedded, and real-time. She offered specific alternatives: a reflective playback studio modeled on the NFL Red Zone, where students review highlights of their own real-patient interactions on a phone rather than in a built environment; mixed reality with patient-specific cultural and personality data; decentralized practice that learners access from home with real-time coaching. Her clearest challenge to the team was that the sim center sells itself as immersive learning but no one inside the project can articulate what is actually valuable about it. The team’s job is to figure out what is worth simulating and what is not. She pointed to a Chinese hospital where AI now diagnoses disease with ninety-three percent accuracy and to UC San Diego using thirty-five-hundred-dollar Apple Vision Pro headsets in actual operating rooms with better spatial awareness than their five-hundred-thousand-dollar specialized equipment, framing both as reasons to question whether VR centers are the technology to plan around at all.
+
+**Key points:**
+- The simulation center may be a 2030 anachronism. The things being framed as futuristic now (VR centers, NASA-style command centers) are likely to feel dated by then. The design opportunity is decentralized and embedded models, not bigger buildings.
+- Embedded education means learning everywhere all the time, not students shepherded through halls and pushed off to the side. The architecture should design for learning from the start, not retrofit it in.
+- The simulation center can be decentralized. Real-time coaching at home, accessible practice that is not place-based and not resource-intensive, may serve more learners than a building can.
+- A reflective playback studio idea: an NFL Red Zone style highlight reel of a student’s real patient interactions, played back for self-review. Probably best on a phone, not in an immersive tech studio.
+- MD Anderson rejected the NASA-style command center concept for similar reasons. Centralizing real-time information in a room of desks where people will not talk to each other is the wrong design move.
+- Knowledge is moving faster than publication cycles. The design challenge is helping clinicians and students learn in the moment, not waiting for a research paper or curriculum revision to catch up.
+- AI-tailored treatments are creating clinical complexity that even physicians struggle to follow. The educational design has to address how learners and patients process this complexity in real time.
+- Real-world examples to plan around: a Chinese hospital where AI diagnoses with ninety-three percent accuracy, and UC San Diego using thirty-five-hundred-dollar Apple Vision Pro headsets in actual operating rooms with better spatial awareness than their five-hundred-thousand-dollar specialized equipment.
+
+### 19. Col. (Ret.) Enrique Ortiz Jr.
+_Former BlackHawk medevac pilot; former Chief of Medical Integrations at U.S. Army Futures Command_
+
+**Headline takeaway.** Aviation moved 80 to 90 percent of pilot training into simulators. The medical analogy breaks down where physiology gets complex, but the operational logic is the same.
+
+**Summary.**
+Rick brought a rare cross-sector view to the project, drawing on aviation, hospital management, military medicine, and UT system leadership. His core framing was that aviation and healthcare are both complex systems that have to function as highly reliable organizations, which positions simulation as part of how an institution builds safety and performance assurance, not just educational support. He pointed to aviation as a useful but imperfect benchmark. Some airlines now run eighty to ninety percent of new-pilot training in simulators, with real aircraft used only for validation, demonstrating that simulation-heavy models are operationally viable at scale. He was equally clear about where the analogy breaks down. Human physiology is more complex than mechanical systems, and care is team-based in broader ways than aviation, involving nurses, monitors, and full procedural teams. His military-medicine experience gave the team a cautionary lesson on proficiency: the military health system struggled to give surgeons enough trauma reps to stay sharp, and simulation was underused as the workaround. That positions the Dell Med simulation center as a direct response to a real operational problem, how to maintain proficiency when real-world exposure is inconsistent or insufficient. Drawing on his work shaping Army medical modernization, his strongest strategic counsel was about ambition. The team should not produce cost-constrained recommendations at this stage. The deliverable should articulate an aspirational vision and leave business-case analysis for later. The project should be about what could be, not what is.
+
+**Key points:**
+- Aviation and healthcare are both complex systems that should function as highly reliable organizations. Simulation belongs inside the safety and reliability infrastructure, not just the education function.
+- Aviation is a useful benchmark. Some airlines now run eighty to ninety percent of new-pilot training in simulators, with real aircraft used only for validation, proving that simulation-heavy models work at scale.
+- The aviation analogy breaks down where physiology and team complexity exceed mechanical systems. Healthcare simulation has to account for biological variability and broader team coordination than a pilot/copilot pair.
+- Team-based, high-acuity, high-risk scenarios should be the design priority. The center should rehearse communication, role clarity, escalation, and handoff, not just technical procedures.
+- A core operational problem the simulation center can solve: how to maintain proficiency when real-world exposure is inconsistent or insufficient. The military health system has lived this problem and underused simulation as the answer.
+- The project should not let cost constrain the first-level vision. Bold proposals should be made now, with feasibility and funding analysis deferred to a later phase.
+- Future-oriented language is common (‘hospital of the future’), but actual investment and commitment are harder. The recommendation should force a real decision, not echo familiar rhetoric.
+- AI and immersive technology should augment clinicians, not replace them. Reversibility is required: human backup capability has to be preserved.
+
+### 20. Nick Rinaldi
+_U.S. Army training and modernization; kinesiology and biometric capture_
+
+**Headline takeaway.** The simulation center is not a building, it is an ecosystem of access. Reps come from phones and game consoles long before they come from VR rigs.
+
+**Summary.**
+Nick brought the operator’s lens on training systems, drawn from a kinesiology and Army training background working on how soldiers are measured and modernized. His central argument was that the simulation center has to be designed as an ecosystem, not a building, and that the widget matters less than the continuum of access learners have to it. He pushed the team toward a layered model: low-fidelity but highly accessible practice via phone, laptop, or game console at home; physical simulation devices in the facility; cadaveric or real-world practice at the top tier. Mental reps and exposure should start early and be available broadly, so learners arrive at scarce, high-fidelity experiences already familiar and less anxious. He was sharp on motivation. Isolated task practice is too boring to sustain repetition unless the experience is wrapped in a meaningful outcome. Training should be designed around outcomes like ‘save the patient,’ not decontextualized procedural checklists, with leaderboards, scoring, and goals that drive practice when no instructor is watching. He pushed the team toward team-based simulation. Code situations are a team sport, and team training does not require maximal technical complexity; low-tech mannequins and simpler setups are often sufficient for orchestration practice. His most pointed contribution was on data: if you do not capture the learner’s profile longitudinally, why bother? Individual performance tracking over time should be core to the design, not an afterthought.
+
+**Key points:**
+- The widget is not the point. The simulation center should be designed as an end-to-end ecosystem that helps a human learn, not a collection of flashy devices.
+- Repetitions matter. The lab should prioritize volume of practice over realism or novelty.
+- Build a continuum of access. Low-fidelity practice via phone, laptop, or game console at home; facility-based simulation in the middle; cadaveric or real-world practice at the top.
+- A lab-only strategy limits scale. Digital access expands training throughput beyond what physical hardware allows.
+- Design training around outcomes, not procedural checklists. The scenario is ‘save the patient,’ and the technical reps live inside a meaningful clinical mission.
+- Medical emergencies are a team sport. The lab should train coordination, communication, and team execution alongside individual technical skill.
+- Humans only learn when they are motivated to do it internally. Gamification (leaderboards, scoring, visible feedback) drives self-directed practice when faculty are not watching.
+- Capturing a learner’s longitudinal performance profile should be core to the lab’s design, not an afterthought. Without persistent attribution and honest feedback, the data has no value.
+
+### 21. Future Learners
+_Premed undergraduates; composite voice from 10+ UT Austin interviews_
+
+**Headline takeaway.** A composite of 10+ premed undergraduates: futuristic sim centers read as a red flag. Messy and in use is the credibility signal.
+
+**Summary.**
+This entry synthesizes themes from interviews with ten or more UT Austin premed undergraduates. Names and identifying details have been anonymized for privacy. The students described their existing mental model of a simulation center as sterile and museum-like, places they would be terrified of breaking something rather than environments where they would actually train. Their strongest signal was that a futuristic-looking sim center reads as a red flag: it suggests the school cares more about donor photoshoots than functional education. The credibility signal they look for instead is messy and in use, a resident sweating through a scenario or students running reps on their own time. They asked for a formalized system for failure, separated from grading, with immediate empathetic debriefing. They want handling uncertainty taught as a skill in itself, ahead of procedures or pharmacology, framed as inoculation against panic. They want emotional decompression space, the kind of dedicated room described in the report as the Porch, instead of being left to cry in stairwells. On AI, they were measured: it should function as a super-scribe and invisible assistant, not a decision-maker, and AI patients are only useful if their narrative fidelity reaches the point of getting defensive, lying about history out of fear, or crying. Their biggest stated fear about training is the loss of empathy. The second is the Level 1 failure mode, becoming dependent on AI tools and losing the baseline clinical intuition that has to be there when systems go down. They also flagged that undergrad creates strict silos between premeds, nursing students, and other future health professionals, and that interprofessional training has to start before clerkships if it is going to feel real.
+
+**Key points:**
+- The current mental model of a sim center is sterile, museum-like, white walls and pristine mannequins, a place to be afraid of breaking something. The new center has to break this perception or it will not get used.
+- A pristine, futuristic-looking sim center reads as a red flag, a donor-photoshoot building rather than functional education. The credibility signal they look for is messy and in use.
+- The Sim Gym concept resonates. Students running reps on their own time, because they actually want to be there, is the cultural signal that distinguishes a working center from a showpiece.
+- Handling uncertainty is the single most valuable skill they want a sim center to teach, ahead of procedures, communication, or teamwork. Inoculation against panic is the explicit ask.
+- Failure has to be formalized, separated from grading, and met with immediate empathetic debriefing. If the lab evaluates them on mistakes, they will play it safe and never take risks.
+- Team training has to be in person. Non-verbal cues, sensing stress, eye contact, knowing when to speak up versus stay out of the way, none of that simulates over video.
+- AI is welcome as a super-scribe and invisible assistant. It is not welcome as a decision-maker. The Level 1 failure fear: becoming dependent on AI tools and losing the baseline clinical intuition that is needed when systems go down.
+- Emotional decompression space (the Porch concept) is named as a game-changer. The current alternative is crying in stairwells. Loss of empathy is the single biggest stated fear about training.
+
+
+
+------------------------------------------------------------------------------
+## SITE VISITS (PRIMARY RESEARCH)
+------------------------------------------------------------------------------
+
+### 1. Spurs Human Performance Center
+
+Content for this site visit is being added.
+
+### 2. SXSW Innovation
+
+**Summary.** Three panels at SXSW gave the team a cross-industry read on where healthcare technology is being negotiated in public. The conversations cut across agentic AI in medical decision-making, the role of nurses as the human firewall against automation, and the use of immersive play and ritual as therapeutic interventions. Together they framed the questions the simulation center has to answer about AI integration, identity preservation, and humanization of technology.
+
+**Observations:**
+- Panel one, "The future of healthcare is at home" with Ricky Choi (Samsung), Dhruv Kumar, John Whyte (AMA), and Arundhati Parmar. Physician AI usage doubled since 2023, with over 80 percent now using AI for documentation, chart summarization, and diagnostic support. Within five years every physician will use AI in some capacity.
+- Cognitive deskilling is the central concern. The current generation of medical students will train fundamentally differently, with comparison drawn to GPS dependency. One student described forcing himself to complete a differential diagnosis independently before consulting AI.
+- AI prescribing controversy: Utah’s Doctronic pilot allows AI prescribing for renewals. The AMA opposes prescribing without human oversight, citing slippery-slope concerns and a documented case where researchers tricked the bot into prescribing three times the proper dosage.
+- Wearables are moving from fitness tracking to medical detection. Atrial fibrillation, sleep apnea, ADHD management through haptic reminders. The institutional motivation is to remove friction between detection and treatment, not just identify problems.
+- Hospital-at-home programs are limited geographically but expanding. Patients prefer their own beds, family proximity, and continuous data generation over hospital admission for stable conditions requiring IV antibiotics or similar.
+- Panel two, "Nurses as firewall between AI and patients." Union-organizing context at Mission Regional Medical Center after acquisition by HCA. Cost-cutting, staffing reductions, and shareholder-first culture have made nurses the last human checkpoint between hospital systems and patient harm.
+- Panel three, "Technologies of care: ritual play and the future of wellness" with Sarin (Hatsumi) and Nikki (Soul Paint). Demonstration of Soul Paint, a VR body-mapping experience, and Deep, a meditative breathing-controlled game. Both are deployed clinically with published research showing improved emotional regulation and reduced PTSD symptoms in youth detention populations.
+- Core argument from the wellness panel: the healthcare system is fragmented along the human experience itself, mental health separated from physical, expression separated from work. Embodied play and ritual are the actionable mechanisms (not the spiritual framing) that historically reconnect these. The center should design for reconnection, not just skill acquisition.
+- The XR Health Alliance reports 20 million GBP UK government investment in immersive health products since 2021. The arts-and-health field is finally generating clinical evidence at scale, with WHO, UNESCO, and the NHS all formally engaged.
+
+### 3. SXSW EDU
+
+Content for this site visit is being added.
+
+
+
+------------------------------------------------------------------------------
+## LITERATURE (SECONDARY RESEARCH)
+------------------------------------------------------------------------------
+
+These are the secondary sources referenced in the synthesis,
+ordered roughly from peer-reviewed academic at the top to
+institutional / strategic / news at the bottom.
+
+### 1. Embedding Learning in a Learning Health Care System to Improve Quality of Care
+_Paper · PMC_
+
+The foundational argument that medical education has to be structurally embedded inside a learning health system, with feedback loops that translate care variation into curriculum change.
+
+Source: https://pmc.ncbi.nlm.nih.gov/articles/PMC8349926/
+
+### 2. The Academic Learning Health System: A Framework for Integrating Research, Education, and Care
+_Paper · PMC_
+
+The aLHS framework that proposes integrating UME, GME, and CME under a Chief Learning Officer so educational goals align with health-system goals across the full continuum.
+
+Source: https://pmc.ncbi.nlm.nih.gov/articles/PMC10453356/
+
+### 3. Precision Education: The Future of Lifelong Learning in Medicine
+_Paper · PubMed_
+
+The original precision-education argument that learning should be tailored to the individual learner’s data trajectory, parallel to how precision medicine tailors treatment.
+
+Source: https://pubmed.ncbi.nlm.nih.gov/38277444/
+
+### 4. Mastery Learning in Critical Care
+_Paper · ATS Scholar_
+
+The critical-care evidence base for simulation-based mastery learning, which uses deliberate practice with strict mastery criteria rather than time-based progression.
+
+Source: https://www.atsjournals.org/doi/full/10.34197/ats-scholar.2020-0121LE
+
+### 5. Translational Educational Research: A Necessity for Effective Health-care Improvement
+_Paper · PMC_
+
+Defines T1 through T3 educational outcomes and argues that the metric for educational success is measurable improvement in patient outcomes, not test scores.
+
+Source: https://pmc.ncbi.nlm.nih.gov/articles/PMC3494468/
+
+### 6. Participatory Design Approach in the Use of Scenario Analysis for Medical Education
+_Paper · 2025 · JMIR_
+
+The Trinity College Dublin scenario-analysis methodology that surfaces megatrends (climate resilience, knowledge economy) and trains learners in complex adaptive systems thinking.
+
+Source: https://www.jmir.org/2025/1/e73173
+
+### 7. Approaches to Reach Trustworthy Patient Education: A Narrative Review
+_Paper · PMC_
+
+A narrative review of what makes patient education credible and actionable, applicable to the embedded-education models the medical center is designing for.
+
+Source: https://pmc.ncbi.nlm.nih.gov/articles/PMC11641738/
+
+### 8. Effects of the Hidden Curriculum in Medical Education: Scoping Review
+_Paper · 2025 · JMIR Medical Education_
+
+A scoping review of legitimate peripheral participation, the workplace-learning mechanism that justifies transparent glass-walled team rooms where novices absorb tacit professional culture.
+
+Source: https://mededu.jmir.org/2025/1/e68481
+
+### 9. Comparing Multimodal Learning Using Computer-Based and Immersive VR Simulation for Medical Training
+_Paper · 2025 · JMIR Medical Education_
+
+A quasi-experimental study showing immersive VR simulation outperforms computer-based formats on retention and burnout reduction, supporting the multi-modality sim-gym argument.
+
+Source: https://mededu.jmir.org/2025/1/e70726
+
+### 10. A Value Analysis of Longitudinal Integrated Clerkships
+_Paper · 2024 · PubMed_
+
+The cost-effectiveness analysis showing that single-unified All-LIC programs are cheaper than dual-track block-plus-LIC models and produce higher educational value.
+
+Source: https://pubmed.ncbi.nlm.nih.gov/38565150/
+
+### 11. Structuring Medical Education for Workforce Transformation: Continuity and Longitudinal Integrated Clerkships
+_Paper · MDPI Education Sciences_
+
+Defines the three continuities (care, supervision, curriculum) that distinguish LICs from block rotations and explains how they produce systems citizens.
+
+Source: https://www.mdpi.com/2227-7102/7/2/58
+
+### 12. Digital Twin for Personalized Medicine Development
+_Paper · PMC_
+
+The technical case for digital twins in medicine, including the data infrastructure required to maintain a virtual replica of a patient or system in real time.
+
+Source: https://pmc.ncbi.nlm.nih.gov/articles/PMC12369496/
+
+### 13. Could Digital Twins Be the Next Revolution in Healthcare?
+_Paper · 2025 · European Journal of Public Health_
+
+A public-health framing of digital twins, including the imaging-derived 3D anatomical models that allow surgical residents to rehearse on patient-specific pathology before operating.
+
+Source: https://academic.oup.com/eurpub/article/35/1/19/7909469
+
+### 14. Artificial Intelligence in Healthcare: Transforming the Practice of Medicine
+_Paper · PMC_
+
+A broad review of AI in clinical practice that includes XR and Holomics (holographic interaction with patient data) as the visualization layer over digital twins.
+
+Source: https://pmc.ncbi.nlm.nih.gov/articles/PMC8285156/
+
+### 15. Ambient Intelligence Based on IoT for Assisting People with Alzheimer’s Disease
+_Paper · MDPI Electronics_
+
+An IoT-based ambient intelligence study used as evidence for sensor-equipped smart patient rooms that simultaneously support patient safety (fall detection) and educational competency monitoring.
+
+Source: https://www.mdpi.com/2079-9292/10/11/1260
+
+### 16. A Survey on Ambient Intelligence in Health Care
+_Paper · PMC_
+
+The foundational survey of ambient-intelligence applications in healthcare, framing the technology as a continuous, unobtrusive feedback layer over clinical work.
+
+Source: https://pmc.ncbi.nlm.nih.gov/articles/PMC3890262/
+
+### 17. Envisioning the Future of Primary Care: Patient-Centered Communication Feedback Technology
+_Paper · 2025 · PubMed_
+
+Evidence for AI-powered communication feedback that detects bias patterns (such as differential time spent with patients by demographic) that self-reflection alone cannot match.
+
+Source: https://pubmed.ncbi.nlm.nih.gov/40848279/
+
+### 18. Ethical and Legal Challenges of Artificial Intelligence-Driven Healthcare
+_Paper · PMC_
+
+The ethical-and-legal frame for AmI deployment, including consent protocols, dual-use justification, and the privacy guardrails the smart patient room requires.
+
+Source: https://pmc.ncbi.nlm.nih.gov/articles/PMC7332220/
+
+### 19. Exploring the Need for Medical Futures Studies: A Scoping Review
+_Paper · PMC_
+
+A scoping review of healthcare foresight methodology, supporting the community-integration argument that medical education has to extend into FQHCs and treat SDOH as core curriculum.
+
+Source: https://pmc.ncbi.nlm.nih.gov/articles/PMC11499746/
+
+### 20. Primary Health Care Providers’ Roles and Responsibilities: Treatment of Persons Affected by Obesity
+_Paper · Taylor & Francis Online_
+
+A qualitative study of primary-care role distribution, used to ground the just-in-time learning argument that EHRs should push contextual primers at the point of decision.
+
+Source: https://www.tandfonline.com/doi/full/10.1080/17538068.2016.1270874
+
+### 21. Attitudes and Perceptions of Health Leaders for Quality Enhancement of Workforce in Saudi Arabia
+_Paper · PMC_
+
+Health-leader survey supplying international context for embedded-education adoption and the gap between recognized need and operational implementation.
+
+Source: https://pmc.ncbi.nlm.nih.gov/articles/PMC9141873/
+
+### 22. Teamwork Makes the Dream Work: Infusing Interprofessional Education
+_Paper · Journal of Human Services_
+
+Argues that interprofessional education fails when forced into a classroom and succeeds when it is the natural byproduct of shared space and shared work.
+
+Source: https://journalhumanservices.org/article/74213-teamwork-makes-the-dream-work-infusing-interprofessional-education-into-human-services-curriculum-and-training
+
+### 23. Systems-Integrated CME: Implementation and Outcomes Imperative
+_Position paper · National Academy of Medicine_
+
+The NAM perspective that traditional CME (lectures, conferences) has negligible impact and that the future is systems-integrated, embedded in clinical workflow with measurable outcomes.
+
+Source: https://nam.edu/perspectives/systems-integrated-cme-the-implementation-and-outcomes-imperative-for-continuing-medical-education-in-the-learning-health-care-enterprise/
+
+### 24. Proceedings of the 2025 Annual Meeting
+_Report · 2025 · American Medical Association_
+
+The AMA proceedings on Performance Improvement CME, where physicians earn credit for using data to identify a practice gap, intervene, and measure the result.
+
+Source: https://www.ama-assn.org/system/files/a25-cme-reports.pdf
+
+### 25. The Future of External Education 2030
+_Position paper · 2030 · Medical Affairs Professional Society_
+
+Position paper on the 2030 horizon for external medical education, supporting the case that CME credits should be awarded for QI leadership and wellness initiatives.
+
+Source: https://medicalaffairs.org/position-paper-the-future-of-external-education-2030/
+
+### 26. Graduate Medical Education Outcomes and Metrics: Proceedings of a Workshop
+_Workshop · 2018 · National Academies_
+
+The handover-problem documentation: residency program directors know little about incoming interns’ specific strengths and weaknesses, which the digital learner twin is meant to solve.
+
+Source: https://www.nationalacademies.org/read/25003/chapter/2
+
+### 27. Adoption of Artificial Intelligence in Healthcare Delivery Systems
+_Report · 2025 · Peterson Health Technology Institute_
+
+Field-evidence on early AI deployments, including ambient intelligence systems that automatically assess clinician communication skills (empathy markers, teach-back, interruption rate) in real time.
+
+Source: https://phti.org/wp-content/uploads/sites/3/2025/03/PHTI-Adoption-of-AI-in-Healthcare-Delivery-Systems-Early-Applications-Impacts.pdf
+
+### 28. Precision education: What it is and how it’s advancing med ed
+_Article · 2024 · American Medical Association_
+
+The AMA’s practitioner-facing primer on precision education, including the digital learner twin concept and predictive analytics for early intervention with struggling residents.
+
+Source: https://www.ama-assn.org/education/changemeded-initiative/precision-education-what-it-and-how-its-advancing-med-ed
+
+### 29. 4 Ways Simulation Can Assess Foundational Competencies
+_Industry article · Laerdal Medical_
+
+A practitioner reference on competency-assessment uses of simulation, used to support the case that SBME with mastery thresholds outperforms unstructured simulation.
+
+Source: https://laerdal.com/us/information/4-ways-simulation-can-assess-foundational-competencies/
+
+### 30. Longitudinal Integrated Clerkships at Spencer Fox Eccles School of Medicine
+_Curriculum · University of Utah_
+
+A working LIC curriculum at Utah, with documented preceptor satisfaction citing authentic relationships and meaningful feedback opportunities not available in block models.
+
+Source: https://medicine.utah.edu/programs/md/curriculum/longitudinal-clerkships
+
+### 31. GME Competencies and Assessment
+_Curriculum · UCSF Medical Education_
+
+UCSF’s competency-assessment framework, the operational reference for the portable competency passport that travels with learners from UME to GME.
+
+Source: https://meded.ucsf.edu/gme-competencies-assessment
+
+### 32. Educator Community Programs and Resources
+_Programs · NYU Langone Health_
+
+NYU’s educator-community resources, model for the warm-up sim gym concept where residents access task trainers and VR stations immediately before patient procedures.
+
+Source: https://med.nyu.edu/for-faculty/educator-community/programs-resources
+
+### 33. The Current Landscape of Faculty Development: Challenges and Opportunities
+_Report · Zucker School of Medicine_
+
+A faculty-development landscape review supplying the institutional context for retraining preceptors to operate effectively inside LIC and aLHS models.
+
+Source: https://medicine.hofstra.edu/pdf/faculty/facdev/facdev-prodev-current.pdf
+
+### 34. A New Era of Ambient Intelligence in Healthcare
+_Industry blog · 2025 · Microsoft Industry Blogs_
+
+Microsoft’s framing of ambient intelligence (AI scribes, automated coding, embedded sensors) as the path to eliminating pajama time and creating frictionless clinical workspaces.
+
+Source: https://www.microsoft.com/en-us/industry/blog/healthcare/2025/02/27/a-new-era-of-ambient-intelligence-in-healthcare/
+
+### 35. Hospital 2030: Digital masterplanning for a smart healthcare campus
+_Article · SALUS Global_
+
+The phygital planning framework that treats AI, sensors, and telehealth as structural elements requiring schematic-design integration, with the string-of-pearls strategy for staged digital rollout.
+
+Source: https://salus.global/article-show/hospital-2030-digital-masterplanning-for-a-smart-healthcare-campus
+
+### 36. How Digital Twins Are Shaping the Future of Cancer Care
+_Article · MD Anderson_
+
+MD Anderson’s pioneering work on patient-specific digital twins for surgical rehearsal, allowing residents to practice on the exact pathology they will operate on the next day.
+
+Source: https://www.mdanderson.org/cancerwise/how-digital-twins-are-shaping-the-future-of-cancer-care.h00-159775656.html
+
+### 37. Re-Tooling Architectural Education: Healthcare 2030 Design Studio in Singapore
+_Article · Studio Chronotope_
+
+The Singapore healthcare-2030 design studio that prototyped climate-adaptive medical facilities with biophilic and resilience features designed for extreme-weather continuity.
+
+Source: https://www.studiochronotope.com/re-tooling-architectural-education-ideas-from-the-healthcare-2030-design-studio-in-singapore.html
+
+### 38. Health Starts Here Strategic Plan
+_Strategic plan · 2025 · Dell Medical School, UT Austin_
+
+The official Dell Med strategic plan whose framing of integrated, multidisciplinary patient care and community-driven health is the foundation the 2030 medical center vision builds on.
+
+Source: https://dellmed.utexas.edu/about/strategic-plan
+
+### 39. UT Austin Medical District Master Plan
+_Master plan · 2013 · Sasaki Associates_
+
+The Sasaki master plan that establishes Floor Area Ratio 2.0 density, restored city grid, and pedestrian collision zones designed to force interdisciplinary interaction.
+
+Source: https://construction.utexas.edu/sites/default/files/MasterPlan-MedicalDistrict-20130509.pdf
+
+### 40. Dell Medical District Landscape
+_Project · Sasaki_
+
+The SITES Gold landscape strategy with biophilic elements, supporting both planetary-health curriculum and the burnout-reduction case for connection to nature.
+
+Source: https://www.sasaki.com/projects/dell-medical-district-landscape/
+
+### 41. $100M private gift accelerates planning for UT’s academic medical center
+_News · 2024 · Virtual Builders Exchange_
+
+Reporting on the Coxe family’s 100 million dollar contribution, which underwrites the connective-tissue investments (technology, recruitment, integrated planning) the new medical center depends on.
+
+Source: https://www.virtualbx.com/feature-story/100m-private-gift-accelerates-planning-for-uts-academic-medical-center/
+
