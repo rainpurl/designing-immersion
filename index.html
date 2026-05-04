@@ -1496,6 +1496,362 @@ header {
 }
 
 /* ============================================================
+   BEYOND THE RESEARCH — methodology, stakeholder lenses, convergence
+   ============================================================ */
+
+/* Top callout — sits between the lede and the stat block. Points to
+   Beyond the Appendix for the source materials this section synthesizes. */
+.research-top-callout {
+  margin: 22px 0 28px;
+  padding: 14px 18px;
+  background: rgba(0, 0, 0, 0.04);
+  border-left: 3px solid var(--burnt);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-strong);
+}
+[data-theme="dark"] .research-top-callout {
+  background: rgba(255, 255, 255, 0.05);
+}
+.research-top-callout-label {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--burnt);
+  font-weight: 700;
+  margin-right: 10px;
+  vertical-align: 1px;
+}
+.research-top-callout a {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+.research-top-callout a:hover {
+  color: var(--burnt);
+  text-decoration-color: var(--burnt);
+}
+
+/* By-the-numbers stat block sits below the lede. Four stats, equal width,
+   monospaced numerals, single thin top rule keeps it editorial. */
+.research-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin: 28px 0 36px;
+  padding: 22px 0 0;
+  border-top: 2px solid var(--burnt);
+}
+.research-stat-num {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 8px;
+}
+.research-stat-label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-strong);
+  line-height: 1.4;
+}
+@media (max-width: 720px) {
+  .research-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  .research-stat-num { font-size: 30px; }
+}
+
+/* Phase timeline: four phase cards laid horizontally. Each phase shows
+   a sequence number, name, date span, and a one-line activity note. */
+.research-phase-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin: 22px 0 36px;
+}
+.research-phase {
+  border-top: 2px solid var(--burnt);
+  padding: 12px 0 0;
+}
+.research-phase-num {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--burnt);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.research-phase-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+.research-phase-dates {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.55;
+  margin-bottom: 10px;
+}
+.research-phase-detail {
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--text-strong);
+  margin: 0;
+}
+@media (max-width: 720px) {
+  .research-phase-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+/* Eyebrow + section divider used between methodology paragraphs. */
+.beyond-prose .research-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--burnt);
+  font-weight: 700;
+  margin: 32px 0 6px;
+}
+.beyond-prose .research-eyebrow:first-child { margin-top: 0; }
+
+/* Stakeholder lens tabs — inline tabs that live inside a long scroll page.
+   Visually distinct from .research-tabs (which is page-level): underline-on-
+   active rather than filled-pill, smaller padding, wraps on narrow viewports. */
+.stakeholder-wrap {
+  margin: 18px 0 28px;
+}
+.stakeholder-tabs {
+  display: flex;
+  gap: 4px;
+  margin: 0 0 20px;
+  border-bottom: 1px solid var(--rule);
+  flex-wrap: wrap;
+}
+.stakeholder-tab {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 10px 14px 9px;
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink);
+  opacity: 0.55;
+  cursor: pointer;
+  transition: opacity 0.2s, border-color 0.2s, color 0.2s;
+  margin-bottom: -1px;
+  white-space: nowrap;
+}
+.stakeholder-tab:hover { opacity: 0.9; }
+.stakeholder-tab.active {
+  opacity: 1;
+  border-bottom-color: var(--burnt);
+  color: var(--burnt);
+}
+.stakeholder-panel.hidden { display: none; }
+.stakeholder-panel-intro {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-strong);
+  margin: 0 0 18px;
+  padding-left: 14px;
+  border-left: 2px solid var(--burnt);
+}
+
+/* Theme cards — strategic themes per stakeholder, displayed in a vertical
+   stack inside each panel. Two-column grid: number on the left, body right. */
+.theme-card {
+  border-top: 1px solid var(--rule);
+  padding: 18px 0 16px;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 18px;
+}
+.stakeholder-panel .theme-card:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+.theme-num {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--burnt);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  padding-top: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.theme-name {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 6px;
+  line-height: 1.3;
+}
+.theme-text {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-strong);
+  margin: 0;
+}
+@media (max-width: 720px) {
+  .theme-card {
+    grid-template-columns: 32px 1fr;
+    gap: 14px;
+  }
+  .theme-num { font-size: 20px; }
+  .theme-name { font-size: 15px; }
+}
+
+/* Convergence cards — primary x secondary cross-research. Six clusters,
+   each a labeled section with a stack of cards. Each card shows the takeaway
+   as a headline and the two source quotes labeled and side-by-side. */
+.convergence-cluster {
+  margin: 32px 0 0;
+}
+.convergence-cluster:first-of-type { margin-top: 16px; }
+.convergence-cluster-header {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--burnt);
+}
+.convergence-cluster-num {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--burnt);
+  font-variant-numeric: tabular-nums;
+}
+.convergence-cluster-title {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.25;
+}
+.convergence-card {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.convergence-cluster .convergence-card:last-child {
+  border-bottom: none;
+}
+.convergence-takeaway {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin: 0 0 12px;
+  line-height: 1.4;
+}
+.convergence-quotes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.convergence-quote {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-strong);
+  margin: 0;
+  padding-left: 12px;
+  border-left: 2px solid rgba(0, 0, 0, 0.12);
+}
+[data-theme="dark"] .convergence-quote {
+  border-left-color: rgba(255, 255, 255, 0.18);
+}
+.convergence-quote-label {
+  display: block;
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--burnt);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+@media (max-width: 720px) {
+  .convergence-quotes {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .convergence-cluster-title { font-size: 15px; }
+}
+
+/* Field research pointer — closing card that points to existing Appendix
+   site visits content rather than duplicating it here. */
+.field-pointer {
+  margin: 28px 0 8px;
+  padding: 18px 22px;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--burnt);
+}
+.field-pointer-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--burnt);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.field-pointer-text {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-strong);
+  margin: 0;
+}
+.field-pointer-link {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+.field-pointer-link:hover { color: var(--burnt); text-decoration-color: var(--burnt); }
+
+/* Pull quote breakout used once in the Convergence section. */
+.beyond-prose .convergence-pullquote {
+  margin: 36px 0 32px;
+  padding: 24px 28px;
+  background: var(--burnt);
+  color: #ffffff;
+  font-size: 17px;
+  line-height: 1.45;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+.beyond-prose .convergence-pullquote-attr {
+  display: block;
+  margin-top: 14px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+/* ============================================================
    CONTRIBUTE, takeover overlay
    ============================================================ */
 .contribute-overlay {
@@ -2252,6 +2608,50 @@ body.book-fullscreen #chat-panel {
   }
 }
 
+/* Site-visit modal: per-panel section. Used when a visit has a `panels` array
+   (multi-talk visits like SXSW Innovation). Each panel gets its own header
+   with a number, title, and speakers line, then a takeaway list beneath. */
+#im-body .im-panel {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 2px solid var(--burnt);
+}
+#im-body .im-panel:first-of-type {
+  margin-top: 18px;
+  padding-top: 18px;
+}
+#im-body .im-panel-num {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--burnt);
+  font-weight: 700;
+  margin-bottom: 6px;
+  font-variant-numeric: tabular-nums;
+}
+#im-body .im-panel-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 8px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+#im-body .im-panel-speakers {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--text-strong);
+  opacity: 0.85;
+  margin: 0 0 16px;
+  line-height: 1.55;
+}
+#im-body .im-panel .im-points {
+  margin: 0;
+}
+@media (max-width: 720px) {
+  #im-body .im-panel-title { font-size: 17px; }
+}
+
 /* ============================================================
    BEYOND THE RESEARCH — primary/secondary tabs + cards
    ============================================================ */
@@ -2360,10 +2760,28 @@ body.book-fullscreen #chat-panel {
   transform: scale(1.04);
 }
 .visit-card-body {
-  padding: 22px;
+  padding: 22px 22px 0;
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+.visit-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: 0.7;
+}
+.visit-card-meta .meta-divider {
+  display: inline-block;
+  width: 14px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
 }
 .visit-card-eyebrow {
   font-size: 10px;
@@ -2383,6 +2801,33 @@ body.book-fullscreen #chat-panel {
   line-height: 1.5;
   opacity: 0.85;
   margin-top: 8px;
+}
+.visit-card-foot {
+  margin-top: auto;
+  padding: 14px 22px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: 0.78;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin-top: 18px;
+}
+.visit-card:hover .visit-card-foot {
+  border-top-color: rgba(255, 255, 255, 0.28);
+  opacity: 1;
+}
+.visit-card-foot-arrow {
+  font-size: 13px;
+  letter-spacing: 0;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+.visit-card:hover .visit-card-foot-arrow {
+  transform: translateX(3px);
 }
 
 /* Interview cards — quieter, neutral treatment, in a responsive grid */
@@ -2842,31 +3287,7 @@ const CONFIG = {
       name: 'Research',
       startSpread: 11,
       placeholderColor: '#BF5700',
-      appendix: {
-        customRender: (container) => {
-          container.innerHTML = `
-            <p class="archive-coming-soon">
-              Content coming soon. In the meantime, look through the
-              <a href="#" class="archive-coming-soon-link">Beyond the Appendix</a>
-              section to see our references used throughout our research, as well as information on our site visits, and interview transcript excerpts and insights.
-            </p>
-          `;
-          const link = container.querySelector('.archive-coming-soon-link');
-          if (link) {
-            link.addEventListener('click', (e) => {
-              e.preventDefault();
-              const appendixSec = CONFIG.sections.find((s) => s.id === 'appendix');
-              if (!appendixSec) return;
-              setRoute(pathForSection(appendixSec));
-              jumpToSpread(appendixSec.startSpread);
-              setTimeout(() => {
-                const archive = document.getElementById('archive');
-                if (archive) archive.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }, 100);
-            });
-          }
-        },
-      },
+      appendix: { customRender: (container) => renderBeyondProse(container, 'research') },
     },
 
     {
@@ -2924,17 +3345,53 @@ const CONFIG = {
             image: VISIT_IMAGES.sxsw_innovation,
             subtitle: 'Site visit, Austin',
             date: 'March 2026',
-            summary: 'Three panels at SXSW gave the team a cross-industry read on where healthcare technology is being negotiated in public. The conversations cut across agentic AI in medical decision-making, the role of nurses as the human firewall against automation, and the use of immersive play and ritual as therapeutic interventions. Together they framed the questions the simulation center has to answer about AI integration, identity preservation, and humanization of technology.',
-            observations: [
-              'Panel one, "The future of healthcare is at home" with Ricky Choi (Samsung), Dhruv Kumar, John Whyte (AMA), and Arundhati Parmar. Physician AI usage doubled since 2023, with over 80 percent now using AI for documentation, chart summarization, and diagnostic support. Within five years every physician will use AI in some capacity.',
-              'Cognitive deskilling is the central concern. The current generation of medical students will train fundamentally differently, with comparison drawn to GPS dependency. One student described forcing himself to complete a differential diagnosis independently before consulting AI.',
-              'AI prescribing controversy: Utah\u2019s Doctronic pilot allows AI prescribing for renewals. The AMA opposes prescribing without human oversight, citing slippery-slope concerns and a documented case where researchers tricked the bot into prescribing three times the proper dosage.',
-              'Wearables are moving from fitness tracking to medical detection. Atrial fibrillation, sleep apnea, ADHD management through haptic reminders. The institutional motivation is to remove friction between detection and treatment, not just identify problems.',
-              'Hospital-at-home programs are limited geographically but expanding. Patients prefer their own beds, family proximity, and continuous data generation over hospital admission for stable conditions requiring IV antibiotics or similar.',
-              'Panel two, "Nurses as firewall between AI and patients." Union-organizing context at Mission Regional Medical Center after acquisition by HCA. Cost-cutting, staffing reductions, and shareholder-first culture have made nurses the last human checkpoint between hospital systems and patient harm.',
-              'Panel three, "Technologies of care: ritual play and the future of wellness" with Sarin (Hatsumi) and Nikki (Soul Paint). Demonstration of Soul Paint, a VR body-mapping experience, and Deep, a meditative breathing-controlled game. Both are deployed clinically with published research showing improved emotional regulation and reduced PTSD symptoms in youth detention populations.',
-              'Core argument from the wellness panel: the healthcare system is fragmented along the human experience itself, mental health separated from physical, expression separated from work. Embodied play and ritual are the actionable mechanisms (not the spiritual framing) that historically reconnect these. The center should design for reconnection, not just skill acquisition.',
-              'The XR Health Alliance reports 20 million GBP UK government investment in immersive health products since 2021. The arts-and-health field is finally generating clinical evidence at scale, with WHO, UNESCO, and the NHS all formally engaged.',
+            summary: 'Three SXSW panels gave the team a cross-industry read on where healthcare technology is being negotiated in public. The conversations cut across agentic AI in medical decision-making, the role of nurses as the human firewall against automation, and the use of immersive play and ritual as therapeutic interventions. Together they framed the questions the simulation center has to answer about AI integration, identity preservation, and humanization of technology.',
+            panels: [
+              {
+                title: 'The future of healthcare is at home',
+                speakers: 'Drs. Ricky Choi (Samsung), Dhruv Kumar, John Whyte (AMA), and Arundhati Parmar.',
+                takeaways: [
+                  'Physician AI usage doubled between 2023 and the panel date, with over eighty percent of physicians now using AI for documentation, chart summarization, discharge summaries, and diagnostic support. Within five years, the panel projected, every physician will use AI in some capacity. Agentic AI, where the system acts without a human in the loop, was the panel\u2019s central frame.',
+                  'Cognitive deskilling was the panel\u2019s most consistent worry. The current generation of medical students will train fundamentally differently, with the panelists drawing the GPS analogy: physicians will lose the ability to navigate without it. One medical student described forcing himself to complete a differential diagnosis independently before consulting the AI, and the panel agreed that protecting that habit is curricular work, not personal discipline.',
+                  'The Utah pilot called Doctronic allows AI to prescribe medications, currently scoped to renewals only. The AMA opposes prescribing without human oversight, citing both slippery-slope concerns and a documented case in which researchers tricked the model into prescribing three times the proper dosage. The AMA\u2019s position is that AI tools requiring prescribing authority should face the same licensure standards as physicians.',
+                  'Wearables are crossing from fitness tracking into medical detection. Atrial fibrillation, sleep apnea, and ADHD management through periodic haptic reminders are the active examples. The institutional motivation is to reduce friction between detection and treatment by triggering automated appointment scheduling from the device itself, not just to surface conditions.',
+                  'Hospital-at-home programs deliver IV antibiotics and similar hospital-level care while patients sleep in their own beds with their families nearby. Geographic restrictions limit current reach, but integration with wearable monitoring and combined nurse-physician home visits is what turns the model into something safer than a hospital admission for stable conditions.',
+                  'Patients arrive with sharper questions, having used ChatGPT to follow up on prior appointments. The results are uneven. One physician described a 95-year-old heart-failure patient successfully managing care through a voice interface; another described a model that confused the patient\u2019s medical history with her daughter\u2019s. Prompt quality is the difference: physician-style prompting correctly identified an uncommon GI diagnosis where patient-style prompting produced a misdiagnosis of viral gastritis.',
+                  'Payment models pull in opposite directions. Value-based care rewards AI efficiency; fee-for-service punishes anything that reduces billable procedures. A radiology study showing twelve seconds of AI-assisted reading improvement was used as the canonical example of why a holistic payment-system approach has to come before clinical adoption can spread.',
+                  'Direct-to-consumer genetic testing came up as a cautionary thread: data privacy is not protected, most cancers are not caused by inherited mutations, and a false sense of security is a real outcome. Cost barriers create their own health disparities, with AI-powered nutrition apps available but often locked behind payment.',
+                  'The closing concern from Whyte was that AI risks making healthcare more efficient without making it better. The panel landed on the requirement that any productivity gains from AI must benefit both patients and physicians, not only the throughput numbers. Digital twins for personalized treatment testing were named as the next frontier where this question gets harder.',
+                ],
+              },
+              {
+                title: 'Nurses as firewall between AI and patients',
+                speakers: 'Mission Hospital nurse union organizers and a National Nurses United representative.',
+                takeaways: [
+                  'Mission Hospital nurses organized in 2020 after HCA\u2019s acquisition of the western North Carolina community hospital. The acquisition produced immediate cuts to staffing, equipment quality, and supply availability. HCA, as a publicly traded company, was described as prioritizing shareholders over both patients and nurses. North Carolina is the second-least-unionized state in the country, which made the organizing effort consequential beyond Mission itself.',
+                  'Mission is the only Level 1 trauma center for eighteen counties in western North Carolina, which gave the union work direct community-health stakes: better working conditions translate, in life-and-death situations, to better patient care. Two contract cycles were completed by the time of the panel, with a third in preparation. Contract language now requires union approval for any new technology affecting patient care, and explicitly states that technology cannot override nursing clinical judgment.',
+                  'A UC San Diego study cited from the floor reported clinicians spending two percent more time on documentation with AI scribes, not less. The pattern the nurses described was AI tools creating additional verification work rather than reducing it, with nurses responsible for catching errors the system did not flag itself.',
+                  'The panelists named specific AI failures they had witnessed on the floor. A scheduling system assigning unsafe nurse-to-patient ratios. An AI recommending fluid levels dangerous for heart-failure patients. A documentation system hallucinating IV-drug-use history out of a chart entry that read \u201cneedles\u201d (a patient who had stepped on pine needles in their yard). Newborn lab results displaying adult reference ranges.',
+                  'Technology vulnerability shows up in emergencies. Hurricane Helene produced a 300-mile power outage that forced paper charting. The Ascension ransomware attack left nurses without electronic systems for a month, with patient health information compromised and notifications still ongoing at the time of the panel. The argument was not against technology, but against treating it as load-bearing without preserved analog redundancy.',
+                  'The advocacy work spans 10,000-plus nurses across HCA hospitals nationally. The current demands include HCA divestment from AI surveillance technologies and stronger workplace-violence protection. Legislative work supports a state-level bill from Senator Ed Murphy that would establish nurse override rights, opposes a federal executive order prohibiting state-level AI regulation, and supports California legislation shifting AI safety responsibility from end users to developers.',
+                  'The framing principle is precautionary: AI tools must demonstrate safety and effectiveness before implementation, with ongoing monitoring and validation. Clinical judgment cannot be overridden by an AI system. The same logic the FDA applies to drugs and devices is the model the panelists want applied to clinical AI.',
+                  'The advice for new graduate nurses was the most concrete piece of the panel. Trust clinical intuition regardless of experience level. Do not be afraid to slow down and ask questions. Seek second opinions when the system pushes back. The union\u2019s existence was framed as a safety net for individual nurses challenging AI recommendations: collective voice is stronger than individual concerns, and experienced nurses mentor new grads on clinical decision-making in ways the technology does not. The throughline was license protection: you worked hard for your license, protect it. Better to pause and question than to make a dangerous mistake at the edge of someone else\u2019s automation.',
+                ],
+              },
+              {
+                title: 'Technologies of care: ritual play and the future of wellness',
+                speakers: 'Sarin (co-director, Soul Paint; founder, Hatsumi studio, Brighton UK) and Nikki (interaction artist; co-director, Soul Paint).',
+                takeaways: [
+                  'The panel opened with the scale of the problem. Twenty-five percent of the global population reports mental health problems; twenty percent live with chronic pain. Healthcare spending was 9.8 trillion dollars in 2019 and is projected to reach 23.1 trillion by 2040. Provider ratios are getting worse fast: one provider per seven people today, projected to be one per four by 2040 and one per three by 2060.',
+                  'The system is fragmented along the human experience itself. Mental and physical health are treated separately. Patients move through pathways rather than being supported as wholes. The disconnection from inner world and emotion is structural. The panel\u2019s argument was that the active ingredient missing from healthcare is creative expression and embodied play, alongside diet, exercise, sleep, and nature.',
+                  'Play is an evolution-tested learning mechanism that runs across species. All mammals play, half of birds play, and cephalopods play. The function is faster internalization of information, emotional regulation, body connection, social bonding, and self-directed autonomy. In adults, play manifests as ritual: the same core mechanics without the spiritual requirement. Mindfulness, in this framing, is the modern version of prayer, the same set of actionable interaction mechanisms drawn from historical rituals, secularized for present use.',
+                  'The arts-and-health evidence base is finally generating clinical signal at scale. Daisy Fancourt holds the UNESCO Chair in Arts and Wellbeing. The WHO and the NHS are formally engaged. Social prescribing and arts prescription are rising as standard primary-care moves. Most of the existing approaches are analog, which makes them hard to scale; the opportunity the panel argued for is technology-enabled accessibility for remote and homebound populations who cannot reach the analog version.',
+                  'The technology principle for embodied care has three parts. Bring the body into digital experiences. Create presence rather than disconnected consumption. Give the user agency over the healing process. The examples shown across the panel and the broader Hatsumi practice include Ancestors (Smartphone Orchestra) for community legacy exploration, Antipsychotic (Matt McCorkle) using a haptic sofa for difficult conversations, Collective Body (Sarah Silver) for group dance and flow, Heartbeat as a two-player heartbeat visualization, and Visual Voice VR for sound-to-geometry multiplayer expression.',
+                  'Deep is Nikki\u2019s ten-year meditative VR project. Diaphragm expansion controls underwater movement: breathing in moves the player up and forward, breathing out lets them sink. The mechanic addresses two problems with conventional meditation, which are difficulty maintaining focus in a second-screen world and difficulty locating belly breathing in the first place. Eight or more published papers report improved self-control and emotional regulation, reduced PTSD symptoms, and effectiveness with youth in detention centers. The panelists called this a Trojan-horse approach: the user describes it as playing a video game, not as attending a therapy session.',
+                  'Soul Paint is a VR body-mapping experience that premiered at SXSW 2024 and won the Southwest award. The methodology comes from the body-mapping work developed in 1980s South Africa to address HIV/AIDS stigma, where subjects trace their body on paper and visualize pain or emotion with colors and shapes. The VR version becomes a 3D spatial painting where the user can move inside and outside their own body representation. The experience is led by a Rosario Dawson voiceover and structured as a guided ritual: introduction, learning the painting tools, a breathing ritual that builds the avatar as smoke or ethereal form, stepping through a mirror so the avatar becomes the canvas, unlimited time to visualize feelings, dancing back into the artwork, a \u201cshake off\u201d transformation where the user disowns the feeling, and a view of others\u2019 stories in an expanding archive.',
+                  'The work has reached over three thousand participants to date, with a Lincoln Center exhibition in New York that brought a diverse walk-in audience and ethics-approved research with the Dart Center. Care-home sessions confirmed the technology is not age-limited. Research findings show measurable before-and-after wellbeing improvements.',
+                  'The policy alignment is explicit. The UK NHS long-term plan moves hospital to community care, analog to digital efficiency, and sickness to prevention focus. The XR Health Alliance\u2019s 2021 report, \u201cThe Growing Value of XR in Healthcare,\u201d led to a twenty-million-pound UK government investment, followed by 2023 landscape mapping of immersive health tools. The current gap the panelists named is that most deployed work is clinical-application focused; the experimental creative work that produces the most novel reframes is still under-funded.',
+                  'The Playful Care Coalition launches as an international group bringing together researchers, artists, healthcare designers, and institutions. The goals are breaking down industry silos, creating collaboration frameworks, developing new care models through embodied play, and sharing pilot learnings to avoid repeated research. The next concrete pilot is in Australia: eight pain clinics will test Soul Paint with chronic-pain patients, integrated with acceptance and commitment therapy. The closing argument was that precision medicine has to absorb creativity and play as active treatment ingredients, not as adjuncts.',
+                ],
+              },
             ],
           },
           {
@@ -5506,6 +5963,40 @@ function renderBeyondProse(container, sectionId) {
       goToLiteratureTab();
     });
   });
+
+  // Wire stakeholder-tab clicks (Beyond the Research uses inline tabs for the
+  // five stakeholder lenses inside an otherwise-scrolling page).
+  container.querySelectorAll('.stakeholder-wrap').forEach((wrap) => {
+    wrap.querySelectorAll('.stakeholder-tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        wrap.querySelectorAll('.stakeholder-tab').forEach((t) => t.classList.remove('active'));
+        tab.classList.add('active');
+        const panelName = tab.dataset.tab;
+        wrap.querySelectorAll('.stakeholder-panel').forEach((p) => {
+          p.classList.toggle('hidden', p.dataset.panel !== panelName);
+        });
+      });
+    });
+  });
+
+  // Wire field-pointer link to jump to the appendix Site Visits tab.
+  container.querySelectorAll('.field-pointer-link[data-target="appendix-visits"]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const appendixSec = CONFIG.sections.find((s) => s.id === 'appendix');
+      if (!appendixSec) return;
+      setRoute(pathForSection(appendixSec));
+      jumpToSpread(appendixSec.startSpread);
+      // Wait for the archive to re-render, then activate the Site visits tab
+      // and scroll the archive into view.
+      setTimeout(() => {
+        const visitsTab = document.querySelector('#archive-content .research-tab[data-tab="visits"]');
+        if (visitsTab) visitsTab.click();
+        const archive = document.getElementById('archive');
+        if (archive) archive.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    });
+  });
 }
 
 /* ----------------------------------------------------------------------------
@@ -6006,8 +6497,832 @@ const BEYOND_PROSE = {
     ],
   },
 
-  // Research intentionally absent — that panel remains "Content coming soon"
-  // until the team supplies the draft.
+  // ============================ RESEARCH ============================
+  // Hybrid layout: methodology narrative as the visible scroll spine, with
+  // the five stakeholder lenses contained in a single inline tabbed widget,
+  // followed by the cross-research convergence cards in six clusters and a
+  // pointer back to the appendix for site-visit detail.
+  research: `
+    <p class="lede">The opening four pages of the book compress the research methodology into a single spread. Beyond it sits the work that produced those pages: the methodology by phase, the strategic themes through five stakeholder lenses, and the cross-research convergence table that decided what made it into the book and what did not.</p>
+
+    <div class="research-top-callout">
+      <span class="research-top-callout-label">For reference</span>The full interview transcripts and excerpts, the secondary literature with links, and the detailed site-visit notes live in <a href="#" class="field-pointer-link" data-target="appendix-visits">Beyond the Appendix</a>.
+    </div>
+
+    <div class="research-stats">
+      <div>
+        <div class="research-stat-num">22</div>
+        <div class="research-stat-label">Primary interviews</div>
+      </div>
+      <div>
+        <div class="research-stat-num">100+</div>
+        <div class="research-stat-label">Secondary sources</div>
+      </div>
+      <div>
+        <div class="research-stat-num">3</div>
+        <div class="research-stat-label">Field site visits</div>
+      </div>
+      <div>
+        <div class="research-stat-num">30</div>
+        <div class="research-stat-label">Cross-source convergences</div>
+      </div>
+    </div>
+
+    <h3>The Methodology, Phase by Phase</h3>
+
+    <div class="research-phase-grid">
+      <div class="research-phase">
+        <div class="research-phase-num">Phase 01</div>
+        <div class="research-phase-name">Discovery</div>
+        <div class="research-phase-dates">Jan &ndash; Feb</div>
+        <p class="research-phase-detail">Twenty-two semi-structured interviews across medicine, military, athletics, futures, and immersive design. Secondary reading across aviation, firefighting, maritime, oil and gas, gaming, esports, theme park design, and space programs. Three field site visits.</p>
+      </div>
+      <div class="research-phase">
+        <div class="research-phase-num">Phase 02</div>
+        <div class="research-phase-name">Synthesis</div>
+        <div class="research-phase-dates">Feb &ndash; Mar</div>
+        <p class="research-phase-detail">Every interview transcribed and coded. Cross-source comparison: what one expert said in one industry against what another said in a different one. Two-filter rule applied to every surviving idea before it earned a place.</p>
+      </div>
+      <div class="research-phase">
+        <div class="research-phase-num">Phase 03</div>
+        <div class="research-phase-name">Concepting</div>
+        <div class="research-phase-dates">Mar &ndash; Apr</div>
+        <p class="research-phase-detail">Surviving insights translated into thirteen possible artifacts. A selection workshop with the EPMO and Dell Med leadership narrowed the slate to one primary scope and two connected territories worth carrying forward.</p>
+      </div>
+      <div class="research-phase">
+        <div class="research-phase-num">Phase 04</div>
+        <div class="research-phase-name">Delivery</div>
+        <div class="research-phase-dates">Apr &ndash; May</div>
+        <p class="research-phase-detail">The chosen concepts shaped into the frameworks, matrices, and vignettes that fill the rest of the book. Drafts pressure-tested against the same primary and secondary sources that produced them.</p>
+      </div>
+    </div>
+
+    <div class="research-eyebrow">Phase 01 &middot; The Brief and the Aperture</div>
+    <p>The work began with a question rather than a hypothesis. Dell Med asked us to look outside medicine for what medical simulation might learn from, and that framing shaped the next five months. We started in January with a wide aperture, because the goal was to be productively disoriented before we tried to converge on anything.</p>
+
+    <div class="research-eyebrow">Phase 01 &middot; Discovery</div>
+    <p>Discovery ran through February. We conducted twenty-two semi-structured interviews across medicine, the military, elite athletics, simulation leadership, futures research, nursing education, immersive design, and hardware. Alongside the interviews, we read into how aviation, firefighting, maritime work, oil and gas, gaming, esports, theme park design, and space programs train people who cannot afford to fail. We also spent time in the field, at the Spurs Human Performance Center in San Antonio and across SXSW EDU and SXSW Innovation in Austin, looking at how these ideas behave in actual buildings with actual people.</p>
+
+    <h3>Five Stakeholder Lenses</h3>
+    <p>Synthesis ran through every interview, but the strategic themes that emerged read differently depending on whose room you imagined yourself in. The five lenses below are the same research, refracted through five constituencies the center has to serve at once. Athletics and military supplied the cross-industry pressure; non-Dell providers, Dell students, and Dell providers supplied the institutional reality the center has to operate inside.</p>
+
+    <div class="stakeholder-wrap">
+      <div class="stakeholder-tabs" role="tablist" aria-label="Stakeholder lenses">
+        <button class="stakeholder-tab active" data-tab="athletics">Athletics</button>
+        <button class="stakeholder-tab" data-tab="military">Military</button>
+        <button class="stakeholder-tab" data-tab="other-providers">Other Providers</button>
+        <button class="stakeholder-tab" data-tab="dell-students">Dell Students</button>
+        <button class="stakeholder-tab" data-tab="dell-providers">Dell Providers</button>
+      </div>
+
+      <div class="stakeholder-panel" data-panel="athletics">
+        <p class="stakeholder-panel-intro">The athletic lens reframes the simulation center as identity infrastructure. The Spurs Human Performance Center anchored this thread on the visit side; interviews with elite-athletics voices and the secondary literature on deliberate practice supplied the rest.</p>
+
+        <div class="theme-card">
+          <div class="theme-num">01</div>
+          <div>
+            <h4 class="theme-name">Train at altitude</h4>
+            <p class="theme-text">Athletes practice complex skills under engineered constraint. Limited time, restricted information, physical fatigue. Competition then feels easier than training. Translated to medical simulation, this means rehearsing procedures under interruption, fatigue, and ambiguity rather than under ideal conditions. The pressures of the clinical environment should be present in the rehearsal of it.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">02</div>
+          <div>
+            <h4 class="theme-name">Score the team, not the hero</h4>
+            <p class="theme-text">The athletic model rewards team output before individual statistics. The implication for medical assessment is artifacts that capture how the team performed together: handoffs, communication, shared anticipation. Identity built around team contribution is harder to fake than individual technical mastery, and harder to lose to a single bad day.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">03</div>
+          <div>
+            <h4 class="theme-name">Friction is part of the room</h4>
+            <p class="theme-text">Real performance environments contain noise, interruptions, equipment quirks, and unpredictable timing. Stripping these out of training removes the part of the work that determines whether learners can perform under real conditions at all. Build the friction in, on purpose, and grade for adaptation rather than for clean execution.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">04</div>
+          <div>
+            <h4 class="theme-name">Trendlines, not first-try perfection</h4>
+            <p class="theme-text">Track the slope of improvement, not the score on any single attempt. Athletes who feel safe enough to fail repeat more, and learners who repeat more close the gap faster. Set completion targets at 80 to 90 percent so that progress, not perfection, is what advances the learner. Persistence becomes the metric.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">05</div>
+          <div>
+            <h4 class="theme-name">Recovery is a scheduled skill</h4>
+            <p class="theme-text">Athletic programs build mandatory processing time into the calendar after high-stress events, treating recovery as part of the work rather than as time off. The medical analog is structured debrief blocks built into the daily schedule, with mental-skills work (breathing, focus resets) treated as clinical curriculum rather than wellness extras.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">06</div>
+          <div>
+            <h4 class="theme-name">Tiered ladders, not a single ramp</h4>
+            <p class="theme-text">Athletes progress through beginner, intermediate, and advanced tracks that let them experience mastery at every level while staying stretched. A medical simulation curriculum built as a single difficulty ramp loses learners at the bottom and bores them at the top. Build ladders, and start the bottom rungs early enough to demystify the top.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stakeholder-panel hidden" data-panel="military">
+        <p class="stakeholder-panel-intro">The military lens carried the strongest argument for designing failure into the curriculum. Interviews with senior military leaders, Special Operations trainers, and a former medevac pilot anchored this thread; the secondary literature on aviation and nuclear-power training filled it in.</p>
+
+        <div class="theme-card">
+          <div class="theme-num">01</div>
+          <div>
+            <h4 class="theme-name">Design for failure, not around it</h4>
+            <p class="theme-text">Military training calibrates scenarios to individual breaking points so that learners encounter and recover from failure before patient contact, not after. Medical education currently shields high performers from failure until clinical rotations, where the consequences are irreversible. Rehearse the breakdown, not only the recovery.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">02</div>
+          <div>
+            <h4 class="theme-name">Sets and reps, not set pieces</h4>
+            <p class="theme-text">Aviation, military, and elite athletics treat fundamental skills as something to repeat to autonomic reflex, not something to demonstrate once. The facility implication is throughput: many small bays for high-volume practice rather than only a few expensive scenario rooms. Manual dexterity and decision speed have to be cheap to rehearse.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">03</div>
+          <div>
+            <h4 class="theme-name">Unplugged before plugged-in</h4>
+            <p class="theme-text">Advanced technology, AI included, comes after analog mastery, not before it. Introducing assistive systems to learners before they can operate without them produces dependency that fails when the system fails. The strategic move is mandatory analog-competency gates ahead of access to AI accelerators or digital overlays.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">04</div>
+          <div>
+            <h4 class="theme-name">Grade the team</h4>
+            <p class="theme-text">Care is interdependent, but evaluation is still individual. The military model evaluates units on cohesion and collective outcome alongside individual technical performance. Translating that requires shared assessment rubrics, faculty trained to grade interdependence rather than only solo execution, and scenarios that make the unit visible.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">05</div>
+          <div>
+            <h4 class="theme-name">One profile, recruit to retire</h4>
+            <p class="theme-text">The military maintains a single readiness profile that follows the service member from training through deployment and into retraining. Medicine&rsquo;s equivalent is a portable competency record that survives institutional moves and updates with every refresher. The center should generate that record rather than depend on receiving it.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">06</div>
+          <div>
+            <h4 class="theme-name">Peers grade peers, not just faculty</h4>
+            <p class="theme-text">Military selection and advancement use peer evaluation on non-technical traits because peers see things faculty cannot. Medical training rarely formalizes this. Adding peer-evaluated soft-skill assessments raises the floor on professionalism and surfaces character risk that standardized testing misses entirely.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stakeholder-panel hidden" data-panel="other-providers">
+        <p class="stakeholder-panel-intro">Non-Dell providers (clinicians outside the Dell Med system whom we interviewed for outside-in perspective) named the institutional gravity that the center will have to push against. This lens is heavy on wellbeing and infrastructure flexibility because that is where they had been burned the most often.</p>
+
+        <div class="theme-card">
+          <div class="theme-num">01</div>
+          <div>
+            <h4 class="theme-name">Wellbeing is a quality input</h4>
+            <p class="theme-text">The most consistent message from non-Dell clinicians was that burnout is not a personal problem to solve after hours. It is an institutional input to clinical quality. Curricula should integrate psychological support and recovery protocols inside simulation scenarios rather than alongside them, treating provider wellbeing as a measurable contributor to outcomes.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">02</div>
+          <div>
+            <h4 class="theme-name">A gym, not a graduation</h4>
+            <p class="theme-text">The center should function as a continuous practice space across the entire career, not a place that is done with the learner after residency. Front-loaded learning decays without reinforcement; spaced repetition does not. The architectural implication is open-bay access by attendings and CME participants, not just by trainees on a schedule.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">03</div>
+          <div>
+            <h4 class="theme-name">Train the whole team in the same room</h4>
+            <p class="theme-text">Patient care happens in mixed teams; education rarely does. The center should mandate multidisciplinary scenarios where medical students, nurses, and pharmacists navigate the same case as a unit. Situational awareness and respect for scope of practice are built before the high-stakes encounter, not during it.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">04</div>
+          <div>
+            <h4 class="theme-name">Think first, layer AI second</h4>
+            <p class="theme-text">AI is efficient at documentation and pattern recognition, and inefficient at the synthesis, ethics, and complex communication that define clinical judgment. The center should force hypothesis generation without algorithmic assistance during foundational training, then layer technology on top of established judgment rather than substituting for it.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">05</div>
+          <div>
+            <h4 class="theme-name">Everything on wheels</h4>
+            <p class="theme-text">Purpose-built rooms become obsolete with the modality they were built for. Retractable walls and mobile equipment let one space serve high-fidelity trauma in the morning and low-fidelity skills in the afternoon. Flexibility is what protects the capital investment as specialty demand and technology turn over.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">06</div>
+          <div>
+            <h4 class="theme-name">Revenue beyond tuition</h4>
+            <p class="theme-text">Long-term sustainability depends on income streams that do not compete with the academic mission: industry courses, device-company partnerships, insurer collaborations on simulation-trained credentialing. The shift is from cost center to regional asset, with financial stability tied to broader industry adoption rather than to discretionary academic budgets.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stakeholder-panel hidden" data-panel="dell-students">
+        <p class="stakeholder-panel-intro">Dell Med students supplied the sharpest specifics about what currently fails in their training. This lens reads as a punch list of fixes that are both architectural and curricular, with strong feelings about VR (rejected), peer-led debrief (loved), and the gap between first-year coursework and clinical-rotation reality.</p>
+
+        <div class="theme-card">
+          <div class="theme-num">01</div>
+          <div>
+            <h4 class="theme-name">The room is part of the lesson</h4>
+            <p class="theme-text">Students named environmental friction (the actual hospital room with its tethered lines, alarms, and uncooperative physiology) as the part of clinical reality that simulation skips. Investing in functional medical infrastructure inside simulation rooms matters more than investing in another high-fidelity mannequin in a clean room.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">02</div>
+          <div>
+            <h4 class="theme-name">Hybrid beats fully virtual</h4>
+            <p class="theme-text">Current VR implementations were rejected by Dell students for nausea, cognitive load, and a poor user experience that interferes with clinical reasoning. Augmented reality and hybrid setups that keep human partners in the room outperformed full-virtual environments for everything except isolated procedural reps where empathy is not the learning objective.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">03</div>
+          <div>
+            <h4 class="theme-name">One governance, every learner</h4>
+            <p class="theme-text">Departmental control over equipment access produces uneven utilization and undermines interprofessional training. Centralized governance that grants equal access across UME, nursing, and pharmacy is what makes interprofessional education real rather than rhetorical. Without it, parallel play wins.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">04</div>
+          <div>
+            <h4 class="theme-name">Build the pressure without the punishment</h4>
+            <p class="theme-text">The current curriculum protects students from failure during foundational training, which leaves them unprepared for the emotional weight of clinical mistakes when those finally happen. The center should progressively introduce consequence-laden scenarios without resorting to punitive academic ranking. Vigilance, not shame, is the goal.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">05</div>
+          <div>
+            <h4 class="theme-name">Scaffold the technology, year by year</h4>
+            <p class="theme-text">The disconnect between low-tech first-year coursework and the technology-dense reality of clinical rotations leaves students underprepared. The fix is to introduce EMR workflows and diagnostic devices early as a scaffolded layer of the curriculum, growing in complexity year over year so that clerkship readiness is fluency, not catch-up.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">06</div>
+          <div>
+            <h4 class="theme-name">Peer collisions over solo stations</h4>
+            <p class="theme-text">Students named peer observation and immediate debrief as their highest-value learning, ranking AI tools below human coaching. The physical and scheduled implication is breakout space and time blocks designed for peer-led reflection rather than isolating learners at virtual stations with private feedback loops.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stakeholder-panel hidden" data-panel="dell-providers">
+        <p class="stakeholder-panel-intro">Dell Med faculty and providers carried the longest view on what the center has to do as an institutional asset. This lens skews toward governance, financial sustainability, and the workforce pipeline because those are the levers that decide whether the building has a second decade.</p>
+
+        <div class="theme-card">
+          <div class="theme-num">01</div>
+          <div>
+            <h4 class="theme-name">Competency gates, not clock hours</h4>
+            <p class="theme-text">Time-based progression promotes confidence; competency-based gating verifies mastery. Learners should be prohibited from procedures on patients until objective simulation mastery has been demonstrated. The implication is shared assessment rubrics and faculty trained to deliver behaviorally specific feedback, not generic validation.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">02</div>
+          <div>
+            <h4 class="theme-name">Train the noise, not just the skill</h4>
+            <p class="theme-text">Real clinical practice contains interruptions, conflicting data, and hierarchy dynamics. Training in clean, isolated technical exercises does not transfer well. Mixed teams operating under simulated noise build crisis resource management and information triage that isolated drills cannot, and surface the breakdowns that only show up under real cognitive load.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">03</div>
+          <div>
+            <h4 class="theme-name">Modular before specialized</h4>
+            <p class="theme-text">Medical technology turns over on a three-to-five-year cycle. Fixed, specialized rooms lock in the modality at the moment of construction. Modular walls, adaptable AV backbones, and hardware-agnostic infrastructure protect the building&rsquo;s relevance across multiple technology generations. The transition from laparoscopic to robotic is the canonical case.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">04</div>
+          <div>
+            <h4 class="theme-name">Capture the signal at the level of behavior</h4>
+            <p class="theme-text">The center should function as a data-rich environment that captures granular performance metrics (biomechanics, ergonomics, decision speed) through sensors and ambient tracking. Integrated with hospital systems, simulation data moves from subjective observation to predictive analytics for fatigue, efficiency, and injury risk before they show up in the OR.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">05</div>
+          <div>
+            <h4 class="theme-name">Own the equipment, do not borrow it</h4>
+            <p class="theme-text">Reliance on external partners for robotic systems and wet-lab tissue limits when learners can practice. Independent ownership supports unrestricted practice hours, complex emergency drills like hemorrhage control, and the haptic-feedback skills that haptic-light technologies do not yet replace. Borrowed access is a scheduling constraint disguised as a budget decision.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">06</div>
+          <div>
+            <h4 class="theme-name">Tie simulation to outcomes, not budgets</h4>
+            <p class="theme-text">Sustainability requires decoupling the center from discretionary academic spending and linking it to clinical revenue and patient-safety outcomes. Positioned as a risk-reduction tool with measurable downstream returns, the center becomes operationally non-negotiable rather than budget-vulnerable when leadership turns over.</p>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-num">07</div>
+          <div>
+            <h4 class="theme-name">From middle school to attending</h4>
+            <p class="theme-text">The center can anchor a regional pipeline that reaches local students well before college, addressing health-equity workforce gaps at the source. Stackable credentials let students enter at multiple points and exit at sustainable ones, reducing the debt-and-attrition risks medicine currently absorbs across the workforce.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="research-eyebrow">Phase 02 &middot; Synthesis</div>
+    <p>Synthesis began in February and continued into March. Every interview was transcribed and coded. We compared what one expert said in one industry against what another expert said in a different one, and we kept only the ideas that survived that pressure. An insight had to do two things to earn its place in this book. It had to hold up across at least two unrelated sources, and it had to reframe a problem the client would have been unlikely to name on day one. Findings that only confirmed what Dell Med already knew were noted but set aside.</p>
+
+    <h3>Where Primary and Secondary Converged</h3>
+    <p>Thirty findings cleared the two-filter rule. Each one is shown below as a card with the secondary source quote and the primary interview quote that converged on the same takeaway, organized into the six clusters the takeaways naturally fell into during synthesis. The convergences are the load-bearing layer of the book: every framework, matrix, and vignette in the rest of the volume traces back to at least one of these.</p>
+
+    <div class="convergence-cluster">
+      <div class="convergence-cluster-header">
+        <div class="convergence-cluster-num">Cluster 01</div>
+        <div class="convergence-cluster-title">Team and governance</div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Mandatory multidisciplinary training</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;The educational model of 2030 ... relies on interprofessional collaboration rather than isolated discipline-based study.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;The Center must mandate multidisciplinary simulation where medical students, nursing staff, and pharmacists navigate complex scenarios as a cohesive unit.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Forced collaboration through architecture</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;Interprofessional Education (IPE) fails when it is forced in a classroom; it succeeds when it is a natural byproduct of shared space and shared work.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;The physical space must be designed to force collaboration ... mirroring the complex reality of hospital care rather than isolated study.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Unified governance</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;Chief Learning Officer ... should oversee the entire continuum, ensuring that educational goals align with health system goals.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;The new center must operate under a centralized governance model that democratizes access ... across UME, nursing, and pharmacy, dismantling barriers.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Systems and team citizenship</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;This creates &lsquo;continuity of care&rsquo; ... [students] become &lsquo;systems citizens&rsquo; who understand the gaps in healthcare delivery.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;The center must enforce a paradigm where unit performance supersedes individual excellence ... shared accountability for outcomes.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="convergence-cluster">
+      <div class="convergence-cluster-header">
+        <div class="convergence-cluster-num">Cluster 02</div>
+        <div class="convergence-cluster-title">Outcomes and the long arc of practice</div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Outcome-based metrics</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;The &lsquo;best&rsquo; medical centers ... will utilize Translational Medical Education, where the metric of educational success is not a test score but a measurable improvement in patient outcomes.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;The center must be designed to progressively introduce high-stakes emotional and cognitive pressure ... moving from safe, pass/fail exploration to intense, consequence-laden scenarios.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Longitudinal continuity</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;Students do not rotate through blocks. Instead, they manage a panel of patients across specialties for an entire year ... This creates &lsquo;continuity of care,&rsquo; &lsquo;continuity of supervision,&rsquo; and &lsquo;continuity of curriculum&rsquo;.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;The strategic pivot must move ... to Longitudinal Competency ... The Center should function as a lifelong &lsquo;gym&rsquo; for practice ... moving users from undergraduate exposure through graduate mastery.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Deliberate practice</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;SBME [Simulation-Based Mastery Learning] uses &lsquo;deliberate practice&rsquo; ... repetitive performance of a specific skill with immediate, targeted feedback ... until a mastery standard is met.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;Operational excellence requires shifting focus from sporadic, high-fidelity simulations to high-volume, low-stakes &lsquo;sets and reps&rsquo; of fundamental skills.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Adaptive resilience</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;To be the &lsquo;best,&rsquo; UT Austin&rsquo;s infrastructure must be Climate Adaptive ... students must be trained in &lsquo;complex adaptive systems thinking&rsquo; to manage the health impacts of climate change.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;The center must shift from purely teaching clinical competence to engineering psychological durability through &lsquo;deliberate adversity&rsquo; training ... under engineered constraints.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Scaffolding and warm-ups</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;Ideally, this facility should not be in a separate building but embedded within the hospital (e.g., on the operating theater floor) to facilitate &lsquo;warm-up&rsquo; immediately prior to patient care.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;The strategic opportunity lies in introducing technology ... as a scaffolded layer ... [and] mandating &lsquo;unplugged&rsquo; competency gates before granting access to AI accelerators.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Data-driven CME</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;The future of CME lies in Performance Improvement (PI) projects where credit is awarded not for sitting in a room, but for using data to identify a practice gap.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;This approach replaces fragmented &lsquo;choose your own adventure&rsquo; CME with structured, data-driven cohorts that track competency over decades.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="convergence-cluster">
+      <div class="convergence-cluster-header">
+        <div class="convergence-cluster-num">Cluster 03</div>
+        <div class="convergence-cluster-title">Context, mastery, and the gates between</div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">High-fidelity context</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;This digital twin extends ... into the clinical and educational realm ... providing a &lsquo;virtual stage&rsquo; where students can practice navigating clinical workflows.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;Current simulation models over-index on isolated anatomical skills while failing to replicate the environmental chaos ... The strategic pivot must move ... to &lsquo;high-friction&rsquo; environments.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Athletic training model</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;Just as athletes practice continually, residents should have access to task trainers and VR stations to warm up before procedures.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;The facility must prioritize accessibility and throughput to ensure manual dexterity ... similar to aviation and military protocols.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Mastery via trends</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;The 2030 model requires that before a resident touches a patient ... they must demonstrate mastery in a high-fidelity simulation environment.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;The center must operationalize a philosophy of &lsquo;progress over perfection&rsquo; by establishing metrics that reward trendlines and persistence.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Objective tracking</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;Ambient Intelligence ... can capture the audio and video ... provides objective, actionable data that human preceptors ... cannot observe.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;This involves creating digital portfolios that track decision-making over time using &lsquo;game mechanics&rsquo; like branching narratives.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="convergence-pullquote">The point of analogous research was not to import answers from other industries. It was to surface the questions medicine had not yet asked itself.<span class="convergence-pullquote-attr">Synthesis principle, Phase 02</span></p>
+
+    <div class="convergence-cluster">
+      <div class="convergence-cluster-header">
+        <div class="convergence-cluster-num">Cluster 04</div>
+        <div class="convergence-cluster-title">Spaces that teach</div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Evolving infrastructure</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;The UT Austin Medical Center must implement a Digital Twin of the entire campus ... This is a virtual replica of the physical facility that evolves in real-time.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;The physical design must prioritize adaptability ... to allow rapid reconfiguration ... [and] invest in hardware agnostic platforms that can evolve.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Embedded education</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;To be &lsquo;future-proof&rsquo; for 2030 and beyond, the UT Austin Medical Center must transcend the traditional silos ... The distinction between &lsquo;learning&rsquo; and &lsquo;working&rsquo; in healthcare must vanish.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;The traditional model of a siloed &lsquo;Simulation Center&rsquo; is rapidly becoming an outdated construct; the future lies in &lsquo;embedded education&rsquo; where learning is integrated directly into the clinical environment.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Learning everywhere</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;The design must intentionally blur the lines between &lsquo;clinical space&rsquo; and &lsquo;educational space,&rsquo; ensuring that the physical environment itself acts as a scaffold for learning.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;Rather than solely transporting learners to a separate facility, the campus itself must be designed to facilitate &lsquo;learning and research everywhere in the moment&rsquo;.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Spaces for collision and debrief</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;Clinical corridors should feature small, acoustically semi-private alcoves ... allow a team to step out of a patient room and immediately debrief.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;The physical space ... must prioritize &lsquo;collaborative collisions&rsquo; ... breakout spaces and time blocks specifically designed for peer-led reflection.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Visible learning</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;Glass walls (with switchable opacity for privacy) in workrooms allow students to observe clinical decision-making ... fosters &lsquo;legitimate peripheral participation&rsquo;.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;Students derive immense value from peer observation ... This reinforces a culture where feedback is continuous and formative.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Obsolescence proofing</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;A static building designed for the needs of 2024 will be obsolete by 2035 ... UT Austin&rsquo;s infrastructure must be Climate Adaptive.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;Fixed, purpose-built rooms often become obsolete ... The physical design must prioritize adaptability ... to allow rapid reconfiguration ... and prevent bottlenecks.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="convergence-cluster">
+      <div class="convergence-cluster-header">
+        <div class="convergence-cluster-num">Cluster 05</div>
+        <div class="convergence-cluster-title">Care for the caretaker, and what care actually requires</div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Burnout mitigation</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;Retaining [faculty] requires an environment that minimizes burnout and maximizes professional fulfillment ... &lsquo;Pajama time&rsquo; ... is a primary driver of burnout.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;The Center must treat clinician well-being as a clinical quality input ... [shifting] from a productivity-only culture to one that protects its human capital investment.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Soft skills priority</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;AI algorithms can analyze these recordings to assess a student&rsquo;s communication skills (e.g., empathy markers ...) ... identify unconscious bias.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;The distinct value proposition of this center will be mastering the &lsquo;soft skills&rsquo; of communication, empathy, and cultural humility which technology often struggles to replicate.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Deliberate adversity</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;Students must be trained in &lsquo;complex adaptive systems thinking&rsquo; to manage the health impacts ... requiring educational spaces that simulate these systemic crises.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;The center must shift from purely teaching clinical competence to engineering psychological durability through &lsquo;deliberate adversity&rsquo; training.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Care for the caretaker</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;A systems-integrated CME model recognizes that a healthy, unburdened physician provides better care.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;Curricula should integrate psychological support and &lsquo;care for the caretaker&rsquo; protocols directly into simulation scenarios.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Community and patient connection</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;The &lsquo;Health Starts Here&rsquo; plan emphasizes &lsquo;community-driven solutions&rsquo; ... Students should be embedded in community clinics.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;Simulation must focus heavily on bridging the gap in diverse patient interactions ... The curriculum must prioritize the patient-provider connection.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="convergence-cluster">
+      <div class="convergence-cluster-header">
+        <div class="convergence-cluster-num">Cluster 06</div>
+        <div class="convergence-cluster-title">Technology in its right place</div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">The digital learner profile</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;By 2030, every student and resident should have a Digital Learner Twin, a longitudinal, dynamic model of their developing competencies.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;This necessitates a unified data infrastructure that creates a portable, enduring performance profile for every clinician ... [managing] the learner lifecycle from pre-matriculation through residency.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Automated feedback loops</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;Ambient Intelligence (AmI) ... sensors and microphones ... can capture the audio and video ... [and] provide a dashboard of feedback by the time the student leaves the room.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;Moving beyond binary pass/fail assessments ... offering students highlight reels and continuous playback of their performance.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Tech after foundation</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;The &lsquo;Hospital 2030&rsquo; framework treats digital enablers (AI, sensors, telehealth) as structural elements that must be defined during the conceptual design phase.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;Advanced technology ... must be strictly sequenced ... The strategic imperative is a curriculum that mandates &lsquo;unplugged&rsquo; competency gates before granting access to AI accelerators.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">AI as enabler, not crutch</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;By integrating Ambient Intelligence ... the system frees up time for the physician to engage in &lsquo;curiosity-driven&rsquo; learning rather than &lsquo;compliance-driven&rsquo; learning.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;The Center must use simulation to force hypothesis generation without algorithmic crutches, only layering in technology once core critical thinking is established.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="convergence-card">
+        <div class="convergence-takeaway">Just-in-time AI support</div>
+        <div class="convergence-quotes">
+          <div>
+            <span class="convergence-quote-label">Secondary</span>
+            <p class="convergence-quote">&ldquo;UT Austin&rsquo;s CME should utilize the electronic health record (EHR) to push &lsquo;learning nuggets&rsquo; to providers at the moment of decision.&rdquo;</p>
+          </div>
+          <div>
+            <span class="convergence-quote-label">Primary</span>
+            <p class="convergence-quote">&ldquo;Future clinical environments must transition from viewing technology as a tool to viewing it as a &lsquo;peer participant&rsquo; or &lsquo;another person in the room&rsquo;.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="research-eyebrow">Phase 03 &ndash; 04 &middot; Concepting and Delivery</div>
+    <p>Concepting followed in March and April. The surviving insights were translated into a slate of possible artifacts, and a selection workshop with the EPMO and Dell Med leadership narrowed that slate down to the ones worth carrying forward. Delivery, from April through May, shaped those concepts into the frameworks, matrices, and vignettes that fill the rest of these pages. What you are reading is the record of that work.</p>
+
+    <div class="field-pointer">
+      <div class="field-pointer-label">Field Research</div>
+      <p class="field-pointer-text">The site-visit writeups (Spurs Human Performance Center, SXSW Innovation, SXSW EDU) are documented in detail in the <a href="#" class="field-pointer-link" data-target="appendix-visits">Beyond the Appendix</a> section, alongside the full interview roster and the secondary literature list. The summaries there are the working notes; the strategic threads they fed into are above.</p>
+    </div>
+  `,
+
 };
 
 /* ============================================================================
@@ -6137,16 +7452,34 @@ function renderResearchAppendix(container, section) {
 
   // Site visit cards (site visits tab)
   if (visits.length) {
-    const visitsHTML = visits.map((v, i) => `
+    const visitsHTML = visits.map((v, i) => {
+      const cardCount = v.panels && v.panels.length
+        ? `${v.panels.length} panel${v.panels.length === 1 ? '' : 's'}`
+        : v.observations && v.observations.length
+          ? `${v.observations.length} observations`
+          : null;
+      const cardCta = v.panels && v.panels.length
+        ? 'Read the panels'
+        : 'Read the visit notes';
+      return `
       <button class="visit-card${v.image ? ' has-image' : ''}" data-visit-idx="${i}">
         ${v.image ? `<div class="visit-card-image"><img src="${v.image}" alt="" loading="lazy"></div>` : ''}
         <div class="visit-card-body">
-          <div class="visit-card-eyebrow">Site visit</div>
+          <div class="visit-card-meta">
+            <span>Site visit</span>
+            ${v.date ? `<span class="meta-divider"></span><span>${v.date}</span>` : ''}
+            ${cardCount ? `<span class="meta-divider"></span><span>${cardCount}</span>` : ''}
+          </div>
           <div class="visit-card-title">${v.name}</div>
-          <div class="visit-card-summary">${v.summary ? v.summary.slice(0, 110) + (v.summary.length > 110 ? '\u2026' : '') : 'Notes coming soon.'}</div>
+          <div class="visit-card-summary">${v.summary ? v.summary.slice(0, 160) + (v.summary.length > 160 ? '\u2026' : '') : 'Notes coming soon.'}</div>
+        </div>
+        <div class="visit-card-foot">
+          <span>${cardCta}</span>
+          <span class="visit-card-foot-arrow">&rsaquo;</span>
         </div>
       </button>
-    `).join('');
+    `;
+    }).join('');
     visitsPanel.insertAdjacentHTML('beforeend', `
       <div class="visits-row">${visitsHTML}</div>
     `);
@@ -6319,7 +7652,44 @@ function openVisitModal(v) {
       p.textContent = v.summary;
       body.appendChild(p);
     }
-    if (v.observations && v.observations.length) {
+    // Multi-panel layout: render each panel as its own section. Used for
+    // visits that covered multiple discrete talks (e.g. SXSW Innovation).
+    if (v.panels && v.panels.length) {
+      v.panels.forEach((panel, idx) => {
+        const section = document.createElement('div');
+        section.className = 'im-panel';
+
+        const num = document.createElement('div');
+        num.className = 'im-panel-num';
+        num.textContent = `Panel ${String(idx + 1).padStart(2, '0')}`;
+        section.appendChild(num);
+
+        const ttl = document.createElement('div');
+        ttl.className = 'im-panel-title';
+        ttl.textContent = panel.title;
+        section.appendChild(ttl);
+
+        if (panel.speakers) {
+          const sp = document.createElement('div');
+          sp.className = 'im-panel-speakers';
+          sp.textContent = panel.speakers;
+          section.appendChild(sp);
+        }
+
+        if (panel.takeaways && panel.takeaways.length) {
+          const ul = document.createElement('ul');
+          ul.className = 'im-points';
+          panel.takeaways.forEach((point) => {
+            const li = document.createElement('li');
+            li.textContent = point;
+            ul.appendChild(li);
+          });
+          section.appendChild(ul);
+        }
+
+        body.appendChild(section);
+      });
+    } else if (v.observations && v.observations.length) {
       const heading = document.createElement('div');
       heading.className = 'im-section-label';
       heading.textContent = 'Observations';
