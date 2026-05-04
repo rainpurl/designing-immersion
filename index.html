@@ -942,6 +942,49 @@ header {
   margin-right: 8px;
 }
 
+/* Cross-industry precedent block: structured callout listing each precedent
+   organization and its contribution. Distinguished from trf-degrade by a
+   burnt-orange left rule and tighter row layout. */
+.trf-precedent {
+  margin: 16px 0 0;
+  padding: 14px 18px;
+  border-left: 2px solid var(--burnt);
+  background: rgba(191, 87, 0, 0.04);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-strong);
+}
+.trf-precedent-label {
+  display: block;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--burnt);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.trf-precedent-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 14px;
+  padding: 6px 0;
+  border-top: 1px solid rgba(26, 26, 26, 0.08);
+}
+.trf-precedent-row:first-of-type { border-top: none; padding-top: 0; }
+.trf-precedent-row:last-child { padding-bottom: 0; }
+.trf-precedent-org {
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+.trf-precedent-desc {
+  color: var(--text-strong);
+}
+@media (max-width: 720px) {
+  .trf-precedent-row { grid-template-columns: 1fr; gap: 4px; }
+}
+
 /* Step-cost visual: shows the relative cost premium per level as a
    horizontal bar. Burnt-orange L1-L3, deeper for L4-L5 to mark "the step." */
 .trf-step-cost {
@@ -5540,14 +5583,14 @@ const BEYOND_PROSE = {
         html: `
           <p class="lede">The Technology Readiness Framework maps human-AI relationships in a simulation room to architectural specifications. Five levels, from Unplugged to Agentic Peer, anchor a planning conversation that has too often been about specific products. The framework's most strategically important output is not the levels themselves but Room Zero, the over-provisioned baseline infrastructure that goes in every room at construction so that future upgrades are a software exercise rather than a capital project.</p>
 
-          <p>The book carries the framework at high level. Beyond it sits the deeper specification: hard architectural numbers, a six-system Room Zero spec with retrofit math, the room-mix snapshot across 2030, 2035, and 2040, and a three-question decision tool for matching a training objective to a room level.</p>
+          <p>The book carries the framework at high level. Beyond it sits the deeper specification: hard architectural numbers, cross-industry precedent for each level, and a six-system Room Zero spec with retrofit math.</p>
 
           <h3>The Five Levels</h3>
 
           <div class="trf-level">
             <div class="trf-level-header">
               <div class="trf-level-num">1</div>
-              <div class="trf-level-name">Unplugged \u2014 Direct Human Interaction</div>
+              <div class="trf-level-name">Unplugged, Direct Human Interaction</div>
               <div class="trf-level-cost">Baseline</div>
             </div>
             <div class="trf-level-body">
@@ -5561,6 +5604,17 @@ const BEYOND_PROSE = {
                 <tr><td>Structural</td><td>Standard</td></tr>
                 <tr><td>Cost premium</td><td>0% (baseline)</td></tr>
               </table>
+              <div class="trf-precedent">
+                <span class="trf-precedent-label">Cross-Industry Precedent</span>
+                <div class="trf-precedent-row">
+                  <div class="trf-precedent-org">US Military</div>
+                  <div class="trf-precedent-desc">Tabletop exercises remain the backbone of command decision training. No screen, no simulation. People sit around a table and talk through a scenario that gets worse as it goes. A Special Operations trainer interviewed for this project noted that the practice of who gives what to whom can happen on a plastic doll.</div>
+                </div>
+                <div class="trf-precedent-row">
+                  <div class="trf-precedent-org">Gibson, 1968</div>
+                  <div class="trf-precedent-desc">Stress inoculation research showed you can train people to perform under extreme pressure with a clipboard and a timer. The rooms with no technology in them are not leftovers; they are where people learn to communicate and stay composed.</div>
+                </div>
+              </div>
               <div class="trf-degrade"><strong>Why Level 1 is permanent.</strong> Cognitive deskilling (AMA panel\u2019s GPS-dependency analogy) plus AI system failures (Helene, Ascension) make analog competency the firewall, not a legacy holdover.</div>
             </div>
           </div>
@@ -5568,11 +5622,11 @@ const BEYOND_PROSE = {
           <div class="trf-level">
             <div class="trf-level-header">
               <div class="trf-level-num">2</div>
-              <div class="trf-level-name">Augmented \u2014 Human Oversees AI</div>
+              <div class="trf-level-name">Augmented, Human Oversees AI</div>
               <div class="trf-level-cost">+10\u201315%</div>
             </div>
             <div class="trf-level-body">
-              <p>Technology enhances sensory realism and provides ambient feedback without replacing human judgment. AR-enhanced patient encounters, ambient intelligence feedback, sensor-based communication assessment. ${_PL.BRODERICK()}'s UCSD &ldquo;simulation backpacks&rdquo; brought training to clinical sites when learners couldn\u2019t come to the center. FLAIM Systems' heated firefighting suits made trainees four times more engaged; one trainee reported forgetting she was in VR. The technology did not take over. It made the sensory environment convincing enough that the body responded as if the fire were real.</p>
+              <p>Technology enhances sensory realism and provides ambient feedback without replacing human judgment. AR-enhanced patient encounters, ambient intelligence feedback, sensor-based communication assessment. ${_PL.BRODERICK()}'s UCSD &ldquo;simulation backpacks&rdquo; brought training to clinical sites when learners couldn\u2019t come to the center. The technology did not take over. It made the sensory environment convincing enough that the body responded as if the conditions were real.</p>
               <table class="trf-spec-table">
                 <tr><td>Power</td><td>10\u201315 W/sqft</td></tr>
                 <tr><td>Data</td><td>Ceiling sensors, ambient intelligence, large monitors</td></tr>
@@ -5582,6 +5636,17 @@ const BEYOND_PROSE = {
                 <tr><td>Structural</td><td>Standard</td></tr>
                 <tr><td>Cost premium</td><td>+10\u201315%</td></tr>
               </table>
+              <div class="trf-precedent">
+                <span class="trf-precedent-label">Cross-Industry Precedent</span>
+                <div class="trf-precedent-row">
+                  <div class="trf-precedent-org">FLAIM Systems</div>
+                  <div class="trf-precedent-desc">FLAIM builds firefighter training rigs where the suit heats up, the breathing apparatus restricts airflow, and a VR headset shows the fire. Trainees were four times more engaged than with screen-only training. One trainee reported forgetting she was in a simulation.</div>
+                </div>
+                <div class="trf-precedent-row">
+                  <div class="trf-precedent-org">UCSD Medicine</div>
+                  <div class="trf-precedent-desc">When learners could not always get to the sim center, the team built portable simulation backpacks that brought the training to clinical sites instead.</div>
+                </div>
+              </div>
               <div class="trf-degrade"><strong>Degrade.</strong> Falls back to Level 1 by powering off sensors and displays.</div>
             </div>
           </div>
@@ -5589,11 +5654,11 @@ const BEYOND_PROSE = {
           <div class="trf-level">
             <div class="trf-level-header">
               <div class="trf-level-num">3</div>
-              <div class="trf-level-name">Tech in-the-Loop \u2014 Co-Participant</div>
+              <div class="trf-level-name">Tech in-the-Loop, Co-Participant</div>
               <div class="trf-level-cost">+30\u201350%</div>
             </div>
             <div class="trf-level-body">
-              <p>AI-assisted continuous micro-assessment during team scenarios. Real-time performance tracking, cloud-based distributed simulation. The physical space stays constant while training content evolves via software. ${_PL.KORN_FULL()}'s vision of continuous micro-assessment during team scenarios. ${_PL.COKER_FULL()}'s robotic surgical-data observation: experts have measurably tighter arm movement than novices, but the link to actual competence has not been studied. Maritime cloud-based distributed simulation runs bridge crews across continents on the same scenario. Aviation's 50+ years of FAA certification standards correlate with fatal-accident reduction. Robotic surgery now logs every actuation as a credentialing artifact.</p>
+              <p>AI-assisted continuous micro-assessment during team scenarios. Real-time performance tracking, cloud-based distributed simulation. The physical space stays constant while training content evolves via software. ${_PL.KORN_FULL()}'s vision of continuous micro-assessment during team scenarios. ${_PL.COKER_FULL()}'s robotic surgical-data observation: experts have measurably tighter arm movement than novices, but the link to actual competence has not been studied.</p>
               <table class="trf-spec-table">
                 <tr><td>Power</td><td>20\u201330 W/sqft, heavy server load</td></tr>
                 <tr><td>Data</td><td>Server racks, multi hi-fi screens, sensor arrays</td></tr>
@@ -5603,6 +5668,21 @@ const BEYOND_PROSE = {
                 <tr><td>Structural</td><td>Standard</td></tr>
                 <tr><td>Cost premium</td><td>+30\u201350%</td></tr>
               </table>
+              <div class="trf-precedent">
+                <span class="trf-precedent-label">Cross-Industry Precedent</span>
+                <div class="trf-precedent-row">
+                  <div class="trf-precedent-org">Maritime</div>
+                  <div class="trf-precedent-desc">Cloud-based distributed simulation runs bridge crews across continents on the same scenario.</div>
+                </div>
+                <div class="trf-precedent-row">
+                  <div class="trf-precedent-org">FAA</div>
+                  <div class="trf-precedent-desc">50+ years of certification standards correlated with fatal-accident reduction in commercial aviation.</div>
+                </div>
+                <div class="trf-precedent-row">
+                  <div class="trf-precedent-org">Robotics</div>
+                  <div class="trf-precedent-desc">Every actuation is logged; longitudinal skill curves are now a standard credentialing artifact.</div>
+                </div>
+              </div>
               <div class="trf-degrade"><strong>Prerequisite.</strong> AI assessment depends on competency definition. The rubric work has not been completed in medical education. Flag as prerequisite, not blocker. \u2003 \u2003 <strong>Degrade.</strong> Falls back to Level 2 by disconnecting the cloud / AI layer.</div>
             </div>
           </div>
@@ -5610,11 +5690,11 @@ const BEYOND_PROSE = {
           <div class="trf-level">
             <div class="trf-level-header">
               <div class="trf-level-num">4</div>
-              <div class="trf-level-name">Agent Managed \u2014 Directive</div>
+              <div class="trf-level-name">Agent Managed, Directive</div>
               <div class="trf-level-cost">+75\u2013100%</div>
             </div>
             <div class="trf-level-body">
-              <p>The room and scenario respond to the learner. Software-defined training environments. Adaptive scenarios that change based on learner actions. AI as scenario director. OSCE 2.0 ambiguity scenarios where the AI adjusts patient affect, symptom evolution, distractor events to target the individual learner\u2019s weak spots. Boeing's Starliner VR pre-launch training, where the scenario environment is software-defined and responds to the pilot's choices. Oil-and-gas point-of-need simulation runs on the actual rig, moving the training to the hazard.</p>
+              <p>The room and scenario respond to the learner. Software-defined training environments. Adaptive scenarios that change based on learner actions. AI as scenario director. OSCE 2.0 ambiguity scenarios where the AI adjusts patient affect, symptom evolution, distractor events to target the individual learner\u2019s weak spots.</p>
               <table class="trf-spec-table">
                 <tr><td>Power</td><td>40\u201360 W/sqft, dedicated voltage</td></tr>
                 <tr><td>Data</td><td>Edge compute, VR/AR, dynamic wall power</td></tr>
@@ -5624,6 +5704,17 @@ const BEYOND_PROSE = {
                 <tr><td>Structural</td><td>Standard</td></tr>
                 <tr><td>Cost premium</td><td>+75\u2013100%</td></tr>
               </table>
+              <div class="trf-precedent">
+                <span class="trf-precedent-label">Cross-Industry Precedent</span>
+                <div class="trf-precedent-row">
+                  <div class="trf-precedent-org">Boeing</div>
+                  <div class="trf-precedent-desc">VR pre-launch training for crewed spaceflight, where scenarios respond to the pilot\u2019s choices in real time.</div>
+                </div>
+                <div class="trf-precedent-row">
+                  <div class="trf-precedent-org">Oil &amp; Gas</div>
+                  <div class="trf-precedent-desc">Point-of-need simulation runs on actual rigs, not simulators, moving the training to the hazard.</div>
+                </div>
+              </div>
               <div class="trf-degrade"><strong>Prerequisite.</strong> All Level 3 prerequisites plus curriculum integration: the AI-directed scenario has to map to what the program actually teaches. \u2003 \u2003 <strong>Degrade.</strong> Falls back to Level 3 by switching from AI-directed to human-directed scenarios.</div>
             </div>
           </div>
@@ -5631,11 +5722,11 @@ const BEYOND_PROSE = {
           <div class="trf-level">
             <div class="trf-level-header">
               <div class="trf-level-num">5</div>
-              <div class="trf-level-name">Agentic Peer \u2014 Embodied</div>
+              <div class="trf-level-name">Agentic Peer, Embodied</div>
               <div class="trf-level-cost">+150%+</div>
             </div>
             <div class="trf-level-body">
-              <p>AI acts as a physical participant: not a tool, not an observer. The &ldquo;diamond arrangement&rdquo; places the patient, family, provider, and technology at equal eye level. ${_PL.SINGER_FULL()}'s embodied-AI concept. Training emphasizes teaming with AI agents, trust calibration (deliberately introduced AI errors as a training surface), and overseeing autonomous systems. The Soul Paint VR demonstration at SXSW, where technology was a participant in the creative process rather than a channel for the final product. Spurs Human Performance Center, where measurement reads as celebration rather than surveillance. Showcase only: one or two rooms maximum.</p>
+              <p>AI acts as a physical participant: not a tool, not an observer. The &ldquo;diamond arrangement&rdquo; places the patient, family, provider, and technology at equal eye level. ${_PL.SINGER_FULL()}'s embodied-AI concept. Training emphasizes teaming with AI agents, trust calibration (deliberately introduced AI errors as a training surface), and overseeing autonomous systems. Showcase only: one or two rooms maximum.</p>
               <table class="trf-spec-table">
                 <tr><td>Power</td><td>80+ W/sqft, industrial / quantum-ready</td></tr>
                 <tr><td>Data</td><td>Quantum / HPC clusters, dedicated local compute</td></tr>
@@ -5645,6 +5736,17 @@ const BEYOND_PROSE = {
                 <tr><td>Structural</td><td>Reinforced floors, heavy compute</td></tr>
                 <tr><td>Cost premium</td><td>+150%+</td></tr>
               </table>
+              <div class="trf-precedent">
+                <span class="trf-precedent-label">Cross-Industry Precedent</span>
+                <div class="trf-precedent-row">
+                  <div class="trf-precedent-org">Soul Paint, SXSW</div>
+                  <div class="trf-precedent-desc">VR as co-creative partner. Technology was a participant in the creative process, not a channel for the final product.</div>
+                </div>
+                <div class="trf-precedent-row">
+                  <div class="trf-precedent-org">Spurs Athletics</div>
+                  <div class="trf-precedent-desc">The Human Performance Lab reframed measurement as celebration rather than surveillance.</div>
+                </div>
+              </div>
               <div class="trf-degrade"><strong>Prerequisite.</strong> All prior prerequisites plus an institutional culture shift: leadership models data transparency, dashboards are opt-in and learner-owned, AI agents are introduced to faculty before students. \u2003 \u2003 <strong>Degrade.</strong> Falls back to Level 4 by switching embodied AI to screen-based AI.</div>
             </div>
           </div>
@@ -5661,7 +5763,7 @@ const BEYOND_PROSE = {
             <div class="trf-step-row l5"><span class="lvl">L5</span><div class="bar" style="width: 100%;"></div><span class="mult">~9\u00d7</span></div>
           </div>
 
-          <h3>Room Zero \u2014 The Pipes-Not-Faucets Principle</h3>
+          <h3>Room Zero, The Pipes-Not-Faucets Principle</h3>
           <p>Room Zero is the framework's most strategically important output. It is the baseline infrastructure that goes in <em>every</em> room at construction, regardless of the room's intended day-one level. Specific technology choices made now will be obsolete by opening day, but architectural decisions (power, data conduit, structural reinforcement) are locked in at construction. Over-provisioning the pipes makes future upgrades a software exercise rather than a capital project.</p>
           <p>${_PL.KORN_FULL()}'s flexibility lesson: &ldquo;What we build in three years is not necessarily going to be what needs to be done five years hence. Once you build it, if you're stuck, then what?&rdquo; ${_PL.MURRAY()}'s &ldquo;you'll be wrong&rdquo; principle. ${_PL.SINGER_FULL()}'s catalog of futuristic-looking centers that aged badly. ${_PL.BRODERICK()}'s facilities-management pain: power requirements change every time new equipment arrives.</p>
 
@@ -5714,129 +5816,6 @@ const BEYOND_PROSE = {
             <div class="trf-retrofit-cell l4"><div class="mult">6\u20139\u00d7</div><div class="label">Retrofit to Level 4 later</div></div>
           </div>
           <p><em>The rule of thumb.</em> Every room gets Room Zero. The intended level only determines what is populated inside it.</p>
-
-          <h3>Ten-Year Snapshot</h3>
-          <p>Upgrades push rooms up the ladder without construction, because Room Zero pre-installed the conduit, data pipe, and HVAC headroom. Level 1\u20133 training migrates out to spokes and remote, and the hub becomes more specialized, not more expansive.</p>
-
-          <div class="trf-temporal">
-            <div class="trf-temporal-block">
-              <div class="trf-temporal-head">
-                <div class="trf-temporal-year">2030</div>
-                <div class="trf-temporal-label">Opening day</div>
-                <div class="trf-temporal-note">Building leads with L1\u20133 and a single L5 showcase. Every room has Room Zero.</div>
-              </div>
-              <table class="trf-mix-table">
-                <tr><th></th><th>L1</th><th>L2</th><th>L3</th><th>L4</th><th>L5</th></tr>
-                <tr><td>Hub</td><td>6</td><td>5</td><td>4</td><td>2</td><td>1</td></tr>
-                <tr><td>Spoke</td><td>5</td><td>3</td><td>\u2014</td><td>\u2014</td><td>\u2014</td></tr>
-                <tr><td>Anywhere</td><td>4</td><td>\u2014</td><td>\u2014</td><td>\u2014</td><td>\u2014</td></tr>
-              </table>
-            </div>
-            <div class="trf-temporal-block">
-              <div class="trf-temporal-head">
-                <div class="trf-temporal-year">2035</div>
-                <div class="trf-temporal-label">Mid-cycle refresh</div>
-                <div class="trf-temporal-note">Software and sensor upgrades push L2\u20133 rooms to L3\u20134 without construction.</div>
-              </div>
-              <table class="trf-mix-table">
-                <tr><th></th><th>L1</th><th>L2</th><th>L3</th><th>L4</th><th>L5</th></tr>
-                <tr><td>Hub</td><td>3</td><td>4</td><td>6</td><td>4</td><td>1</td></tr>
-                <tr><td>Spoke</td><td>6</td><td>5</td><td>2</td><td>\u2014</td><td>\u2014</td></tr>
-                <tr><td>Anywhere</td><td>6</td><td>2</td><td>\u2014</td><td>\u2014</td><td>\u2014</td></tr>
-              </table>
-            </div>
-            <div class="trf-temporal-block">
-              <div class="trf-temporal-head">
-                <div class="trf-temporal-year">2040</div>
-                <div class="trf-temporal-label">Mature system</div>
-                <div class="trf-temporal-note">Hub holds only what must be physical: haptics, cadavers, team crisis, embodied agents.</div>
-              </div>
-              <table class="trf-mix-table">
-                <tr><th></th><th>L1</th><th>L2</th><th>L3</th><th>L4</th><th>L5</th></tr>
-                <tr><td>Hub</td><td>\u2014</td><td>1</td><td>3</td><td>6</td><td>4</td></tr>
-                <tr><td>Spoke</td><td>7</td><td>6</td><td>4</td><td>1</td><td>\u2014</td></tr>
-                <tr><td>Anywhere</td><td>8</td><td>4</td><td>1</td><td>\u2014</td><td>\u2014</td></tr>
-              </table>
-            </div>
-          </div>
-
-          <h3>Are You Tech-Ready?</h3>
-          <p>A three-step instrument used in programming meetings to arrive at a defensible room level.</p>
-
-          <div class="trf-decision">
-            <div class="trf-decision-step">
-              <div class="step-num">01</div>
-              <div>
-                <div class="step-title">Curriculum goals</div>
-                <ul>
-                  <li><strong>Cognitive</strong> \u2014 rehearsal, mental models</li>
-                  <li><strong>Communication</strong> \u2014 empathy, patient interaction</li>
-                  <li><strong>Procedural</strong> \u2014 motor skills, haptics</li>
-                  <li><strong>Team Crisis</strong> \u2014 coordination under load</li>
-                  <li><strong>Trust Calibration</strong> \u2014 teaming with AI agents</li>
-                </ul>
-                <div class="resolves">Cognitive and Communication round to L1\u20132. Procedural and Team round to L3\u20134. Trust Calibration sets L5.</div>
-              </div>
-            </div>
-            <div class="trf-decision-step">
-              <div class="step-num">02</div>
-              <div>
-                <div class="step-title">Sim and practice team configuration</div>
-                <ul>
-                  <li>Individual</li>
-                  <li>Pair</li>
-                  <li>Small Team</li>
-                  <li>Full Clinical Team</li>
-                </ul>
-                <div class="resolves">Individual and Pair round down. Small and Full round up.</div>
-              </div>
-            </div>
-            <div class="trf-decision-step">
-              <div class="step-num">03</div>
-              <div>
-                <div class="step-title">Future tech dependency</div>
-                <ul>
-                  <li><strong>None</strong> \u2014 Level 1</li>
-                  <li><strong>Assistive</strong> \u2014 Level 2</li>
-                  <li><strong>Collaborative</strong> \u2014 Level 3</li>
-                  <li><strong>Directive</strong> \u2014 Level 4</li>
-                  <li><strong>Embodied</strong> \u2014 Level 5</li>
-                </ul>
-                <div class="resolves">Tech dependency sets the floor. Objective and team adjust from there.</div>
-              </div>
-            </div>
-          </div>
-
-          <p><strong>Worked examples \u2014 how the tool actually resolves.</strong></p>
-          <div class="trf-worked">
-            <div class="trf-worked-case">
-              <div class="case-num">Case 01</div>
-              <div>
-                <div class="case-scenario">Breaking bad news to a simulated family</div>
-                <div class="case-tags">Communication \u00b7 Individual \u00b7 None</div>
-                <div class="case-resolution">An Unplugged room is the right room. The temptation to add tech here is what produces AMA-flagged dependency.</div>
-              </div>
-              <div class="case-level">L1</div>
-            </div>
-            <div class="trf-worked-case">
-              <div class="case-num">Case 02</div>
-              <div>
-                <div class="case-scenario">Code-blue team crisis with real-time feedback</div>
-                <div class="case-tags">Team Crisis \u00b7 Full Clinical Team \u00b7 Collaborative</div>
-                <div class="case-resolution">Full team plus live AI assessment rounds up. Room needs edge compute, multi-channel audio, HVAC for a full resuscitation cart plus servers.</div>
-              </div>
-              <div class="case-level">L4</div>
-            </div>
-            <div class="trf-worked-case">
-              <div class="case-num">Case 03</div>
-              <div>
-                <div class="case-scenario">Overseeing an autonomous diagnostic agent</div>
-                <div class="case-tags">Trust Calibration \u00b7 Pair \u00b7 Embodied</div>
-                <div class="case-resolution">Trust Calibration objective and Embodied tech both force L5. This is the one showcase room, not a template.</div>
-              </div>
-              <div class="case-level">L5</div>
-            </div>
-          </div>
 
           <h3>Three Traps</h3>
           <div class="trf-traps">
