@@ -358,6 +358,25 @@ header {
   color: #FFFFFF;
 }
 
+/* Duplicate of the section nav that lives inside the archive panel, above
+   the "Beyond the {section}" title. Hidden by default; reveals once the
+   original above-book nav has scrolled past, so users always have a way
+   to switch sections without scrolling back to the top. */
+.section-nav.in-archive {
+  margin-top: 0;
+  margin-bottom: 32px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+}
+.section-nav.in-archive.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0s;
+}
+
 /* Book-stage meta (kept for compat in case CSS is re-used) */
 .book-stage-meta {
   display: flex;
@@ -843,6 +862,382 @@ header {
   .beyond-prose h3 { font-size: 18px; }
   .beyond-prose .insight-card { padding: 18px 20px 10px; }
   .beyond-prose .insight-card .insight-num { font-size: 20px; }
+}
+
+/* TRF — level cards with header bar, spec table, and degrade footer.
+   Designed to echo the print spreads' visual language without trying to
+   pixel-match it. Header is burnt-orange; specs sit in a tight monospaced
+   table; the degrade-down footer mirrors the graceful-degradation ladder. */
+.trf-level {
+  margin: 32px 0;
+  border: 1px solid rgba(26, 26, 26, 0.12);
+  background: rgba(250, 246, 236, 0.4);
+}
+.trf-level-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 16px 20px;
+  background: var(--burnt);
+  color: #ffffff;
+}
+.trf-level-num {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.trf-level-name {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.trf-level-cost {
+  margin-left: auto;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.trf-level-body {
+  padding: 20px 24px 4px;
+}
+.trf-level-body p { margin-bottom: 14px; }
+.trf-spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 18px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.trf-spec-table td {
+  padding: 8px 10px;
+  border-top: 1px solid rgba(26, 26, 26, 0.08);
+  vertical-align: top;
+}
+.trf-spec-table td:first-child {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--dust);
+  width: 130px;
+  white-space: nowrap;
+}
+.trf-spec-table tr:first-child td { border-top: none; }
+.trf-degrade {
+  margin: 0 -24px;
+  padding: 10px 24px;
+  background: rgba(26, 26, 26, 0.04);
+  border-top: 1px solid rgba(26, 26, 26, 0.08);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--dust);
+}
+.trf-degrade strong {
+  color: var(--ink);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  margin-right: 8px;
+}
+
+/* Step-cost visual: shows the relative cost premium per level as a
+   horizontal bar. Burnt-orange L1-L3, deeper for L4-L5 to mark "the step." */
+.trf-step-cost {
+  margin: 32px 0;
+  padding: 24px;
+  border: 1px solid rgba(26, 26, 26, 0.12);
+  background: rgba(250, 246, 236, 0.4);
+}
+.trf-step-cost-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--burnt);
+  margin-bottom: 14px;
+}
+.trf-step-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 80px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+.trf-step-row .lvl { font-weight: 700; }
+.trf-step-row .bar {
+  height: 22px;
+  background: var(--burnt);
+  opacity: 0.85;
+}
+.trf-step-row.l1 .bar { width: 11%; opacity: 0.55; }
+.trf-step-row.l2 .bar { width: 17%; opacity: 0.65; }
+.trf-step-row.l3 .bar { width: 33%; opacity: 0.78; }
+.trf-step-row.l4 .bar { width: 67%; opacity: 0.92; }
+.trf-step-row.l5 .bar { width: 100%; opacity: 1; background: #8C3F00; }
+.trf-step-row .mult { text-align: right; font-variant-numeric: tabular-nums; color: var(--dust); }
+
+/* Room Zero — six-system grid with monospaced spec callouts. */
+.trf-rz-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 24px 0 32px;
+}
+.trf-rz-item {
+  padding: 18px 20px;
+  border: 1px solid rgba(26, 26, 26, 0.12);
+  background: rgba(250, 246, 236, 0.4);
+}
+.trf-rz-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--burnt);
+  margin-bottom: 4px;
+}
+.trf-rz-system {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.trf-rz-headline {
+  font-size: 13px;
+  margin-bottom: 8px;
+  opacity: 0.92;
+}
+.trf-rz-spec {
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--dust);
+  padding-top: 8px;
+  border-top: 1px dashed rgba(26, 26, 26, 0.12);
+}
+@media (max-width: 720px) {
+  .trf-rz-grid { grid-template-columns: 1fr; }
+}
+
+/* Retrofit cost callout — three chunky bars showing 1x / 3-5x / 6-9x */
+.trf-retrofit {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin: 24px 0;
+}
+.trf-retrofit-cell {
+  padding: 18px 16px;
+  border: 1px solid rgba(26, 26, 26, 0.12);
+  text-align: center;
+}
+.trf-retrofit-cell .mult {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--burnt);
+  margin-bottom: 2px;
+}
+.trf-retrofit-cell .label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--dust);
+}
+.trf-retrofit-cell.now { background: rgba(191, 87, 0, 0.06); }
+.trf-retrofit-cell.now .mult { color: var(--burnt); }
+.trf-retrofit-cell.l4 .mult { color: #8C3F00; }
+@media (max-width: 720px) {
+  .trf-retrofit { grid-template-columns: 1fr; }
+}
+
+/* 2030 / 2035 / 2040 room-mix table. */
+.trf-temporal {
+  margin: 24px 0 32px;
+}
+.trf-temporal-block {
+  margin-bottom: 24px;
+  border: 1px solid rgba(26, 26, 26, 0.12);
+}
+.trf-temporal-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 14px 20px;
+  background: rgba(26, 26, 26, 0.04);
+  border-bottom: 1px solid rgba(26, 26, 26, 0.12);
+}
+.trf-temporal-year {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.trf-temporal-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--burnt);
+  font-weight: 700;
+}
+.trf-temporal-note {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--dust);
+}
+.trf-mix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.trf-mix-table td, .trf-mix-table th {
+  padding: 10px 14px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  border-top: 1px solid rgba(26, 26, 26, 0.08);
+}
+.trf-mix-table th {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--dust);
+  font-weight: 700;
+  background: rgba(26, 26, 26, 0.02);
+}
+.trf-mix-table th:first-child, .trf-mix-table td:first-child {
+  text-align: left;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+}
+
+/* Decision tool — three numbered steps. */
+.trf-decision {
+  margin: 32px 0;
+}
+.trf-decision-step {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 20px;
+  padding: 18px 0;
+  border-top: 1px solid rgba(26, 26, 26, 0.12);
+}
+.trf-decision-step:first-child { border-top: none; }
+.trf-decision-step .step-num {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--burnt);
+  line-height: 1;
+}
+.trf-decision-step .step-title {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+.trf-decision-step ul {
+  margin: 8px 0 0 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.trf-decision-step .resolves {
+  font-size: 12px;
+  color: var(--dust);
+  margin-top: 8px;
+  font-style: italic;
+}
+.trf-worked {
+  margin: 24px 0;
+}
+.trf-worked-case {
+  display: grid;
+  grid-template-columns: 60px 1fr 60px;
+  gap: 16px;
+  align-items: start;
+  padding: 14px 0;
+  border-top: 1px solid rgba(26, 26, 26, 0.08);
+}
+.trf-worked-case:first-child { border-top: none; }
+.trf-worked-case .case-num {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--dust);
+  font-weight: 700;
+}
+.trf-worked-case .case-scenario {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.trf-worked-case .case-tags {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--dust);
+  margin-bottom: 6px;
+}
+.trf-worked-case .case-resolution {
+  font-size: 13px;
+  line-height: 1.6;
+}
+.trf-worked-case .case-level {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--burnt);
+  line-height: 1;
+  text-align: right;
+}
+
+/* Three traps — like insight cards but danger-colored eyebrows. */
+.trf-traps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 24px 0;
+}
+.trf-trap {
+  padding: 18px;
+  border: 1px solid rgba(26, 26, 26, 0.12);
+}
+.trf-trap-num {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--burnt);
+  margin-bottom: 4px;
+}
+.trf-trap-name {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.trf-trap-body {
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+@media (max-width: 720px) {
+  .trf-traps { grid-template-columns: 1fr; }
+}
+
+/* Source link footer — tiny pills that jump to the appendix Literature tab. */
+.trf-source-footer {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(26, 26, 26, 0.12);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--dust);
+}
+.trf-source-footer p { margin-bottom: 8px; }
+.trf-source-footer a {
+  color: var(--burnt);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
 }
 
 .pull-quote {
@@ -2056,7 +2451,7 @@ body.book-fullscreen #chat-panel {
 
   <div id="page-controls">
     <span class="pc-label">Page</span>
-    <input type="number" id="page-input" min="1" value="1" aria-label="Page number" />
+    <input type="text" id="page-input" value="A" aria-label="Page number" autocomplete="off" spellcheck="false" />
     <span class="pc-divider">of</span>
     <span id="page-total">-</span>
   </div>
@@ -2072,6 +2467,7 @@ body.book-fullscreen #chat-panel {
      ============================================================ -->
 <section id="archive">
   <div class="archive-inner">
+    <nav class="section-nav above-book in-archive" id="section-nav-archive" aria-label="Section navigation"></nav>
     <h1 class="archive-section-title" id="archive-section-title">-</h1>
     <div id="archive-content"></div>
   </div>
@@ -2267,8 +2663,14 @@ const CONFIG = {
      ─────────────────────────────────────────────────────────────
      Drop your exported PDF next to this HTML file and put its
      filename here. Leaving as `null` shows the placeholder pages
-     so you can preview the layout.                                */
-  pdfPath: 'https://pub-439fe19e4416434e9035ac843204d55b.r2.dev/book.pdf',
+     so you can preview the layout.
+
+     CACHE-BUSTING: append a ?v=N query string to the PDF URL and
+     bump N every time you upload a new book.pdf. Cloudflare R2 and
+     the browser both cache by URL, so without a unique URL each
+     upload, the flip-through can keep rendering the old file even
+     after the bytes in R2 have changed.                          */
+  pdfPath: 'https://pub-439fe19e4416434e9035ac843204d55b.r2.dev/book.pdf?v=2',
 
   /* 2. SECTIONS
      ─────────────────────────────────────────────────────────────
@@ -2303,7 +2705,7 @@ const CONFIG = {
     {
       id: 'concepts',
       name: 'Concepts',
-      startSpread: 13,
+      startSpread: 18,
       placeholderColor: '#BF5700',
       appendix: { customRender: (container) => renderBeyondProse(container, 'concepts') },
     },
@@ -2313,13 +2715,13 @@ const CONFIG = {
       name: 'Tools',
       startSpread: 26,
       placeholderColor: '#BF5700',
-      appendix: { comingSoon: true },
+      appendix: { customRender: (container) => renderBeyondProse(container, 'tools') },
     },
 
     {
       id: 'principles',
       name: 'Principles',
-      startSpread: 50,
+      startSpread: 55,
       placeholderColor: '#BF5700',
       appendix: { customRender: (container) => renderBeyondProse(container, 'principles') },
     },
@@ -2327,7 +2729,7 @@ const CONFIG = {
     {
       id: 'appendix',
       name: 'Appendix',
-      startSpread: 54,
+      startSpread: 59,
       placeholderColor: '#BF5700',
       appendix: {
         customRender: (container, section) => renderResearchAppendix(container, section),
@@ -3277,6 +3679,993 @@ const CONFIG = {
             summary: 'Reference for curriculum-design methodology adapted for the SILC\u2019s longitudinal learner journey across UME, GME, and CME.',
             url: 'https://www.granbyschools.com/curriculum-building-institute/',
           },
+
+          // ============================================================
+          // TECHNOLOGY READINESS FRAMEWORK — SOURCE VALIDATION
+          // 140 references validating each architectural, cost, and clinical
+          // claim in the framework. Surfaced below the framework on the Tools
+          // tab as well as here as individual citations.
+          // ============================================================
+          {
+            type: 'Standard',
+            title: 'ASHRAE 90.1 — Energy Standard for Buildings Except Low-Rise Residential Buildings',
+            authors: 'TRF source #1 — ashrae.org',
+            summary: 'Validates baseline U.S. building energy standard governing lighting power density (W/sqft) and electrical infrastructure used as the analogous benchmark for Room Zero base electrical capacity (Items 4, 9, 12, 16, 20, 25).',
+            url: 'https://www.ashrae.org/technical-resources/bookstore/standard-90-1',
+          },
+          {
+            type: 'Standard',
+            title: 'ASHRAE 90.1 Wikipedia summary (Lighting Power Density tables)',
+            authors: 'TRF source #2 — wikipedia.org',
+            summary: 'Validates that ASHRAE 90.1 sets prescriptive maximum LPD limits (e.g., 0.82–1.05 W/ft² for hospital spaces) — the closest analogous standard for Items 9 (Level 1: 5 W/sqft) and Item 12 (Level 2: 10–15 W/sqft) when receptacle and equipment loads are added.',
+            url: 'https://en.wikipedia.org/wiki/ASHRAE_90.1',
+          },
+          {
+            type: 'Standard',
+            title: 'ASHRAE TC 9.9 — Mission Critical Facilities, Data Centers, Technology Spaces',
+            authors: 'TRF source #3 — ashrae.org',
+            summary: 'Validates the industry standard committee setting power density and thermal guidelines for technology/server spaces — direct analogous benchmark for Items 16, 20, and 25 (heavy server/edge/HPC loads).',
+            url: 'https://tpc.ashrae.org/?cmtKey=fd4a4ee6-96a3-4f61-8b85-43418dfa988d',
+          },
+          {
+            type: 'Standard',
+            title: 'ASHRAE 90.1 — definition of \"computer rooms\" with design power density exceeding 20 W/ft²',
+            authors: 'TRF source #4 — ashrae.org',
+            summary: 'Validates ASHRAE\'s regulatory threshold of 20 W/ft² as the trigger for \"computer room\" classification — directly supports Item 16 (Level 3: 20–30 W/sqft for heavy server load).',
+            url: 'https://www.ashrae.org/file%20library/technical%20resources/standards%20and%20guidelines/standards%20addenda/90.1-2016/90_1_2016_be_bm_bn_bo_bp_br_bs_bu_bv_cf_cl_cm_cq_ct_cu_cv_cw_cy_20210324.pdf',
+          },
+          {
+            type: 'Reference',
+            title: 'Computerworld — \"Data center density hits the wall\" (citing ASHRAE TC 9.9 and HP Critical Facilities)',
+            authors: 'TRF source #5 — computerworld.com',
+            summary: 'Validates that modern data centers are designed for 100–200 W/sqft average density — direct analogous benchmark for Items 20 (Level 4: 40–60 W/sqft) and 25 (Level 5: 80+ W/sqft).',
+            url: 'https://www.computerworld.com/article/1549833/data-center-density-hits-the-wall.html',
+          },
+          {
+            type: 'Reference',
+            title: 'CED Engineering — \"HVAC Cooling Systems for Data Centers\"',
+            authors: 'TRF source #6 — cedengineering.com',
+            summary: 'Validates typical data center cooling density of 50–150 W/sqft and HVAC sizing methodology — supports Items 16, 20, 25, and Item 32 (HVAC sizing for future server heat loads).',
+            url: 'https://www.cedengineering.com/userfiles/M05-020%20-%20HVAC%20Cooling%20Systems%20for%20Data%20Centers%20-%20US.pdf',
+          },
+          {
+            type: 'Standard',
+            title: 'U.S. DOE — \"Best Practices Guide for Energy-Efficient Data Center Design\" (2024)',
+            authors: 'TRF source #7 — energy.gov',
+            summary: 'Validates engineered design approaches for high-density compute environments and oversizing principles for HVAC redundancy — supports Items 16, 20, 25, 32.',
+            url: 'https://www.energy.gov/sites/default/files/2024-07/best-practice-guide-data-center-design_0.pdf',
+          },
+          {
+            type: 'Reference',
+            title: 'TechTarget — \"How to calculate data center cooling requirements\"',
+            authors: 'TRF source #8 — techtarget.com',
+            summary: 'Validates the rule-of-thumb that HVAC consultants multiply IT heat output by 1.5× to enable future expansion — directly supports Item 32 (HVAC sizing for future server heat loads).',
+            url: 'https://www.techtarget.com/searchdatacenter/tip/How-to-calculate-data-center-cooling-requirements',
+          },
+          {
+            type: 'Reference',
+            title: 'Mike Holt Forum — \"Watts per square feet in buildings\" (commercial rules-of-thumb)',
+            authors: 'TRF source #9 — mikeholt.com',
+            summary: 'Provides industry rules-of-thumb (Hospital ≈ 20 W/sqft, Data Center ≈ 50 W/sqft, Office ≈ 7 W/sqft) — analogous benchmarks for Items 9, 12, 16, 20, 25.',
+            url: 'https://forums.mikeholt.com/threads/watts-per-square-feet-in-buildings.28076/',
+          },
+          {
+            type: 'Reference',
+            title: 'ACEEE — \"An Analysis of Plug Load Capacities and Power Densities\" (2014)',
+            authors: 'TRF source #10 — aceee.org',
+            summary: 'Validates that commercial tenants commonly specify 8–16 W/sqft for plug loads in lease structures, providing analogous benchmark for Items 12, 13 and Level 2 power scaling assumptions.',
+            url: 'https://www.aceee.org/files/proceedings/2014/data/papers/9-404.pdf',
+          },
+          {
+            type: 'Standard',
+            title: 'Henderson Engineers — \"Understanding FGI: Improve your patient experience with better acoustics\"',
+            authors: 'TRF source #11 — hendersonengineers.com',
+            summary: 'Validates FGI minimum STC ratings for healthcare adjacencies (STC 45 between same-floor patient rooms; STC 60 between OR and MRI) — directly supports Item 6 (STC 50 standard).',
+            url: 'https://www.hendersonengineers.com/insight_article/understanding-fgi-improve-your-patient-experience-with-better-acoustics/',
+          },
+          {
+            type: 'Standard',
+            title: 'REES — \"Best Practices for Improving Acoustics and Meeting FGI Standards\"',
+            authors: 'TRF source #12 — rees.com',
+            summary: 'Validates that FGI raised STC rating to 50 (from 45) for patient rooms in adopted state codes — directly supports Item 6 (STC 50 acoustic rating).',
+            url: 'https://rees.com/best-practices-for-improving-acoustics-and-meeting-fgi-standards/',
+          },
+          {
+            type: 'Reference',
+            title: 'New York State DOH — Design Submission Requirements DSG-3.3 (FGI Table 1.2-6)',
+            authors: 'TRF source #13 — ny.gov',
+            summary: 'Validates the official FGI table specifying STC 50 between exam rooms and between patient rooms / treatment rooms — direct authoritative source for Item 6.',
+            url: 'https://www.health.ny.gov/facilities/cons/docs/3-3-0.pdf',
+          },
+          {
+            type: 'Standard',
+            title: 'FGI Errata for 2018 Guidelines for Outpatient Facilities (Table 1.2-6)',
+            authors: 'TRF source #14 — fgiguidelines.org',
+            summary: 'Validates the official FGI requirement that composite demising-wall performance be STC 50 for greater speech privacy between patient care rooms — directly supports Item 6.',
+            url: 'https://fgiguidelines.org/wp-content/uploads/2022/02/2018_FGI_OP_errata_220203.pdf',
+          },
+          {
+            type: 'Reference',
+            title: 'Acentech — \"Acoustical Privacy for Exam Rooms\"',
+            authors: 'TRF source #15 — acentech.com',
+            summary: 'Validates that FGI mandates STC 50 between exam rooms when sound masking is not used — direct support for Item 6 (STC 50 = normal conversation inaudible).',
+            url: 'https://www.acentech.com/resources/acoustical-privacy-for-exam-rooms/',
+          },
+          {
+            type: 'Reference',
+            title: 'BASWA — \"Acoustics 101: Understanding STC Ratings\"',
+            authors: 'TRF source #16 — baswana.com',
+            summary: 'Validates the qualitative interpretation that STC 50 means normal conversation in adjacent space is essentially inaudible — directly supports Item 6\'s qualitative claim.',
+            url: 'https://www.baswana.com/acoustical-plaster/acoustics-101-understanding-stc-ratings',
+          },
+          {
+            type: 'Reference',
+            title: 'ASTM E413 — Classification for Rating Sound Insulation (referenced via FGI)',
+            authors: 'TRF source #17 — asn.au',
+            summary: 'Validates the underlying ASTM standard that defines STC measurements used in FGI — analogous standard reference for Item 6.',
+            url: 'https://www.acoustics.asn.au/conference_proceedings/INTERNOISE2014/papers/p951.pdf',
+          },
+          {
+            type: 'Standard',
+            title: 'International Building Code (IBC) Section 1607 / Table 1607.1 — Live Loads',
+            authors: 'TRF source #18 — ibc-wiki.com',
+            summary: 'Validates IBC live-load requirements: hospital corridors above first floor 80 psf, OR/labs 60 psf, patient rooms 40 psf with 1,000 lb concentrated loads — analogous benchmark for Item 8 (125 psf structural slab specification, which exceeds IBC minimums to allow future heavy equipment).',
+            url: 'https://www.ibc-wiki.com/section-1607/',
+          },
+          {
+            type: 'Standard',
+            title: 'ICC Digital Codes — 2021 IBC Section 1607 Live Loads',
+            authors: 'TRF source #19 — iccsafe.org',
+            summary: 'Authoritative source for U.S. structural live-load minimums; supports Item 8 by establishing the regulatory baseline above which the 125 psf framework specification provides flexibility headroom.',
+            url: 'https://codes.iccsafe.org/s/IBC2021P1/chapter-16-structural-design/IBC2021P1-Ch16-Sec1607',
+          },
+          {
+            type: 'Reference',
+            title: 'Eng-Tips — \"Plywood Floor Per IBC 125 psf LL\" discussion',
+            authors: 'TRF source #20 — eng-tips.com',
+            summary: 'Validates that 125 psf live load is a recognized engineering design criterion for floors built on 16\" centers — direct analogous benchmark for Items 7 and 8.',
+            url: 'https://www.eng-tips.com/threads/plywood-floor-per-ibc-125-psf-ll.256181/',
+          },
+          {
+            type: 'Standard',
+            title: 'Facility Guidelines Institute (FGI) — Editions and Hospitals 2022 Guidelines',
+            authors: 'TRF source #21 — fgiguidelines.org',
+            summary: 'Authoritative gray-literature source for the FGI Guidelines for Design and Construction of Hospitals (2022) — referenced standard for healthcare structural, acoustic, and infection control design (Items 6, 8, 32).',
+            url: 'https://fgiguidelines.org/codes/editions/',
+          },
+          {
+            type: 'Reference',
+            title: 'Unistrut General Engineering Catalog (No. 12)',
+            authors: 'TRF source #22 — lsicloud.net',
+            summary: 'Validates Unistrut as the standard metal framing system used in healthcare for medical equipment support — directly supports Item 7.',
+            url: 'https://cdn.lsicloud.net/kendall/Resources/AD/Unistrut_A1026_GR_Catalog.pdf',
+          },
+          {
+            type: 'Reference',
+            title: 'Unistrut Midwest — \"Medical Equipment Support Solutions\"',
+            authors: 'TRF source #23 — unistrut.biz',
+            summary: 'Validates that Unistrut metal framing is the preferred industry standard for hospital ceiling- and wall-mounted medical equipment supports — directly supports Item 7.',
+            url: 'https://unistrut.biz/solutions/medical-equipment-support-solutions',
+          },
+          {
+            type: 'Reference',
+            title: 'Block Imaging — \"What Is \'Unistrut\' & Why Does My Medical Facility Need It?\"',
+            authors: 'TRF source #24 — blockimaging.com',
+            summary: 'Validates that Unistrut/strut-channel is the industry-standard ceiling-mounted support framework for medical equipment — directly supports Item 7.',
+            url: 'https://www.blockimaging.com/blog/what-is-unistrut-and-why-does-my-medical-facility-need-it',
+          },
+          {
+            type: 'Reference',
+            title: 'Strut Systems Installation — Medical Equipment Support Specifications (12-Gauge 1-5/8\" channels)',
+            authors: 'TRF source #25 — strutinstallation.com',
+            summary: 'Validates the standard 1-5/8\" Unistrut P5001/P1001 channels used in medical ceiling grids — supports Item 7 (Unistrut metal rail standard).',
+            url: 'https://strutinstallation.com/resources/specifications/',
+          },
+          {
+            type: 'Reference',
+            title: 'Making Manzanita — \"Construction Basics: Stud Spacing and 16 On Center\"',
+            authors: 'TRF source #26 — makingmanzanita.com',
+            summary: 'Validates 16-inch on-center as the U.S. industry-standard stud/rail spacing for residential and commercial wall framing — directly supports Item 7 (every 16 inches).',
+            url: 'https://www.makingmanzanita.com/stud-spacing/',
+          },
+          {
+            type: 'Reference',
+            title: 'PNNL Building America — \"Advanced Framing: Minimum Wall Studs\"',
+            authors: 'TRF source #27 — pnnl.gov',
+            summary: 'Validates that 16\" o.c. spacing has long been the conventional U.S. framing standard, with code-mandated 16\" o.c. in some hurricane jurisdictions — supports Item 7.',
+            url: 'https://basc.pnnl.gov/resource-guides/advanced-framing-minimum-wall-studs',
+          },
+          {
+            type: 'Reference',
+            title: 'AISI Cold-Formed Steel Design Manual (referenced in Strut Systems Installation specs)',
+            authors: 'TRF source #28 — strutinstallation.com',
+            summary: 'Validates AISI Cold-Formed Steel Design specifications referenced in Unistrut medical-support engineering — analogous structural standard for Items 7 and 8.',
+            url: 'https://strutinstallation.com/resources/specifications/',
+          },
+          {
+            type: 'Reference',
+            title: 'RSMeans Data — Construction Cost Estimating (Gordian)',
+            authors: 'TRF source #29 — rsmeans.com',
+            summary: 'Industry-standard cost-estimating database referenced in healthcare project budgeting — supports cost-premium and retrofit-multiplier claims (Items 1, 2, 3, 5, 13, 17, 21, 26).',
+            url: 'https://www.rsmeans.com/',
+          },
+          {
+            type: 'Reference',
+            title: 'RSMeans — Hospital 2-3 Story Construction Cost per Square Foot Model',
+            authors: 'TRF source #30 — rsmeans.com',
+            summary: 'Validates use of RSMeans hospital cost models for benchmarking construction premiums — analogous source for cost-tier estimates in Items 1, 13, 17, 21, 26.',
+            url: 'https://www.rsmeans.com/model-pages/hospital-2-3-story',
+          },
+          {
+            type: 'Reference',
+            title: 'SmithGroup — \"Flexibility is the Key to Designing Health Facilities of the Future\" (Emory University Hospital case study)',
+            authors: 'TRF source #31 — smithgroup.com',
+            summary: 'Validates an empirical ~20% first-cost premium for a \"core and shell\" flexible hospital design — direct analogous benchmark for Item 1 (8–12% Room Zero shell premium).',
+            url: 'https://smithgroup.com/perspectives/2020/flexibility-is-the-key-to-designing-health-facilities-of-the-future',
+          },
+          {
+            type: 'Reference',
+            title: 'Healthcare Design Magazine — \"How To Design Flexible Healthcare Spaces\"',
+            authors: 'TRF source #32 — healthcaredesignmagazine.com',
+            summary: 'Validates that flexible MEP/IT shell design carries higher first cost but enables modular phased fit-out — direct support for Items 1, 2, 3, and 5 (cost premium for built-in shell vs. retrofit).',
+            url: 'https://healthcaredesignmagazine.com/trends/how-design-flexible-healthcare-spaces/12326/',
+          },
+          {
+            type: 'Reference',
+            title: 'HBS Inc. — \"Designing Flexibility into Tomorrow\'s Healthcare Infrastructure\"',
+            authors: 'TRF source #33 — hbsinc.com',
+            summary: 'Validates the principle that planning shell/spatial resources for technology infrastructure has lower marginal cost at build than retrofitting later — supports Items 1, 2, 3, 5.',
+            url: 'https://www.hbsinc.com/post/designing-flexibility-into-tomorrow-s-healthcare-infrastructure',
+          },
+          {
+            type: 'Reference',
+            title: 'Healthcare Facilities Today — \"Flexibility in healthcare design\"',
+            authors: 'TRF source #34 — healthcarefacilitiestoday.com',
+            summary: 'Validates the cost trade-off between higher upfront flexibility (structural slab capacity, MEP redundancy) and significant future renovation costs — supports Items 1, 2, 3, 32.',
+            url: 'https://www.healthcarefacilitiestoday.com/posts/Flexibility-in-healthcare-design--8063',
+          },
+          {
+            type: 'Reference',
+            title: 'Apex Design Build — \"Designing for Flexibility\" (shelled space + slab strengthening)',
+            authors: 'TRF source #35 — apexdesignbuild.net',
+            summary: 'Validates the practice of strengthening foundations/slabs and providing shelled spaces for future modifications — supports Items 1, 2, 3, 8.',
+            url: 'https://www.apexdesignbuild.net/designing-for-flexibility/',
+          },
+          {
+            type: 'Reference',
+            title: 'Bremner Healthcare Real Estate — \"How do you design flexibility into healthcare facilities for future needs?\"',
+            authors: 'TRF source #36 — bremnerrealestate.com',
+            summary: 'Validates greenfield hospital costs of $600–$1,200/SF (citing RSMeans/AHA/ASHE) and the case for designing flexible capacity — analogous benchmark for Items 1, 2, 3.',
+            url: 'https://bremnerrealestate.com/how-do-you-design-flexibility-into-healthcare-facilities-for-future-needs/',
+          },
+          {
+            type: 'Reference',
+            title: 'Axis Imaging News — \"The Cost of Health Care Construction: Retrofit vs New Build\"',
+            authors: 'TRF source #37 — axisimagingnews.com',
+            summary: 'Validates that healthcare retrofit costs (~$200/SF in cited project) approach new-construction costs and that retrofitting in occupied buildings carries significant disruption premiums — analogous support for Items 2, 3, 5.',
+            url: 'https://axisimagingnews.com/miscellaneous/the-cost-of-health-care-construction-retrofit-vs-new-build',
+          },
+          {
+            type: 'Reference',
+            title: 'Pointcore — \"How Much Does a Hospital Cost to Build? Hospital Remodel vs. New Construction\"',
+            authors: 'TRF source #38 — pointcore.com',
+            summary: 'Validates that retrofitting infrastructure in operating hospitals can be more expensive than new construction when major MEP/IT upgrades are needed — analogous support for Items 2, 3, 5.',
+            url: 'https://www.pointcore.com/hospital-remodel-vs-new-construction-things-to-consider-with-new-healthcare-facilities-and-renovated-healthcare-facilities/',
+          },
+          {
+            type: 'Reference',
+            title: 'Ankura — \"Healthcare Renovation Construction Cost Benchmarks\" (Furgeson & Reilley)',
+            authors: 'TRF source #39 — ankura.com',
+            summary: 'Validates current healthcare construction at $700–$730/SF, with renovation premiums in occupied facilities — analogous support for Items 1, 2, 3, 5.',
+            url: 'https://angle.ankura.com/post/102j40o/healthcare-renovation-construction-cost-benchmarks',
+          },
+          {
+            type: 'Reference',
+            title: 'Modern Healthcare — \"Hospital construction slows amid rising material costs\"',
+            authors: 'TRF source #40 — modernhealthcare.com',
+            summary: 'Provides industry context on capital-budget pressures driving renovation vs. new build decisions — analogous backdrop for Items 1, 2, 3, 5.',
+            url: 'https://www.modernhealthcare.com/construction-design/hospital-construction-material-cost-design-atrium-uab-henry-ford',
+          },
+          {
+            type: 'Reference',
+            title: 'Core Construction Services — \"Key Considerations When Estimating the Cost of a Healthcare Project\"',
+            authors: 'TRF source #41 — core-services.org',
+            summary: 'Validates use of RSMeans/ENR/Turner indices and 1.35–1.45× soft-cost multipliers in healthcare budgeting — analogous benchmark for cost-premium claims (Items 1, 13, 17, 21, 26).',
+            url: 'https://core-services.org/key-considerations-when-estimating-the-cost-of-a-healthcare-project/',
+          },
+          {
+            type: 'Reference',
+            title: 'Inside Out Electric — \"What Conduit Plans Miss\" (20–30% conduit overfill buffer)',
+            authors: 'TRF source #42 — insideoutelectricllc.com',
+            summary: 'Validates the industry recommendation to include 20–30% overfill capacity in empty conduit/raceway runs for future expansion — direct analogous benchmark for Item 4 (empty conduit capacity planning).',
+            url: 'https://insideoutelectricllc.com/what-conduit-plans-miss/',
+          },
+          {
+            type: 'Reference',
+            title: 'Hubbell — Pre-Wired Raceway Design and Specification Center',
+            authors: 'TRF source #43 — hubbell.com',
+            summary: 'Validates standard pathways for installing empty conduits/raceways for future cable pulls — supports Item 4 (40–60 W/sqft empty conduit for future capacity).',
+            url: 'https://www.hubbell.com/wiringdevice-kellems/en/pre-wired-raceway',
+          },
+          {
+            type: 'Reference',
+            title: 'EC&M — \"Choosing the Right Raceway\"',
+            authors: 'TRF source #44 — ecmweb.com',
+            summary: 'Validates that empty raceways are explicitly used in shell buildings/multi-tenant spaces for future tenant fit-out — analogous benchmark for Items 4, 5 (cost premium for pulling new wire later).',
+            url: 'https://www.ecmweb.com/national-electrical-code/code-basics/article/20896212/choosing-the-right-raceway',
+          },
+          {
+            type: 'Standard',
+            title: 'HHS — \"Fact Sheet: Ransomware and HIPAA\"',
+            authors: 'TRF source #45 — hhs.gov',
+            summary: 'Validates federal HHS guidance that healthcare entities must maintain contingency/business-continuity plans for ransomware events — directly supports Item 10 (analog competency during outages).',
+            url: 'https://www.hhs.gov/hipaa/for-professionals/security/guidance/cybersecurity/ransomware-fact-sheet/index.html',
+          },
+          {
+            type: 'Standard',
+            title: 'CISA/FBI/HHS Joint Advisory AA20-302A — \"Ransomware Activity Targeting the Healthcare and Public Health Sector\"',
+            authors: 'TRF source #46 — cisa.gov',
+            summary: 'Validates the joint federal recommendation that hospitals maintain offline backups, downtime procedures, and analog workflows — direct support for Item 10.',
+            url: 'https://www.cisa.gov/news-events/cybersecurity-advisories/aa20-302a',
+          },
+          {
+            type: 'Standard',
+            title: 'ASPR TRACIE — \"Healthcare System Cybersecurity Readiness and Response\"',
+            authors: 'TRF source #47 — hhs.gov',
+            summary: 'Validates ASPR/HHS guidance on analog phone, paper charts, and downtime communication channels during cyber events — directly supports Item 10.',
+            url: 'https://files.asprtracie.hhs.gov/documents/aspr-tracie-healthcare-system-cybersercurity-readiness-response.pdf',
+          },
+          {
+            type: 'Standard',
+            title: 'ASPR TRACIE — Cybersecurity Resource Page (HHS)',
+            authors: 'TRF source #48 — hhs.gov',
+            summary: 'Validates HHS curated resources on cybersecurity downtime and resiliency planning — supports Item 10.',
+            url: 'https://asprtracie.hhs.gov/technical-resources/86/cybersecurity/0',
+          },
+          {
+            type: 'Paper',
+            title: 'ScienceDirect — \"Cyber-Attacks on Hospital Systems: A Narrative Review\" (Sciencedirect S2950386825000103)',
+            authors: 'TRF source #49 — sciencedirect.com',
+            summary: 'Peer-reviewed validation that hospitals must invest in downtime procedure manuals, paper charts, and surgical/emergency analog protocols — directly supports Item 10.',
+            url: 'https://www.sciencedirect.com/science/article/pii/S2950386825000103',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Ransomware Recovery and Imaging Operations: Lessons Learned\"',
+            authors: 'TRF source #50 — nih.gov',
+            summary: 'Peer-reviewed paper validating that prolonged ransomware events require transition to long-term analog workflows — directly supports Item 10.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8218969/',
+          },
+          {
+            type: 'Standard',
+            title: 'AAMC — \"Medical Simulation in Medical Education: Results of an AAMC Survey\"',
+            authors: 'TRF source #51 — aamc.org',
+            summary: 'Validates AAMC industry-wide survey establishing standardized patients and simulation as the baseline training method in U.S. medical education — directly supports Item 11.',
+            url: 'https://store.aamc.org/medical-simulation-in-medical-education-results-of-an-aamc-survey-pdf.html',
+          },
+          {
+            type: 'Standard',
+            title: 'AAMC — \"Standardized Patients Teach Skills and Empathy\"',
+            authors: 'TRF source #52 — aamc.org',
+            summary: 'Validates that standardized-patient encounters are an integral baseline of U.S. medical education and USMLE assessment — directly supports Item 11.',
+            url: 'https://news.aamc.org/medical-education/article/standardized-patients-teach-skills-and-empathy/',
+          },
+          {
+            type: 'Standard',
+            title: 'AAMC — \"Medical Simulation in Medical Education\" (2023 survey)',
+            authors: 'TRF source #53 — aamc.org',
+            summary: 'Authoritative AAMC resource validating simulation/SP encounters as baseline training method — supports Item 11.',
+            url: 'https://www.aamc.org/about-us/mission-areas/medical-education/medical-simulation',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Standardized Patients in Medical Education: A Review of the Literature\"',
+            authors: 'TRF source #54 — nih.gov',
+            summary: 'Peer-reviewed literature review confirming SP simulation as effective baseline training method — directly supports Item 11.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10431693/',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Is the use of standardized patients more effective than role-playing? A meta-analysis\" (Frontiers in Medicine 2025)',
+            authors: 'TRF source #55 — nih.gov',
+            summary: 'Peer-reviewed meta-analysis validating SP encounters as a measurably effective baseline simulation method — directly supports Item 11.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12214434/',
+          },
+          {
+            type: 'Standard',
+            title: 'Society for Simulation in Healthcare (SSH) — Accreditation Standards 2021',
+            authors: 'TRF source #56 — ssih.org',
+            summary: 'Authoritative SSH accreditation standards for healthcare simulation programs covering facility design and modalities — directly supports Items 11 and broader simulation infrastructure references.',
+            url: 'https://www.ssih.org/sites/default/files/2025-03/2021%20SSH%20Accreditation%20Standards.pdf',
+          },
+          {
+            type: 'Standard',
+            title: 'SSH — Research Accreditation Standards 2021',
+            authors: 'TRF source #57 — ssih.org',
+            summary: 'Validates SSH research and design standards for simulation centers — supports Item 11 and simulation-facility design principles.',
+            url: 'https://www.ssih.org/sites/default/files/2025-03/2021%20SSH%20Research%20Accreditation%20Standards.pdf',
+          },
+          {
+            type: 'Paper',
+            title: 'Nature — \"Illuminating the dark spaces of healthcare with ambient intelligence\"',
+            authors: 'TRF source #58 — nature.com',
+            summary: 'Peer-reviewed Nature paper validating ambient intelligence with ceiling-mounted/contactless sensors in clinical settings — directly supports Item 14.',
+            url: 'https://www.nature.com/articles/s41586-020-2669-y',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Ethical issues in using ambient intelligence in health-care settings\"',
+            authors: 'TRF source #59 — nih.gov',
+            summary: 'Peer-reviewed validation of ceiling-mounted ambient sensors in OR and ICU settings — directly supports Item 14.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8310737/',
+          },
+          {
+            type: 'Reference',
+            title: 'Houston Methodist — \"Ambient Intelligence: Leveraging Computer Vision Technology to Improve OR Efficiency\"',
+            authors: 'TRF source #60 — houstonmethodist.org',
+            summary: 'Validates real-world deployment of four ceiling-mounted cameras + audio sensors per OR for ambient clinical intelligence — directly supports Item 14.',
+            url: 'https://www.houstonmethodist.org/leading-medicine-blog/articles/2025/oct/ambient-intelligence-leveraging-computer-vision-technology-to-improve-or-efficiency/',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Visual Haptic Feedback for Training of Robotic Suturing\"',
+            authors: 'TRF source #61 — nih.gov',
+            summary: 'Peer-reviewed validation of robotic-suturing simulators that track grip/tension via visual-haptic feedback — directly supports Item 15.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8849007/',
+          },
+          {
+            type: 'Paper',
+            title: 'arXiv — \"Wrist-Squeezing Force Feedback Improves Accuracy and Speed in Robotic Surgery Training\"',
+            authors: 'TRF source #62 — arxiv.org',
+            summary: 'Peer-reviewed training study showing tactile feedback significantly reduces grip force in suturing tasks — directly supports Item 15.',
+            url: 'https://arxiv.org/pdf/2205.06927',
+          },
+          {
+            type: 'Paper',
+            title: 'Frontiers in Robotics and AI — \"Role of haptic feedback technologies and novel engineering developments for surgical training\"',
+            authors: 'TRF source #63 — frontiersin.org',
+            summary: 'Peer-reviewed validation of haptic feedback systems tracking arm movement and grip in surgical simulators — directly supports Item 15.',
+            url: 'https://www.frontiersin.org/journals/robotics-and-ai/articles/10.3389/frobt.2025.1567955/full',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Application of Haptic Feedback to Robotic Surgery\"',
+            authors: 'TRF source #64 — nih.gov',
+            summary: 'Peer-reviewed validation of sensor-based suture tension monitoring during robot-assisted knot tying — directly supports Item 15.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC1283126/',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Development of a microsurgery-assisted robot for high-precision thread traction and tension control\"',
+            authors: 'TRF source #65 — nih.gov',
+            summary: 'Peer-reviewed validation of robotic systems with sensors that precisely measure suture traction force — directly supports Item 15.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7988610/',
+          },
+          {
+            type: 'Paper',
+            title: 'arXiv — \"MedSimAI: Simulation and Formative Feedback Generation to Enhance Deliberate Practice in Medical Education\"',
+            authors: 'TRF source #66 — arxiv.org',
+            summary: 'Peer-reviewed validation of AI-powered branching simulation platforms with real-time feedback in medical schools — directly supports Items 18 and 19.',
+            url: 'https://arxiv.org/pdf/2503.05793',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Generative AI in simulation debriefings: Team-FIRST framework\"',
+            authors: 'TRF source #67 — nih.gov',
+            summary: 'Peer-reviewed validation of AI tools providing real-time analysis of team interactions during medical simulations — directly supports Item 18.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12924402/',
+          },
+          {
+            type: 'Reference',
+            title: 'Society for Learning Analytics Research (SoLAR) — \"Multimodal AI-Powered Teamwork Analytics in Healthcare Simulation\"',
+            authors: 'TRF source #68 — solaresearch.org',
+            summary: 'Validates AI tools that capture body movement, heartbeat, and speech to track team performance in real time — directly supports Item 18.',
+            url: 'https://www.solaresearch.org/?p=49511',
+          },
+          {
+            type: 'Paper',
+            title: 'Nature npj AI — \"Combining real-time AI and in-person expert instruction in simulated surgical skills training\"',
+            authors: 'TRF source #69 — nature.com',
+            summary: 'Peer-reviewed RCT validating real-time AI feedback (ICEMS deep-learning system) during VR surgical simulation — directly supports Items 18 and 22.',
+            url: 'https://www.nature.com/articles/s44387-025-00032-8',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"A Mathematical Model Based on Stratifying the Severity of Medical Errors for Building Scenarios for Clinical Cases With Branching\"',
+            authors: 'TRF source #70 — nih.gov',
+            summary: 'Peer-reviewed validation of branching diagnostic case scenarios as effective AI-augmented medical education — directly supports Item 19.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11088723/',
+          },
+          {
+            type: 'Paper',
+            title: 'arXiv — \"Automated Generation of High-Quality Medical Simulation Scenarios Through Integration of Semi-Structured Data and LLMs\"',
+            authors: 'TRF source #71 — arxiv.org',
+            summary: 'Peer-reviewed validation of LLM-driven branching simulation scenario generation — directly supports Item 19.',
+            url: 'https://arxiv.org/pdf/2404.19713',
+          },
+          {
+            type: 'Reference',
+            title: 'Sketchy / DDx — \"Enhancing medical education with AI-powered simulations\"',
+            authors: 'TRF source #72 — sketchy.com',
+            summary: 'Industry validation of AI-powered branching diagnostic scenario platforms in medical education — supports Item 19.',
+            url: 'https://educators.sketchy.com/posts/enhancing-medical-education-with-ai-powered-simulations-leveraging-scaffolded-learning-and-adaptive-technology',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Artificial Intelligence and Healthcare Simulation: The Shifting Landscape of Medical Education\"',
+            authors: 'TRF source #73 — nih.gov',
+            summary: 'Peer-reviewed validation of AI-driven dynamic patient symptom alteration based on treatment choices — directly supports Item 24.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11152357/',
+          },
+          {
+            type: 'Paper',
+            title: 'arXiv — \"From Hype to Implementation: Embedding GPT-4o in Medical Education\" (PMC12527310)',
+            authors: 'TRF source #74 — nih.gov',
+            summary: 'Peer-reviewed validation of multimodal AI providing dynamic adaptive patient simulation — supports Items 19, 24, and 28.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12527310/',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Edge Computing in Healthcare: Innovations, Opportunities, and Challenges\" (MDPI Future Internet)',
+            authors: 'TRF source #75 — mdpi.com',
+            summary: 'Peer-reviewed validation of edge-computing infrastructure in clinical/healthcare environments — directly supports Item 22.',
+            url: 'https://www.mdpi.com/1999-5903/16/9/329',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"AI augmented edge and fog computing for Internet of Health Things (IoHT)\"',
+            authors: 'TRF source #76 — nih.gov',
+            summary: 'Peer-reviewed validation of edge AI computing architectures for low-latency healthcare workloads (e.g., VR/AR clinical training) — directly supports Item 22.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11888859/',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Virtual reality as a teaching method for resuscitation training in undergraduate first year medical students\" (PMC7851931)',
+            authors: 'TRF source #77 — nih.gov',
+            summary: 'Peer-reviewed RCT validating VR for BLS/CPR/code training — directly supports Items 22 and 23.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7851931/',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Use of augmented and virtual reality in resuscitation training: A systematic review\" (PMC11053298)',
+            authors: 'TRF source #78 — nih.gov',
+            summary: 'Peer-reviewed systematic review validating VR/AR for code blue/resuscitation simulation — directly supports Items 22 and 23.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11053298/',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Virtual reality as a teaching method for resuscitation training during COVID-19\" (PMC9214467)',
+            authors: 'TRF source #79 — nih.gov',
+            summary: 'Peer-reviewed RCT validating VR-delivered BLS resuscitation training — directly supports Items 22 and 23.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9214467/',
+          },
+          {
+            type: 'Paper',
+            title: 'arXiv — \"MEDCO: Medical Education Copilots Based on A Multi-Agent Framework\"',
+            authors: 'TRF source #80 — arxiv.org',
+            summary: 'Peer-reviewed validation of multi-agent AI system acting as expert/peer \"copilots\" in medical training — directly supports Item 28.',
+            url: 'https://arxiv.org/pdf/2408.12496',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Artificial Intelligence Versus Human-Controlled Doctor in Virtual Reality Simulation for Sepsis Team Training\" (PMC10413090)',
+            authors: 'TRF source #81 — nih.gov',
+            summary: 'Peer-reviewed RCT validating an AI-powered doctor agent acting as a teammate in interprofessional simulation — directly supports Item 28.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10413090/',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Human-AI teaming: leveraging transactive memory and speaking up for enhanced team effectiveness\" (PMC10436524)',
+            authors: 'TRF source #82 — nih.gov',
+            summary: 'Peer-reviewed validation of AI agents as full team members in ICU teams — directly supports Item 28.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10436524/',
+          },
+          {
+            type: 'Paper',
+            title: 'arXiv — \"Designing and Evaluating an AI-enhanced Immersive Multidisciplinary Simulation (AIMS)\"',
+            authors: 'TRF source #83 — arxiv.org',
+            summary: 'Peer-reviewed validation of conversational AI as embodied virtual patient/peer in IPE training — directly supports Item 28.',
+            url: 'https://arxiv.org/pdf/2510.08891',
+          },
+          {
+            type: 'Paper',
+            title: 'arXiv — \"Advancing Human-Machine Teaming: Concepts, Challenges, and Applications\"',
+            authors: 'TRF source #84 — arxiv.org',
+            summary: 'Peer-reviewed survey validating trust calibration and adaptive teaming in human-AI training, including healthcare — directly supports Item 29.',
+            url: 'https://arxiv.org/pdf/2503.16518',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Self-assessment in machines boosts human Trust\" (Frontiers in Robotics and AI 2025)',
+            authors: 'TRF source #85 — nih.gov',
+            summary: 'Peer-reviewed validation of trust-calibration training between humans and AI — directly supports Item 29.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12146354/',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Explainable recommendation: when design meets trust calibration\" (PMC8327305)',
+            authors: 'TRF source #86 — nih.gov',
+            summary: 'Peer-reviewed validation of trust-calibration training for healthcare AI errors — directly supports Item 29.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8327305/',
+          },
+          {
+            type: 'Reference',
+            title: 'ICE Blog (peer educator commentary) — \"Deskilling and Automation Bias: A Cautionary Tale for Health Professions Educators\"',
+            authors: 'TRF source #87 — icenet.blog',
+            summary: 'Validates clinician over-reliance on AI (\"automation bias\") and need for training scenarios with AI errors — directly supports Item 29.',
+            url: 'https://icenet.blog/2025/08/26/deskilling-and-automation-bias-a-cautionary-tale-for-health-professions-educators/',
+          },
+          {
+            type: 'Paper',
+            title: 'medRxiv — \"Automation Bias in Large Language Model Assisted Diagnostic Reasoning Among AI-Trained Physicians\"',
+            authors: 'TRF source #88 — medrxiv.org',
+            summary: 'Peer-reviewed preprint validating clinicians\' susceptibility to AI errors and the need for trust-calibration training — directly supports Item 29.',
+            url: 'https://www.medrxiv.org/content/10.1101/2025.08.23.25334280.full.pdf',
+          },
+          {
+            type: 'Paper',
+            title: 'ScienceDirect — \"Exploring the risks of automation bias in healthcare AI applications: A Bowtie analysis\"',
+            authors: 'TRF source #89 — sciencedirect.com',
+            summary: 'Peer-reviewed validation that exposing clinicians to scenarios where AI fails reduces overtrust — directly supports Item 29.',
+            url: 'https://www.sciencedirect.com/science/article/pii/S2666449624000410',
+          },
+          {
+            type: 'Reference',
+            title: 'Cleveland Clinic — IBM Quantum System One + on-premises HPC cluster announcement',
+            authors: 'TRF source #90 — ccf.org',
+            summary: 'Validates the first U.S. academic medical center deploying quantum + HPC clusters for clinical research — directly supports Item 27.',
+            url: 'https://www.lerner.ccf.org/news/article/?title=Updated+quantum+chip,+high-performance+computing+connection+to+support+Cleveland+Clinic+quantum+computing+research+&id=e91293c97492a9c3541e2ebbc66b86f2126528a3',
+          },
+          {
+            type: 'Paper',
+            title: 'Springer — \"Quantum computing revolution in healthcare: a systematic review\"',
+            authors: 'TRF source #91 — springer.com',
+            summary: 'Peer-reviewed validation of quantum/HPC convergence for healthcare research — directly supports Item 27.',
+            url: 'https://link.springer.com/article/10.1007/s10462-025-11381-w',
+          },
+          {
+            type: 'Paper',
+            title: 'arXiv — \"The state of quantum computing applications in health and medicine\" (Flöther, IBM)',
+            authors: 'TRF source #92 — arxiv.org',
+            summary: 'Peer-reviewed mapping of clinical quantum computing applications — directly supports Item 27.',
+            url: 'https://arxiv.org/pdf/2301.09106',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"The Potential of Quantum Computing and Machine Learning to Advance Clinical Research\" (PMC6205278)',
+            authors: 'TRF source #93 — nih.gov',
+            summary: 'Peer-reviewed validation of quantum computing for clinical/medical research applications — supports Item 27.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6205278/',
+          },
+          {
+            type: 'Reference',
+            title: 'WB Engineers+Consultants — \"Planning Lab Infrastructure for AI-Driven Simulation Environments\"',
+            authors: 'TRF source #94 — wbengineering.com',
+            summary: 'Validates that AI/quantum simulation labs require expanded electrical capacity and scalable cooling akin to compact data centers — directly supports Items 16, 20, 25, and 32.',
+            url: 'https://wbengineering.com/resources/articles/planning-lab-infrastructure-for-ai-driven-simulation/',
+          },
+          {
+            type: 'Reference',
+            title: 'Risknowlogy — \"Graceful Degradation — Degraded Mode in Safety Systems\"',
+            authors: 'TRF source #95 — risknowlogy.com',
+            summary: 'Validates graceful-degradation as a formal safety-system design principle for mixed-criticality systems — directly supports Item 30.',
+            url: 'https://risknowlogy.com/articles/detail/17309/',
+          },
+          {
+            type: 'Reference',
+            title: 'SIL Safe — \"Graceful Degradation\"',
+            authors: 'TRF source #96 — silsafe.net',
+            summary: 'Validates graceful degradation as the planned ability of safety-critical systems to keep core functions during partial failure — directly supports Item 30.',
+            url: 'https://silsafe.net/glossary/graceful-degradation/',
+          },
+          {
+            type: 'Paper',
+            title: 'ScienceDirect Topics — \"Graceful Degradation\" (Computer Science overview)',
+            authors: 'TRF source #97 — sciencedirect.com',
+            summary: 'Validates graceful degradation as a principal design philosophy for ubiquitous and IoT/healthcare systems — directly supports Item 30.',
+            url: 'https://www.sciencedirect.com/topics/computer-science/graceful-degradation',
+          },
+          {
+            type: 'Paper',
+            title: 'arXiv — \"Integrating Graceful Degradation and Recovery through Requirement-driven Adaptation\" (Carnegie Mellon)',
+            authors: 'TRF source #98 — arxiv.org',
+            summary: 'Peer-reviewed validation of graceful-degradation/recovery formalisms for cyber-physical systems — analogous support for Item 30.',
+            url: 'https://arxiv.org/pdf/2401.09678',
+          },
+          {
+            type: 'Reference',
+            title: 'International Journal of Emerging Trends in CS&IT — \"Chaos Engineering in Clinical Microservices: Graceful Degradation Framework for Critical Medical Clients\"',
+            authors: 'TRF source #99 — ijetcsit.org',
+            summary: 'Peer-reviewed validation of a Graceful Degradation Framework specifically for clinical Kubernetes/microservices and critical medical alerting — directly supports Item 30.',
+            url: 'https://ijetcsit.org/index.php/ijetcsit/article/view/677',
+          },
+          {
+            type: 'Standard',
+            title: 'HFMA — \"Tackling the Challenge of Stranded Assets in the Acute Care Hospital Sector\"',
+            authors: 'TRF source #100 — hfma.org',
+            summary: 'Authoritative HFMA gray-literature validation of the \"stranded asset\" concept (≈$160B / ~40% of U.S. hospital fixed-asset base) — directly supports Item 31 (Stranded-Asset Trap).',
+            url: 'https://www.hfma.org/topics/article/54453.html',
+          },
+          {
+            type: 'Standard',
+            title: 'AHA — \"Federal Investment Needed to Keep Hospitals\' Physical Infrastructure Ready\"',
+            authors: 'TRF source #101 — aha.org',
+            summary: 'Validates the AHA\'s framing of hospitals\' lack of slack/over-built capacity and the trap of under-invested vs. over-invested infrastructure — analogous support for Item 31.',
+            url: 'https://www.aha.org/fact-sheets/2021-05-26-fact-sheet-federal-investment-needed-keep-hospitals-physical-infrastructure',
+          },
+          {
+            type: 'Reference',
+            title: 'SwipeSense — \"A Solution for Inefficient Asset Utilization in Hospitals\"',
+            authors: 'TRF source #102 — swipesense.com',
+            summary: 'Validates that hospitals frequently invest in capacity nobody uses (\"Fantasy Trap\") with documented low asset utilization — analogous support for Item 31.',
+            url: 'https://www.swipesense.com/2018/08/22/a-solution-for-inefficient-asset-utilization-in-hospitals/',
+          },
+          {
+            type: 'Reference',
+            title: 'Healthcare Finance News — \"Mobile asset management in the hospital\" (GE Healthcare)',
+            authors: 'TRF source #103 — healthcarefinancenews.com',
+            summary: 'Validates that hospitals on average have 25% more capacity/equipment than can be used — directly supports the Fantasy Trap component of Item 31.',
+            url: 'https://www.healthcarefinancenews.com/medtech-blog/mobile-asset-management-hospital-depth-discussion-ge-healthcare',
+          },
+          {
+            type: 'Reference',
+            title: 'Donnelly Mech — \"HVAC for Data Centers\" (oversize for future heat load + N+1 redundancy)',
+            authors: 'TRF source #104 — donnellymech.com',
+            summary: 'Validates industry HVAC sizing for future server heat-load growth — directly supports Item 32.',
+            url: 'https://donnellymech.com/blog/commercial-hvac/hvac-for-data-centers-what-the-industry-needs-to-know/',
+          },
+          {
+            type: 'Reference',
+            title: 'Dataspan — \"How to Calculate Cooling Requirement for your Data Center\"',
+            authors: 'TRF source #105 — dataspan.com',
+            summary: 'Validates oversizing cooling capacity by up to 30% for future load growth and N+1 redundancy — directly supports Item 32.',
+            url: 'https://dataspan.com/blog/how-to-calculate-cooling-requirements-for-a-data-center/',
+          },
+          {
+            type: 'Reference',
+            title: 'HVAC-Eng — \"Optimizing HVAC Systems for Data Centers\"',
+            authors: 'TRF source #106 — hvac-eng.com',
+            summary: 'Validates HVAC scalability planning for evolving data-center heat loads — supports Item 32.',
+            url: 'https://hvac-eng.com/optimizing-hvac-systems-for-data-centers-key-considerations/',
+          },
+          {
+            type: 'Standard',
+            title: 'ASHRAE TC 9.9 — \"Data Center Storage Equipment\" white paper (2015)',
+            authors: 'TRF source #107 — ashrae.org',
+            summary: 'Validates ASHRAE thermal guidance for data-processing equipment with recommendations on power-density growth and thermal envelope — directly supports Items 16, 20, 25, and 32.',
+            url: 'https://www.ashrae.org/file%20library/technical%20resources/bookstore/ashrae_storage_white_paper_2015.pdf',
+          },
+          {
+            type: 'Standard',
+            title: 'ASHRAE TC 9.9 — \"Data Center Power Equipment Thermal Guidelines\" (2016)',
+            authors: 'TRF source #108 — ashrae.org',
+            summary: 'Validates ASHRAE thermal/structural design guidelines for high-density power equipment — supports Items 16, 20, 25, 32.',
+            url: 'https://www.ashrae.org/file%20library/technical%20resources/bookstore/ashrae_tc0909_power_white_paper_22_june_2016_revised.pdf',
+          },
+          {
+            type: 'Paper',
+            title: 'PLOS Digital Health — \"A problem of Epic proportion\" (Epic dominance and vendor lock-in)',
+            authors: 'TRF source #109 — plos.org',
+            summary: 'Peer-reviewed analysis of vendor lock-in risk in U.S. healthcare EHR infrastructure and EU\'s regulatory mitigation — directly supports Item 33.',
+            url: 'https://journals.plos.org/digitalhealth/article?id=10.1371/journal.pdig.0001143',
+          },
+          {
+            type: 'Paper',
+            title: 'NCBI Bookshelf — \"Why Interoperability is Essential in Health Care: Procuring Interoperability\" (NBK594855)',
+            authors: 'TRF source #110 — nih.gov',
+            summary: 'Peer-reviewed/National Academies validation that proprietary \"vendor lock\" is a primary obstacle in healthcare data infrastructure — directly supports Item 33.',
+            url: 'https://www.ncbi.nlm.nih.gov/books/NBK594855/',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"The 21st Century Cures Act: A Competitive Apps Market and the Risk of Innovation Blocking\" (PMC7762678)',
+            authors: 'TRF source #111 — nih.gov',
+            summary: 'Peer-reviewed validation of federal information-blocking rules designed to mitigate vendor lock-in — directly supports Item 33.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7762678/',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"The Cosmos Collaborative: A Vendor-Facilitated Electronic Health Record Data Aggregation Platform\" (PMC8775787)',
+            authors: 'TRF source #112 — nih.gov',
+            summary: 'Peer-reviewed validation of vendor-specific limitations and the need for inter-vendor interoperability — directly supports Item 33.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8775787/',
+          },
+          {
+            type: 'Reference',
+            title: 'EHR In Practice — \"EHR interoperability challenges and solutions\"',
+            authors: 'TRF source #113 — ehrinpractice.com',
+            summary: 'Industry validation of vendor lock-in as a systemic challenge in healthcare data infrastructure — supports Item 33.',
+            url: 'https://www.ehrinpractice.com/ehr-interoperability-challenges-solutions.html',
+          },
+          {
+            type: 'Reference',
+            title: 'EHR Source — \"EHR Interoperability in 2026: FHIR, TEFCA, and What Your Practice Needs to Know\"',
+            authors: 'TRF source #114 — ehrsource.com',
+            summary: 'Industry validation of FHIR/TEFCA/SMART-on-FHIR as mitigation strategies against vendor lock-in — supports Item 33.',
+            url: 'https://www.ehrsource.com/articles/ehr-interoperability-guide/',
+          },
+          {
+            type: 'Reference',
+            title: 'Houston Methodist / Apella — \"Operating Room Efficiency with Ambient Intelligence\"',
+            authors: 'TRF source #115 — apella.io',
+            summary: 'Validates real-world implementation of four ceiling-mounted cameras + audio sensors per OR for ambient intelligence — directly supports Item 14.',
+            url: 'https://apella.io/blog/operating-room-efficiency-with-ambient-intelligence-lessons-from-the-or-manager-conference',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"The impact of simulation-based training in medical education: A review\" (PMC11224887)',
+            authors: 'TRF source #116 — nih.gov',
+            summary: 'Peer-reviewed review validating AI-driven adaptive simulation with real-time feedback — supports Items 18, 19, 24.',
+            url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11224887/',
+          },
+          {
+            type: 'Reference',
+            title: 'ClinicalTrials.gov — \"Testing the Efficacy of an Artificial Intelligence Real-Time Coaching System (ICEMS) in Simulation Training of Medical Students\" (NCT05168150)',
+            authors: 'TRF source #117 — clinicaltrials.gov',
+            summary: 'Validates registered RCT of real-time AI coaching during VR simulation training — directly supports Items 18, 22.',
+            url: 'https://clinicaltrials.gov/study/NCT05168150',
+          },
+          {
+            type: 'Paper',
+            title: 'MDPI Sensors — \"Haptic and Palpation Sensing for Robotic Surgery\"',
+            authors: 'TRF source #118 — mdpi.com',
+            summary: 'Peer-reviewed validation of force/tactile/optical sensors integrated into robotic-suturing training — directly supports Item 15.',
+            url: 'https://www.mdpi.com/1424-8220/26/4/1126',
+          },
+          {
+            type: 'Paper',
+            title: 'arXiv — \"An Experimental Modular Instrument With a Haptic Feedback Framework for Robotic Surgery Training\"',
+            authors: 'TRF source #119 — arxiv.org',
+            summary: 'Peer-reviewed validation of haptic-integrated robotic suture training instruments — supports Item 15.',
+            url: 'https://arxiv.org/html/2604.27385',
+          },
+          {
+            type: 'Standard',
+            title: 'HealthySimulation.com — \"SSiH: Society for Simulation in Healthcare\"',
+            authors: 'TRF source #120 — healthysimulation.com',
+            summary: 'Industry summary of SSH role in setting simulation modality and facility-design standards across healthcare — supports Items 11, 14, 18, 19, 22, 23, 24, 28.',
+            url: 'https://www.healthysimulation.com/ssih-society-for-simulation-in-healthcare/',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Quantum Computing in Medicine\" (PMC11586987)',
+            authors: 'TRF source #121 — nih.gov',
+            summary: 'Peer-reviewed validation of QC integration with HPC and clinical environments — directly supports Item 27.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11586987/',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"The Potential Role of Quantum Computing in Biomedicine and Healthcare: The Next Frontier Beyond AI\" (PMC12096140)',
+            authors: 'TRF source #122 — nih.gov',
+            summary: 'Peer-reviewed validation of quantum-enhanced research clusters in healthcare — supports Item 27.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12096140/',
+          },
+          {
+            type: 'Reference',
+            title: 'Cleveland Clinic Consult QD — \"Quantum Computing Debuts at Cleveland Clinic\"',
+            authors: 'TRF source #123 — clevelandclinic.org',
+            summary: 'Validates real-world deployment of HPC + quantum in a healthcare research setting — directly supports Item 27.',
+            url: 'https://consultqd.clevelandclinic.org/quantum-computing-debuts-at-cleveland-clinic',
+          },
+          {
+            type: 'Reference',
+            title: 'National Gypsum — \"Designing Health Care Facilities for Optimal IEQ\"',
+            authors: 'TRF source #124 — nationalgypsum.com',
+            summary: 'Validates FGI STC requirements (≥50 between consultation room and adjacent public space) — directly supports Item 6.',
+            url: 'https://www.nationalgypsum.com/newsroom/newsletters/onboard-august2022',
+          },
+          {
+            type: 'Reference',
+            title: 'Hesni — \"Acoustics for Hospitals: FGI Guidelines, HCAHPS, and LEED\"',
+            authors: 'TRF source #125 — hesni.org',
+            summary: 'Validates the FGI demising-wall STC tables (STC 45–60 across hospital adjacencies) — directly supports Item 6.',
+            url: 'https://hesni.org/images/downloads/2013_Annual_Conference/healthcare_facilities_acoustics.pdf',
+          },
+          {
+            type: 'Reference',
+            title: 'Aihealthcare360 — \"Risks of AI in Healthcare: Bias, Errors, and Patient Safety\"',
+            authors: 'TRF source #126 — aihealthcare360.org',
+            summary: 'Validates the requirement for clinician training on AI failure modes and trust calibration — supports Item 29.',
+            url: 'https://aihealthcare360.org/foundations/risks-of-ai-in-healthcare/',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"ChatGPT in Medical Education: A Precursor for Automation Bias?\" (PMC10831594)',
+            authors: 'TRF source #127 — nih.gov',
+            summary: 'Peer-reviewed validation of training future physicians to recognize AI errors and avoid overtrust — directly supports Item 29.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10831594/',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Bias recognition and mitigation strategies in artificial intelligence healthcare applications\" (PMC11897215)',
+            authors: 'TRF source #128 — nih.gov',
+            summary: 'Peer-reviewed validation of trust-calibration and AI-error mitigation training in clinical AI — supports Item 29.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11897215/',
+          },
+          {
+            type: 'Reference',
+            title: 'Electricity Plans — \"Electricity for Hospitals, Clinics and Medical Facilities\" (DOE CBECS data)',
+            authors: 'TRF source #129 — electricityplans.com',
+            summary: 'Validates U.S. DOE CBECS data on hospital electricity intensity (31 kWh/SF/yr inpatient) — analogous benchmark for Items 9, 12, 16, 20, 25.',
+            url: 'https://electricityplans.com/landing/electricity-for-hospitals-clinics-medical-offices/',
+          },
+          {
+            type: 'Reference',
+            title: 'Gunderson Engineering — \"Best Practices for Electrical Load Calculations in Commercial Buildings\"',
+            authors: 'TRF source #130 — gundersonengineering.com',
+            summary: 'Validates NEC-based load calculations and commercial-building W/SF rules of thumb — analogous benchmark for Items 4, 9, 12, 16.',
+            url: 'https://gundersonengineering.com/best-practices-for-electrical-load-calculations-in-commercial-buildings/',
+          },
+          {
+            type: 'Reference',
+            title: 'Electrical Knowhow — \"Electrical Load Estimation – Part Two\" (IEEE-based W/sqft tables)',
+            authors: 'TRF source #131 — electrical-knowhow.com',
+            summary: 'Validates IEEE-based commercial W/sqft load-estimation tables (Hospital ≈ 20 W/sqft total) — analogous benchmark for Items 9, 12, 16, 20, 25.',
+            url: 'http://www.electrical-knowhow.com/2012/11/electrical-load-estimation-part-two.html',
+          },
+          {
+            type: 'Standard',
+            title: 'NPC EC&M — \"Branch-Circuit, Feeder and Service Calculations, Part IX\" (NEC 220.14)',
+            authors: 'TRF source #132 — ecmag.com',
+            summary: 'Validates NEC code-based receptacle and lighting load formulas (1 VA/SF general receptacle baseline; analogous baseline for ~5 W/sqft Level 1 spec) — supports Item 9.',
+            url: 'https://www.ecmag.com/section/codes-standards/branch-circuit-feeder-and-service-calculations-part-ix',
+          },
+          {
+            type: 'Standard',
+            title: 'Mypdh.engineer — \"NEC 220 – Branch-Circuit, Feeder, and Service Load Calculations\"',
+            authors: 'TRF source #133 — mypdh.engineer',
+            summary: 'Validates NEC Table 220.12 lighting/receptacle load standards used as baseline for office-type analog spaces — analogous benchmark for Item 9 (Level 1: 5 W/sqft).',
+            url: 'https://mypdh.engineer/lessons/220-branch-circuit-feeder-and-service-load-calculations-2/',
+          },
+          {
+            type: 'Reference',
+            title: 'emergentmind — \"Trust Calibration in AI\" (Human–AI Governance framework)',
+            authors: 'TRF source #134 — emergentmind.com',
+            summary: 'Validates trust-calibration as a multidimensional and quantitative process in human–AI clinical teaming — supports Item 29.',
+            url: 'https://www.emergentmind.com/topics/trust-calibration-in-ai',
+          },
+          {
+            type: 'Paper',
+            title: 'arXiv — \"Uncalibrated Models Can Improve Human-AI Collaboration\"',
+            authors: 'TRF source #135 — arxiv.org',
+            summary: 'Peer-reviewed validation of trust-calibration training as integral to safe human-AI healthcare collaboration — supports Item 29.',
+            url: 'https://arxiv.org/pdf/2202.05983',
+          },
+          {
+            type: 'Paper',
+            title: 'arXiv — \"Trustworthy and Practical AI for Healthcare: A Guided Deferral System with LLMs\"',
+            authors: 'TRF source #136 — arxiv.org',
+            summary: 'Peer-reviewed validation of human-AI deferral systems and calibrated trust in clinical workflow — supports Items 28 and 29.',
+            url: 'https://arxiv.org/pdf/2406.07212',
+          },
+          {
+            type: 'Paper',
+            title: 'PMC — \"Providing Care: Intrinsic Human–Machine Teams and Data\" (PMC9601264)',
+            authors: 'TRF source #137 — nih.gov',
+            summary: 'Peer-reviewed validation of human-machine teaming as an emerging paradigm in healthcare — supports Item 28.',
+            url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9601264/',
+          },
+          {
+            type: 'Standard',
+            title: 'Leviton — \"ASHRAE 90.1 2022 Lighting Control and Submetering Design Guide\"',
+            authors: 'TRF source #138 — leviton.com',
+            summary: 'Validates current ASHRAE 90.1 lighting density standards used as baseline reference — analogous benchmark for Items 4, 9, 12.',
+            url: 'https://leviton.com/content/dam/leviton/lighting-controls/controls/product_documents/design_guides/ASHRAE-90-1-2022-Lighting-Control-and-Submetering-English-Design-Guide1.pdf',
+          },
+          {
+            type: 'Reference',
+            title: 'UpCodes — California Building Code 2022 Chapter 16 (IBC structural design)',
+            authors: 'TRF source #139 — up.codes',
+            summary: 'Validates IBC/CBC structural live-load reporting requirements — analogous code reference for Item 8.',
+            url: 'https://up.codes/viewer/california/ca-building-code-2022/chapter/16/structural-design',
+          },
+          {
+            type: 'Standard',
+            title: 'ICC Digital Codes — 2018 IBC Section 1607 Live Loads',
+            authors: 'TRF source #140 — iccsafe.org',
+            summary: 'Authoritative source for IBC live-load minimum values across hospital, office, and lab occupancies — analogous benchmark for Item 8.',
+            url: 'https://codes.iccsafe.org/s/IBC2018/chapter-16-structural-design/IBC2018-Ch16-Sec1607',
+          },
         ],
         // Working glossary surfaced as a fourth tab on the appendix panel.
         // Alphabetical. Add new terms in their alphabetical position.
@@ -3415,6 +4804,47 @@ function spreadPages(spreadIdx) {
 }
 
 /* ============================================================================
+   PAGE LABELS
+   ============================================================================
+   The PDF starts with front matter (cover, copyright, TOC, etc.) before the
+   book body begins. The first body spread is at site pages 11-12, so site
+   pages 1-10 are front matter and labeled A-J; site page 11 is book page 1
+   onward. The pageLabel/parseLabel pair handle both directions. */
+
+const FRONT_MATTER_PAGES = 10; // site pages 1..10 are front matter (A..J)
+
+function pageLabel(siteNum) {
+  if (siteNum == null) return '';
+  if (siteNum <= 0) return '';
+  if (siteNum <= FRONT_MATTER_PAGES) {
+    // 1 -> A, 2 -> B, ... 10 -> J
+    return String.fromCharCode(64 + siteNum);
+  }
+  // 11 -> 1, 12 -> 2, ...
+  return String(siteNum - FRONT_MATTER_PAGES);
+}
+
+/** Convert a user-typed label back to a site-page number. Accepts:
+ *  - Single letter A-J (or a-j) -> 1..10
+ *  - Number string -> site page number = N + FRONT_MATTER_PAGES
+ *  - Returns NaN for unparseable input. */
+function parseLabel(input) {
+  if (typeof input !== 'string') return NaN;
+  const s = input.trim().toUpperCase();
+  if (s.length === 0) return NaN;
+  if (/^[A-Z]$/.test(s)) {
+    const code = s.charCodeAt(0) - 64; // A->1, J->10, ...
+    if (code < 1 || code > FRONT_MATTER_PAGES) return NaN;
+    return code;
+  }
+  const n = parseInt(s, 10);
+  if (!Number.isFinite(n)) return NaN;
+  if (n < 1) return NaN;
+  // Treat as book-body number; map back to site page
+  return n + FRONT_MATTER_PAGES;
+}
+
+/* ============================================================================
    PAGE RENDERING
    ============================================================================ */
 async function renderPdfPage(pageNum) {
@@ -3466,14 +4896,14 @@ function renderPlaceholder(pageNum) {
     wrap.classList.add('section-color');
     wrap.style.background = sectionForThisPage.placeholderColor;
     wrap.innerHTML = `
-      <div class="ph-meta"><span>Section · ${sectionForThisPage.name}</span><span>${String(pageNum).padStart(2,'0')}</span></div>
+      <div class="ph-meta"><span>Section · ${sectionForThisPage.name}</span><span>${pageLabel(pageNum)}</span></div>
       <div class="ph-content">
         <div class="ph-section-num">Section opener</div>
         <h2 class="ph-section-title">${sectionForThisPage.name}</h2>
         <div class="ph-rule"></div>
         <p class="ph-body">${(sectionForThisPage.appendix.heading || '').toString()}</p>
       </div>
-      <div class="ph-foot"><span>Section start</span><span class="ph-page-num">${String(pageNum).padStart(2,'0')}</span></div>
+      <div class="ph-foot"><span>Section start</span><span class="ph-page-num">${pageLabel(pageNum)}</span></div>
     `;
     return wrap;
   }
@@ -3485,14 +4915,14 @@ function renderPlaceholder(pageNum) {
     ? `This is a preview placeholder. Once the site is deployed alongside <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 11px; background: var(--paper-deep); padding: 1px 5px; border-radius: 2px;">${CONFIG.pdfPath.split('/').pop()}</code>, the actual book page will render here.`
     : `Drop a PDF into <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 11px; background: var(--paper-deep); padding: 1px 5px; border-radius: 2px;">CONFIG.pdfPath</code> at the top of this file's script tag. Each PDF page becomes one book page; pages are paired into spreads.`;
   wrap.innerHTML = `
-    <div class="ph-meta"><span>${sectionName}</span><span>${String(pageNum).padStart(2,'0')}</span></div>
+    <div class="ph-meta"><span>${sectionName}</span><span>${pageLabel(pageNum)}</span></div>
     <div class="ph-content">
-      <div class="ph-section-num">Page ${pageNum}</div>
+      <div class="ph-section-num">Page ${pageLabel(pageNum)}</div>
       <h2 class="ph-section-title" style="color: var(--burnt); font-size: 32px;">${hasConfiguredPdf ? 'Preview mode.' : 'Your spread<br>renders here.'}</h2>
       <div class="ph-rule" style="background: var(--burnt);"></div>
       <p class="ph-body">${bodyMsg}</p>
     </div>
-    <div class="ph-foot"><span>${hasConfiguredPdf ? 'Preview placeholder' : 'Placeholder mode'}</span><span class="ph-page-num">${String(pageNum).padStart(2,'0')}</span></div>
+    <div class="ph-foot"><span>${hasConfiguredPdf ? 'Preview placeholder' : 'Placeholder mode'}</span><span class="ph-page-num">${pageLabel(pageNum)}</span></div>
   `;
   return wrap;
 }
@@ -3531,14 +4961,20 @@ async function setPageSlot(slotEl, pageNum) {
    FLIP MECHANICS
    ============================================================================ */
 function updateArrows() {
-  // Page number reflected in the editable input below the book
+  // Page label reflected in the editable input below the book.
+  // Front matter (site pages 1-10) renders as letters A-J; the book body
+  // (site pages 11+) renders as 1, 2, 3, ... so site page 11 reads "1".
   const [lp, rp] = spreadPages(state.currentSpread);
-  // For the cover view, lp is null and rp is page 1
+  // For the cover view, lp is null and rp is page 1 (site numbering)
   const pageNumber = (lp == null) ? rp : lp;
   const pageInput = $('#page-input');
-  if (pageInput && document.activeElement !== pageInput) pageInput.value = pageNumber;
-  pageInput.max = state.totalPages;
-  $('#page-total').textContent = state.totalPages;
+  if (pageInput && document.activeElement !== pageInput) {
+    pageInput.value = pageLabel(pageNumber);
+  }
+  // "of N" should display the book-body total (site total minus front matter),
+  // matching the book's own pagination rather than the PDF's raw page count.
+  const bodyTotal = Math.max(0, state.totalPages - FRONT_MATTER_PAGES);
+  $('#page-total').textContent = bodyTotal;
 }
 
 async function renderCurrentSpread() {
@@ -3564,8 +5000,9 @@ async function renderCurrentSpread() {
   // Update meta UI
   const sec = spreadToSection(state.currentSpread);
 
-  // Update section nav active
-  $$('#section-nav button').forEach((btn) => {
+  // Update section nav active state across both nav instances
+  // (above-book and in-archive).
+  $$('#section-nav button, #section-nav-archive button').forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.id === sec.id);
   });
 
@@ -3823,6 +5260,22 @@ function goToInterview(name) {
   setTimeout(() => openInterviewModal(iv), 80);
 }
 
+/** Jump the book to the Appendix section, switch to its Literature tab, and
+ *  scroll the archive into view. Used by the TRF source-list footer link. */
+function goToLiteratureTab() {
+  const appendixSec = CONFIG.sections.find((s) => s.id === 'appendix');
+  if (!appendixSec) return;
+  setRoute(pathForSection(appendixSec));
+  jumpToSpread(appendixSec.startSpread);
+  // Wait for the archive to re-render, then activate the Literature tab and scroll.
+  setTimeout(() => {
+    const litTab = document.querySelector('#archive-content .research-tab[data-tab="secondary"]');
+    if (litTab) litTab.click();
+    const archive = document.getElementById('archive');
+    if (archive) archive.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
 /** Inject prose HTML for `sectionId` into `container` and wire person-link clicks.
  *  Content can be either:
  *    - a string of HTML (rendered as-is), or
@@ -3877,6 +5330,14 @@ function renderBeyondProse(container, sectionId) {
       goToInterview(btn.dataset.interviewName);
     });
     attachCursorTip(btn, 'View interview');
+  });
+
+  // Wire TRF source-list link to jump to the appendix Literature tab.
+  container.querySelectorAll('.trf-source-link').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      goToLiteratureTab();
+    });
   });
 }
 
@@ -4059,8 +5520,361 @@ const BEYOND_PROSE = {
     ],
   },
 
-  // Research and Tools intentionally absent — those panels remain "Content
-  // coming soon" until the team supplies the drafts.
+  // ============================ TOOLS ============================
+  // Three-tab structure. Spatial Catalog and Hub-Spokes-Anywhere are
+  // placeholders for now; Tech Readiness Framework carries the first
+  // round of content drawn from the team's matrix work.
+  tools: {
+    lede: `The Tools section in the book is constrained by the spread-by-spread layout. Beyond it sits the deeper specification of the three deliverables the EPMO commissioned: the Spatial Catalog, the Technology Readiness Framework, and the Hub, Spokes, Anywhere model. Each tab below opens that work to its working form, including the sources, the reasoning, and the parts the printed pages did not have room for.`,
+    tabs: [
+      {
+        id: 'spatial-catalog',
+        label: 'Spatial Catalog',
+        html: `
+          <p class="lede" style="opacity: 0.6; font-style: italic;">The Spatial Catalog expansion is being drafted. Check back here for the full set of room types, fixed and flexible elements, adjacency logic, and the sources behind each spatial decision.</p>
+        `,
+      },
+      {
+        id: 'tech-readiness',
+        label: 'Technology Readiness Framework',
+        html: `
+          <p class="lede">The Technology Readiness Framework maps human-AI relationships in a simulation room to architectural specifications. Five levels, from Unplugged to Agentic Peer, anchor a planning conversation that has too often been about specific products. The framework's most strategically important output is not the levels themselves but Room Zero, the over-provisioned baseline infrastructure that goes in every room at construction so that future upgrades are a software exercise rather than a capital project.</p>
+
+          <p>The book carries the framework at high level. Beyond it sits the deeper specification: hard architectural numbers, a six-system Room Zero spec with retrofit math, the room-mix snapshot across 2030, 2035, and 2040, and a three-question decision tool for matching a training objective to a room level.</p>
+
+          <h3>The Five Levels</h3>
+
+          <div class="trf-level">
+            <div class="trf-level-header">
+              <div class="trf-level-num">1</div>
+              <div class="trf-level-name">Unplugged \u2014 Direct Human Interaction</div>
+              <div class="trf-level-cost">Baseline</div>
+            </div>
+            <div class="trf-level-body">
+              <p>Direct human-to-human practice with no technology in the room. Standardized patient encounters, team communication drills, stress inoculation. ${_PL.RINALDI()}'s argument: when team orchestration is the learning objective, the widget does not matter. The team-sport practice can happen on a plastic doll. ${_PL.GIBSON()}'s argument: scenarios must occasionally remove technology to build power-out resilience. The SXSW Nurses-as-Firewall panel's evidence: Hurricane Helene caused 300+ mile power outages requiring paper charting; Ascension's ransomware attack left systems down for a month. Analog competency is safety-critical and non-negotiable. Every room above Level 1 has to be able to function this way.</p>
+              <table class="trf-spec-table">
+                <tr><td>Power</td><td>5 W/sqft, standard outlets</td></tr>
+                <tr><td>Data</td><td>Basic networking, wall outlets</td></tr>
+                <tr><td>Sq. footage</td><td>Minimal</td></tr>
+                <tr><td>Acoustics</td><td>Standard</td></tr>
+                <tr><td>HVAC</td><td>Standard</td></tr>
+                <tr><td>Structural</td><td>Standard</td></tr>
+                <tr><td>Cost premium</td><td>0% (baseline)</td></tr>
+              </table>
+              <div class="trf-degrade"><strong>Why Level 1 is permanent.</strong> Cognitive deskilling (AMA panel\u2019s GPS-dependency analogy) plus AI system failures (Helene, Ascension) make analog competency the firewall, not a legacy holdover.</div>
+            </div>
+          </div>
+
+          <div class="trf-level">
+            <div class="trf-level-header">
+              <div class="trf-level-num">2</div>
+              <div class="trf-level-name">Augmented \u2014 Human Oversees AI</div>
+              <div class="trf-level-cost">+10\u201315%</div>
+            </div>
+            <div class="trf-level-body">
+              <p>Technology enhances sensory realism and provides ambient feedback without replacing human judgment. AR-enhanced patient encounters, ambient intelligence feedback, sensor-based communication assessment. ${_PL.BRODERICK()}'s UCSD &ldquo;simulation backpacks&rdquo; brought training to clinical sites when learners couldn\u2019t come to the center. FLAIM Systems' heated firefighting suits made trainees four times more engaged; one trainee reported forgetting she was in VR. The technology did not take over. It made the sensory environment convincing enough that the body responded as if the fire were real.</p>
+              <table class="trf-spec-table">
+                <tr><td>Power</td><td>10\u201315 W/sqft</td></tr>
+                <tr><td>Data</td><td>Ceiling sensors, ambient intelligence, large monitors</td></tr>
+                <tr><td>Sq. footage</td><td>Slightly increased</td></tr>
+                <tr><td>Acoustics</td><td>Standard</td></tr>
+                <tr><td>HVAC</td><td>Standard</td></tr>
+                <tr><td>Structural</td><td>Standard</td></tr>
+                <tr><td>Cost premium</td><td>+10\u201315%</td></tr>
+              </table>
+              <div class="trf-degrade"><strong>Degrade.</strong> Falls back to Level 1 by powering off sensors and displays.</div>
+            </div>
+          </div>
+
+          <div class="trf-level">
+            <div class="trf-level-header">
+              <div class="trf-level-num">3</div>
+              <div class="trf-level-name">Tech in-the-Loop \u2014 Co-Participant</div>
+              <div class="trf-level-cost">+30\u201350%</div>
+            </div>
+            <div class="trf-level-body">
+              <p>AI-assisted continuous micro-assessment during team scenarios. Real-time performance tracking, cloud-based distributed simulation. The physical space stays constant while training content evolves via software. ${_PL.KORN_FULL()}'s vision of continuous micro-assessment during team scenarios. ${_PL.COKER_FULL()}'s robotic surgical-data observation: experts have measurably tighter arm movement than novices, but the link to actual competence has not been studied. Maritime cloud-based distributed simulation runs bridge crews across continents on the same scenario. Aviation's 50+ years of FAA certification standards correlate with fatal-accident reduction. Robotic surgery now logs every actuation as a credentialing artifact.</p>
+              <table class="trf-spec-table">
+                <tr><td>Power</td><td>20\u201330 W/sqft, heavy server load</td></tr>
+                <tr><td>Data</td><td>Server racks, multi hi-fi screens, sensor arrays</td></tr>
+                <tr><td>Sq. footage</td><td>Substantial expansion</td></tr>
+                <tr><td>Acoustics</td><td>Moderate, sensor accuracy required</td></tr>
+                <tr><td>HVAC</td><td>Increased, server heat dissipation</td></tr>
+                <tr><td>Structural</td><td>Standard</td></tr>
+                <tr><td>Cost premium</td><td>+30\u201350%</td></tr>
+              </table>
+              <div class="trf-degrade"><strong>Prerequisite.</strong> AI assessment depends on competency definition. The rubric work has not been completed in medical education. Flag as prerequisite, not blocker. \u2003 \u2003 <strong>Degrade.</strong> Falls back to Level 2 by disconnecting the cloud / AI layer.</div>
+            </div>
+          </div>
+
+          <div class="trf-level">
+            <div class="trf-level-header">
+              <div class="trf-level-num">4</div>
+              <div class="trf-level-name">Agent Managed \u2014 Directive</div>
+              <div class="trf-level-cost">+75\u2013100%</div>
+            </div>
+            <div class="trf-level-body">
+              <p>The room and scenario respond to the learner. Software-defined training environments. Adaptive scenarios that change based on learner actions. AI as scenario director. OSCE 2.0 ambiguity scenarios where the AI adjusts patient affect, symptom evolution, distractor events to target the individual learner\u2019s weak spots. Boeing's Starliner VR pre-launch training, where the scenario environment is software-defined and responds to the pilot's choices. Oil-and-gas point-of-need simulation runs on the actual rig, moving the training to the hazard.</p>
+              <table class="trf-spec-table">
+                <tr><td>Power</td><td>40\u201360 W/sqft, dedicated voltage</td></tr>
+                <tr><td>Data</td><td>Edge compute, VR/AR, dynamic wall power</td></tr>
+                <tr><td>Sq. footage</td><td>Maximum flexible</td></tr>
+                <tr><td>Acoustics</td><td>Significant, multi-channel audio</td></tr>
+                <tr><td>HVAC</td><td>Significant, compute heat load</td></tr>
+                <tr><td>Structural</td><td>Standard</td></tr>
+                <tr><td>Cost premium</td><td>+75\u2013100%</td></tr>
+              </table>
+              <div class="trf-degrade"><strong>Prerequisite.</strong> All Level 3 prerequisites plus curriculum integration: the AI-directed scenario has to map to what the program actually teaches. \u2003 \u2003 <strong>Degrade.</strong> Falls back to Level 3 by switching from AI-directed to human-directed scenarios.</div>
+            </div>
+          </div>
+
+          <div class="trf-level">
+            <div class="trf-level-header">
+              <div class="trf-level-num">5</div>
+              <div class="trf-level-name">Agentic Peer \u2014 Embodied</div>
+              <div class="trf-level-cost">+150%+</div>
+            </div>
+            <div class="trf-level-body">
+              <p>AI acts as a physical participant: not a tool, not an observer. The &ldquo;diamond arrangement&rdquo; places the patient, family, provider, and technology at equal eye level. ${_PL.SINGER_FULL()}'s embodied-AI concept. Training emphasizes teaming with AI agents, trust calibration (deliberately introduced AI errors as a training surface), and overseeing autonomous systems. The Soul Paint VR demonstration at SXSW, where technology was a participant in the creative process rather than a channel for the final product. Spurs Human Performance Center, where measurement reads as celebration rather than surveillance. Showcase only: one or two rooms maximum.</p>
+              <table class="trf-spec-table">
+                <tr><td>Power</td><td>80+ W/sqft, industrial / quantum-ready</td></tr>
+                <tr><td>Data</td><td>Quantum / HPC clusters, dedicated local compute</td></tr>
+                <tr><td>Sq. footage</td><td>Maximum + vertical clearance</td></tr>
+                <tr><td>Acoustics</td><td>Maximum, embodied-AI fidelity</td></tr>
+                <tr><td>HVAC</td><td>Maximum, reinforced HPC cooling</td></tr>
+                <tr><td>Structural</td><td>Reinforced floors, heavy compute</td></tr>
+                <tr><td>Cost premium</td><td>+150%+</td></tr>
+              </table>
+              <div class="trf-degrade"><strong>Prerequisite.</strong> All prior prerequisites plus an institutional culture shift: leadership models data transparency, dashboards are opt-in and learner-owned, AI agents are introduced to faculty before students. \u2003 \u2003 <strong>Degrade.</strong> Falls back to Level 4 by switching embodied AI to screen-based AI.</div>
+            </div>
+          </div>
+
+          <h3>The Cost Step</h3>
+          <p>Between Level 3 and Level 4 the premium roughly doubles. Past this line, rooms need dedicated power, edge computing, cooling, and curriculum commitments that have to exist before the concrete is poured.</p>
+
+          <div class="trf-step-cost">
+            <div class="trf-step-cost-title">Cost premium relative to Level 1</div>
+            <div class="trf-step-row l1"><span class="lvl">L1</span><div class="bar" style="width: 11%;"></div><span class="mult">1\u00d7</span></div>
+            <div class="trf-step-row l2"><span class="lvl">L2</span><div class="bar" style="width: 17%;"></div><span class="mult">~1.5\u00d7</span></div>
+            <div class="trf-step-row l3"><span class="lvl">L3</span><div class="bar" style="width: 33%;"></div><span class="mult">~3\u00d7</span></div>
+            <div class="trf-step-row l4"><span class="lvl">L4</span><div class="bar" style="width: 67%;"></div><span class="mult">~6\u00d7</span></div>
+            <div class="trf-step-row l5"><span class="lvl">L5</span><div class="bar" style="width: 100%;"></div><span class="mult">~9\u00d7</span></div>
+          </div>
+
+          <h3>Room Zero \u2014 The Pipes-Not-Faucets Principle</h3>
+          <p>Room Zero is the framework's most strategically important output. It is the baseline infrastructure that goes in <em>every</em> room at construction, regardless of the room's intended day-one level. Specific technology choices made now will be obsolete by opening day, but architectural decisions (power, data conduit, structural reinforcement) are locked in at construction. Over-provisioning the pipes makes future upgrades a software exercise rather than a capital project.</p>
+          <p>${_PL.KORN_FULL()}'s flexibility lesson: &ldquo;What we build in three years is not necessarily going to be what needs to be done five years hence. Once you build it, if you're stuck, then what?&rdquo; ${_PL.MURRAY()}'s &ldquo;you'll be wrong&rdquo; principle. ${_PL.SINGER_FULL()}'s catalog of futuristic-looking centers that aged badly. ${_PL.BRODERICK()}'s facilities-management pain: power requirements change every time new equipment arrives.</p>
+
+          <p><strong>Six systems for minimum viable flexibility.</strong></p>
+          <div class="trf-rz-grid">
+            <div class="trf-rz-item">
+              <div class="trf-rz-num">01 \u00b7 POWER</div>
+              <div class="trf-rz-system">Conduit for L3 demand at minimum</div>
+              <div class="trf-rz-headline">Run enough electrical conduit to carry the room to Level 3 even if it opens at Level 1.</div>
+              <div class="trf-rz-spec">Install 40\u201360 W/sqft of empty conduit now. Pulling new wire through an occupied building later costs 4\u20136\u00d7 the money and takes the room offline.</div>
+            </div>
+            <div class="trf-rz-item">
+              <div class="trf-rz-num">02 \u00b7 DATA</div>
+              <div class="trf-rz-system">Network wiring that grows without rip-out</div>
+              <div class="trf-rz-headline">Treat the network like plumbing, not a vendor product. It belongs in the walls.</div>
+              <div class="trf-rz-spec">Fiber connections at every zone, with backup paths built in. No single vendor's system locking you in.</div>
+            </div>
+            <div class="trf-rz-item">
+              <div class="trf-rz-num">03 \u00b7 WALLS</div>
+              <div class="trf-rz-system">Attachment points and movable partitions</div>
+              <div class="trf-rz-headline">A room can switch roles over a weekend, not a fiscal quarter.</div>
+              <div class="trf-rz-spec">Metal rail (Unistrut or similar) every 16 inches, with partition tracks at the floor slab. Layout changes do not require a contractor.</div>
+            </div>
+            <div class="trf-rz-item">
+              <div class="trf-rz-num">04 \u00b7 ACOUSTICS</div>
+              <div class="trf-rz-system">Sound isolation rated to STC 50</div>
+              <div class="trf-rz-headline">Normal conversation next door is inaudible.</div>
+              <div class="trf-rz-spec">Walls floor to ceiling with sound-absorbing insulation and vibration-dampening channels. Ceiling microphones for ambient intelligence and embodied AI both need a quiet baseline.</div>
+            </div>
+            <div class="trf-rz-item">
+              <div class="trf-rz-num">05 \u00b7 HVAC</div>
+              <div class="trf-rz-system">Capacity for added compute heat</div>
+              <div class="trf-rz-headline">Size the cooling loop now for Level 4 server heat loads, even in Level 1 rooms.</div>
+              <div class="trf-rz-spec">Adding cooling capacity after the building opens means roof work, chiller replacements, and shutdown windows.</div>
+            </div>
+            <div class="trf-rz-item">
+              <div class="trf-rz-num">06 \u00b7 STRUCTURAL</div>
+              <div class="trf-rz-system">Floor loading headroom for future equipment</div>
+              <div class="trf-rz-headline">Cadaver tanks, force-feedback rigs, and server cabinets all assume the floor can take it.</div>
+              <div class="trf-rz-spec">Design slabs to hold at least 125 pounds per square foot, exceeding IBC minimums for medical occupancies.</div>
+            </div>
+          </div>
+
+          <p><strong>What Room Zero is not.</strong> Not the tech itself. Room Zero is the conduit, not the cable; the slab, not the server. Not a Level: a Level 1 room with Room Zero is still a Level 1 room, until it is populated. Not optional: ambulatory and skills-lab facets need the same backup, or they strand out of the portfolio.</p>
+
+          <p><strong>The cost reference.</strong> Room Zero at build time adds roughly 8\u201312% to room shell cost. Retrofitting the same capability into an occupied building runs 3\u20135\u00d7 for Level 3 capability and 6\u20139\u00d7 for Level 4.</p>
+          <div class="trf-retrofit">
+            <div class="trf-retrofit-cell now"><div class="mult">1\u00d7</div><div class="label">Install Room Zero at build</div></div>
+            <div class="trf-retrofit-cell"><div class="mult">3\u20135\u00d7</div><div class="label">Retrofit to Level 3 later</div></div>
+            <div class="trf-retrofit-cell l4"><div class="mult">6\u20139\u00d7</div><div class="label">Retrofit to Level 4 later</div></div>
+          </div>
+          <p><em>The rule of thumb.</em> Every room gets Room Zero. The intended level only determines what is populated inside it.</p>
+
+          <h3>Ten-Year Snapshot</h3>
+          <p>Upgrades push rooms up the ladder without construction, because Room Zero pre-installed the conduit, data pipe, and HVAC headroom. Level 1\u20133 training migrates out to spokes and remote, and the hub becomes more specialized, not more expansive.</p>
+
+          <div class="trf-temporal">
+            <div class="trf-temporal-block">
+              <div class="trf-temporal-head">
+                <div class="trf-temporal-year">2030</div>
+                <div class="trf-temporal-label">Opening day</div>
+                <div class="trf-temporal-note">Building leads with L1\u20133 and a single L5 showcase. Every room has Room Zero.</div>
+              </div>
+              <table class="trf-mix-table">
+                <tr><th></th><th>L1</th><th>L2</th><th>L3</th><th>L4</th><th>L5</th></tr>
+                <tr><td>Hub</td><td>6</td><td>5</td><td>4</td><td>2</td><td>1</td></tr>
+                <tr><td>Spoke</td><td>5</td><td>3</td><td>\u2014</td><td>\u2014</td><td>\u2014</td></tr>
+                <tr><td>Anywhere</td><td>4</td><td>\u2014</td><td>\u2014</td><td>\u2014</td><td>\u2014</td></tr>
+              </table>
+            </div>
+            <div class="trf-temporal-block">
+              <div class="trf-temporal-head">
+                <div class="trf-temporal-year">2035</div>
+                <div class="trf-temporal-label">Mid-cycle refresh</div>
+                <div class="trf-temporal-note">Software and sensor upgrades push L2\u20133 rooms to L3\u20134 without construction.</div>
+              </div>
+              <table class="trf-mix-table">
+                <tr><th></th><th>L1</th><th>L2</th><th>L3</th><th>L4</th><th>L5</th></tr>
+                <tr><td>Hub</td><td>3</td><td>4</td><td>6</td><td>4</td><td>1</td></tr>
+                <tr><td>Spoke</td><td>6</td><td>5</td><td>2</td><td>\u2014</td><td>\u2014</td></tr>
+                <tr><td>Anywhere</td><td>6</td><td>2</td><td>\u2014</td><td>\u2014</td><td>\u2014</td></tr>
+              </table>
+            </div>
+            <div class="trf-temporal-block">
+              <div class="trf-temporal-head">
+                <div class="trf-temporal-year">2040</div>
+                <div class="trf-temporal-label">Mature system</div>
+                <div class="trf-temporal-note">Hub holds only what must be physical: haptics, cadavers, team crisis, embodied agents.</div>
+              </div>
+              <table class="trf-mix-table">
+                <tr><th></th><th>L1</th><th>L2</th><th>L3</th><th>L4</th><th>L5</th></tr>
+                <tr><td>Hub</td><td>\u2014</td><td>1</td><td>3</td><td>6</td><td>4</td></tr>
+                <tr><td>Spoke</td><td>7</td><td>6</td><td>4</td><td>1</td><td>\u2014</td></tr>
+                <tr><td>Anywhere</td><td>8</td><td>4</td><td>1</td><td>\u2014</td><td>\u2014</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <h3>Are You Tech-Ready?</h3>
+          <p>A three-step instrument used in programming meetings to arrive at a defensible room level.</p>
+
+          <div class="trf-decision">
+            <div class="trf-decision-step">
+              <div class="step-num">01</div>
+              <div>
+                <div class="step-title">Curriculum goals</div>
+                <ul>
+                  <li><strong>Cognitive</strong> \u2014 rehearsal, mental models</li>
+                  <li><strong>Communication</strong> \u2014 empathy, patient interaction</li>
+                  <li><strong>Procedural</strong> \u2014 motor skills, haptics</li>
+                  <li><strong>Team Crisis</strong> \u2014 coordination under load</li>
+                  <li><strong>Trust Calibration</strong> \u2014 teaming with AI agents</li>
+                </ul>
+                <div class="resolves">Cognitive and Communication round to L1\u20132. Procedural and Team round to L3\u20134. Trust Calibration sets L5.</div>
+              </div>
+            </div>
+            <div class="trf-decision-step">
+              <div class="step-num">02</div>
+              <div>
+                <div class="step-title">Sim and practice team configuration</div>
+                <ul>
+                  <li>Individual</li>
+                  <li>Pair</li>
+                  <li>Small Team</li>
+                  <li>Full Clinical Team</li>
+                </ul>
+                <div class="resolves">Individual and Pair round down. Small and Full round up.</div>
+              </div>
+            </div>
+            <div class="trf-decision-step">
+              <div class="step-num">03</div>
+              <div>
+                <div class="step-title">Future tech dependency</div>
+                <ul>
+                  <li><strong>None</strong> \u2014 Level 1</li>
+                  <li><strong>Assistive</strong> \u2014 Level 2</li>
+                  <li><strong>Collaborative</strong> \u2014 Level 3</li>
+                  <li><strong>Directive</strong> \u2014 Level 4</li>
+                  <li><strong>Embodied</strong> \u2014 Level 5</li>
+                </ul>
+                <div class="resolves">Tech dependency sets the floor. Objective and team adjust from there.</div>
+              </div>
+            </div>
+          </div>
+
+          <p><strong>Worked examples \u2014 how the tool actually resolves.</strong></p>
+          <div class="trf-worked">
+            <div class="trf-worked-case">
+              <div class="case-num">Case 01</div>
+              <div>
+                <div class="case-scenario">Breaking bad news to a simulated family</div>
+                <div class="case-tags">Communication \u00b7 Individual \u00b7 None</div>
+                <div class="case-resolution">An Unplugged room is the right room. The temptation to add tech here is what produces AMA-flagged dependency.</div>
+              </div>
+              <div class="case-level">L1</div>
+            </div>
+            <div class="trf-worked-case">
+              <div class="case-num">Case 02</div>
+              <div>
+                <div class="case-scenario">Code-blue team crisis with real-time feedback</div>
+                <div class="case-tags">Team Crisis \u00b7 Full Clinical Team \u00b7 Collaborative</div>
+                <div class="case-resolution">Full team plus live AI assessment rounds up. Room needs edge compute, multi-channel audio, HVAC for a full resuscitation cart plus servers.</div>
+              </div>
+              <div class="case-level">L4</div>
+            </div>
+            <div class="trf-worked-case">
+              <div class="case-num">Case 03</div>
+              <div>
+                <div class="case-scenario">Overseeing an autonomous diagnostic agent</div>
+                <div class="case-tags">Trust Calibration \u00b7 Pair \u00b7 Embodied</div>
+                <div class="case-resolution">Trust Calibration objective and Embodied tech both force L5. This is the one showcase room, not a template.</div>
+              </div>
+              <div class="case-level">L5</div>
+            </div>
+          </div>
+
+          <h3>Three Traps</h3>
+          <div class="trf-traps">
+            <div class="trf-trap">
+              <div class="trf-trap-num">01 \u00b7 Over-spec</div>
+              <div class="trf-trap-name">The Specification Trap</div>
+              <div class="trf-trap-body">Over-specified rooms that try to look futuristic feel dated by opening day and end up being remembered as a waste of resources.</div>
+            </div>
+            <div class="trf-trap">
+              <div class="trf-trap-num">02 \u00b7 Stranded capacity</div>
+              <div class="trf-trap-name">The Fantasy Trap</div>
+              <div class="trf-trap-body">Building capability nobody uses. Team-training rooms that were &ldquo;never used for that&rdquo; (${_PL.COKER_FULL()}'s lesson from UCSD).</div>
+            </div>
+            <div class="trf-trap">
+              <div class="trf-trap-num">03 \u00b7 Under-spec</div>
+              <div class="trf-trap-name">The Stranded-Asset Trap</div>
+              <div class="trf-trap-body">Under-specified rooms become immovable. Retrofit cost eats the original savings three times over.</div>
+            </div>
+          </div>
+          <p><em>The cheapest room is the one you never have to rebuild.</em> Install Room Zero at build (1\u00d7). Retrofit to L3 later (3\u20135\u00d7). Retrofit to L4 later (6\u20139\u00d7).</p>
+
+          <div class="trf-source-footer">
+            <p><strong>Sources.</strong> Every architectural number, cost premium, and clinical claim in this framework is validated by a 140-source reference list spanning ASHRAE energy and thermal standards, FGI healthcare design guidelines, IBC structural codes, peer-reviewed simulation effectiveness studies, automation-bias research, and ambient-intelligence deployments. The full list is browsable in the <a href="#" class="trf-source-link">Beyond the Appendix &rsaquo; Literature tab</a>, where each entry carries a direct link to the source. Look for entries labeled &ldquo;TRF source #N.&rdquo;</p>
+          </div>
+        `,
+      },
+      {
+        id: 'hub-spokes-anywhere',
+        label: 'Hub, Spokes, Anywhere',
+        html: `
+          <p class="lede" style="opacity: 0.6; font-style: italic;">The Hub, Spokes, Anywhere expansion is being drafted. Check back here for the full distribution model: what training belongs at the hub, what migrates to spokes, what can happen anywhere, and the cross-industry sources (maritime cloud simulation, military joint operations, oil-and-gas rig-side simulators) the framework draws on.</p>
+        `,
+      },
+    ],
+  },
+
+  // Research intentionally absent — that panel remains "Content coming soon"
+  // until the team supplies the draft.
 };
 
 /* ============================================================================
@@ -4456,17 +6270,22 @@ function closePdfModal() {
    SECTION NAV
    ============================================================================ */
 function buildSectionNav() {
-  const nav = $('#section-nav');
-  nav.innerHTML = '';
+  // Two nav bars share the same buttons: one above the book (always visible),
+  // one inside the archive (revealed once the user has scrolled past the
+  // first). Build both from the same source of truth.
+  const navs = [$('#section-nav'), $('#section-nav-archive')].filter(Boolean);
+  navs.forEach((nav) => { nav.innerHTML = ''; });
   CONFIG.sections.forEach((sec) => {
-    const btn = document.createElement('button');
-    btn.dataset.id = sec.id;
-    btn.textContent = sec.name;
-    btn.addEventListener('click', () => {
-      setRoute(pathForSection(sec));
-      jumpToSpread(sec.startSpread);
+    navs.forEach((nav) => {
+      const btn = document.createElement('button');
+      btn.dataset.id = sec.id;
+      btn.textContent = sec.name;
+      btn.addEventListener('click', () => {
+        setRoute(pathForSection(sec));
+        jumpToSpread(sec.startSpread);
+      });
+      nav.appendChild(btn);
     });
-    nav.appendChild(btn);
   });
 }
 
@@ -4890,11 +6709,17 @@ async function init() {
     }
   });
 
-  // Page number input, type a page and jump
+  // Page number input, type a label (A-J or a body-page number) and jump
   const pageInput = $('#page-input');
   const goToTypedPage = () => {
-    const n = parseInt(pageInput.value, 10);
-    if (!Number.isFinite(n)) return;
+    const n = parseLabel(pageInput.value);
+    if (!Number.isFinite(n)) {
+      // Invalid input: revert to current page label
+      const [lp0, rp0] = spreadPages(state.currentSpread);
+      const cur = (lp0 == null) ? rp0 : lp0;
+      pageInput.value = pageLabel(cur);
+      return;
+    }
     const clamped = Math.min(Math.max(n, 1), state.totalPages);
     // Page 1 = cover view (spread 0). Pages 2+ map to spread floor(page/2).
     const targetSpread = clamped === 1 ? 0 : Math.floor(clamped / 2);
@@ -4907,8 +6732,14 @@ async function init() {
   pageInput.addEventListener('blur', () => {
     // If the user changed the value but didn't hit enter, still jump on blur
     const [lp, rp] = spreadPages(state.currentSpread);
-    const currentDisplayed = (lp == null) ? rp : lp; // cover shows rp(=1); spreads show lp
-    if (parseInt(pageInput.value, 10) !== currentDisplayed) goToTypedPage();
+    const currentDisplayed = (lp == null) ? rp : lp;
+    const typedSiteNum = parseLabel(pageInput.value);
+    if (Number.isFinite(typedSiteNum) && typedSiteNum !== currentDisplayed) {
+      goToTypedPage();
+    } else {
+      // Invalid or unchanged: just resync the displayed label
+      pageInput.value = pageLabel(currentDisplayed);
+    }
   });
 
   // Keyboard arrows for flipping (skip when an input/textarea is focused or any modal is open)
@@ -5049,6 +6880,23 @@ async function init() {
     const titleObserver = new MutationObserver(updateWordmark);
     titleObserver.observe(archiveTitle, { childList: true, characterData: true, subtree: true });
     updateWordmark(); // initial state
+  }
+
+  // Reveal the in-archive section nav once the original above-book nav has
+  // scrolled out of view. Tracks the original nav's bottom edge against the
+  // top of the viewport, so the duplicate appears the moment the original
+  // disappears, giving readers continuous access to section switching.
+  const originalNav = document.getElementById('section-nav');
+  const archiveNav  = document.getElementById('section-nav-archive');
+  if (originalNav && archiveNav) {
+    const updateArchiveNav = () => {
+      const rect = originalNav.getBoundingClientRect();
+      // Original nav is "gone" once its bottom edge passes above the viewport.
+      const navOutOfView = rect.bottom < 0;
+      archiveNav.classList.toggle('visible', navOutOfView);
+    };
+    window.addEventListener('scroll', updateArchiveNav);
+    updateArchiveNav();
   }
 
   // Fullscreen toggle for the book — uses the native Fullscreen API where
