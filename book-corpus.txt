@@ -605,229 +605,220 @@ The Direction for Delivery statement from the concepting workshop: Create a futu
 
 ### II. THE FIVE LEVELS, EVIDENCE BASE
 
-The five levels of human-AI relationship in simulation rooms (from the concepting deck) each have distinct research grounding:
+The five levels of human-AI relationship in a simulation room each carry distinct research grounding, training examples, cross-industry precedent, and architectural specifications. The levels also degrade gracefully: every room above Level 1 must be able to step down to the level below it.
 
-**Level 1: ****"****Unplugged****"**** (Base Case), Direct Human Interaction**
+**Level 1: Unplugged, Direct Human Interaction (Baseline)**
 
-- SOF Trainer: "We don't have to get so complicated… incredibly expensive, hard to manage, lots of hardware. It dates quickly." Team orchestration practice "can be on a plastic doll, it doesn't really matter."
+Direct human-to-human practice with no technology in the room. Standardized patient encounters, team communication drills, stress inoculation. The learner's own autonomic response is the training surface.
 
-- SOF Trainer: "Make it low tech where you need team sport to come together. The orchestration, who's giving what to who, and the practice of that repetition, can be on a plastic doll."
+Training examples: Standardized patient encounters with a trained actor playing a patient (the learner practices a history, a hard conversation, a breaking-bad-news script, with nothing on the table but a chart). Team communication drills with nurse, resident, and attending talking through a deteriorating case around a table (closed-loop communication, read-backs, role clarity). Stress inoculation with time pressure, noise, and interruptions layered onto a cognitive task.
 
-- Gibson: Design scenarios that deliberately REMOVE technology to build foundational skills. Power-out resilience, what happens when the tech fails?
+Research voices:
+- SOF Trainer: "We don't have to get so complicated... incredibly expensive, hard to manage, lots of hardware. It dates quickly." Team orchestration practice "can be on a plastic doll, it doesn't really matter."
+- Gibson: Design scenarios that deliberately remove technology to build foundational skills. Power-out resilience is what happens when the tech fails.
+- Military Strategic Theme, Foundation-First Technology Layering: Advanced technology must be strictly sequenced to occur only after learners demonstrate mastery in analog environments. Introducing assistive technology too early creates dependency and erodes cognitive resilience.
+- AMA Panel (SXSW): Medical student forces himself to complete diagnosis independently before using AI, citing concern about cognitive deskilling. "Conservative approach: add AI familiarity, don't remove core knowledge yet."
+- Nurses as Firewall (SXSW): Hurricane Helene caused 300+ mile power outages requiring paper charting. Ascension's ransomware attack left clinical systems down for a month. When technology fails, analog competency is the firewall.
 
-- Military Strategic Theme, "Foundation-First Technology Layering": Advanced technology must be strictly sequenced to occur only after learners demonstrate mastery in analog environments. Introducing assistive technology too early risks creating dependency and eroding cognitive resilience.
+Cross-industry precedent (canonical):
+- US Military: Tabletop exercises remain the backbone of command decision training. No screen, no simulation. People sit around a table and talk through a scenario that gets worse as it goes. A Special Operations trainer interviewed for this project noted that the practice of who gives what to whom can happen on a plastic doll.
+- Gibson, 1968: Stress inoculation research showed you can train people to perform under extreme pressure with a clipboard and a timer. The rooms with no technology in them are not leftovers; they are where people learn to communicate and stay composed.
 
-- AMA Panel (SXSW): Medical student forces himself to complete diagnosis independently before using AI, concern about cognitive deskilling. "Conservative approach: add AI familiarity, don't remove core knowledge yet."
+Architectural specs: Power 5 W/sqft (standard outlets). Data: basic networking, wall outlets. Square footage minimal. Acoustics standard. HVAC standard. Structural standard. Cost premium 0% (baseline).
 
-- Nurses as Firewall (SXSW): Hurricane Helene caused 300+ mile power outage requiring paper charting. Ascension ransomware attack left systems down for a month. Technology fails, analog competency is safety-critical.
+Why Level 1 is permanent: Cognitive deskilling (the AMA panel's GPS-dependency analogy) plus AI system failures (Helene, Ascension) make analog competency the firewall, not a legacy holdover. Every room above Level 1 must be able to function as an Unplugged room. This is a patient safety requirement, not a design convenience.
 
-- Other Providers Theme, "Human-Centric AI Integration": The center must use simulation to force hypothesis generation without algorithmic crutches, only layering in technology once core critical thinking is established.
+**Level 2: Augmented, Human Oversees AI (+10-15%)**
 
-- Architectural implication: Minimal square footage, standard power, basic wall outlets, no tech integration required.
+Technology enhances sensory realism and provides ambient feedback without replacing human judgment. Portable, point-of-need assistive tech. Simulation backpacks.
 
-**Level 2: ****"****AI-Augmented****"**** (Assistive), Human Oversees AI**
+Training examples: AR-enhanced patient encounters where a standardized patient wears AR cues and the learner sees overlaid vitals, pupil dilation, or a rash without pulling the human out of the room. Ambient intelligence feedback where ceiling mics and cameras quietly time the encounter, flag interruptions, and surface missed cues for debrief (the AI never speaks). Sensor-based communication assessment where wearables track proximity, eye-gaze direction, and speaking turns during a team drill, with data showing up in the post-scenario review rather than in the moment.
 
-- Broderick (UCSD): Deployed "simulation backpacks" at remote sites because learners can't always come to the center (15-minute walk, 20-minute drive). Portable, point-of-need assistive tech.
+Research voices:
+- Broderick (UCSD): Deployed simulation backpacks at remote sites because learners can't always come to the center.
+- Dell Students Theme, Hybridized Human-Digital Interaction: Current VR implementations rejected due to poor UX, nausea, and cognitive load. Future model should prioritize AR or hybrid approaches where technology enhances rather than replaces human interaction.
+- Liana Chen (Dell 1st year): Dell Med lacks modern simulation tech compared to other schools, but acknowledged value of learning foundations without tech first.
+- Secondary research, ambient intelligence: Sensors and microphones embedded in patient rooms can capture encounters and provide automated assessment of communication skills, empathy markers, teach-back usage, and interruption rates. Feedback dashboard available by the time the student leaves the room.
 
-- FLAIM firefighting system: Heated suits and breathing apparatus made trainees 4x more engaged. One trainee "forgot she was in VR." Technology enhances sensory realism without replacing human judgment.
+Cross-industry precedent (canonical):
+- FLAIM Systems: Builds firefighter training rigs where the suit heats up, the breathing apparatus restricts airflow, and a VR headset shows the fire. Trainees were four times more engaged than with screen-only training. One trainee reported forgetting she was in a simulation. The technology did not take over; it made the sensory environment convincing enough that the body responded as if the conditions were real.
+- UCSD Medicine: When learners could not always get to the sim center, the team built portable simulation backpacks that brought the training to clinical sites instead.
 
-- Dell Students Theme, "Hybridized Human-Digital Interaction": Current VR implementations rejected due to poor UX, nausea, and cognitive load. Future model should prioritize AR or hybrid approaches where technology enhances rather than replaces human interaction.
+Architectural specs: Power 10-15 W/sqft. Data: ceiling sensors, ambient intelligence, large monitors. Square footage slightly increased. Acoustics standard. HVAC standard. Structural standard. Cost premium +10-15%.
 
-- Natasha (Dell Med student): Called VR simulation "stupid" and "a waste of my time", not because VR is bad, but because the software was buggy and the experience didn't improve clinical decision-making. "Focus on learning software rather than clinical skills."
+Degrade: Falls back to Level 1 by powering off sensors and displays.
 
-- Liana Chen (Dell 1st yr): Dell Med lacks modern simulation tech compared to other schools, but student acknowledged value of learning foundations without tech first. Gap appears when transitioning to tech-enabled hospital environments.
+**Level 3: Tech in-the-Loop, Co-Participant (+30-50%)**
 
-- Secondary Research, Ambient Intelligence: Sensors and microphones embedded in patient rooms can capture encounters and provide automated assessment of communication skills, empathy markers, teach-back usage, interruption rates. Feedback dashboard available by the time the student leaves the room.
+AI-assisted continuous micro-assessment during team scenarios. Real-time performance tracking. Cloud-based distributed simulation. The physical space stays constant while training content evolves via software.
 
-- Architectural implication: Slightly increased footprint, moderate power, ceiling sensors, ambient intelligence beginning to appear.
+Training examples: AI-tracked surgical performance where the instrument measures tremor, economy of motion, and tissue tension in real time (the learner operates, the AI keeps score, the attending debriefs with evidence). Team crisis scenarios with live assessment, such as a full code-blue simulation with AI tracking closed-loop communication, time-to-intervention, and role overlap, with feedback landing in debrief minutes after the event. Branching clinical decision sims that reshape themselves around the learner's choices (ordering the wrong lab changes what the patient looks like thirty minutes later).
 
-**Level 3: ****"****AI-in-the-Loop****"**** (Co-Participant), Collaborative Decision Making**
-
+Research voices:
 - Korndorffer's vision: AI-assisted continuous micro-assessment during team scenarios. "We can't define competency, articulate it, measure it, that's our problem." AI tracks patterns to help close that gap.
+- Coker: Robotic surgical data shows expert users have "much tighter" arm movement patterns than novices. "At least you can track improvement." But nobody has studied whether these metrics correlate to actual surgical competence.
+- Gibson on evaluation: AI could help with structured assessment, but "it would take a lot of human work on the rubric."
+- Tech Futures Theme, Longitudinal Performance via Game Mechanics and Biometric Feedback: Moving beyond binary pass/fail to "campaign mode" with continuous playback of performance, digital portfolios tracking decision-making over time.
+- Secondary research, Digital Learner Twin: Longitudinal, dynamic model of developing competencies. Aggregates data from exam scores, simulation performance, ambient intelligence feedback, and patient outcomes. Predicts struggles before failure occurs.
 
-- Coker: Robotic surgical data shows expert users have "much tighter" arm movement patterns than novices. "At least you can track improvement." But nobody has studied whether these metrics correlate to actual surgical competence. AI could track this in real time.
+Cross-industry precedent (canonical):
+- Maritime: Cloud-based distributed simulation runs bridge crews across continents on the same scenario.
+- FAA: 50+ years of certification standards correlated with fatal-accident reduction in commercial aviation.
+- Robotics: Every actuation is logged; longitudinal skill curves are now a standard credentialing artifact.
 
-- Maritime industry: Cloud-based distributed simulation across continents. Software-defined training on commodity hardware, the physical space stays constant while training content evolves via cloud.
+Architectural specs: Power 20-30 W/sqft (heavy server load). Data: server racks, multi hi-fi screens, sensor arrays. Square footage substantial expansion. Acoustics moderate (sensor accuracy required). HVAC increased (server heat dissipation). Structural standard. Cost premium +30-50%.
 
-- Gibson on evaluation: AI could help with structured assessment, but "it would take a lot of human work on the rubric." Human-to-human interaction assessment is "really hard, I don't think AI can do that."
+Prerequisite (competency definition vacuum): AI assessment at this level depends on being able to define what the AI is measuring. The rubric work has not been completed in medical education. Flag as prerequisite, not blocker.
 
-- Tech Futures Theme, "Longitudinal Performance via Game Mechanics and Biometric Feedback": Moving beyond binary pass/fail to "campaign mode" with continuous playback of performance, digital portfolios tracking decision-making over time.
+Degrade: Falls back to Level 2 by disconnecting the cloud / AI layer.
 
-- Secondary Research, Digital Learner Twin: Longitudinal, dynamic model of developing competencies. Aggregates data from exam scores, simulation performance, ambient intelligence feedback, and patient outcomes. Predicts struggles before failure occurs.
+**Level 4: Agent Managed, Directive (+75-100%)**
 
-- Architectural implication: Substantial expansion, heavy server racks, multiple high-fidelity screens, sensor arrays, significant increase in data infrastructure.
+The room and scenario respond to the learner. Software-defined training environments. Adaptive scenarios that change based on learner actions. AI as scenario director.
 
-**Level 4: ****"****AI-Managed****"**** (Directive), AI Defines Scenario, Directs Flow**
+Training examples: OSCE 2.0 ambiguity scenarios where the AI adjusts patient affect, symptom evolution, and distractor events to target the individual learner's weak spots (no two runs are the same). VR pre-procedure training where a surgeon rehearses this patient's anatomy from their actual imaging the night before, with the room loading the scenario from the EHR. Adaptive scenario environments where walls, lighting, sounds, and props reconfigure on a schedule (morning ED trauma bay, afternoon ICU bedside, evening community clinic).
 
-- Concept Garden, "Ambiguity Scenarios with Embedded Metrics (OSCE 2.0)": High-uncertainty scenarios designed with built-in measurement triggers (critical communication acts, escalation timing, values elicitation), with an upgrade path to adaptive scenarios that change in response to learner actions and LLM-in-the-loop conditions.
-
-- Boeing Starliner: VR enables training during pre-launch quarantine when physical simulators are inaccessible. The scenario environment is software-defined and controlled by the system.
-
+Research voices:
+- Concept Garden, Ambiguity Scenarios with Embedded Metrics (OSCE 2.0): High-uncertainty scenarios designed with built-in measurement triggers (critical communication acts, escalation timing, values elicitation), with an upgrade path to adaptive scenarios that change in response to learner actions and LLM-in-the-loop conditions.
 - Singer: The room and scenario respond to the learner. AI as scenario director, not just observer.
+- AMA Panel (SXSW): Agentic AI is the emerging frontier. Every physician is projected to use AI within 5 years. 80%+ already use it for documentation, chart summarization, and diagnosis support.
 
-- Oil and gas industry: Simulation at point-of-need on actual rigs, just-in-time training before complex procedures. The system manages the training flow.
+Cross-industry precedent (canonical):
+- Boeing: VR pre-launch training for crewed spaceflight, where scenarios respond to the pilot's choices in real time.
+- Oil & Gas: Point-of-need simulation runs on actual rigs, not simulators, moving the training to the hazard.
 
-- AMA Panel (SXSW): Agentic AI, AI without a human in the loop, is the emerging frontier. Every physician projected to use AI within 5 years. 80%+ already using it for documentation, chart summarization, diagnosis support.
+Architectural specs: Power 40-60 W/sqft (dedicated voltage). Data: edge compute, VR/AR, dynamic wall power. Square footage maximum flexible. Acoustics significant (multi-channel audio). HVAC significant (compute heat load). Structural standard. Cost premium +75-100%.
 
-- Architectural implication: Maximum flexible square footage, maximum power, dedicated voltage lines, edge computing, advanced VR/AR systems, dynamic wall power.
+Prerequisite: All Level 3 prerequisites plus curriculum integration. The AI-directed scenario has to map to what the program actually teaches.
 
-**Level 5: ****"****AI as Peer****"**** (Embodied), AI Is a Physical Partner**
+Degrade: Falls back to Level 3 by switching from AI-directed to human-directed scenarios.
 
-- Singer's embodied AI concept: AI acts as a physical participant in the room, not just a tool or observer.
+**Level 5: Agentic Peer, Embodied (+150%+)**
 
-- Tech Futures Theme, "AI as a Collaborative Team Member": Future clinical environments must transition from viewing technology as a tool to viewing it as a "peer participant" or "another person in the room." Strategic planning should adopt a "diamond arrangement" framework that places the patient, family, provider, and technology at equal eye level.
+AI acts as a physical participant: not a tool, not an observer. The "diamond arrangement" places the patient, family, provider, and technology at equal eye level as equal participants in the conversation. Showcase only: one or two rooms maximum.
 
-- Tech Futures Theme: Training must emphasize "teaming" with AI agents, managing trust calibration, and overseeing autonomous systems rather than just operating equipment.
+Training examples: Embodied AI team-member scenarios where the AI is physically present (a screen on a mobile base, a projected presence, or a humanoid) at equal eye level with the team and addressed by name. Trust calibration exercises where the AI is deliberately given intermittent errors, with the training target being the learner's ability to detect, challenge, and override without social cost. Co-creative clinical decision-making where diagnosis is built jointly, the learner articulates reasoning out loud, the AI offers a differential, and together they narrow it (measurement is on the dialogue, not the outcome).
 
-- Technologies of Care (SXSW): Soul Paint VR demonstrates embodied AI interaction where the technology becomes a co-creative partner, breathing ritual builds an avatar, user steps into artwork, technology mediates emotional expression and healing. The experience fundamentally changes with the AI as participant rather than tool.
+Research voices:
+- Singer's embodied AI concept: AI acts as a physical participant in the room.
+- Tech Futures Theme, AI as a Collaborative Team Member: Future clinical environments must transition from viewing technology as a tool to viewing it as a peer participant. Strategic planning should adopt a "diamond arrangement" framework.
+- Tech Futures Theme: Training must emphasize teaming with AI agents, managing trust calibration, and overseeing autonomous systems rather than just operating equipment.
 
-- Architectural implication: Maximum square footage plus vertical clearance, extreme dedicated industrial-grade power, quantum or high-performance computing clusters, dedicated localized computing, reinforced floors.
+Cross-industry precedent (canonical):
+- Soul Paint, SXSW: VR as co-creative partner. Technology was a participant in the creative process, not a channel for the final product.
+- Spurs Athletics: The Human Performance Lab reframed measurement as celebration rather than surveillance.
 
-### III. THE "ROOM ZERO" CONCEPT, THE PIPES NOT FAUCETS PRINCIPLE
+Architectural specs: Power 80+ W/sqft (industrial / quantum-ready). Data: quantum / HPC clusters, dedicated local compute. Square footage maximum + vertical clearance. Acoustics maximum (embodied-AI fidelity). HVAC maximum (reinforced HPC cooling). Structural reinforced floors (heavy compute). Cost premium +150%+.
 
-This is the matrix's most strategically important output: what baseline infrastructure goes in EVERY room regardless of intended level.
+Prerequisite: All prior prerequisites plus an institutional culture shift. Leadership publicly models data transparency, performance dashboards are opt-in and learner-owned, and AI agents are introduced as team members in faculty development before they appear in student training.
 
-**Korndorffer, Flexibility is lesson #1:** "What we build in three years is not necessarily going to be what needs to be done five years hence." His experience at Tulane and Stanford: "Once you build it, if you're stuck, then what?"
+Degrade: Falls back to Level 4 by switching embodied AI to screen-based AI.
 
-**Murray, ****"****You'll be wrong****"****:** "Predicting the future is pretty easy. Predicting it well is really, really hard. One thing I'll guarantee, you'll be wrong." Establish a wide baseline rather than betting on specific technologies.
+**Graceful degradation ladder.** Every room above Level 1 must be able to step down. Power off the sensor layer, switch to analog controls, disconnect the cloud, swap the agent for a screen, and the room still serves hospital or learner needs. Level 5 falls to 4, 4 to 3, 3 to 2, 2 to 1. Level 1 is the fallback.
 
-**Singer, Spaces feel dated by opening day:** Arizona State's Decision Theater (staff dress as futuristic, tech is five years behind), military cybersecurity center modeled on the Star Trek Enterprise with sliding doors that "whoosh" for no reason. The centers that try to look futuristic are the ones that fail most spectacularly.
+### III. ROOM ZERO, THE PIPES NOT FAUCETS PRINCIPLE
 
-**Broderick, Facilities management pain:** Power requirements change when new equipment arrives. This is a recurring operational headache when infrastructure wasn't over-provisioned.
+Room Zero is the framework's most strategically important output: the over-provisioned baseline infrastructure that goes in EVERY room at construction, regardless of the room's intended day-one level. Specific technology choices made now will be obsolete by opening day, but architectural decisions (power, data conduit, structural reinforcement) are locked in at construction. Over-provisioning the pipes makes future upgrades a software exercise rather than a capital project.
 
-**SOF Trainer:** "Incredibly expensive, hard to manage, lots of hardware. It dates quickly." Simplicity and modularity beat complexity.
+Research voices supporting Room Zero:
+- Korndorffer, flexibility is lesson #1: "What we build in three years is not necessarily going to be what needs to be done five years hence." His experience at Tulane and Stanford: "Once you build it, if you're stuck, then what?"
+- Murray, "you'll be wrong": "Predicting the future is pretty easy. Predicting it well is really, really hard. One thing I'll guarantee, you'll be wrong." Establish a wide baseline rather than betting on specific technologies.
+- Singer, spaces feel dated by opening day: Arizona State's Decision Theater (staff dress as futuristic, tech is five years behind), and a military cybersecurity center modeled on the Star Trek Enterprise with sliding doors that whoosh for no reason. The centers that try to look futuristic are the ones that fail most spectacularly.
+- Broderick, facilities-management pain: Power requirements change every time new equipment arrives. This is a recurring operational headache when infrastructure wasn't over-provisioned.
+- SOF Trainer: "Incredibly expensive, hard to manage, lots of hardware. It dates quickly." Simplicity and modularity beat complexity.
 
-**Military Theme, ****"****High-Frequency, Low-Stakes Repetition Architecture****"****:** Facility design should center on available capacity for repetitive practice rather than exclusively expensive, scheduled scenario rooms. Implies rooms that can flex between uses.
+**Six systems for minimum viable flexibility.** Each system is specified at build time so the room is never trapped at its day-one level.
 
-**Tech Futures Theme, ****"****Decentralized and Modular Infrastructure****"****:** Physical spaces must be highly modular, convertible between ICU, OR, and ward setups, while investing in hardware-agnostic platforms. Capital investment should prioritize flexible digital infrastructure over rigid aesthetics that quickly date.
+01. POWER, conduit for L3 demand at minimum. Run enough electrical conduit to carry the room to Level 3 even if it opens at Level 1. In practice: install 40-60 watts per square foot of empty conduit now. Pulling new wire through an occupied building later costs 4-6x the money and takes the room offline.
 
-**Other Providers Theme, ****"****Hyper-Flexible Infrastructure Design****"****:** Fixed, purpose-built rooms often become obsolete or underutilized. The physical design must prioritize adaptability, with retractable walls and mobile equipment ("everything on wheels") to allow rapid reconfiguration.
+02. DATA, network wiring that grows without rip-out. Treat the network like plumbing, not a vendor product; it belongs in the walls. In practice: fiber connections at every zone, with backup paths built in. No single vendor's system locking you in.
 
-**Secondary Research, ****"****Phygital****"**** Master Plan:** Traditional planning treats IT as a utility; the Hospital 2030 framework treats digital enablers as structural elements defined during conceptual design. The distinction between physical and digital ceases to exist. Digital Twin of the campus enables simulation of patient flows before construction.
+03. WALLS, attachment points and movable partitions. A room can switch roles over a weekend, not a fiscal quarter. In practice: metal rail (Unistrut or similar) every 16 inches, with partition tracks at the floor slab. Layout changes do not require a contractor.
 
-**Secondary Research, Table 1 comparison:** Traditional medical centers do "physical space first, IT retrofitted." The 2030 vision does "phygital planning, digital cores established alongside physical schematic design." This ensures infrastructure supports future AI/sensor loads without costly retrofits.
+04. ACOUSTICS, sound isolation rated to STC 50. STC 50 means a normal conversation next door is inaudible. In practice: walls floor to ceiling with sound-absorbing insulation and vibration-dampening channels. Ceiling microphones for ambient intelligence and embodied AI both need a quiet baseline to work.
 
-**Room Zero minimum spec (synthesized):** Over-provisioned power conduit (capacity to at least Level 3), data infrastructure that can scale, modular wall attachment points, platform-agnostic networking, acoustic treatment at minimum viable level, HVAC capacity that can handle added heat from computing equipment.
+05. HVAC, capacity for added compute heat. Size the cooling loop now for Level 4 server heat loads, even in Level 1 rooms. In practice: adding cooling capacity after the building opens means roof work, chiller replacements, and shutdown windows.
 
-### IV. THE TEMPORAL OVERLAY, HOW THE MATRIX EVOLVES
+06. STRUCTURAL, floor loading headroom for future equipment. Cadaver tanks, force-feedback surgical rigs, and server cabinets all assume the floor can take it. In practice: design slabs to hold at least 125 pounds per square foot, exceeding IBC minimums for medical occupancies.
 
-**2030 (Opening Day)**
+**What Room Zero is NOT.**
+- Not the tech itself. Room Zero is the conduit, not the cable; the slab, not the server.
+- Not a Level. A Level 1 room with Room Zero is still a Level 1 room until it is populated.
+- Not optional. Ambulatory and skills-lab facets need the same backup, or they strand out of the portfolio.
 
-- Mostly Level 1-3 rooms, a few Level 4, one Level 5 showcase
+**Cost reference.** Room Zero at build time adds roughly 8-12% to room shell cost. Retrofitting the same capability into an occupied building runs 3-5x for Level 3 capability and 6-9x for Level 4. The cheapest room is the one you never have to rebuild.
 
-- All rooms built with Room Zero baseline
+**The rule of thumb.** Every room gets Room Zero. The intended level only determines what is populated inside it.
 
-- Physical hub is the primary training location
+### IV. THE COST STEP
 
-- Korndorffer: Center should be ready for holograms, quantum, 2040, but the evidence says invest in durable principles, not specific platforms
+Cost premium relative to Level 1 (directional, validated against AEC benchmarks):
+- L1: 1x (baseline)
+- L2: ~1.5x
+- L3: ~3x
+- L4: ~6x
+- L5: ~9x
 
-**2035 (Mid-Cycle Refresh)**
+Between Level 3 and Level 4 the premium roughly doubles. Past this line, rooms stop sharing building infrastructure and need their own dedicated power, edge computing, and cooling. The same line is also a curriculum gate: L4 rooms are AI-directed, and if the program has not defined what the AI is measuring, the room sits empty no matter what was spent on it. While the framework maps infrastructure requirements, levels 3-5 depend on curriculum commitments that must develop in parallel.
 
-- Software and sensor upgrades push Level 2-3 rooms to Level 3-4 without construction
+### V. THE THREE TRAPS
 
-- Spokes (near clinical spaces) absorb Level 1-2 training
+The three failure modes the framework is designed to prevent.
 
-- Maritime model proves this works: software-defined training on commodity hardware, physical space stays constant
+01. OVER-SPEC, the Specification Trap. Over-specified rooms that try to look futuristic feel dated by opening day and end up being remembered as a waste of resources. Singer's Arizona State Decision Theater is the canonical example.
 
-- This is where the Room Zero investment pays off, rooms upgrade via software because the pipes were already installed
+02. STRANDED CAPACITY, the Fantasy Trap. Building capability nobody uses. Team-training rooms that were "never used for that" (Coker's lesson from UCSD).
 
-**2040 (Mature System)**
+03. UNDER-SPEC, the Stranded-Asset Trap. Under-specified rooms that become immovable when needs evolve. Retrofit cost eats the original savings three times over (3-5x at Level 3, 6-9x at Level 4).
 
-- Hub holds only Level 4-5: what MUST be physical (haptics, cadavers, team crisis, embodied AI)
+### VI. THE HUB / SPOKE / ANYWHERE MODEL (COMPANION TO THE MATRIX)
 
-- Level 1-3 training has migrated to spokes and "anywhere" (remote/virtual)
+The Tech Readiness Matrix maps WHAT INFRASTRUCTURE each room needs. The Building the System concept maps WHERE training happens.
 
-- Singer's distributed simulation argument validated: quality decoupled from geography
+Hub (the dedicated physical center): reserved over time for experiences that genuinely require physical presence, including team crisis simulation, haptic procedures, embodied AI partners.
 
-- The building becomes MORE prestigious because it's reserved for experiences that genuinely require physical presence
+Spoke (training near clinical work): communication training, individual assessment, just-in-time skill warm-up. Modeled on Broderick's UCSD simulation backpacks.
 
-**Key supporting evidence for temporal shift:**
+Anywhere (remote, virtual, on-demand): cognitive rehearsal, communication practice, individual assessment that can happen on a phone, laptop, home environment, bedside, or in transit.
 
-- Coker (haptic story): First time on the robot, she "annihilated the suture" because of no haptic feedback. "The robot always wins. The weakest thing will break." Real tissue experience is irreplaceable, this is what stays in the hub.
+The principle: the hub holds only what must be physical. Each training type has a different threshold for when it can leave the hub. The matrix tells planners what infrastructure each location needs as that distribution shifts over the building's lifetime.
 
-- Murray: Tactile fidelity is non-negotiable, "the thing you reach over for has to feel just like the instrument you would use in real life." This stays in the hub.
-
-- Broderick: "It's hard to beat anything that's hands-on." UCSD deployed "simulation backpacks" at remote sites. Individual cognitive and communication skills can migrate outward.
-
+Supporting evidence:
+- Coker (haptic story): First time on the robot, she "annihilated the suture" because of no haptic feedback. "The robot always wins. The weakest thing will break." Real tissue experience is irreplaceable; this is what stays in the hub.
+- Murray: Tactile fidelity is non-negotiable. "The thing you reach over for has to feel just like the instrument you would use in real life." This stays in the hub.
+- Broderick: "It's hard to beat anything that's hands-on." Individual cognitive and communication skills can migrate outward.
 - Singer: Distributed simulation works. Quality can be decoupled from geography for many training types.
 
-- Boeing Starliner: VR enables training when physical simulators are inaccessible. Proves remote Level 3-4 experiences are viable.
+### VII. WHAT THE MATRIX MUST ACCOUNT FOR, FRICTION POINTS AND RISKS
 
-### V. THE HUB/SPOKE/ANYWHERE MODEL (COMPANION TO THE MATRIX)
+The Competency Definition Vacuum (Korndorffer / Coker): "We can't define competency, articulate it, measure it." Every AI-powered assessment level (3+) depends on being able to define what the AI is measuring. The matrix flags this as a prerequisite for higher levels.
 
-The Tech Readiness Matrix maps WHAT INFRASTRUCTURE. The Building the System concept (deck page 13) maps WHERE.
+The Economic Barrier (Korndorffer): Simulation training "is not a required part of your job. There is no money that's occurring because you're not treating patients." Higher-level rooms cost more to build AND more to staff. The matrix needs cost-of-retrofit vs. cost-of-over-provision analysis to justify the premium.
 
-**Hub (Physical Center):**
+Curriculum is out of scope but everything depends on it: Insights 1, 3, 7, and 8 from the synthesis all require curriculum commitments. The matrix can recommend infrastructure, but without curriculum backing the spaces sit empty.
 
-- 2030: Team crisis sim, haptic procedures
+AI failures are real (SXSW Nurses panel): AI scheduling assigned unsafe nurse-to-patient ratios. AI recommended dangerous fluid levels. Systems hallucinated IV drug use from "pine needles." Newborn labs showed adult reference ranges. The matrix must ensure every level above Unplugged has a graceful degradation path back to Level 1.
 
-- 2035: Team crisis sim, haptic procedures (same, these require physical co-location)
+Cognitive deskilling risk (AMA Panel): Risk of physicians becoming overly reliant on AI. GPS dependency analogy. Medical students already uncomfortable with their AI dependency. The matrix must preserve Level 1 capability as a permanent, non-negotiable feature, not a legacy holdover.
 
-- 2040: Team crisis sim, haptic procedures (still requires the building)
+### VIII. ARCHITECTURAL SPEC DIMENSIONS THE MATRIX INCLUDES
 
-**Spoke (Near Clinical Spaces):**
+Each level has specific specifications across these dimensions:
 
-- 2030: Communication training, individual assessment
+Power: L1 5 W/sqft (standard outlets), L2 10-15 W/sqft, L3 20-30 W/sqft (heavy server load), L4 40-60 W/sqft (dedicated voltage), L5 80+ W/sqft (industrial / quantum-ready).
 
-- 2035: Expanding to absorb more training types
+Data infrastructure: L1 basic networking and wall outlets, L2 ceiling sensors and ambient intelligence with large monitors, L3 server racks and multi hi-fi screens with sensor arrays, L4 edge compute and VR/AR with dynamic wall power, L5 quantum / HPC clusters with dedicated local compute.
 
-- 2040: Haptic procedures begin migrating here as portable tech matures
+Square footage: L1 minimal, L2 slightly increased, L3 substantial expansion, L4 maximum flexible, L5 maximum plus vertical clearance.
 
-**Anywhere (Remote/Virtual):**
+Acoustic treatment: L1-2 standard, L3 moderate (sensor-accuracy required), L4 significant (multi-channel audio), L5 maximum (embodied-AI fidelity).
 
-- 2030: Cognitive rehearsal
+HVAC capacity: L1-2 standard, L3 increased (server heat dissipation), L4 significant (compute heat load), L5 maximum (reinforced HPC cooling).
 
-- 2035: Communication training, individual assessment migrate here
+Structural: L1-4 standard, L5 reinforced floors (heavy compute).
 
-- 2040: Cognitive rehearsal, communication, individual assessment, individual + cognitive combined
+Cost premium over base: L1 0%, L2 +10-15%, L3 +30-50%, L4 +75-100%, L5 +150%+.
 
-**The principle:** "The hub holds only what must be physical." Each training type has a different threshold for when it can leave the hub. The matrix tells planners what infrastructure each location needs.
-
-### VI. WHAT THE MATRIX MUST ACCOUNT FOR, FRICTION POINTS AND RISKS
-
-**The ****"****Arizona State Trap****"**** (Singer):** Designing for the future makes spaces feel hokey and dated. The matrix must recommend investing in durable infrastructure, not specific technology aesthetics.
-
-**The ****"****UCSD Trap****"**** (Coker):** Building capability nobody uses. UCSD built team training rooms that were "never used for that." The matrix must connect infrastructure to realistic scheduling and usage models.
-
-**The Competency Definition Vacuum (Korndorffer/Coker):** "We can't define competency, articulate it, measure it." Every AI-powered assessment level (3+) depends on being able to define what the AI is measuring. The matrix should flag this as a prerequisite for higher levels.
-
-**The Economic Barrier (Korndorffer):** Simulation training "is not a required part of your job. There is no money that's occurring because you're not treating patients." Higher-level rooms cost more to build AND more to staff. The matrix needs cost-of-retrofit vs. cost-of-over-provision analysis.
-
-**Curriculum is out of scope but everything depends on it:** Insights 1, 3, 7, and 8 from the Claude Insights doc all require curriculum commitments. The matrix can recommend infrastructure, but without curriculum backing, the spaces sit empty.
-
-**AI failures are real (SXSW Nurses panel):** AI scheduling assigned unsafe nurse-to-patient ratios. AI recommended dangerous fluid levels. System hallucinated IV drug use from "pine needles." Newborn labs showed adult reference ranges. The matrix must ensure every level above Unplugged has a graceful degradation path back to Level 1.
-
-**Cognitive deskilling risk (AMA Panel):** Risk of physicians becoming overly reliant on AI. GPS dependency analogy. Medical students already uncomfortable with their AI dependency. The matrix must preserve Level 1 capability as a permanent, non-negotiable feature, not a legacy holdover.
-
-### VII. CROSS-INDUSTRY PRECEDENTS BY LEVEL
-
-**Level 1:** Military tabletop exercises, SOF Trainer's analog team coordination, Gibson's stress inoculation without technology
-
-**Level 2:** FLAIM firefighting heated suits (4x engagement increase), Broderick's UCSD simulation backpacks, oil and gas point-of-need simulation on rigs
-
-**Level 3:** Maritime cloud-based distributed simulation, aviation FAA Level D certification standards (50+ years of fatal accident reduction), Coker's robotic surgical data tracking
-
-**Level 4:** Boeing Starliner VR pre-launch training, military adaptive scenario environments, Singer's AI-directed immersive spaces
-
-**Level 5:** Singer's embodied AI concept, Tech Futures "diamond arrangement" framework, Soul Paint VR (SXSW) where technology becomes co-creative partner, Spurs Human Performance Lab (cameras everywhere measuring everything, culture of excellence where measurement equals celebration)
-
-### VIII. ARCHITECTURAL SPEC DIMENSIONS THE MATRIX CAN INCLUDE
-
-Based on the research, each level needs specs across these dimensions:
-
-**Power:** Standard outlets → moderate → heavy server load → dedicated voltage lines → industrial-grade/quantum-ready
-
-**Data infrastructure:** Basic networking → ceiling sensors + ambient intelligence → heavy server racks + sensor arrays → edge computing + high-bandwidth → quantum/HPC clusters
-
-**Square footage:** Minimal → slightly increased → substantial expansion → maximum flexible → maximum + vertical clearance
-
-**Acoustic treatment:** Basic → basic → moderate (sensor accuracy needs) → significant (multiple audio channels) → maximum (embodied AI interaction fidelity)
-
-**HVAC capacity:** Standard → standard → increased (server heat) → significant (computing heat load) → maximum (reinforced cooling for HPC)
-
-**Structural:** Standard → standard → standard → standard → reinforced floors (heavy computing equipment)
-
-**Cost premium over base:** 0% → ~10-15% → ~30-50% → ~75-100% → ~150%+ (these are directional, need AEC validation)
 
 **4 Building the System**
 
