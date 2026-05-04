@@ -711,10 +711,23 @@ header {
   font-size: 13px;
   letter-spacing: 0.04em;
   color: var(--ink);
-  opacity: 0.45;
+  opacity: 0.55;
   font-style: italic;
   padding: 32px 0 80px;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 640px;
+  line-height: 1.6;
+}
+.archive-coming-soon a {
+  color: var(--burnt);
+  text-decoration: underline;
+  text-decoration-color: rgba(191, 87, 0, 0.45);
+  text-underline-offset: 2px;
+  font-style: italic;
+}
+.archive-coming-soon a:hover {
+  color: var(--burnt-deep);
+  text-decoration-color: var(--burnt-deep);
 }
 .archive-eyebrow {
   font-size: 10px;
@@ -907,11 +920,12 @@ header {
 }
 /* Two-column body: main content on the left, precedent callout on the right.
    Explicit row assignments keep placement deterministic regardless of source
-   order. The degrade footer spans the full width below everything. */
+   order. The degrade footer spans the full width below everything, with the
+   sources line tucked in beneath. */
 .trf-level-body {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 260px;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto auto auto auto;
   gap: 24px 28px;
   padding: 20px 24px 4px;
   align-items: start;
@@ -965,6 +979,41 @@ header {
   font-size: 11px;
   letter-spacing: 0.06em;
   margin-right: 8px;
+}
+
+/* Subtle sources line tucked beneath the degrade footer. Numbered links
+   match the appendix's "TRF source #N" labels. Hover reveals full citation
+   via the title attribute. */
+.trf-sources {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  margin: 0 -24px;
+  padding: 8px 24px 10px;
+  background: rgba(26, 26, 26, 0.02);
+  border-top: 1px solid rgba(26, 26, 26, 0.06);
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
+  color: var(--dust);
+}
+.trf-sources-label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-right: 10px;
+}
+.trf-sources a {
+  color: var(--dust);
+  text-decoration: underline;
+  text-decoration-color: rgba(26, 26, 26, 0.22);
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+.trf-sources a + a { margin-left: 6px; }
+.trf-sources a:hover {
+  color: var(--burnt);
+  text-decoration-color: var(--burnt);
 }
 
 /* Cross-industry precedent: side callout pinned to the right column of the
@@ -1030,7 +1079,8 @@ header {
     grid-column: 1;
     grid-row: auto;
   }
-  .trf-degrade {
+  .trf-degrade,
+  .trf-sources {
     grid-row: auto;
   }
 }
@@ -2792,7 +2842,31 @@ const CONFIG = {
       name: 'Research',
       startSpread: 11,
       placeholderColor: '#BF5700',
-      appendix: { comingSoon: true },
+      appendix: {
+        customRender: (container) => {
+          container.innerHTML = `
+            <p class="archive-coming-soon">
+              Content coming soon. In the meantime, look through the
+              <a href="#" class="archive-coming-soon-link">Beyond the Appendix</a>
+              section to see our references used throughout our research, as well as information on our site visits, and interview transcript excerpts and insights.
+            </p>
+          `;
+          const link = container.querySelector('.archive-coming-soon-link');
+          if (link) {
+            link.addEventListener('click', (e) => {
+              e.preventDefault();
+              const appendixSec = CONFIG.sections.find((s) => s.id === 'appendix');
+              if (!appendixSec) return;
+              setRoute(pathForSection(appendixSec));
+              jumpToSpread(appendixSec.startSpread);
+              setTimeout(() => {
+                const archive = document.getElementById('archive');
+                if (archive) archive.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }, 100);
+            });
+          }
+        },
+      },
     },
 
     {
@@ -5631,7 +5705,7 @@ const BEYOND_PROSE = {
         id: 'tech-readiness',
         label: 'Technology Readiness Framework',
         html: `
-          <p class="lede">The Technology Readiness Framework maps human-AI relationships in a simulation room to architectural specifications. Five levels, from Unplugged to Agentic Peer, anchor a planning conversation that has too often been about specific products. The framework's most strategically important output is not the levels themselves but Room Zero, the over-provisioned baseline infrastructure that goes in every room at construction so that future upgrades are a software exercise rather than a capital project.</p>
+          <p class="lede">The Technology Readiness Framework maps human-AI relationships in a simulation room to architectural specifications. Five levels, from Unplugged to Agentic Peer, anchor a planning conversation that has too often been about specific products. The framework's most strategically important output is Room Zero: the over-provisioned baseline infrastructure that goes in every room at construction so that future upgrades are a software exercise rather than a capital project.</p>
 
           <p>The book carries the framework at high level. Beyond it sits the deeper specification: hard architectural numbers, cross-industry precedent for each level, and a six-system Room Zero spec with retrofit math.</p>
 
@@ -5666,6 +5740,12 @@ const BEYOND_PROSE = {
                 </div>
               </div>
               <div class="trf-degrade"><strong>Why Level 1 is permanent.</strong> Cognitive deskilling (AMA panel\u2019s GPS-dependency analogy) plus AI system failures (Helene, Ascension) make analog competency the firewall, not a legacy holdover.</div>
+              <div class="trf-sources">
+                <span class="trf-sources-label">Sources</span>
+                <a href="https://en.wikipedia.org/wiki/ASHRAE_90.1" target="_blank" rel="noopener" title="ASHRAE 90.1 Wikipedia summary (Lighting Power Density tables)">#2 Wikipedia</a>
+                <a href="https://files.asprtracie.hhs.gov/documents/aspr-tracie-healthcare-system-cybersercurity-readiness-response.pdf" target="_blank" rel="noopener" title="ASPR TRACIE, &quot;Healthcare System Cybersecurity Readiness and Response&quot;">#47 HHS</a>
+                <a href="https://store.aamc.org/medical-simulation-in-medical-education-results-of-an-aamc-survey-pdf.html" target="_blank" rel="noopener" title="AAMC, &quot;Medical Simulation in Medical Education: Results of an AAMC Survey&quot;">#51 AAMC</a>
+              </div>
             </div>
           </div>
 
@@ -5676,7 +5756,7 @@ const BEYOND_PROSE = {
               <div class="trf-level-cost">+10\u201315%</div>
             </div>
             <div class="trf-level-body">
-              <p>Technology enhances sensory realism and provides ambient feedback without replacing human judgment. AR-enhanced patient encounters, ambient intelligence feedback, sensor-based communication assessment. ${_PL.BRODERICK()}'s UCSD &ldquo;simulation backpacks&rdquo; brought training to clinical sites when learners couldn\u2019t come to the center. The technology did not take over. It made the sensory environment convincing enough that the body responded as if the conditions were real.</p>
+              <p>Technology adds to sensory realism and provides ambient feedback without replacing human judgment. AR-enhanced patient encounters, ambient intelligence feedback, sensor-based communication assessment. ${_PL.BRODERICK()}'s UCSD &ldquo;simulation backpacks&rdquo; brought training to clinical sites when learners couldn\u2019t come to the center. The technology did not take over. The sensory environment was convincing enough that the body responded as if the conditions were real.</p>
               <table class="trf-spec-table">
                 <tr><td>Power</td><td>10\u201315 W/sqft</td></tr>
                 <tr><td>Data</td><td>Ceiling sensors, ambient intelligence, large monitors</td></tr>
@@ -5698,6 +5778,12 @@ const BEYOND_PROSE = {
                 </div>
               </div>
               <div class="trf-degrade"><strong>Degrade.</strong> Falls back to Level 1 by powering off sensors and displays.</div>
+              <div class="trf-sources">
+                <span class="trf-sources-label">Sources</span>
+                <a href="https://www.ashrae.org/technical-resources/bookstore/standard-90-1" target="_blank" rel="noopener" title="ASHRAE 90.1, Energy Standard for Buildings Except Low-Rise Residential Buildings">#1 ASHRAE</a>
+                <a href="https://www.nature.com/articles/s41586-020-2669-y" target="_blank" rel="noopener" title="Nature, &quot;Illuminating the dark spaces of healthcare with ambient intelligence&quot;">#58 Nature</a>
+                <a href="https://www.houstonmethodist.org/leading-medicine-blog/articles/2025/oct/ambient-intelligence-leveraging-computer-vision-technology-to-improve-or-efficiency/" target="_blank" rel="noopener" title="Houston Methodist, &quot;Ambient Intelligence: Leveraging Computer Vision Technology to Improve OR Efficiency&quot;">#60 Houston Methodist</a>
+              </div>
             </div>
           </div>
 
@@ -5734,6 +5820,12 @@ const BEYOND_PROSE = {
                 </div>
               </div>
               <div class="trf-degrade"><strong>Prerequisite.</strong> AI assessment depends on competency definition. The rubric work has not been completed in medical education. Flag as prerequisite, not blocker. \u2003 \u2003 <strong>Degrade.</strong> Falls back to Level 2 by disconnecting the cloud / AI layer.</div>
+              <div class="trf-sources">
+                <span class="trf-sources-label">Sources</span>
+                <a href="https://www.ashrae.org/file%20library/technical%20resources/standards%20and%20guidelines/standards%20addenda/90.1-2016/90_1_2016_be_bm_bn_bo_bp_br_bs_bu_bv_cf_cl_cm_cq_ct_cu_cv_cw_cy_20210324.pdf" target="_blank" rel="noopener" title="ASHRAE 90.1, definition of &quot;computer rooms&quot; with design power density exceeding 20 W/ft²">#4 ASHRAE</a>
+                <a href="https://arxiv.org/pdf/2503.05793" target="_blank" rel="noopener" title="arXiv, &quot;MedSimAI: Simulation and Formative Feedback Generation to Enhance Deliberate Practice in Medical Education&quot;">#66 arXiv</a>
+                <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12924402/" target="_blank" rel="noopener" title="PMC, &quot;Generative AI in simulation debriefings: Team-FIRST framework&quot;">#67 PMC</a>
+              </div>
             </div>
           </div>
 
@@ -5766,6 +5858,12 @@ const BEYOND_PROSE = {
                 </div>
               </div>
               <div class="trf-degrade"><strong>Prerequisite.</strong> All Level 3 prerequisites plus curriculum integration: the AI-directed scenario has to map to what the program actually teaches. \u2003 \u2003 <strong>Degrade.</strong> Falls back to Level 3 by switching from AI-directed to human-directed scenarios.</div>
+              <div class="trf-sources">
+                <span class="trf-sources-label">Sources</span>
+                <a href="https://www.computerworld.com/article/1549833/data-center-density-hits-the-wall.html" target="_blank" rel="noopener" title="Computerworld, &quot;Data center density hits the wall&quot; (citing ASHRAE TC 9.9 and HP Critical Facilities)">#5 Computerworld</a>
+                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11152357/" target="_blank" rel="noopener" title="PMC, &quot;Artificial Intelligence and Healthcare Simulation: The Shifting Landscape of Medical Education&quot;">#73 PMC</a>
+                <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7851931/" target="_blank" rel="noopener" title="PMC, &quot;Virtual reality as a teaching method for resuscitation training in undergraduate first year medical students&quot; (PMC7851931)">#77 PMC</a>
+              </div>
             </div>
           </div>
 
@@ -5776,7 +5874,7 @@ const BEYOND_PROSE = {
               <div class="trf-level-cost">+150%+</div>
             </div>
             <div class="trf-level-body">
-              <p>AI acts as a physical participant: not a tool, not an observer. The &ldquo;diamond arrangement&rdquo; places the patient, family, provider, and technology at equal eye level. ${_PL.SINGER_FULL()}'s embodied-AI concept. Training emphasizes teaming with AI agents, trust calibration (deliberately introduced AI errors as a training surface), and overseeing autonomous systems. Showcase only: one or two rooms maximum.</p>
+              <p>AI acts as a physical participant in the room. The &ldquo;diamond arrangement&rdquo; places the patient, family, provider, and technology at equal eye level. ${_PL.SINGER_FULL()}'s embodied-AI concept. Training emphasizes teaming with AI agents, trust calibration (deliberately introduced AI errors as a training surface), and overseeing autonomous systems. One or two rooms maximum across the facility.</p>
               <table class="trf-spec-table">
                 <tr><td>Power</td><td>80+ W/sqft, industrial / quantum-ready</td></tr>
                 <tr><td>Data</td><td>Quantum / HPC clusters, dedicated local compute</td></tr>
@@ -5798,6 +5896,12 @@ const BEYOND_PROSE = {
                 </div>
               </div>
               <div class="trf-degrade"><strong>Prerequisite.</strong> All prior prerequisites plus an institutional culture shift: leadership models data transparency, dashboards are opt-in and learner-owned, AI agents are introduced to faculty before students. \u2003 \u2003 <strong>Degrade.</strong> Falls back to Level 4 by switching embodied AI to screen-based AI.</div>
+              <div class="trf-sources">
+                <span class="trf-sources-label">Sources</span>
+                <a href="https://arxiv.org/pdf/2408.12496" target="_blank" rel="noopener" title="arXiv, &quot;MEDCO: Medical Education Copilots Based on A Multi-Agent Framework&quot;">#80 arXiv</a>
+                <a href="https://arxiv.org/pdf/2503.16518" target="_blank" rel="noopener" title="arXiv, &quot;Advancing Human-Machine Teaming: Concepts, Challenges, and Applications&quot;">#84 arXiv</a>
+                <a href="https://wbengineering.com/resources/articles/planning-lab-infrastructure-for-ai-driven-simulation/" target="_blank" rel="noopener" title="WB Engineers+Consultants, &quot;Planning Lab Infrastructure for AI-Driven Simulation Environments&quot;">#94 WB Engineers</a>
+              </div>
             </div>
           </div>
 
