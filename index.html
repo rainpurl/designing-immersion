@@ -1798,6 +1798,49 @@ header {
   .convergence-cluster-title { font-size: 15px; }
 }
 
+/* Convergence tabs — mirrors the stakeholder-tabs pattern. The six clusters
+   are presented as a tab strip with one panel visible at a time. The inner
+   .convergence-cluster styling is preserved so the cards inside each panel
+   look identical to the prior linear layout. */
+.convergence-tabs-wrap { margin: 18px 0 28px; }
+.convergence-tabs {
+  display: flex;
+  gap: 4px;
+  margin: 0 0 8px;
+  border-bottom: 1px solid var(--rule);
+  flex-wrap: wrap;
+}
+.convergence-tab {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 10px 14px 9px;
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink);
+  opacity: 0.55;
+  cursor: pointer;
+  transition: opacity 0.2s, border-color 0.2s, color 0.2s;
+  margin-bottom: -1px;
+  white-space: nowrap;
+}
+.convergence-tab:hover { opacity: 0.9; }
+.convergence-tab.active {
+  opacity: 1;
+  border-bottom-color: var(--burnt);
+  color: var(--burnt);
+}
+.convergence-panel.hidden { display: none; }
+/* Inside a tab panel, the cluster header acts as the panel intro. The panel
+   already carries the cluster's full identity, so we lighten the standalone
+   margins that the linear layout used. */
+.convergence-panel .convergence-cluster {
+  margin-top: 0;
+}
+
 /* Field research pointer — closing card that points to existing Appendix
    site visits content rather than duplicating it here. */
 .field-pointer {
@@ -5979,6 +6022,21 @@ function renderBeyondProse(container, sectionId) {
     });
   });
 
+  // Wire convergence-tab clicks (Beyond the Research uses the same inline
+  // tab pattern for the six cross-research clusters).
+  container.querySelectorAll('.convergence-tabs-wrap').forEach((wrap) => {
+    wrap.querySelectorAll('.convergence-tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        wrap.querySelectorAll('.convergence-tab').forEach((t) => t.classList.remove('active'));
+        tab.classList.add('active');
+        const panelName = tab.dataset.tab;
+        wrap.querySelectorAll('.convergence-panel').forEach((p) => {
+          p.classList.toggle('hidden', p.dataset.panel !== panelName);
+        });
+      });
+    });
+  });
+
   // Wire field-pointer link to jump to the appendix Site Visits tab.
   container.querySelectorAll('.field-pointer-link[data-target="appendix-visits"]').forEach((a) => {
     a.addEventListener('click', (e) => {
@@ -6030,7 +6088,7 @@ const BEYOND_PROSE = {
     <p>${_PL.KORN_FULL()}, Dell Med's Vice Dean of Education, framed it more directly. He had built simulation centers at Tulane and Stanford. ${_PL.KORN()} told the team to focus outside the spaces he was already familiar with, to think big, and to consider all possibilities for the future based on trends in analogous industries. The team took that framing seriously and treated non-medical training systems as primary research, not as illustrative color.</p>
 
     <h3>The Team and the Method</h3>
-    <p>Three graduate design students worked the project for five months inside a one-year program. The methodology mixed design research and futures research. Over twenty-two primary interviews. Three site visits. More than a hundred secondary sources. Concepting sprints across thirteen directions, narrowed by the EPMO to one primary scope and two connected territories.</p>
+    <p>Three graduate design students worked the project for four months inside a one-year program. The methodology mixed design research and futures research. Over twenty-two primary interviews. Three site visits. More than a hundred secondary sources. Concepting sprints across thirteen directions, narrowed by the EPMO to one primary scope and two connected territories.</p>
     <p>The decision to interview outside medicine was a hypothesis: medical simulation has been studying itself long enough that the field's own consensus is now the constraint. The team interviewed military intelligence leaders, Special Operations trainers, an Army modernization officer, a former medevac pilot, an Olympic-level middle-distance runner, a national-security futurist, and an AR/VR specialist from one of the major immersive technology companies, alongside the Dell Med faculty, surgical residents, Dell Med students, and analogous-medicine experts the field would expect.</p>
 
     <h3>A Note on the Title-Page Quote</h3>
@@ -6063,65 +6121,13 @@ const BEYOND_PROSE = {
   `,
 
   // ============================ CONCEPTS ============================
+  // Body intentionally light. The synthesis-and-insights material that briefly
+  // lived here was misplaced and has moved to Beyond the Research, where it
+  // belongs alongside the convergence clusters and the concepting workshop.
   concepts: `
-    <h3>The Synthesis Process</h3>
-    <p>The team ran three rounds of analysis. The first was a closed clustering of the primary interview transcripts, generating roughly thirty themes. The second compared those themes against the secondary literature, tagging each theme as confirmed by the field, surfaced primarily by the cross-industry voices, or contested between the two. The third filtered the themes for actionability: which ones would change a design decision, and which ones were observations the EPMO already lived with.</p>
-    <p>The &ldquo;beyond expert consensus&rdquo; tags are an artifact of round two. They mark the places where the cross-industry research did the work the field could not do for itself. The single sharpest example is ${_PL.SINGER_FULL()}'s narrative-architecture reframe of the &ldquo;hokey and sterile&rdquo; VR problem. The field had named the symptom for years. No medical voice in the research had named the cause as a talent-pipeline problem (medicine hires technologists and educators; immersive theater hires experience designers and spatial audio engineers).</p>
-
-    <h3>The Insights, Selected and Cut</h3>
-    <p>The synthesis surfaced seven opportunity areas. After review by ${_PL.KORN_FULL()}, ${_PL.COKER_FULL()}, ${_PL.RODRIGUEZ()}, and Cassandra Fleming, the EPMO confirmed three for forward development. Insight 1 was designated the primary scope. Insights 2 and 3 were held as connected territory the deliverables should continue to reference. Insights 4 through 7 were named, defended in the room, and ultimately not pursued for this phase. The four cut insights are listed here in their working form, with the team's read on why each one did not make the final brief.</p>
-
-    <div class="insight-card">
-      <div class="insight-num">Insight 1</div>
-      <p>Simulation has been optimized for the conditions it can reproduce and under-designed for the conditions that determine learning transfer. Relatedly: the most sophisticated simulation capability in the world sits unused when the institution cannot assemble the right team in the same room at the same time.</p>
-      <p class="q-prompt">How might we design an immersive learning and assessment environment that clinicians fight to experience, and that is worth the cost of showing up?</p>
-      <p>The narrative-design argument and the talent-pipeline argument both live here. The cross-industry voices (${_PL.SINGER_FULL()}, the FLAIM firefighting case, military protected-time mandates, aviation regulatory requirements) supplied evidence the field does not currently integrate.</p>
-    </div>
-
-    <div class="insight-card">
-      <div class="insight-num">Insight 2</div>
-      <p>The center's reach is not determined by its square footage.</p>
-      <p class="q-prompt">How might we give architects and faculty a clear framework for what belongs in the center, what works better distributed, and what can happen anywhere, before square footage gets locked?</p>
-      <p>The hub, spoke, and anywhere framework. Maritime cloud simulation (Wartsila), oil-and-gas rig-side simulators, military joint operations, and Pfizer manufacturing all supplied working models. No medical voice was going to hand the EPMO this rubric.</p>
-    </div>
-
-    <div class="insight-card">
-      <div class="insight-num">Insight 3</div>
-      <p>Technology shifts clinical tasks, and trust with technology shifts with them. Each shift reshapes the training and the space around it.</p>
-      <p class="q-prompt">How might we design adaptable spaces and training that can be continuously refreshed as technology changes clinical work, so clinicians learn when to trust, verify, and override technology safely?</p>
-      <p>${_PL.SINGER_FULL()}'s four concurrent AI relationships and ${_PL.MURRAY()}'s futures posture carry this insight. The EPMO identified it as the insight that keeps the center from being obsolete at opening day.</p>
-    </div>
-
-    <div class="insight-card is-cut">
-      <div class="insight-num">Insight 4</div>
-      <p>How assessment is designed, and whether the environment supports both success and recovery, determines whether learners build resilience or burn out.</p>
-      <p class="q-prompt">How might we embed debrief spaces and prioritize clinician wellbeing education in a way that builds and maintains self-regulation and resilience over time?</p>
-      <p>Cut from the deliverable scope because wellbeing infrastructure is primarily a curriculum and policy problem, not a facilities one. The Porch (Spatial 2 in the Principles section) carries the strongest architectural claim from this insight forward. The rest belongs to a wellbeing workstream the EPMO already runs.</p>
-    </div>
-
-    <div class="insight-card is-cut">
-      <div class="insight-num">Insight 5</div>
-      <p>The skills that most determine clinical outcomes are ones medicine has not defined, technology cannot assess, and therefore cannot guarantee a clinician is trained on.</p>
-      <p class="q-prompt">How might we make clinical intuition in high-stakes, ambiguous situations assessable by capturing how learners communicate, empathize, and decide under pressure, so soft skills become objectively coachable and trackable over time?</p>
-      <p>Cut because it is a competency-definition problem before it is an assessment problem. ${_PL.KORN_FULL()} named the gap directly: the field cannot define competency, articulate it, or measure it. Until the curriculum side moves, building rooms to capture intuition is premature. The team flagged this as a prerequisite for higher levels of the Tech Readiness Matrix and recommended it as a parallel curriculum project.</p>
-    </div>
-
-    <div class="insight-card is-cut">
-      <div class="insight-num">Insight 6</div>
-      <p>Peer institutions are moving fast. Whoever figures out the governance layer first has the advantage.</p>
-      <p class="q-prompt">How might we make the data governance challenge visible and owned across workstreams before it becomes a blocker?</p>
-      <p>Cut as a deliverable but preserved as a recommended next-phase project. ${_PL.GIBSON()}'s national-security work and the NBA/NFLPA athlete-data agreements supplied working models. The team flagged a Data Governance and Information Security Framework as one of the three concepts the EPMO should fund in a follow-on phase.</p>
-    </div>
-
-    <div class="insight-card is-cut">
-      <div class="insight-num">Insight 7</div>
-      <p>When measurement feels like competition, people chase it. When it feels like surveillance, they avoid it.</p>
-      <p class="q-prompt">How might we motivate continuous improvement in clinical performance by focusing on team-based, game-like portfolios, so competition stays healthy, feedback feels identity-supporting, and progress is visible over time?</p>
-      <p>Cut because it is primarily a culture and leadership question, with infrastructure as a supporting factor. The Spurs Human Performance Center site visit (covered in the Principles section as &ldquo;identity infrastructure, not training infrastructure&rdquo;) carries the cultural argument forward. The full insight, including team-based portfolios and identity-supporting feedback, is named here as work the EPMO will need a separate workstream to take on.</p>
-    </div>
-
-    <h3>The Concepting Workshop</h3>
-    <p>Before narrowing, the team developed thirteen concept directions across three workshops. The deliverables that survived to final development were a Design Playbook, a Tech Readiness Matrix, a Spatial Catalogue, a Layered Webpage (this site), and a Building the System hub-spoke-anywhere framework. The cut concepts included an Experience Map Generator (a tool for faculty to build narrative scenarios), a Faculty-Operator Onboarding Playbook, and a Data Governance and Information Security Framework drawn from ${_PL.GIBSON()}'s Senate-security work and the NBA/NFLPA athlete-data agreements. The three cut concepts are preserved as recommended next-phase deliverables.</p>
+    <p class="lede">Beyond the Concepts is being rewritten.</p>
+    <p>This section in the book carries the working concepts the team developed for the EPMO: the Tech Readiness Matrix, the hub-spoke-anywhere framework, and the spatial concepts. The companion material that should live in this Beyond section, covering how the concepts evolved, what was tried and discarded, and the design decisions behind the matrix levels, is in progress.</p>
+    <p>For the synthesis process, the seven insights, and the concepting-workshop record, see <em>Beyond the Research</em>.</p>
   `,
 
   // ============================ PRINCIPLES ============================
@@ -6850,6 +6856,17 @@ const BEYOND_PROSE = {
     <h3>Where Primary and Secondary Converged</h3>
     <p>Thirty findings cleared the two-filter rule. Each one is shown below as a card with the secondary source quote and the primary interview quote that converged on the same takeaway, organized into the six clusters the takeaways naturally fell into during synthesis. The convergences are the load-bearing layer of the book: every framework, matrix, and vignette in the rest of the volume traces back to at least one of these.</p>
 
+    <div class="convergence-tabs-wrap">
+      <div class="convergence-tabs" role="tablist" aria-label="Convergence clusters">
+        <button class="convergence-tab active" data-tab="team">01 &middot; Team and governance</button>
+        <button class="convergence-tab" data-tab="outcomes">02 &middot; Outcomes and the long arc</button>
+        <button class="convergence-tab" data-tab="context">03 &middot; Context and mastery</button>
+        <button class="convergence-tab" data-tab="spaces">04 &middot; Spaces that teach</button>
+        <button class="convergence-tab" data-tab="caretaker">05 &middot; Care for the caretaker</button>
+        <button class="convergence-tab" data-tab="technology">06 &middot; Technology in its right place</button>
+      </div>
+
+      <div class="convergence-panel" data-panel="team">
     <div class="convergence-cluster">
       <div class="convergence-cluster-header">
         <div class="convergence-cluster-num">Cluster 01</div>
@@ -6912,7 +6929,9 @@ const BEYOND_PROSE = {
         </div>
       </div>
     </div>
+      </div>
 
+      <div class="convergence-panel hidden" data-panel="outcomes">
     <div class="convergence-cluster">
       <div class="convergence-cluster-header">
         <div class="convergence-cluster-num">Cluster 02</div>
@@ -7003,7 +7022,9 @@ const BEYOND_PROSE = {
         </div>
       </div>
     </div>
+      </div>
 
+      <div class="convergence-panel hidden" data-panel="context">
     <div class="convergence-cluster">
       <div class="convergence-cluster-header">
         <div class="convergence-cluster-num">Cluster 03</div>
@@ -7066,9 +7087,9 @@ const BEYOND_PROSE = {
         </div>
       </div>
     </div>
+      </div>
 
-    <p class="convergence-pullquote">The point of analogous research was not to import answers from other industries. It was to surface the questions medicine had not yet asked itself.<span class="convergence-pullquote-attr">Synthesis principle, Phase 02</span></p>
-
+      <div class="convergence-panel hidden" data-panel="spaces">
     <div class="convergence-cluster">
       <div class="convergence-cluster-header">
         <div class="convergence-cluster-num">Cluster 04</div>
@@ -7159,7 +7180,9 @@ const BEYOND_PROSE = {
         </div>
       </div>
     </div>
+      </div>
 
+      <div class="convergence-panel hidden" data-panel="caretaker">
     <div class="convergence-cluster">
       <div class="convergence-cluster-header">
         <div class="convergence-cluster-num">Cluster 05</div>
@@ -7236,7 +7259,9 @@ const BEYOND_PROSE = {
         </div>
       </div>
     </div>
+      </div>
 
+      <div class="convergence-panel hidden" data-panel="technology">
     <div class="convergence-cluster">
       <div class="convergence-cluster-header">
         <div class="convergence-cluster-num">Cluster 06</div>
@@ -7313,9 +7338,130 @@ const BEYOND_PROSE = {
         </div>
       </div>
     </div>
+      </div>
+    </div>
 
-    <div class="research-eyebrow">Phase 03 &ndash; 04 &middot; Concepting and Delivery</div>
-    <p>Concepting followed in March and April. The surviving insights were translated into a slate of possible artifacts, and a selection workshop with the EPMO and Dell Med leadership narrowed that slate down to the ones worth carrying forward. Delivery, from April through May, shaped those concepts into the frameworks, matrices, and vignettes that fill the rest of these pages. What you are reading is the record of that work.</p>
+    <div class="research-eyebrow">Phase 02 &middot; The Seven Insights</div>
+    <p>By early March the convergences had been re-shaped into seven opportunity areas. Each one started with a question the research had earned the right to ask, and each one carried at least one cross-industry source the field would not have produced for itself. The seven were the working slate the team brought into the EPMO selection workshop on the 26th. Three were picked. Four were defended in the room and held back.</p>
+
+    <h3>The Seven, in Working Form</h3>
+
+    <div class="insight-card">
+      <div class="insight-num">Insight 01 &middot; Selected (Primary)</div>
+      <p>Simulation has been optimized for what is easy to reproduce and under-designed for the conditions that determine learning transfer. Relatedly: the most sophisticated simulation capability sits unused when the institution cannot assemble the right team in the same room at the same time.</p>
+      <p class="q-prompt">How might we design simulation experiences that replicate the full complexity of real clinical care, the environmental chaos and the team dynamics, not just the clinical task?</p>
+      <p>The narrative-architecture argument and the team-assembly argument live here together. ${_PL.SINGER_FULL()} on theme parks and immersive theater. ${_PL.KORN_FULL()} on virtual reality where everything is &ldquo;just sitting right there.&rdquo; JMIR on the strategic pivot toward &ldquo;high-friction&rdquo; environments. The EPMO designated this the primary scope.</p>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-num">Insight 02 &middot; Selected (Connected)</div>
+      <p>The center&rsquo;s reach is not determined by its square footage.</p>
+      <p class="q-prompt">How might we give architects and faculty a clear framework for what belongs in the center, what works better distributed, and what can happen anywhere, before square footage gets locked?</p>
+      <p>Wartsila cloud simulation across countries. Virtual Marine lifeboat satisfaction climbing past real freefall trainees. Pfizer deploying five hundred VR headsets to factory floors so training came to the workers instead of pulling workers off the line. Dr. Brown on flexible spaces that do not hardwire equipment into walls. The hub, spoke, and anywhere framework grew directly out of this insight.</p>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-num">Insight 03 &middot; Selected (Connected)</div>
+      <p>Technology shifts clinical tasks, and trust with technology shifts with them. Each shift reshapes the training and the space around it.</p>
+      <p class="q-prompt">How might we design adaptable spaces and rapid-cycle training loops that can be continuously refreshed as AI changes clinical work, so clinicians learn when to trust, verify, and override technology safely?</p>
+      <p>${_PL.SINGER_FULL()}'s four concurrent human-AI relationship types, none linear. ${_PL.MURRAY()} on trusting machines for recommendations but not decisions, and on the next generation not sharing that hesitation. Aviation&rsquo;s autopilot history: tool, then default, then a skill of managing the automation itself. Waymo&rsquo;s three-second window for safety drivers to recognize AI failure. The EPMO flagged this as the insight that prevents the center from being obsolete on opening day.</p>
+    </div>
+
+    <div class="insight-card is-cut">
+      <div class="insight-num">Insight 04 &middot; Held back</div>
+      <p>How assessment is designed, and whether the environment supports both success and recovery, determines whether learners build resilience or burn out.</p>
+      <p class="q-prompt">How might we embed debrief spaces and wellbeing education in a way that builds and maintains self-regulation and resilience over time?</p>
+      <p>U.S. Senate stress training: expect the reaction, make counseling available, never stigmatize, teach the physiology. Special Operations on stress under assessment, where instructors learn each person&rsquo;s individual trigger and poke it deliberately until it is no longer a stressor. Dr. Beauvais on healthcare structures that are unhealthy for the people inside them despite altruistic intentions.</p>
+      <p><strong>Why held back:</strong> Wellbeing infrastructure is mostly a curriculum and policy problem, not a facilities one. The Porch (Spatial 2 in the Principles section) carries the strongest architectural claim from this insight forward. The rest belongs to a wellbeing workstream the EPMO already runs.</p>
+    </div>
+
+    <div class="insight-card is-cut">
+      <div class="insight-num">Insight 05 &middot; Held back</div>
+      <p>The skills that most determine clinical outcomes are ones medicine has not defined, technology cannot assess, and therefore cannot guarantee a clinician is trained on.</p>
+      <p class="q-prompt">How might we make clinical intuition in high-stakes, ambiguous situations assessable by capturing how learners communicate, empathize, and decide under pressure, so soft skills become coachable and trackable?</p>
+      <p>${_PL.GIBSON()} on AI-assisted assessment requiring &ldquo;a lot of human work on the rubric,&rdquo; and on human-to-human interaction assessment as something AI cannot do. ${_PL.KORN_FULL()} naming the gap directly: the field cannot define competency, articulate it, or measure it. Dr. Coker, an expert robotic surgeon, unable to describe what a competent robotic surgeon looks like.</p>
+      <p><strong>Why held back:</strong> Competency-definition has to move first. Building rooms to capture intuition before the curriculum side defines what counts as intuition is premature. The team flagged this as a prerequisite for the upper levels of the Tech Readiness Matrix and recommended it as a parallel curriculum project.</p>
+    </div>
+
+    <div class="insight-card is-cut">
+      <div class="insight-num">Insight 06 &middot; Held back</div>
+      <p>How data is governed, who can access it, how it is used, and what it can be linked to, will determine whether the center actually improves doctors and outcomes.</p>
+      <p class="q-prompt">How might we make the data governance challenge visible and owned across workstreams before it becomes a blocker?</p>
+      <p>${_PL.GIBSON()} on third-party access being the biggest challenge: every partnership creates data exposure, and governance has to extend to vendor agreements before the partnerships are signed. Dr. Coker on the surgeon stat-card experience at Hopkins: not a technology problem, a governance problem. NBA CBA biometric agreements and NFLPA/WHOOP frameworks where players own their data, as evidence that other industries have negotiated protections medicine has not.</p>
+      <p><strong>Why held back:</strong> Cut as a deliverable but preserved as a recommended next-phase project. The team flagged a Data Governance and Information Security Framework as one of three follow-on phases the EPMO should fund directly.</p>
+    </div>
+
+    <div class="insight-card is-cut">
+      <div class="insight-num">Insight 07 &middot; Held back</div>
+      <p>When measurement feels like competition, people chase it. When it feels like surveillance, they avoid it.</p>
+      <p class="q-prompt">How might we motivate continuous improvement by shifting assessment toward team-based, game-like portfolios so competition stays healthy and progress is visible over time?</p>
+      <p>The Spurs Human Performance Center, where measurement reads as celebration and the mandate is invisible because the design makes people want to be there. Esports, where public performance data is professional identity and the cultural relationship to being measured is the inverse of medicine&rsquo;s. ${_PL.MURRAY()} on healthy competition being team-based, not individual.</p>
+      <p><strong>Why held back:</strong> Primarily a culture and leadership question with infrastructure as a supporting factor. The Spurs visit (covered in Beyond the Principles as &ldquo;identity infrastructure, not training infrastructure&rdquo;) carries the cultural argument forward. The full insight, including team-based portfolios and identity-supporting feedback, is named here as work the EPMO will need a separate workstream to take on.</p>
+    </div>
+
+    <div class="research-eyebrow">Phase 03 &middot; Concepting</div>
+    <p>The concepting workshop on March 26 was the project&rsquo;s first hard narrowing. The EPMO had already prioritized Insights 1, 2, and 3 as a unified anchor. The team came in with a written direction for delivery that converted that anchor into a brief: <em>create a future-ready, scalable simulation ecosystem that prioritizes effective and efficient learning transfer and accessibility, ensuring that training is not constrained by space or synchronous availability of personnel, and can continuously adapt as technology evolves.</em> Ten concepts were on the table when the workshop opened. By the end of it, four had moved into final development, three had been kept as supporting work, and three had been recommended as next-phase deliverables outside the team&rsquo;s capacity.</p>
+
+    <h3>The Ten Concepts</h3>
+    <p>The slate held three artifact types. Document deliverables: the Design Playbook, the Dell&rsquo;s Curiosity Report, the Spatial Catalogue, and the Layered Webpage (which became this site). Decision tools for design and curriculum: Simulation Pathway Mapping, the Rules of the Game, the Tech Readiness Matrix, and Building the System. Speculative artifacts that put humans inside the data: an AI-Powered Experience Map Generator and Sim Scrub In, 2045.</p>
+    <p>Each concept was paired with an audience: the EPMO and Design Leaders for the Playbook; AEC and Dell Medicine leadership for the Curiosity Report; architects, EPMO, and future staff for the Spatial Catalogue; strategic leadership and curriculum directors for the Layered Webpage; DME, curriculum directors, and sim faculty for the Pathway Mapping; DME, sim faculty, and assessment leads for the Rules of the Game; facilities planners and lead architects for the Tech Readiness Matrix; leaders, EPMO, planners, designers, and architects for Building the System; EPMO, architects, and experience-design partners for the Map Generator; and &ldquo;anyone who reads or watches&rdquo; for the 2045 vignette set. The audience pairing was not decoration. It became the screen the EPMO used to decide which concepts had a clear home and which were aimed at no one in particular.</p>
+
+    <h3>What Was Selected, and Why</h3>
+
+    <div class="insight-card">
+      <div class="insight-num">Selected &middot; Building the System</div>
+      <p>A decision rubric for what belongs in the hub, what works in spokes, and what can happen anywhere, framed as a living system that absorbs change over the 2030&ndash;2050 arc rather than as a fixed plan. Selected because it converts Insight 02 into something architects can actually act on, with a sorting tool that does not commit the EPMO to specifications before the technology environment has settled.</p>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-num">Selected &middot; Tech Readiness Matrix</div>
+      <p>Five &ldquo;Levels of AI Integration,&rdquo; from zero-tech rooms to spaces where AI acts as a physical peer, paired with the power, floor-plan, and acoustic flexibility each level requires. Selected because it gives facilities planners a way to make capital decisions now that do not foreclose the next decade. The five-level framing was discussed and refined inside the workshop; the language landed at Unplugged, AI-Augmented, AI-in-the-Loop, AI-Managed Environment, and AI as Peer.</p>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-num">Selected &middot; Spatial Catalogue</div>
+      <p>A booklet of spatial concepts framed at the level of capability rather than specification, each grounded in evidence the EPMO can defend to architects. Selected because it gives decision-makers options that come with research backing, instead of forcing the team to recommend a single building program.</p>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-num">Selected &middot; Layered Webpage (this site)</div>
+      <p>A continuously updatable digital companion replacing a static report, structured so the recommendations evolve alongside the clinical-technology landscape. Selected because the alternative, a 2026 PDF still sitting on the planning team&rsquo;s desktop in 2030, would have undermined the future-ready argument the rest of the work is making.</p>
+    </div>
+
+    <h3>What Was Held Back, and Why</h3>
+
+    <div class="insight-card is-cut">
+      <div class="insight-num">Supporting &middot; The Design Playbook</div>
+      <p>A living institutional resource that captures the principles, frameworks, and decision sequences from the research, structured so anyone entering the planning process at any stage can act with confidence and consistency. <strong>Why held back:</strong> The principles and frameworks themselves move forward in the Principles section of the book, the Tech Readiness Matrix, and Building the System. A separate Playbook would have duplicated content already housed in stronger artifacts. Recommended for a follow-on phase if the EPMO wants a single onboarding document for new planners.</p>
+    </div>
+
+    <div class="insight-card is-cut">
+      <div class="insight-num">Supporting &middot; The Dell&rsquo;s Curiosity Report</div>
+      <p>A published report examining where immersive learning in medical education is heading, grounded in the team&rsquo;s primary research and cross-industry analysis, foregrounding the EPMO-prioritized insights. <strong>Why held back:</strong> The book itself absorbed this function. The Curiosity Report&rsquo;s content, the cross-industry frame and the prioritized insights, became the spine of the printed deliverable rather than a separate report.</p>
+    </div>
+
+    <div class="insight-card is-cut">
+      <div class="insight-num">Supporting &middot; Simulation Pathway Mapping</div>
+      <p>An assessment rubric for ambiguous scenarios with embedded measurement triggers for &ldquo;hyper-human&rdquo; skills: critical communication acts, escalation timing, the act of overriding bad AI feedback. The pitch was making subjective intuition into an objectively trackable metric. <strong>Why held back:</strong> Tied directly to Insight 05, which the EPMO held. Until the curriculum side defines what competency in these skills looks like, the rubric has nothing to anchor against. Flagged as the right deliverable to build immediately after the competency-definition work catches up.</p>
+    </div>
+
+    <div class="insight-card is-cut">
+      <div class="insight-num">Recommended next-phase &middot; Rules of the Game</div>
+      <p>A principles and guardrails playbook reframing clinical assessment from individual competition to team-based growth, with non-punitive boundaries that protect psychological safety while keeping the healthier mechanics of gamification in play. <strong>Why held back:</strong> Tied to Insight 07. The cultural shift this concept depends on (assessment-as-celebration rather than assessment-as-surveillance) is a leadership and policy commitment the EPMO has not yet made. The Spurs site visit carries the architectural argument. The Rules of the Game is recommended as a follow-on once leadership commits.</p>
+    </div>
+
+    <div class="insight-card is-cut">
+      <div class="insight-num">Recommended next-phase &middot; AI-Powered Experience Map Generator</div>
+      <p>A working proof of concept for an interactive AI-assisted scenario authoring tool. The faculty member would enter a clinical task (&ldquo;manage a post-op hemorrhage&rdquo;) and the tool would generate the full scenario across five channels: patient backstory, sensory environment, narrative arc, designed friction, and team choreography, drawing on experience-design principles from theme parks, immersive theater, military and aviation training, and game studios. <strong>Why held back:</strong> Out of scope for a five-month capstone. The tool requires partnerships with experience-design firms and a software-development arc the team could not deliver. Recommended as the deliverable that turns Insight 01 into something faculty can use, once the EPMO has selected partners.</p>
+    </div>
+
+    <div class="insight-card is-cut">
+      <div class="insight-num">Held &middot; Sim Scrub In, 2045</div>
+      <p>A narrative journey of three users (UME, GME, CME) navigating an imagined 2045 center, designed to make the research&rsquo;s claims tangible to anyone reading or watching. <strong>Why held back as originally pitched:</strong> The 2045 framing was risky for an EPMO audience that needed to defend a 2030 building decision. <strong>Where it survived:</strong> The vignettes that opened the book (Maya Okafor in 2030, Doug Williams in 2040, Sam Sharma in 2050) are the descendants of this concept. The team kept the device and adjusted the time horizons so the early vignette serves as a near-term commitment and the later ones serve as design provocations.</p>
+    </div>
+
+    <div class="research-eyebrow">Phase 04 &middot; Delivery</div>
+    <p>Delivery, from April through May, took the four selected concepts and shaped them into the final book. Building the System became the hub-spoke-anywhere section. The Tech Readiness Matrix became the matrix that anchors the Tools section. The Spatial Catalogue informed the Principles section&rsquo;s spatial concepts. The Layered Webpage became this site. The held-back concepts were preserved in the appendix and in this Beyond section as recommended next-phase work, so the EPMO inherits a written record of what the research surfaced and what the next team should pick up.</p>
 
     <div class="field-pointer">
       <div class="field-pointer-label">Field Research</div>
